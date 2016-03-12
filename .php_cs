@@ -8,10 +8,11 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
 return Symfony\CS\Config\Config::create()
     ->setUsingCache(true)
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
-    ->fixers(array(
+    ->fixers([
         '-empty_return',
         '-phpdoc_separation',
         '-pre_increment',
-        'ordered_use'
-    ))
+        'ordered_use',
+        'short_array_syntax',
+    ])
     ->finder($finder);
