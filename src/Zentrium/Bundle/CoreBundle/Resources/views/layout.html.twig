@@ -27,11 +27,15 @@
       <section class="sidebar">
         <ul class="sidebar-menu">
           <li class="header">Main Navigation</li>
-          <li>
-            <a href="{{ path('home') }}">
-              <i class="fa fa-home"></i> <span>Home</span>
-            </a>
-          </li>
+          {{ knp_menu_render('main', {
+            'template': 'ZentriumCoreBundle::mainMenu.html.twig',
+            'currentClass': 'active',
+            'currentAsLink': true,
+            'branch_class': 'treeview',
+            'ancestorClass': 'active',
+            'firstClass': '',
+            'lastClass': ''
+          }) }}
         </ul>
       </section>
     </aside>

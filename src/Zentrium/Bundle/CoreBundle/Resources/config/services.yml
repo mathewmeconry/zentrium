@@ -1,0 +1,6 @@
+services:
+    zentrium.menu.builder:
+        class: Zentrium\Bundle\CoreBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory", "@event_dispatcher"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }

@@ -1,0 +1,21 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+{% set listAttributes = item.childrenAttributes %}
+{{ block('children') }}
+{% endblock %}
+
+{% block label %}
+<i class="{{ item.labelAttribute('icon')|default('fa fa-circle-o') }}"></i>
+<span>{{ item.label|trans }}</span>
+{% if item.hasChildren and item.displayChildren %}
+  <i class="fa fa-angle-left pull-right"></i>
+{% endif %}
+{% endblock %}
+
+{% block list %}
+{% set classes = [listAttributes['class']] %}
+{% set classes = classes|merge(['treeview-menu']) %}
+{% set listAttributes = listAttributes|merge({'class': classes|join(' ') }) %}
+{{ parent() }}
+{% endblock %}
