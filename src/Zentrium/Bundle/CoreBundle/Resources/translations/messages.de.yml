@@ -1,3 +1,6 @@
 zentrium:
+    layout:
+        main_menu: Hauptmenü
+        version: Version
     menu:
         home: Home
