@@ -1,0 +1,8 @@
+{
+  "name": "zentrium",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-hub": "^0.7.0"
+  }
+}
