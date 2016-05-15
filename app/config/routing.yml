@@ -1,3 +1,6 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
 app:
     resource: "@ZentriumCoreBundle/Controller/"
     type:     annotation

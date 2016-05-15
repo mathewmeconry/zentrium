@@ -4,3 +4,8 @@ zentrium:
         version: Version
     menu:
         home: Home
+    security:
+        login: Login
+        logout: Logout
+        password: Passwort
+        username: Benutzername
