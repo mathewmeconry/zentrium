@@ -1,4 +1,5 @@
 imports:
+    - { resource: version.php }
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
@@ -37,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        app_version: "%version%"
 
 # Doctrine Configuration
 doctrine:
