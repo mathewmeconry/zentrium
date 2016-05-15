@@ -1,0 +1,26 @@
+.source-sans-pro-font(@weight, @style, @suffix) {
+    @font-face{
+        font-family: 'Source Sans Pro';
+        font-weight: @weight;
+        font-style: @style;
+        font-stretch: normal;
+        src: url('@{font-path}SourceSansPro-@{suffix}.eot') format('embedded-opentype'),
+             url('@{font-path}SourceSansPro-@{suffix}.ttf.woff2') format('woff2'),
+             url('@{font-path}SourceSansPro-@{suffix}.otf.woff') format('woff'),
+             url('@{font-path}SourceSansPro-@{suffix}.otf') format('opentype'),
+             url('@{font-path}SourceSansPro-@{suffix}.ttf') format('truetype');
+    }
+}
+
+//.source-sans-pro-font(200, normal, 'ExtraLight');
+//.source-sans-pro-font(200, italic, 'ExtraLightIt');
+.source-sans-pro-font(300, normal, 'Light');
+.source-sans-pro-font(300, italic, 'LightIt');
+.source-sans-pro-font(400, normal, 'Regular');
+.source-sans-pro-font(400, italic, 'It');
+.source-sans-pro-font(600, normal, 'Semibold');
+.source-sans-pro-font(600, italic, 'SemiboldIt');
+.source-sans-pro-font(700, normal, 'Bold');
+.source-sans-pro-font(700, italic, 'BoldIt');
+//.source-sans-pro-font(900, normal, 'Black');
+//.source-sans-pro-font(900, italic, 'BlackIt');

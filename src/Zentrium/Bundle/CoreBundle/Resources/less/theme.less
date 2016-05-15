@@ -1,0 +1,73 @@
+@theme-path: '../node_modules/admin-lte/build/less/';
+
+// Bootstrap
+@import (inline) '@{theme-path}../../bootstrap/css/bootstrap.min.css';
+@import (reference) '@{theme-path}../bootstrap-less/mixins.less';
+@import (reference) '@{theme-path}../bootstrap-less/variables.less';
+
+// Misc
+@import '@{theme-path}core.less';
+@import '@{theme-path}variables.less';
+@import '@{theme-path}mixins.less';
+
+// Components
+@import '@{theme-path}header.less';
+@import '@{theme-path}sidebar.less';
+@import '@{theme-path}sidebar-mini.less';
+@import '@{theme-path}control-sidebar.less';
+@import '@{theme-path}dropdown.less';
+@import '@{theme-path}forms.less';
+@import '@{theme-path}progress-bars.less';
+@import '@{theme-path}small-box.less';
+@import '@{theme-path}boxes.less';
+@import '@{theme-path}info-box.less';
+@import '@{theme-path}timeline.less';
+@import '@{theme-path}buttons.less';
+@import '@{theme-path}callout.less';
+@import '@{theme-path}alerts.less';
+@import '@{theme-path}navs.less';
+@import '@{theme-path}products.less';
+@import '@{theme-path}table.less';
+@import '@{theme-path}labels.less';
+@import '@{theme-path}direct-chat.less';
+@import '@{theme-path}users-list.less';
+@import '@{theme-path}carousel.less';
+@import '@{theme-path}modal.less';
+@import '@{theme-path}social-widgets.less';
+
+// Pages
+@import '@{theme-path}mailbox.less';
+@import '@{theme-path}lockscreen.less';
+@import '@{theme-path}login_and_register.less';
+@import '@{theme-path}404_500_errors.less';
+@import '@{theme-path}invoice.less';
+@import '@{theme-path}profile';
+
+// Plugins
+@import '@{theme-path}bootstrap-social.less';
+@import '@{theme-path}fullcalendar.less';
+@import '@{theme-path}select2.less';
+
+// Miscellaneous
+@import '@{theme-path}miscellaneous.less';
+@import '@{theme-path}print.less';
+
+// Skin
+@import '@{theme-path}skins/skin-blue.less';
+
+.main-header .logo {
+    font-weight: 600;
+    font-family: inherit;
+
+    .logo-lg {
+        font-size: 22px;
+    }
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
+    font-size: 22px;
+}
+
+.sidebar-menu li.header {
+    text-transform: uppercase;
+}

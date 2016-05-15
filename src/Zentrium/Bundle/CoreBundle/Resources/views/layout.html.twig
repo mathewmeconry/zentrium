@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% set title = block('title')|trim %}{% if title %}{{ title }} - {% endif %}Zentrium</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
+</head>
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+  <div class="wrapper">
+    <header class="main-header">
+      <a href="{{ path('home') }}" class="logo">
+        <span class="logo-mini">Z</span>
+        <span class="logo-lg">Zentrium</span>
+      </a>
+      <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </nav>
+    </header>
+    <aside class="main-sidebar">
+      <section class="sidebar">
+        <ul class="sidebar-menu">
+          <li class="header">Main Navigation</li>
+          <li>
+            <a href="{{ path('home') }}">
+              <i class="fa fa-home"></i> <span>Home</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </aside>
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>{{ title }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
+      </section>
+      <section class="content">
+        {% block content %}{% endblock %}
+      </section>
+    </div>
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <strong>Version</strong> {{ app_version }}
+      </div>
+      <strong>&nbsp;</strong>
+    </footer>
+  </div>
+  <script src="{{ asset('bundles/zentriumcore/js/bundle.min.js') }}"></script>
+</body>
 </html>
