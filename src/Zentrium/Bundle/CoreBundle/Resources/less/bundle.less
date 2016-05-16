@@ -3,3 +3,32 @@
 @import "icons.less";
 @import "plugins.less";
 @import "theme.less";
+
+.empty {
+    text-align: center;
+    padding: 30px;
+}
+
+.nav-pills li .pill-tools {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+
+    a {
+        color: darken(@box-default-border-top-color, 20%);
+
+        &:hover {
+            color: darken(@box-default-border-top-color, 40%);
+        }
+    }
+
+    a + a {
+        margin-left: 10px;
+    }
+}
+
+.nav-pills li:hover .pill-tools {
+    display: block;
+}

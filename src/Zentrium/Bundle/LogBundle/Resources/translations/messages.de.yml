@@ -1,0 +1,45 @@
+zentrium_log:
+    layout:
+        log: Journal
+    menu:
+        list: Übersicht
+        log: Journal
+        new: Erfassen
+    list:
+        labels: Labels
+        status: Status
+        title:
+            open: Offene Einträge
+            onhold: Wartende Einträge
+            done: Erledigte Einträge
+            invalid: Ungültige Einträge
+        label_reset: Zurücksetzen
+        label_new: Neues Label
+        with_labels: mit Label %labels%|mit Labels %labels%
+        empty: Es sind keine Einträge mit den gewählten Kriterien vorhanden.
+    new:
+        title: Eintrag erfassen
+    edit:
+        title: Eintrag bearbeiten
+    view:
+        edit: Bearbeiten
+    label:
+        new:
+            title: Neues Label
+        field:
+            name: Name
+        form:
+            saved: Das Label wurde erfolgreich gespeichert.
+    log:
+        field:
+            labels: Labels
+            status: Status
+            title: Titel
+            updated: Letzte Aktualisierung
+        form:
+            saved: Der Eintrag wurde erfolgreich gespeichert.
+    status:
+        open: Offen
+        onhold: Wartend
+        done: Erledigt
+        invalid: Ungültig

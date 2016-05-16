@@ -12,3 +12,7 @@ zentrium:
         logout: Logout
         password: Passwort
         username: Benutzername
+    twig:
+        format_list:
+            and: und
+            or: oder

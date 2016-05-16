@@ -1,0 +1,24 @@
+{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_log.layout.log'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ log.title }}</h3>
+    <div class="box-tools pull-right">
+      <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
+    </div>
+  </div>
+  <div class="box-body">
+    <dl>
+      <dt>{{ 'zentrium_log.log.field.status'|trans }}</dt>
+      <dd>{{ ('zentrium_log.status.'~log.status)|trans }}</dd>
+      <dt>{{ 'zentrium_log.log.field.updated'|trans }}</dt>
+      <dd>{{ log.updated|date('d.m.Y H:i') }}</dd>
+      <dt>{{ 'zentrium_log.log.field.labels'|trans }}</dt>
+      <dd>{% if log.labels|length %}{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span> {% endfor %}{% else %}-{% endif %}</dd>
+    </dl>
+  </div>
+</div>
+{% endblock %}

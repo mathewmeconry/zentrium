@@ -1,0 +1,5 @@
+services:
+    zentrium_log.menu_listener:
+        class: Zentrium\Bundle\LogBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu, priority: -20 }

@@ -1,0 +1,54 @@
+{% extends "ZentriumCoreBundle::layout.html.twig" %}
+
+{% set statusIcons = {'open': 'circle', 'onhold': 'pause-circle', 'done': 'check-circle', 'invalid': 'times-circle'} %}
+
+{% block title %}{{ 'zentrium_log.layout.log'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+    {% block content_top %}{% endblock %}
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_log.list.status'|trans }}</h3>
+      </div>
+      <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          {% for status in statuses %}
+          <li{% if status == activeStatus %} class="active"{% endif %}><a href="{{ path('logs', {'status': status, 'labels': activeLabels|join(',')}) }}"><i class="fa fa-{{ statusIcons[status] }}"></i> {{ ('zentrium_log.status.'~status)|trans }} {% if statusCounts[status] is defined %}<span class="label label-primary pull-right">{{ statusCounts[status] }}</span>{% endif %}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% if labels|length %}
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_log.list.labels'|trans }}</h3>
+        <div class="box-tools">
+          {% if activeLabels|length %}
+          <a href="{{ path('logs', {'status': activeStatus}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="{{ 'zentrium_log.list.label_reset'|trans }}"><i class="fa fa-times"></i></a>
+          {% endif %}
+          <a href="{{ path('log_label_new') }}" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="{{ 'zentrium_log.list.label_new'|trans }}"><i class="fa fa-plus"></i></a>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          {% for label in labels %}
+            <li{% if label.id in activeLabels %} class="active"{% endif %}>
+              <a href="{% if label.id in activeLabels %}{{ path('logs', {'status': activeStatus, 'labels': activeLabels|without(label.id)|join(',')}) }}{% else %}{{ path('logs', {'status': activeStatus, 'labels': activeLabels|merge([label.id])|join(',')}) }}{% endif %}"><i class="fa fa-circle-o" style="color: {{ label.color }}"></i> {{ label.name }}</a>
+              <div class="pill-tools">
+                 <a href="{{ path('log_label_edit', {'label': label.id}) }}"><i class="fa fa-pencil"></i></a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-md-9">
+    {% block content_main %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

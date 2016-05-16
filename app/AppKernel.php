@@ -16,9 +16,11 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
+            new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

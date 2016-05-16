@@ -4,3 +4,10 @@ services:
         arguments: ["@knp_menu.factory", "@event_dispatcher"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+
+    zentrium.twig.extension:
+        class: Zentrium\Bundle\CoreBundle\Twig\Extension
+        arguments: ["@translator"]
+        public: false
+        tags:
+            - { name: twig.extension }

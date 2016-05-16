@@ -30,7 +30,8 @@
         "sebastian/version": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "knplabs/knp-time-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
