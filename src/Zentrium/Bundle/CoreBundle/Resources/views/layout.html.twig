@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,6 +51,18 @@
         <h1>{{ title }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
       </section>
       <section class="content">
+        {% block flashes %}
+        {% set alertIcons = {'success': 'check', 'warning': 'warning', 'info': 'info'} %}
+        {% for type, flashes in app.session.flashbag.all %}
+          {% for flash in flashes %}
+            <div class="alert alert-{{ type }} alert-dismissible">
+              <button data-dismiss="alert" class="close" type="button">×</button>
+              {% if alertIcons[type] is defined %}<i class="icon fa fa-{{ alertIcons[type] }}"></i>{% endif %}
+              {{ flash|trans }}
+            </div>
+          {% endfor %}
+        {% endfor %}
+        {% endblock %}
         {% block content %}{% endblock %}
       </section>
     </div>
@@ -63,5 +75,6 @@
   </div>
   {% endblock %}
   <script src="{{ asset('bundles/zentriumcore/js/bundle.min.js') }}"></script>
+  {% block scripts %}{% endblock %}
 </body>
 </html>

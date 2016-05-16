@@ -4,6 +4,9 @@ zentrium:
         version: Version
     menu:
         home: Home
+    form:
+        color: Farbe
+        save: Speichern
     security:
         login: Login
         logout: Logout

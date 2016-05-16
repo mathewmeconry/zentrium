@@ -10,19 +10,43 @@ module.exports = function(grunt) {
         }
       }
     },
+    uglify: {
+      js: {
+        src: [
+          'public/js/form.js',
+        ],
+        dest: 'public/js/bundle.js'
+      }
+    },
     concat: {
       options: {
         separator: ';'
       },
       js: {
         src: [
+          'public/js/modernizr.min.js',
           'node_modules/jquery/dist/jquery.min.js',
           'node_modules/admin-lte/bootstrap/js/bootstrap.min.js',
           'node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
-          'node_modules/admin-lte/plugins/fastclick/fastclick.js',
-          'node_modules/admin-lte/dist/js/app.min.js'
+          'node_modules/admin-lte/plugins/fastclick/fastclick.min.js',
+          'node_modules/admin-lte/plugins/select2/select2.min.js',
+          'node_modules/admin-lte/plugins/select2/i18n/de.js',
+          'node_modules/admin-lte/dist/js/app.min.js',
+          'node_modules/jquery-minicolors/jquery.minicolors.min.js',
+          'public/js/bundle.js',
         ],
         dest: 'public/js/bundle.min.js'
+      }
+    },
+    modernizr: {
+      bundle: {
+        crawl: false,
+        dest: 'public/js/modernizr.min.js',
+        tests: [
+          'history'
+        ],
+        options: [],
+        uglify: true
       }
     },
     copy: {
@@ -37,6 +61,10 @@ module.exports = function(grunt) {
       less: {
         files: ['less/**/*.less'],
         tasks: ['less']
+      },
+      js: {
+        files: ['public/js/**/*.js', '!public/js/bundle.js', '!public/js/bundle.min.js'],
+        tasks: ['uglify', 'concat']
       }
     }
   });
@@ -46,6 +74,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-modernizr');
 
-  grunt.registerTask('default', ['less', 'concat', 'copy']);
+  grunt.registerTask('default', ['less', 'uglify', 'modernizr', 'concat', 'copy']);
 };
