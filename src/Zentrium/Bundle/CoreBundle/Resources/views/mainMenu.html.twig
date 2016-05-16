@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block label %}
-<i class="{{ item.labelAttribute('icon')|default('fa fa-circle-o') }}"></i>
+{% if item.labelAttribute('icon') %}
+<i class="{{ item.labelAttribute('icon') }}"></i>
+{% endif %}
 <span>{{ item.label|trans }}</span>
 {% if item.hasChildren and item.displayChildren %}
   <i class="fa fa-angle-left pull-right"></i>
