@@ -69,8 +69,6 @@ class Extension extends \Twig_Extension
             return '';
         }
 
-        dump($options);
-
         $options = array_merge([
             'property' => null,
             'translate' => false,
