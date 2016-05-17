@@ -10,6 +10,16 @@ zentrium:
     menu:
         home: Home
         users: Benutzer
+    error:
+        404:
+            title: Seite nicht gefunden
+            text: Die gewünschte Seite konnte leider nicht gefunden werden.
+        403:
+            title: Zugriff verweigert
+            text: Die gewünschte Seite konnte aufgrund fehlender Berechtigungen nicht abgerufen werden.
+        500:
+            title: Fehler aufgetreten
+            text: Es ist ein unbekannter Fehler aufgetreten. Sollte das Problem weiterhin bestehen, kontaktiere bitte einen Administrator.
     form:
         color: Farbe
         save: Speichern
