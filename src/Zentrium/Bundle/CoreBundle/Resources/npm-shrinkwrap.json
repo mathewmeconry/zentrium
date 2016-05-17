@@ -1,0 +1,30 @@
+{
+  "name": "zentrium-core-bundle",
+  "dependencies": {
+    "admin-lte": {
+      "version": "2.3.3",
+      "from": "admin-lte@^2.3.3",
+      "resolved": "https://registry.npmjs.org/admin-lte/-/admin-lte-2.3.3.tgz"
+    },
+    "font-awesome": {
+      "version": "4.6.1",
+      "from": "font-awesome@^4.6.1",
+      "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.6.1.tgz"
+    },
+    "jquery": {
+      "version": "2.2.3",
+      "from": "jquery@^2.2.3",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.3.tgz"
+    },
+    "jquery-minicolors": {
+      "version": "2.1.10",
+      "from": "jquery-minicolors@^2.1.10",
+      "resolved": "https://registry.npmjs.org/jquery-minicolors/-/jquery-minicolors-2.1.10.tgz"
+    },
+    "source-sans-pro": {
+      "version": "2.20.0",
+      "from": "source-sans-pro@git://github.com/adobe-fonts/source-sans-pro.git#release",
+      "resolved": "git://github.com/adobe-fonts/source-sans-pro.git#4463d0c33e6567df4da97406642c64028e103630"
+    }
+  }
+}
