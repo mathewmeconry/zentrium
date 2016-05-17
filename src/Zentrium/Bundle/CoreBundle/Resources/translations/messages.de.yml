@@ -4,6 +4,7 @@ zentrium:
         version: Version
     menu:
         home: Home
+        users: Benutzer
     form:
         color: Farbe
         save: Speichern
@@ -16,3 +17,11 @@ zentrium:
         format_list:
             and: und
             or: oder
+    user:
+        list:
+            title: Benutzer
+        field:
+            name: Nachname
+            firstname: Vorname
+            username: Benutzername
+            email: E-Mail

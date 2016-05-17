@@ -5,6 +5,17 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
 
+    zentrium.menu.listener:
+        class: Zentrium\Bundle\CoreBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenuFirst, priority: 100 }
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenuLast, priority: -100 }
+
+    zentrium.repository.user:
+        class: Zentrium\Bundle\CoreBundle\Entity\UserRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [Zentrium\Bundle\CoreBundle\Entity\User]
+
     zentrium.twig.extension:
         class: Zentrium\Bundle\CoreBundle\Twig\Extension
         arguments: ["@translator"]

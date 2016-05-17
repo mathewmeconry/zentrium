@@ -7,7 +7,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Zentrium\Bundle\CoreBundle\Entity\UserRepository")
  * @ORM\Table(name="users")
  */
 class User extends BaseUser

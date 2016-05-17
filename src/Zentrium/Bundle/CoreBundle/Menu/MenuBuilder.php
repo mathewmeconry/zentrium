@@ -25,8 +25,6 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->addChild('zentrium.menu.home', ['route' => 'home', 'labelAttributes' => ['icon' => 'fa fa-home']]);
-
         $this->eventDispatcher->dispatch(MenuEvents::CONFIGURE_MAIN, new ConfigureMenuEvent($this->factory, $menu, $options));
 
         return $menu;
