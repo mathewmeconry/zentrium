@@ -33,6 +33,16 @@ class Extension extends \Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('distributeGrid', [$this, 'distributeGridFunction']),
+        ];
+    }
+
+    /**
      * Returns an array without certain values.
      *
      * @param  array $array
@@ -106,6 +116,21 @@ class Extension extends \Twig_Extension
         } else {
             return $last;
         }
+    }
+
+    /**
+     * Distributes boxes in a grid such that every row is filled completely.
+     *
+     * @param  int   $columns  Number of columns
+     * @param  int   $minWidth Minimum width of each box
+     * @param  int   $boxes    Number of boxes
+     * @return array Width of each box
+     */
+    public function distributeGridFunction($columns, $minWidth, $boxes)
+    {
+        $distributor = new GridDistributor($columns, $minWidth);
+
+        return $distributor->distribute($boxes);
     }
 
     /**

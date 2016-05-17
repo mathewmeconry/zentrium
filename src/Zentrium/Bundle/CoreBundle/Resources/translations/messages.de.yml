@@ -1,4 +1,9 @@
 zentrium:
+    dashboard:
+        title: Home
+        user_count_widget:
+            users: Benutzer
+            show: Anzeigen
     layout:
         main_menu: Hauptmenü
         version: Version

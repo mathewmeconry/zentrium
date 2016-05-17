@@ -1,0 +1,27 @@
+{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium.dashboard.title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  {% set xsWidths = distributeGrid(12, 6, widgetsTop|length) %}
+  {% set lgWidths = distributeGrid(12, 3, widgetsTop|length) %}
+  {% for widget in widgetsTop %}
+    <div class="col-xs-{{ xsWidths[loop.index0] }} col-lg-{{ lgWidths[loop.index0] }}">
+      {{ widget.content|raw }}
+    </div>
+  {% endfor %}
+</div>
+<div class="row">
+  <div class="col-xs-12 col-lg-8">
+    {% for widget in widgetsCenter %}
+      {{ widget.content|raw }}
+    {% endfor %}
+  </div>
+  <div class="col-xs-12 col-lg-4">
+    {% for widget in widgetsSidebar %}
+      {{ widget.content|raw }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="small-box bg-aqua">
+  <div class="inner">
+    <h3>{{ count }}</h3>
+    <p>{{ 'zentrium.dashboard.user_count_widget.users'|transchoice(count) }}</p>
+  </div>
+  <div class="icon">
+    <i class="fa fa-users"></i>
+  </div>
+  <a class="small-box-footer" href="{{ path('users') }}">{{ 'zentrium.dashboard.user_count_widget.show'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+</div>

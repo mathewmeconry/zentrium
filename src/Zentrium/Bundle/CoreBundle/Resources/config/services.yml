@@ -1,4 +1,10 @@
 services:
+    zentrium.dashboard.listener:
+        class: Zentrium\Bundle\CoreBundle\Dashboard\DashboardListener
+        arguments: ["@templating", "@zentrium.repository.user"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
+
     zentrium.menu.builder:
         class: Zentrium\Bundle\CoreBundle\Menu\MenuBuilder
         arguments: ["@knp_menu.factory", "@event_dispatcher"]
