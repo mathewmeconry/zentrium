@@ -1,0 +1,10 @@
+<div class="small-box bg-{% if count > 0 %}yellow{% else %}green{% endif %}">
+  <div class="inner">
+    <h3>{{ count }}</h3>
+    <p>{{ 'zentrium_log.dashboard.log_widget.open_logs'|transchoice(count) }}</p>
+  </div>
+  <div class="icon">
+    <i class="fa fa-book"></i>
+  </div>
+  <a class="small-box-footer" href="{{ path('logs', {'status': 'open'}) }}">{{ 'zentrium_log.dashboard.log_widget.show'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+</div>

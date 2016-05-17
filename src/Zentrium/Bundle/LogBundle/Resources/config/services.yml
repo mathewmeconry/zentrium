@@ -1,5 +1,16 @@
 services:
+    zentrium_log.dashboard_listener:
+        class: Zentrium\Bundle\LogBundle\Dashboard\DashboardListener
+        arguments: ["@templating", "@zentrium_log.repository.log"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
+
     zentrium_log.menu_listener:
         class: Zentrium\Bundle\LogBundle\Menu\MenuListener
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu, priority: -20 }
+
+    zentrium_log.repository.log:
+        class: Zentrium\Bundle\LogBundle\Entity\LogRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [Zentrium\Bundle\LogBundle\Entity\Log]

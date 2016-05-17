@@ -5,6 +5,10 @@ zentrium_log:
         list: Übersicht
         log: Journal
         new: Erfassen
+    dashboard:
+        log_widget:
+            open_logs: offener Eintrag|offene Einträge
+            show: Anzeigen
     list:
         labels: Labels
         status: Status
