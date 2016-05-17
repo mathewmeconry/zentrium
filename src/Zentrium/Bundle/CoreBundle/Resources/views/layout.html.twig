@@ -24,6 +24,9 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <li>
+              <a href="{{ path('viewer') }}" title="{{ 'zentrium.viewer.switch'|trans }}"><i class="fa fa-toggle-on"></i></a>
+            </li>
+            <li>
               <a href="{{ path('fos_user_security_logout') }}" title="{{ 'zentrium.security.logout'|trans }}"><i class="fa fa-sign-out"></i></a>
             </li>
           </ul>
@@ -51,24 +54,13 @@
         <h1>{{ title }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
       </section>
       <section class="content">
-        {% block flashes %}
-        {% set alertIcons = {'success': 'check', 'warning': 'warning', 'info': 'info'} %}
-        {% for type, flashes in app.session.flashbag.all %}
-          {% for flash in flashes %}
-            <div class="alert alert-{{ type }} alert-dismissible">
-              <button data-dismiss="alert" class="close" type="button">×</button>
-              {% if alertIcons[type] is defined %}<i class="icon fa fa-{{ alertIcons[type] }}"></i>{% endif %}
-              {{ flash|trans }}
-            </div>
-          {% endfor %}
-        {% endfor %}
-        {% endblock %}
+        {% include 'ZentriumCoreBundle::flashes.html.twig' %}
         {% block content %}{% endblock %}
       </section>
     </div>
     <footer class="main-footer">
       <div class="pull-right hidden-xs">
-        <strong>{% trans %}zentrium.layout.version{% endtrans %}</strong> {{ app_version }}
+        <strong>{{ 'zentrium.layout.version'|trans }}</strong> {{ app_version }}
       </div>
       <strong>&nbsp;</strong>
     </footer>

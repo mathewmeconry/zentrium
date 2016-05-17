@@ -10,12 +10,14 @@ services:
         arguments: ["@knp_menu.factory", "@event_dispatcher"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: createViewerMenu, alias: viewer }
 
     zentrium.menu.listener:
         class: Zentrium\Bundle\CoreBundle\Menu\MenuListener
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenuFirst, priority: 100 }
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenuLast, priority: -100 }
+            - { name: kernel.event_listener, event: zentrium.menu.viewer, method: onCreateViewerMenu, priority: -50 }
 
     zentrium.repository.user:
         class: Zentrium\Bundle\CoreBundle\Entity\UserRepository

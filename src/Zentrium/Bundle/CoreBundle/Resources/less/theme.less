@@ -55,13 +55,13 @@
 // Skin
 @import '@{theme-path}skins/skin-blue.less';
 
-.main-header .logo {
+.main-header .logo, .main-header .navbar-brand {
     font-weight: 600;
     font-family: inherit;
+}
 
-    .logo-lg {
-        font-size: 22px;
-    }
+.main-header .logo .logo-lg {
+    font-size: 22px;
 }
 
 .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
@@ -105,5 +105,15 @@ body.error-page {
         > i {
             padding-right: 10px;
         }
+    }
+}
+
+@media (min-width: @grid-float-breakpoint) {
+    .container > .navbar-header {
+        margin-left: 15px;
+    }
+
+    .container > .navbar-custom-menu {
+        margin-right: 15px;
     }
 }

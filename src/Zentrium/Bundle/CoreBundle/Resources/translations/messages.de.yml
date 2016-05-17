@@ -10,6 +10,8 @@ zentrium:
     menu:
         home: Home
         users: Benutzer
+        viewer:
+            user_profile: Mein Profil
     error:
         404:
             title: Seite nicht gefunden
@@ -40,3 +42,8 @@ zentrium:
             firstname: Vorname
             username: Benutzername
             email: E-Mail
+    viewer:
+        switch: Lese-Modus einschalten
+        switch_back: Lese-Modus verlassen
+        user_profile:
+            title: Mein Profil

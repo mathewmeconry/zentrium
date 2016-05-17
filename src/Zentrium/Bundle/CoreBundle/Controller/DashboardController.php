@@ -17,6 +17,10 @@ class DashboardController extends Controller
      */
     public function dashboardAction(Request $request)
     {
+        if (!$this->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('viewer');
+        }
+
         $event = new BuildDashboardEvent();
         $this->get('event_dispatcher')->dispatch(DashboardEvents::BUILD_DASHBOARD, $event);
 

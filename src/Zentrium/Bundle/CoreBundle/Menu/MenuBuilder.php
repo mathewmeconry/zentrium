@@ -29,4 +29,13 @@ class MenuBuilder
 
         return $menu;
     }
+
+    public function createViewerMenu(array $options)
+    {
+        $menu = $this->factory->createItem('root');
+
+        $this->eventDispatcher->dispatch(MenuEvents::CONFIGURE_VIEWER, new ConfigureMenuEvent($this->factory, $menu, $options));
+
+        return $menu;
+    }
 }

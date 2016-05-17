@@ -1,0 +1,31 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+{% set listAttributes = item.childrenAttributes %}
+{{ block('children') }}
+{% endblock %}
+
+{% block label %}
+{{ item.label|trans }}
+{% if item.hasChildren and item.displayChildren %}
+  <span class="caret"></span>
+{% endif %}
+{% endblock %}
+
+{% block linkElement %}
+{% import 'knp_menu.html.twig' as knp_menu %}
+{% set linkAttributes = item.linkAttributes %}
+{% if item.hasChildren and item.displayChildren %}
+  {% set classes = (linkAttributes['class'] is defined ? [linkAttributes['class']] : []) %}
+  {% set classes = classes|merge(['dropdown-toggle']) %}
+  {% set linkAttributes = item.linkAttributes|merge({'class': classes|join(' '), 'data-toggle': 'dropdown'}) %}
+{% endif %}
+<a href="{{ item.uri }}"{{ knp_menu.attributes(linkAttributes) }}>{{ block('label') }}</a>
+{% endblock %}
+
+{% block list %}
+{% set classes = (listAttributes['class'] is defined ? [listAttributes['class']] : []) %}
+{% set classes = classes|merge(['dropdown-menu']) %}
+{% set listAttributes = listAttributes|merge({'class': classes|join(' ') }) %}
+{{ parent() }}
+{% endblock %}
