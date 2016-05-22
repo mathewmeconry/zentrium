@@ -1,0 +1,25 @@
+services:
+    zentrium_map.menu_listener:
+        class: Zentrium\Bundle\MapBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
+
+    zentrium_map.manager.map:
+        class: Zentrium\Bundle\MapBundle\Entity\MapManager
+        arguments: ["@doctrine.orm.entity_manager"]
+        lazy: true
+
+    zentrium_map.manager.wmts_layer:
+        class: Zentrium\Bundle\MapBundle\Entity\WmtsLayerManager
+        arguments: ["@doctrine.orm.entity_manager"]
+        lazy: true
+
+    zentrium_map.wmts.capabilities:
+        class: Zentrium\Bundle\MapBundle\Wmts\CapabilitiesParser
+        arguments: ["@zentrium_map.wmts.http_client"]
+        lazy: true
+
+    zentrium_map.wmts.http_client:
+        class: Http\Client\Common\HttpMethodsClient
+        arguments: ["@httplug.client", "@httplug.message_factory"]
+        lazy: true

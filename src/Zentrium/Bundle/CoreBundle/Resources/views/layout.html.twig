@@ -7,6 +7,7 @@
   <title>{% set title = block('title')|trim %}{% if title %}{{ title }} - {% endif %}Zentrium</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
+  {% block stylesheets %}{% endblock %}
 </head>
 <body class="{% block body_class %}hold-transition skin-blue sidebar-collapse sidebar-mini{% endblock %}">
   {% block body %}

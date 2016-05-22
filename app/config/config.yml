@@ -51,13 +51,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
-
+        types:
+            json_deflate: Zentrium\Bundle\CoreBundle\Doctrine\JsonDeflateType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
@@ -73,6 +68,13 @@ doctrine_migrations:
     namespace: Zentrium\Migrations
     table_name: migration_versions
     name: Zentrium Migrations
+
+# Doctrine Extensions Configuration
+stof_doctrine_extensions:
+    default_locale: "%locale%"
+    orm:
+        default:
+            sortable: true
 
 # FOSUser Configuration
 fos_user:
@@ -109,6 +111,14 @@ fos_rest:
     view:
         view_response_listener:
             enabled: true
+
+# PHP-HTTP Configuration
+httplug:
+    classes:
+        client: Http\Adapter\Guzzle6\Client
+        message_factory: Http\Message\MessageFactory\GuzzleMessageFactory
+        uri_factory: Http\Message\UriFactory\GuzzleUriFactory
+        stream_factory: Http\Message\StreamFactory\GuzzleStreamFactory
 
 # Swiftmailer Configuration
 swiftmailer:

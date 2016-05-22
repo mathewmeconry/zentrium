@@ -1,0 +1,5 @@
+zentrium_map:
+    layout:
+        map: Karte
+    menu:
+        map: Karte

@@ -15,7 +15,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
@@ -27,6 +29,7 @@ class AppKernel extends Kernel
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
+            new Zentrium\Bundle\MapBundle\ZentriumMapBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

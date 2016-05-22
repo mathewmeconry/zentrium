@@ -1,0 +1,24 @@
+{% extends "ZentriumCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'zentrium_map.layout.map'|trans }}{% endblock %}
+
+{% block content %}
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ map.name }}</h3>
+  </div>
+  <div class="box-body no-padding">
+    <div id="map" data-config="{{ config|json_encode|escape('html_attr') }}" style="height: 400px;"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/zentriummap/css/ol-debug.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/zentriummap/js/bundle.min.js') }}"></script>
+{% endblock %}

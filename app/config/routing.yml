@@ -13,3 +13,7 @@ core:
 log:
     resource: "@ZentriumLogBundle/Controller/"
     type:     annotation
+
+map:
+    resource: "@ZentriumMapBundle/Controller/"
+    type:     annotation
