@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"wmts" = "WmtsLayer"})
+ * @ORM\DiscriminatorMap({"wmts" = "WmtsLayer", "feature" = "FeatureLayer"})
  */
 abstract class Layer
 {

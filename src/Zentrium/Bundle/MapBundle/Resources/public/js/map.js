@@ -3,6 +3,7 @@ $(function () {
     var $this = $(this);
     var config = $this.data('config');
     var mapProjection = config.projection || 'EPSG:3857';
+    var geoJsonParser = new ol.format.GeoJSON();
 
     var defaultStyle = new ol.style.Style({
       image: new ol.style.Circle({
@@ -23,6 +24,23 @@ $(function () {
           opacity: layer.opacity,
           visible: layer.enabled,
           source: new ol.source.WMTS(options)
+        }));
+      } else if(layer.type == 'feature') {
+        var features = [];
+        for(var j in layer.features) {
+          features.push(geoJsonParser.readFeature(layer.features[j], {
+            dataProjection: 'EPSG:4326',
+            featureProjection: mapProjection,
+          }));
+        }
+        var source = new ol.source.Vector({
+          features: features
+        });
+        layers.push(new ol.layer.Vector({
+          opacity: layer.opacity,
+          visible: layer.enabled,
+          source: source,
+          style: defaultStyle,
         }));
       }
     }

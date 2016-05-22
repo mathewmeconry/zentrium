@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Zentrium\Bundle\MapBundle\Entity\FeatureLayer;
 use Zentrium\Bundle\MapBundle\Entity\Map;
 use Zentrium\Bundle\MapBundle\Entity\WmtsLayer;
 
@@ -45,6 +46,19 @@ class MapController extends Controller
                 $layerConfig['type'] = 'wmts';
                 $layerConfig['capabilities'] = $layer->getCapabilities();
                 $layerConfig['layerId'] = $layer->getLayerId();
+            } elseif ($layer instanceof FeatureLayer) {
+                $features = [];
+                foreach ($layer->getFeatures() as $feature) {
+                    $features[] = [
+                        'type' => 'Feature',
+                        'geometry' => [
+                            'type' => $feature->getType(),
+                            'coordinates' => $feature->getCoordinates(),
+                        ],
+                    ];
+                }
+                $layerConfig['type'] = 'feature';
+                $layerConfig['features'] = $features;
             } else {
                 continue;
             }
