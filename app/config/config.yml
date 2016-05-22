@@ -80,6 +80,36 @@ fos_user:
     firewall_name: main
     user_class: Zentrium\Bundle\CoreBundle\Entity\User
 
+# OAuth Server Configuration
+fos_oauth_server:
+    db_driver: orm
+    client_class: Zentrium\Bundle\CoreBundle\Entity\Application
+    access_token_class: Zentrium\Bundle\CoreBundle\Entity\AccessToken
+    refresh_token_class: Zentrium\Bundle\CoreBundle\Entity\RefreshToken
+    auth_code_class: Zentrium\Bundle\CoreBundle\Entity\AuthCode
+    service:
+        client_manager: zentrium.oauth_server.application_manager
+        user_provider: fos_user.user_provider.username
+        options:
+            supported_scopes: map_position
+
+# REST Configuration
+fos_rest:
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: validationErrors
+    format_listener:
+        enabled: true
+        rules:
+            - { path: ^/api/, fallback_format: json, prefer_extension: false }
+            - { path: ^/, stop: true }
+    exception:
+        enabled: true
+    view:
+        view_response_listener:
+            enabled: true
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

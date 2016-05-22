@@ -1,6 +1,11 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
+api_auth_token:
+    path: /api/auth/token
+    defaults:  { _controller: fos_oauth_server.controller.token:tokenAction }
+    methods: [GET, POST]
+
 core:
     resource: "@ZentriumCoreBundle/Controller/"
     type:     annotation
