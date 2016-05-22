@@ -65,6 +65,21 @@ class Feature
      */
     protected $attributes;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $device;
+
+    /**
+     * @var Position
+     *
+     * @ORM\ManyToOne(targetEntity="Position")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    protected $lastPosition;
+
     public function __construct()
     {
     }
@@ -130,6 +145,30 @@ class Feature
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    public function setDevice($device)
+    {
+        $this->device = $device;
+
+        return $this;
+    }
+
+    public function getLastPosition()
+    {
+        return $this->lastPosition;
+    }
+
+    public function setLastPosition($lastPosition)
+    {
+        $this->lastPosition = $lastPosition;
 
         return $this;
     }

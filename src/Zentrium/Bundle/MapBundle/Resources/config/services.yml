@@ -9,10 +9,21 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         lazy: true
 
+    zentrium_map.manager.position:
+        class: Zentrium\Bundle\MapBundle\Entity\PositionManager
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher"]
+        lazy: true
+
     zentrium_map.manager.wmts_layer:
         class: Zentrium\Bundle\MapBundle\Entity\WmtsLayerManager
         arguments: ["@doctrine.orm.entity_manager"]
         lazy: true
+
+    zentrium_map.position_listener:
+        class: Zentrium\Bundle\MapBundle\EventListener\PositionUpdateListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium_map.position, method: onPositionUpdate }
 
     zentrium_map.wmts.capabilities:
         class: Zentrium\Bundle\MapBundle\Wmts\CapabilitiesParser
