@@ -120,6 +120,15 @@ httplug:
         uri_factory: Http\Message\UriFactory\GuzzleUriFactory
         stream_factory: Http\Message\StreamFactory\GuzzleStreamFactory
 
+# CSRF Protection Bundle
+dunglas_angular_csrf:
+    cookie:
+        expire: 3600
+        set_on:
+            - { path: ^(?!/api/).*$, methods: [GET] }
+    secure:
+        - { route: _options }
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

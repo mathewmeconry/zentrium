@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     uglify: {
       js: {
         src: [
+          'public/js/helpers.js',
           'public/js/form.js',
         ],
         dest: 'public/js/bundle.js'
@@ -33,6 +34,7 @@ module.exports = function(grunt) {
           'node_modules/admin-lte/plugins/select2/i18n/de.js',
           'node_modules/admin-lte/dist/js/app.min.js',
           'node_modules/jquery-minicolors/jquery.minicolors.min.js',
+          'node_modules/js-cookie/src/js.cookie.js',
           'public/js/bundle.js',
         ],
         dest: 'public/js/bundle.min.js'

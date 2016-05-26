@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e43d94007b78b9214ad445c56bdf12c",
-    "content-hash": "3636b615917645ed861cdea728c640f5",
+    "hash": "b54c594b52ab387b48fea47f22e12c4e",
+    "content-hash": "68861305955091c3f6073d5b8600239f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -992,6 +992,66 @@
                 "orm"
             ],
             "time": "2016-01-05 21:34:58"
+        },
+        {
+            "name": "dunglas/angular-csrf-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dunglas/DunglasAngularCsrfBundle.git",
+                "reference": "0e56b26636442613cb9c26400346c6504d5e9956"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dunglas/DunglasAngularCsrfBundle/zipball/0e56b26636442613cb9c26400346c6504d5e9956",
+                "reference": "0e56b26636442613cb9c26400346c6504d5e9956",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/config": "~2.4|~3.0",
+                "symfony/dependency-injection": "~2.4|~3.0",
+                "symfony/http-foundation": "~2.4|~3.0",
+                "symfony/http-kernel": "~2.4|~3.0",
+                "symfony/security-csrf": "~2.4|~3.0"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "phpspec/phpspec": "~2.0",
+                "symfony/form": "~2.4",
+                "symfony/validator": "~2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dunglas\\AngularCsrfBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Dunglas",
+                    "email": "dunglas@gmail.com",
+                    "homepage": "http://dunglas.fr"
+                }
+            ],
+            "description": "CSRF protection when using AngularJS with Symfony2",
+            "homepage": "http://api-platform.com",
+            "keywords": [
+                "angularjs",
+                "csrf",
+                "security",
+                "xsrf"
+            ],
+            "time": "2016-02-11 07:07:26"
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
@@ -4668,7 +4728,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20
+        "friendsofsymfony/user-bundle": 20,
+        "dunglas/angular-csrf-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -6,6 +6,7 @@
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.3",
     "jquery-minicolors": "^2.1.10",
+    "js-cookie": "^2.1.1",
     "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release"
   },
   "devDependencies": {

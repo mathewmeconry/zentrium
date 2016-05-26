@@ -21,6 +21,11 @@
       "from": "jquery-minicolors@^2.1.10",
       "resolved": "https://registry.npmjs.org/jquery-minicolors/-/jquery-minicolors-2.1.10.tgz"
     },
+    "js-cookie": {
+      "version": "2.1.1",
+      "from": "js-cookie@",
+      "resolved": "https://registry.npmjs.org/js-cookie/-/js-cookie-2.1.1.tgz"
+    },
     "source-sans-pro": {
       "version": "2.20.0",
       "from": "source-sans-pro@git://github.com/adobe-fonts/source-sans-pro.git#release",

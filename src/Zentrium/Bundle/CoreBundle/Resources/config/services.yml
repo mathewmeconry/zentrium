@@ -1,4 +1,8 @@
 services:
+    zentrium.csrf.route_matcher:
+        class: Zentrium\Bundle\CoreBundle\Csrf\RouteMatcher
+        arguments: ["@router", _options]
+
     zentrium.dashboard.listener:
         class: Zentrium\Bundle\CoreBundle\Dashboard\DashboardListener
         arguments: ["@templating", "@zentrium.repository.user"]
