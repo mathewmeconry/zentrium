@@ -19,7 +19,14 @@ $(function () {
     for(var i in config.layers) {
       var layer = config.layers[i];
       if(layer.type == 'wmts') {
-        var options = ol.source.WMTS.optionsFromCapabilities(JSON.parse(layer.capabilities), {layer: layer.layerId, requestEncoding: 'REST'});
+        var capabilities = JSON.parse(layer.capabilities);
+        // Temporary fix for https://github.com/openlayers/ol3/issues/4256
+        for(var j in capabilities['Contents']['Layer']) {
+          if('WGS84BoundingBox' in capabilities['Contents']['Layer'][j]) {
+            delete capabilities['Contents']['Layer'][j]['WGS84BoundingBox'];
+          }
+        }
+        var options = ol.source.WMTS.optionsFromCapabilities(capabilities, {layer: layer.layerId, requestEncoding: 'REST'});
         layers.push(new ol.layer.Tile({
           opacity: layer.opacity,
           visible: layer.enabled,
