@@ -5,6 +5,8 @@ $(function () {
     var mapProjection = config.projection || 'EPSG:3857';
     var geoJsonParser = new ol.format.GeoJSON();
 
+    $this.css('height', Math.max(300, $(document.body).height() - $this.offset().top - 20));
+
     var defaultStyle = new ol.style.Style({
       image: new ol.style.Circle({
         radius: 5,
