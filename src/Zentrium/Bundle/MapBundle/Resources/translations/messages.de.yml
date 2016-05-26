@@ -16,6 +16,7 @@ zentrium_map:
         available_layers: Verfügbare Ebenen
     view:
         edit: Einstellungen
+        fullscreen: Vollbild
         set_default: Als Standard-Karte setzen
         save_viewport: Start-Ansicht speichern
     new:
