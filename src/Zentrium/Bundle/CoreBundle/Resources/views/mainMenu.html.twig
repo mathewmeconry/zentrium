@@ -9,7 +9,7 @@
 {% if item.labelAttribute('icon') %}
 <i class="{{ item.labelAttribute('icon') }}"></i>
 {% endif %}
-<span>{{ item.label|trans }}</span>
+<span>{% if item.labelAttribute('translate') is same as(false) %}{{ item.label }}{% else %}{{ item.label|trans }}{% endif %}</span>
 {% if item.hasChildren and item.displayChildren %}
   <i class="fa fa-angle-left pull-right"></i>
 {% endif %}

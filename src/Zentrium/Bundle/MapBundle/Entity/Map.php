@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Map
 {
+    const PROJECTION_MERCATOR = 'EPSG:3857';
     const DEFAULT_ZOOM = 12;
 
     /**
@@ -34,7 +35,7 @@ class Map
      *
      * @Assert\Valid
      *
-     * @ORM\OneToMany(targetEntity="MapLayer", mappedBy="map")
+     * @ORM\OneToMany(targetEntity="MapLayer", mappedBy="map", cascade="ALL", orphanRemoval=true)
      */
     protected $layers;
 
@@ -69,19 +70,32 @@ class Map
     protected $zoom;
 
     /**
+     * @var string
+     *
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="/^EPSG:(\d+)$/")
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $projection;
+
+    /**
      * @var bool
      *
      * @Assert\NotNull
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="default_", type="boolean")
      */
     protected $default;
 
     public function __construct()
     {
         $this->layers = new ArrayCollection();
-        $this->default = false;
+        $this->centerLatitude = 0.0;
+        $this->centerLongitude = 0.0;
         $this->zoom = self::DEFAULT_ZOOM;
+        $this->projection = self::PROJECTION_MERCATOR;
+        $this->default = false;
     }
 
     public function getId()
@@ -150,6 +164,18 @@ class Map
     public function setZoom($zoom)
     {
         $this->zoom = $zoom;
+
+        return $this;
+    }
+
+    public function getProjection()
+    {
+        return $this->projection;
+    }
+
+    public function setProjection($projection)
+    {
+        $this->projection = $projection;
 
         return $this;
     }

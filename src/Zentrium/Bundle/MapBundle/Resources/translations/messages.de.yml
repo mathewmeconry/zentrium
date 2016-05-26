@@ -3,3 +3,20 @@ zentrium_map:
         map: Karte
     menu:
         map: Karte
+        new: Neue Karte
+    map:
+        field:
+            name: Name
+            projection: Koordinaten-System
+        form:
+            saved: Die Karten-Einstellungen wurden erfolgreich gespeichert.
+            set_default: Die Karte wurde als Standard-Karte gesetzt.
+    edit:
+        active_layers: Aktive Ebenen
+        available_layers: Verfügbare Ebenen
+    view:
+        edit: Einstellungen
+        set_default: Als Standard-Karte setzen
+        save_viewport: Start-Ansicht speichern
+    new:
+        title: Neue Karte

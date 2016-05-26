@@ -26,6 +26,11 @@
       "from": "js-cookie@",
       "resolved": "https://registry.npmjs.org/js-cookie/-/js-cookie-2.1.1.tgz"
     },
+    "sortablejs": {
+      "version": "1.4.2",
+      "from": "sortablejs@",
+      "resolved": "https://registry.npmjs.org/sortablejs/-/sortablejs-1.4.2.tgz"
+    },
     "source-sans-pro": {
       "version": "2.20.0",
       "from": "source-sans-pro@git://github.com/adobe-fonts/source-sans-pro.git#release",

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 {% spaceless %}
+{% set title = block('title')|trim %}
 <html lang="{{ app.request.locale }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% set title = block('title')|trim %}{% if title %}{{ title }} - {% endif %}Zentrium</title>
+  <title>{% block title_full %}{{ title }}{% endblock %} - Zentrium</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
   {% block stylesheets %}{% endblock %}
@@ -52,9 +53,11 @@
       </section>
     </aside>
     <div class="content-wrapper">
+      {% if title %}
       <section class="content-header">
         <h1>{{ title }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
       </section>
+      {% endif %}
       <section class="content">
         {% include 'ZentriumCoreBundle::flashes.html.twig' %}
         {% block content %}{% endblock %}

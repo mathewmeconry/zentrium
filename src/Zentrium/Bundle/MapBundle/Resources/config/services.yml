@@ -1,6 +1,7 @@
 services:
     zentrium_map.menu_listener:
         class: Zentrium\Bundle\MapBundle\Menu\MenuListener
+        arguments: ["@zentrium_map.manager.map"]
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
 

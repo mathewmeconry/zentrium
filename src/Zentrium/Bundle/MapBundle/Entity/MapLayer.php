@@ -4,10 +4,12 @@ namespace Zentrium\Bundle\MapBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @UniqueEntity({"map", "layer"})
  */
 class MapLayer
 {
@@ -24,6 +26,7 @@ class MapLayer
      * @Assert\NotNull
      * @Assert\Valid
      *
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Map", inversedBy="layers")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
@@ -33,7 +36,6 @@ class MapLayer
      * @var Layer
      *
      * @Assert\NotNull
-     * @Assert\Valid
      *
      * @ORM\ManyToOne(targetEntity="Layer")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")

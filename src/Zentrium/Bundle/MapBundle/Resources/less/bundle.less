@@ -1,0 +1,19 @@
+.map-view {
+    height: 550px;
+}
+
+.map-layer-list {
+    display: block;
+    height: 300px;
+    overflow-y: auto;
+
+    > li {
+        display: block;
+        padding: 10px 15px;
+        cursor: move;
+
+        &.sortable-ghost {
+            background-color: #f0f0f0;
+        }
+    }
+}

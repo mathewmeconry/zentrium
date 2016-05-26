@@ -1,0 +1,11 @@
+{% extends "ZentriumCoreBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/zentriummap/css/bundle.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/zentriummap/js/bundle.min.js') }}"></script>
+{% endblock %}

@@ -27,7 +27,7 @@ $(function () {
           }
         }
         var options = ol.source.WMTS.optionsFromCapabilities(capabilities, {layer: layer.layerId, requestEncoding: 'REST'});
-        layers.push(new ol.layer.Tile({
+        layers.unshift(new ol.layer.Tile({
           opacity: layer.opacity,
           visible: layer.enabled,
           source: new ol.source.WMTS(options)
@@ -43,7 +43,7 @@ $(function () {
         var source = new ol.source.Vector({
           features: features
         });
-        layers.push(new ol.layer.Vector({
+        layers.unshift(new ol.layer.Vector({
           opacity: layer.opacity,
           visible: layer.enabled,
           source: source,
@@ -65,5 +65,30 @@ $(function () {
         zoom: config.zoom,
       }),
     }));
+  });
+
+  $('#map-set-default').click(function (event) {
+    var $this = $(this);
+    event.preventDefault();
+    Zentrium.post($this.attr('href'), {}).done(function (res) {
+      Zentrium.addFlash('success', res.message, true);
+      $this.remove();
+    });
+    return false;
+  });
+
+  $('#map-save-viewport').click(function (event) {
+    var view = $('#map').data('ol').getView();
+    var center = ol.proj.toLonLat(view.getCenter(), view.getProjection());
+
+    Zentrium.post($(this).attr('href'), {
+      'map_viewport[centerLongitude]': center[0],
+      'map_viewport[centerLatitude]': center[1],
+      'map_viewport[zoom]': view.getZoom()
+    }).done(function (res) {
+      Zentrium.addFlash('success', res.message, true);
+    });
+
+    return false;
   });
 });

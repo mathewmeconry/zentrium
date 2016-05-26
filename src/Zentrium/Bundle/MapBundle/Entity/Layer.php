@@ -3,6 +3,7 @@
 namespace Zentrium\Bundle\MapBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,6 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class Layer
 {
     /**
+     * @Serializer\ReadOnly
+     * @Serializer\Groups({"Simple"})
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,6 +28,8 @@ abstract class Layer
      * @var string
      *
      * @Assert\NotBlank
+     * @Serializer\Type("string")
+     * @Serializer\Groups({"Simple"})
      *
      * @ORM\Column(type="string")
      */

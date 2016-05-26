@@ -176,9 +176,9 @@ class Feature
     public static function getTypes()
     {
         return [
-            TYPE_POINT,
-            TYPE_LINESTRING,
-            TYPE_POLYGON,
+            self::TYPE_POINT,
+            self::TYPE_LINESTRING,
+            self::TYPE_POLYGON,
         ];
     }
 }

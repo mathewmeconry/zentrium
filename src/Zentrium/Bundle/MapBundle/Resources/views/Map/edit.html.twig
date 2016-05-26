@@ -1,0 +1,53 @@
+{% extends "ZentriumMapBundle::layout.html.twig" %}
+{% form_theme form "ZentriumCoreBundle::form.html.twig" %}
+
+{% block title_full %}{{ map.name }} - {{ 'zentrium_map.layout.map'|trans }}{% endblock %}
+
+{% block title %}{{ map.name }}{% endblock %}
+
+{% block content %}
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Einstellungen</h3>
+      </div>
+      <div class="box-body">
+        {{ form_row(form.name) }}
+        {{ form_row(form.projection) }}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_map.edit.active_layers'|trans }}</h3>
+      </div>
+      <div class="box-body no-padding">
+        {{ form_widget(form.layers) }}
+        <ul id="layers-active" class="nav nav-pills nav-stacked map-layer-list"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_map.edit.available_layers'|trans }}</h3>
+      </div>
+      <div class="box-body no-padding">
+        <ul id="layers-available" class="nav nav-pills nav-stacked map-layer-list" data-layers="{{ layers|serialize('json', serialization_context().setGroups('Simple'))|e('html_attr') }}"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-body">
+        {{ form_widget(form.save, {'attr': {'class': 'btn-primary'}}) }}
+        {{ form_rest(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ form_end(form) }}
+{% endblock %}

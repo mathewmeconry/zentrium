@@ -25,12 +25,12 @@ class MapManager
 
     public function setDefaultMap(Map $map)
     {
-        $query = $this->repository->createQueryBuilder()
-            ->update('m')
-            ->set('default', '(m.id != :id)')
+        $qb = $this->repository->createQueryBuilder('m')
+            ->update()
+            ->set('m.default', '(CASE WHEN m.id = :id THEN 1 ELSE 0 END)')
             ->setParameter('id', $map->getId());
 
-        $query->execute();
+        $qb->getQuery()->execute();
 
         $map->setDefault(true);
     }
@@ -44,5 +44,21 @@ class MapManager
         }
 
         return $defaults[0];
+    }
+
+    public function findAllWithNames()
+    {
+        $qb = $this->repository->createQueryBuilder('m')
+            ->select('PARTIAL m.{id,name}')
+            ->orderBy('m.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function save(Map $map)
+    {
+        $this->em->transactional(function (EntityManager $em) use ($map) {
+            $em->persist($map);
+        });
     }
 }

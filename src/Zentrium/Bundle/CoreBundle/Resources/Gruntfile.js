@@ -34,6 +34,8 @@ module.exports = function(grunt) {
           'node_modules/admin-lte/plugins/select2/i18n/de.js',
           'node_modules/admin-lte/dist/js/app.min.js',
           'node_modules/jquery-minicolors/jquery.minicolors.min.js',
+          'node_modules/sortablejs/Sortable.min.js',
+          'node_modules/sortablejs/jquery.binding.js',
           'node_modules/js-cookie/src/js.cookie.js',
           'public/js/bundle.js',
         ],
