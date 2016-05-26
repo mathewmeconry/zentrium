@@ -38,10 +38,13 @@ zentrium:
         list:
             title: Benutzer
         field:
-            name: Nachname
-            firstname: Vorname
+            last_name: Nachname
+            first_name: Vorname
             username: Benutzername
             email: E-Mail
+            mobile_phone: Telefon
+        form:
+            saved: Die Daten wurden erfolgreich aktualisiert.
     viewer:
         switch: Lese-Modus einschalten
         switch_back: Lese-Modus verlassen

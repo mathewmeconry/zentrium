@@ -3,6 +3,7 @@
 namespace Zentrium\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
+use Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper;
 
 class Extension extends \Twig_Extension
 {
@@ -12,13 +13,19 @@ class Extension extends \Twig_Extension
     private $translator;
 
     /**
+     * @var PhoneNumberHelper
+     */
+    private $phoneNumberHelper;
+
+    /**
      * Constructor.
      *
      * @param TranslatorInterface $translator
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, PhoneNumberHelper $phoneNumberHelper)
     {
         $this->translator = $translator;
+        $this->phoneNumberHelper = $phoneNumberHelper;
     }
 
     /**
@@ -29,6 +36,7 @@ class Extension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('without', [$this, 'withoutFilter']),
             new \Twig_SimpleFilter('formatList', [$this, 'formatListFilter']),
+            new \Twig_SimpleFilter('phoneNumber', [$this->phoneNumberHelper, 'format']),
         ];
     }
 

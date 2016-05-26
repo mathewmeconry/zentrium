@@ -9,6 +9,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
 
+    zentrium.form.type.phone_number:
+        class:  Zentrium\Bundle\CoreBundle\Form\Type\PhoneNumberType
+        arguments: ["@libphonenumber.phone_number_util", "@zentrium.templating.helper.phone_number"]
+        tags:
+            - { name: form.type }
+
     zentrium.oauth_server.application_manager:
         class: Zentrium\Bundle\CoreBundle\Entity\ApplicationManager
         arguments: ["@fos_oauth_server.entity_manager", %fos_oauth_server.model.client.class%]
@@ -43,9 +49,16 @@ services:
         tags:
             - { name: request.param_converter, converter: zentrium.request_body }
 
+    zentrium.templating.helper.phone_number:
+        class: Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper
+        arguments: ["@libphonenumber.phone_number_util", %zentrium.default_country%]
+        public: false
+        tags:
+            - { name: templating.helper, alias: phone_number }
+
     zentrium.twig.extension:
         class: Zentrium\Bundle\CoreBundle\Twig\Extension
-        arguments: ["@translator"]
+        arguments: ["@translator", "@zentrium.templating.helper.phone_number"]
         public: false
         tags:
             - { name: twig.extension }

@@ -9,20 +9,24 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>{{ 'zentrium.user.field.name'|trans }}</th>
-          <th>{{ 'zentrium.user.field.firstname'|trans }}</th>
+          <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
+          <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
           <th>{{ 'zentrium.user.field.username'|trans }}</th>
           <th>{{ 'zentrium.user.field.email'|trans }}</th>
+          <th>{{ 'zentrium.user.field.mobile_phone'|trans }}</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for user in users %}
         <tr>
           <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.firstName }}</td>
           <td>{{ user.username }}</td>
           <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+          <td>{% if user.mobilePhone %}<a href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}</td>
+          <td><a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i></a></td>
         </tr>
         {% endfor %}
       </tbody>

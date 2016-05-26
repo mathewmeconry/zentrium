@@ -4,6 +4,8 @@ namespace Zentrium\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use libphonenumber\PhoneNumber;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -26,7 +28,7 @@ class User extends BaseUser
      *
      * @ORM\Column(type="string", length=50)
      */
-    protected $name;
+    protected $lastName;
 
     /**
      * @var string
@@ -35,33 +37,59 @@ class User extends BaseUser
      *
      * @ORM\Column(type="string", length=50)
      */
-    protected $firstname;
+    protected $firstName;
+
+    /**
+     * @var PhoneNumber
+     *
+     * @AssertPhoneNumber
+     *
+     * @ORM\Column(type="phone_number", nullable=true)
+     */
+    protected $mobilePhone;
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
     }
 
-    public function setName($name)
+    public function setLastName($lastName)
     {
-        $this->name = $name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getFirstname()
+    public function getFirstName()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function setFirstname($firstname)
+    public function setFirstName($firstName)
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+    }
+
+    public function getMobilePhone()
+    {
+        return $this->mobilePhone;
+    }
+
+    public function setMobilePhone($mobilePhone)
+    {
+        $this->mobilePhone = $mobilePhone;
 
         return $this;
     }

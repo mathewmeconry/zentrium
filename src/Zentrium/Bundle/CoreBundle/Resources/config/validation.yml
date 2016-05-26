@@ -1,0 +1,4 @@
+FOS\UserBundle\Model\User:
+    properties:
+        username:
+            - Regex: '/^[a-z]+(\.[a-z]+)*$/'

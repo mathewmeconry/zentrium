@@ -9,8 +9,8 @@ class UserRepository extends EntityRepository
     public function findAll()
     {
         $qb = $this->createQueryBuilder('u')
-            ->orderBy('u.name')
-            ->addOrderBy('u.firstname');
+            ->orderBy('u.lastName')
+            ->addOrderBy('u.firstName');
 
         return $qb->getQuery()->getResult();
     }

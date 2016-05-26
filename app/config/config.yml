@@ -4,11 +4,11 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: de
+# Zentrium Configuration
+zentrium_core:
+    default_country: "%country%"
 
+# Framework Configuration
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -53,6 +53,7 @@ doctrine:
         charset:  UTF8
         types:
             json_deflate: Zentrium\Bundle\CoreBundle\Doctrine\JsonDeflateType
+            phone_number: Misd\PhoneNumberBundle\Doctrine\DBAL\Types\PhoneNumberType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:

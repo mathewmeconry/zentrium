@@ -13,7 +13,16 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('zentrium');
+        $rootNode = $treeBuilder->root('zentrium_core');
+
+        $rootNode
+            ->children()
+                ->scalarNode('default_country')
+                    ->cannotBeEmpty()
+                    ->defaultValue('US')
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
