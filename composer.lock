@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "760e5cfb509226b3fc50bd11acc66e15",
-    "content-hash": "b3c06ac1e464f9d26bffc015254dd6ef",
+    "hash": "162d9d715dc4479ab5eb530bbe55fffa",
+    "content-hash": "a101d888690d7ba044e37a48171087fe",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2404,6 +2404,63 @@
                 "time"
             ],
             "time": "2016-05-10 16:53:32"
+        },
+        {
+            "name": "league/period",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/period.git",
+                "reference": "90f20c0bbd670b84374c33f7633fb5e58c5c086f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/period/zipball/90f20c0bbd670b84374c33f7633fb5e58c5c086f",
+                "reference": "90f20c0bbd670b84374c33f7633fb5e58c5c086f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10",
+                "phpunit/phpunit": "^4.0 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Period\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A time range immutable value object",
+            "homepage": "http://period.thephpleague.com",
+            "keywords": [
+                "date",
+                "dateinterval",
+                "dateperiod",
+                "datetime",
+                "interval",
+                "range",
+                "time"
+            ],
+            "time": "2016-05-09 11:02:29"
         },
         {
             "name": "misd/phone-number-bundle",

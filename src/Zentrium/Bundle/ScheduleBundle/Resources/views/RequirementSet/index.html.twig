@@ -1,0 +1,30 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_schedule.layout.requirements'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ 'zentrium_schedule.requirement_set.field.name'|trans }}</th>
+          <th>{{ 'zentrium_schedule.requirement_set.field.begin'|trans }}</th>
+          <th>{{ 'zentrium_schedule.requirement_set.field.end'|trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for set in sets %}
+        <tr>
+          <td>{{ set.id }}</td>
+          <td><a href="{{ path('schedule_requirement_set_view', {'set': set.id}) }}">{{ set.name }}</a></td>
+          <td>{{ set.begin|date('d.m.Y H:i') }}</td>
+          <td>{{ set.end|date('d.m.Y H:i') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

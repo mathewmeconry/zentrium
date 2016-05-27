@@ -20,3 +20,7 @@ log:
 map:
     resource: "@ZentriumMapBundle/Controller/"
     type:     annotation
+
+schedule:
+    resource: "@ZentriumScheduleBundle/Controller/"
+    type:     annotation

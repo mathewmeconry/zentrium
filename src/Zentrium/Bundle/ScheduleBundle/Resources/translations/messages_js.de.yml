@@ -1,0 +1,4 @@
+zentrium_schedule:
+    task:
+        field:
+            name: Name

@@ -32,7 +32,8 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
-            new Zentrium\Bundle\MapBundle\ZentriumMapBundle()
+            new Zentrium\Bundle\MapBundle\ZentriumMapBundle(),
+            new Zentrium\Bundle\ScheduleBundle\ZentriumScheduleBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -43,7 +43,8 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "dunglas/angular-csrf-bundle": "dev-master#0e56b26636442613cb9c26400346c6504d5e9956",
         "misd/phone-number-bundle": "^1.1",
-        "willdurand/js-translation-bundle": "^2.5"
+        "willdurand/js-translation-bundle": "^2.5",
+        "league/period": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

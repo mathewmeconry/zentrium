@@ -1,0 +1,29 @@
+zentrium_schedule:
+    layout:
+        schedule: Einsatzplan
+        requirements: Bedarfsplanung
+        tasks: Aufgaben
+    menu:
+        schedule: Einsatzplan
+        requirements: Bedarfsplanung
+        tasks: Aufgaben
+    requirement_set:
+        field:
+            name: Name
+            begin: Beginn
+            end: Ende
+        view:
+            title: Bedarf
+    task:
+        field:
+            code: Kürzel
+            name: Name
+            notes: Bemerkungen
+        form:
+            saved: Die Aufgabe wurde erfolgreich gespeichert.
+        view:
+            new: Neue Aufgabe
+        new:
+            title: Neue Aufgabe
+        edit:
+            title: Aufgabe bearbeiten

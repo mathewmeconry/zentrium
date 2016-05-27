@@ -1,0 +1,13 @@
+services:
+    zentrium_schedule.manager.requirement_set:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\RequirementSetManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    zentrium_schedule.manager.task:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\TaskManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    zentrium_schedule.menu_listener:
+        class: Zentrium\Bundle\ScheduleBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }

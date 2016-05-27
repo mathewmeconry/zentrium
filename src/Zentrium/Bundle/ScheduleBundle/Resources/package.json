@@ -1,0 +1,14 @@
+{
+  "name": "zentrium-schedule-bundle",
+  "private": true,
+  "dependencies": {
+    "fullcalendar": "^2.7.2",
+    "fullcalendar-scheduler": "^1.3.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
