@@ -6,6 +6,9 @@ api_auth_token:
     defaults:  { _controller: fos_oauth_server.controller.token:tokenAction }
     methods: [GET, POST]
 
+bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
 core:
     resource: "@ZentriumCoreBundle/Controller/"
     type:     annotation

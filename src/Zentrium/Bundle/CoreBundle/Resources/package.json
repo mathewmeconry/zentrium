@@ -11,6 +11,7 @@
     "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release"
   },
   "devDependencies": {
+    "findup-sync": "^0.4.1",
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",

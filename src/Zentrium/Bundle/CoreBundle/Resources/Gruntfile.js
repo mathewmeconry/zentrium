@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    config: {
+      root: require('path').dirname(require('findup-sync')('composer.lock'))
+    },
     less: {
       bundle: {
         options: {
@@ -26,6 +29,8 @@ module.exports = function(grunt) {
       js: {
         src: [
           'public/js/modernizr.min.js',
+          '<%= config.root %>/vendor/willdurand/js-translation-bundle/Bazinga/Bundle/JsTranslationBundle/Resources/public/js/translator.min.js',
+          '<%= config.root %>/web/js/translations/*/*.js',
           'node_modules/jquery/dist/jquery.min.js',
           'node_modules/admin-lte/bootstrap/js/bootstrap.min.js',
           'node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',

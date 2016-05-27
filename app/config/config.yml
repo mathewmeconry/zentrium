@@ -130,6 +130,12 @@ dunglas_angular_csrf:
     secure:
         - { route: _options }
 
+# JS Translations Configuration
+bazinga_js_translation:
+    locale_fallback: "%locale%"
+    default_domain: messages_js
+    active_domains: [messages_js]
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

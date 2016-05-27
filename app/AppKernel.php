@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
             new Zentrium\Bundle\MapBundle\ZentriumMapBundle()
