@@ -4,6 +4,7 @@ namespace Zentrium\Bundle\LogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Validator\Constraints as AssertCore;
 
 /**
  * @ORM\Entity(repositoryClass="Zentrium\Bundle\LogBundle\Entity\LabelRepository")
@@ -31,6 +32,7 @@ class Label
      * @var string
      *
      * @Assert\NotBlank
+     * @AssertCore\Color
      *
      * @ORM\Column(type="string", length=10)
      */
