@@ -80,9 +80,18 @@ stof_doctrine_extensions:
 
 # FOSUser Configuration
 fos_user:
+    service:
+        mailer: fos_user.mailer.twig_swift
     db_driver: orm
     firewall_name: main
     user_class: Zentrium\Bundle\CoreBundle\Entity\User
+    from_email:
+        address: "%mailer_from%"
+        sender_name: Zentrium
+    resetting:
+        token_ttl: 3600
+        email:
+            template: ZentriumCoreBundle:Security:resetPassword.email.twig
 
 # OAuth Server Configuration
 fos_oauth_server:
@@ -140,7 +149,9 @@ bazinga_js_translation:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    host: "%mailer_host%"
+    port: "%mailer_port%"
+    encryption: "%mailer_encryption%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    spool: { type: memory }

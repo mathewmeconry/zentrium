@@ -10,6 +10,7 @@
     <a href="{{ path('home') }}">Zentrium</a>
   </div>
   <div class="login-box-body">
+    {% block content %}
     {% if error %}
       <p class="login-box-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
     {% endif %}
@@ -24,12 +25,15 @@
         <span class="fa fa-key form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8"></div>
+        <div class="col-xs-8 login-box-link">
+          <a href="{{ path('password_request') }}">{{ 'zentrium.security.password_reset.request'|trans }}</a>
+        </div>
         <div class="col-xs-4">
           <input type="submit" name="_submit" value="{{ 'zentrium.security.login'|trans }}" class="btn btn-primary btn-block btn-flat" />
         </div>
       </div>
     </form>
+    {% endblock %}
   </div>
 </div>
 {% endblock %}

@@ -30,10 +30,26 @@ zentrium:
         logout: Logout
         password: Passwort
         username: Benutzername
+        password_reset:
+            subject: Passwort zurücksetzen
+            instructions: |
+                Um dein Passwort zurücksetzen, klicke bitte hier: %url%
+                Danach kannst du dich mit dem Benutzernamen «%username%» wieder einloggen.
+            already_requested: Für diesen Benutzer wurde vor kurzem bereits ein neues Passwort beantragt.
+            invalid_username: Der gesuchte Benutzer existiert nicht.
+            request: Passwort zurücksetzen
+            sent: Du erhältst in den nächsten Minuten ein E-Mail mit Instruktionen zum Setzen deines neuen Passworts.
+            reset: Password zurücksetzen
+            back: zurück
     twig:
         format_list:
             and: und
             or: oder
+    email:
+        salutation: Hallo %firstname%!
+        closing: |
+            Beste Grüsse,
+            dein Zentrium-Administrator
     user:
         field:
             last_name: Nachname
