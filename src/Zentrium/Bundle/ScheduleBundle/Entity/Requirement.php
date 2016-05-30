@@ -44,9 +44,9 @@ class Requirement
      *
      * @Assert\NotNull
      * @Assert\Expression("this.getFrom() <= this.getTo()", message="This value is not a valid time.")
-     * @Assert\Expression("this.getSet() === null || this.getSet().getBegin() <= this.getFrom()", message="This value is not a valid time.")
+     * @Assert\Expression("this.getSet() === null || this.getFrom() === null || (this.getSet().getBegin() <= this.getFrom() && this.getSet().isAligned(this.getFrom()))", message="This value is not a valid time.")
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="from_", type="datetime")
      */
     protected $from;
 
@@ -55,9 +55,9 @@ class Requirement
      *
      * @Assert\NotNull
      * @Assert\Expression("this.getFrom() <= this.getTo()", message="This value is not a valid time.")
-     * @Assert\Expression("this.getSet() === null || this.getSet().getEnd() >= this.getTo()", message="This value is not a valid time.")
+     * @Assert\Expression("this.getSet() === null || this.getTo() === null || (this.getTo() <= this.getSet().getEnd() && this.getSet().isAligned(this.getTo()))", message="This value is not a valid time.")
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="to_", type="datetime")
      */
     protected $to;
 

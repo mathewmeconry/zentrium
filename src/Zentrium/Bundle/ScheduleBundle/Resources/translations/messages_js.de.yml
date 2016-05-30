@@ -2,3 +2,6 @@ zentrium_schedule:
     task:
         field:
             name: Name
+    requirement_set:
+        view:
+            modify_prompt: "Anpassung:"

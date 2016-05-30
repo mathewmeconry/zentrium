@@ -4,6 +4,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Zentrium\Bundle\ScheduleBundle\RequirementSet\OperationInterface;
 
 class RequirementSetManager
 {
@@ -23,6 +24,11 @@ class RequirementSetManager
         $this->repository = $em->getRepository(RequirementSet::class);
     }
 
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
     public function findAll()
     {
         return $this->repository->findBy([], ['name' => 'ASC']);
@@ -36,5 +42,17 @@ class RequirementSetManager
         ;
 
         return $query->getResult();
+    }
+
+    public function apply(RequirementSet $set, OperationInterface $operation)
+    {
+        $operation->apply($set);
+        $set->update();
+
+        $this->em->transactional(function (EntityManager $em) use ($set) {
+            $em->persist($set);
+        });
+
+        return $set;
     }
 }

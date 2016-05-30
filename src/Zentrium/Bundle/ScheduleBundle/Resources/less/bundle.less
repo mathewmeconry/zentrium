@@ -1,0 +1,19 @@
+@operation-bg: rgba(255, 255, 255, 0.15);
+
+@keyframes schedule-operation-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+.schedule-operation-pending, .schedule-operation-failed {
+    background-image: linear-gradient(45deg, @operation-bg 25%, transparent 25%, transparent 50%, @operation-bg 50%, @operation-bg 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+
+.schedule-operation-pending {
+    animation: 1s linear 0s normal none infinite running schedule-operation-stripes;
+}

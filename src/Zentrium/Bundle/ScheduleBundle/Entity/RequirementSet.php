@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use League\Period\Period;
@@ -9,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class RequirementSet
 {
@@ -41,7 +43,7 @@ class RequirementSet
      * @var DateTime
      *
      * @Assert\NotNull
-     * @Assert\Expression("this.getBegin() <= this.getEnd()", message="This value is not a valid time.")
+     * @Assert\Expression("this.getEnd() === null || (this.getBegin() <= this.getEnd() && this.isAligned(this.getEnd())", message="This value is not a valid time.")
      *
      * @ORM\Column(type="datetime")
      */
@@ -53,6 +55,16 @@ class RequirementSet
     protected $period;
 
     /**
+     * @var int
+     *
+     * @Assert\NotNull
+     * @Assert\Range(min=60)
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $slotDuration;
+
+    /**
      * @var ArrayCollection
      *
      * @Assert\Valid
@@ -60,6 +72,15 @@ class RequirementSet
      * @ORM\OneToMany(targetEntity="Requirement", mappedBy="set", cascade="ALL", orphanRemoval=true)
      */
     protected $requirements;
+
+    /**
+     * @var DateTime
+     *
+     * @Assert\NotNull
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
 
     public function __construct()
     {
@@ -117,6 +138,18 @@ class RequirementSet
         return $this->period;
     }
 
+    public function getSlotDuration()
+    {
+        return $this->slotDuration;
+    }
+
+    public function setSlotDuration($slotDuration)
+    {
+        $this->slotDuration = $slotDuration;
+
+        return $this;
+    }
+
     public function getRequirements()
     {
         return $this->requirements;
@@ -127,5 +160,42 @@ class RequirementSet
         $this->requirements = $requirements;
 
         return $this;
+    }
+
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    public function getSlotCount()
+    {
+        return ($this->end->getTimestamp() - $this->begin->getTimestamp()) / $this->slotDuration;
+    }
+
+    public function isAligned(DateTime $time)
+    {
+        if ($this->begin === null || $this->slotDuration === null) {
+            return true;
+        }
+
+        $diff = $time->getTimestamp() - $this->begin->getTimestamp();
+
+        return ($diff % $this->slotDuration == 0);
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function update()
+    {
+        $this->updated = new DateTime();
     }
 }
