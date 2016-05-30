@@ -52,6 +52,7 @@ doctrine:
         password: "%database_password%"
         charset:  UTF8
         types:
+            datetime: Zentrium\Bundle\CoreBundle\Doctrine\UtcDateTimeType
             json_deflate: Zentrium\Bundle\CoreBundle\Doctrine\JsonDeflateType
             phone_number: Misd\PhoneNumberBundle\Doctrine\DBAL\Types\PhoneNumberType
     orm:
