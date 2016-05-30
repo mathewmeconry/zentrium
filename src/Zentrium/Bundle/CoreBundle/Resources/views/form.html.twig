@@ -11,3 +11,17 @@
   {% if form.parent %}</span>{% else %}</div>{% endif %}
   {%- endif %}
 {%- endblock form_errors %}
+
+{% block checkbox_row -%}
+  {{- block('form_row') }}
+{%- endblock checkbox_row %}
+
+{% block checkbox_label -%}
+  {{- block('form_label') -}}
+{%- endblock checkbox_label %}
+
+{% block checkbox_widget -%}
+<div class="checkbox">
+  <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
+</div>
+{%- endblock checkbox_widget %}

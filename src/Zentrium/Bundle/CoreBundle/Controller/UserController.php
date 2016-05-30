@@ -23,10 +23,27 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/users/new", name="user_new")
+     * @Template
+     */
+    public function newAction(Request $request)
+    {
+        $user = $this->get('fos_user.user_manager')->createUser();
+        $user->setPlainPassword($this->get('fos_user.util.token_generator')->generateToken());
+
+        return $this->handleEdit($request, $user);
+    }
+
+    /**
      * @Route("/users/{user}/edit", name="user_edit")
      * @Template
      */
     public function editAction(Request $request, User $user)
+    {
+        return $this->handleEdit($request, $user);
+    }
+
+    private function handleEdit(Request $request, User $user)
     {
         $form = $this->createForm(UserType::class, $user);
 
