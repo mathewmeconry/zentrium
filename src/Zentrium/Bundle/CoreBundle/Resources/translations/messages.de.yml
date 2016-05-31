@@ -10,6 +10,7 @@ zentrium:
     menu:
         home: Home
         users: Benutzer
+        groups: Gruppen
         viewer:
             user_profile: Mein Profil
     error:
@@ -50,11 +51,21 @@ zentrium:
         closing: |
             Beste Grüsse,
             dein Zentrium-Administrator
+    group:
+        title: Gruppen
+        field:
+            name: Name
+            short_name: Abkürzung
+        new:
+            title: Neue Gruppe
+        edit:
+            title: Gruppe bearbeiten
     user:
         field:
             last_name: Nachname
             first_name: Vorname
             username: Benutzername
+            groups: Gruppen
             email: E-Mail
             mobile_phone: Telefon
             enabled: Aktiv

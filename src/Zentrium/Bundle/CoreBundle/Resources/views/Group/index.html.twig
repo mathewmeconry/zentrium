@@ -1,0 +1,28 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium.group.title'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium.group.field.name'|trans }}</th>
+          <th>{{ 'zentrium.group.field.short_name'|trans }}</th>
+          <th class="col-right"><a href="{{ path('group_new') }}"><i class="fa fa-plus"></i></a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for group in groups %}
+        <tr>
+          <td>{{ group.name }}</td>
+          <td>{{ group.shortName }}</td>
+          <td class="col-right"><a href="{{ path('group_edit', {'group': group.id}) }}"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

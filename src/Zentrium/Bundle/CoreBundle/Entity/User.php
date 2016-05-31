@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use libphonenumber\PhoneNumber;
@@ -48,9 +49,18 @@ class User extends BaseUser
      */
     protected $mobilePhone;
 
+    /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Group")
+     */
+    protected $groups;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->groups = new ArrayCollection();
     }
 
     public function getLastName()

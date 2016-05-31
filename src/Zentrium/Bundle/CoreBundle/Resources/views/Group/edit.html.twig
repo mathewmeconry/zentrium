@@ -1,0 +1,16 @@
+{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+
+{% block title_full %}{{ group.name }} - {{ 'zentrium.group.title'|trans }}{% endblock %}
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium.group.edit.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+  </div>
+</div>
+{% endblock %}

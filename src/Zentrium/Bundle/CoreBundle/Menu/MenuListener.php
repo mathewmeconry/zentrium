@@ -11,7 +11,9 @@ class MenuListener
 
     public function onCreateMainMenuLast(ConfigureMenuEvent $event)
     {
-        $event->getMenu()->addChild('zentrium.menu.users', ['route' => 'users', 'labelAttributes' => ['icon' => 'fa fa-users']]);
+        $menu = $event->getMenu()->addChild('zentrium.menu.users', ['route' => 'users', 'labelAttributes' => ['icon' => 'fa fa-users']]);
+        $menu->addChild('zentrium.menu.users', ['route' => 'users']);
+        $menu->addChild('zentrium.menu.groups', ['route' => 'groups']);
     }
 
     public function onCreateViewerMenu(ConfigureMenuEvent $event)

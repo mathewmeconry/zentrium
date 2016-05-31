@@ -85,6 +85,10 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Zentrium\Bundle\CoreBundle\Entity\User
+    group:
+        group_class: Zentrium\Bundle\CoreBundle\Entity\Group
+        form:
+            type: Zentrium\Bundle\CoreBundle\Form\Type\GroupType
     from_email:
         address: "%mailer_from%"
         sender_name: Zentrium
