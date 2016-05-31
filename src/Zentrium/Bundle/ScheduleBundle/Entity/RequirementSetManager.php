@@ -47,7 +47,7 @@ class RequirementSetManager
     public function apply(RequirementSet $set, OperationInterface $operation)
     {
         $operation->apply($set);
-        $set->update();
+        $set->triggerUpdate();
 
         $this->em->transactional(function (EntityManager $em) use ($set) {
             $em->persist($set);

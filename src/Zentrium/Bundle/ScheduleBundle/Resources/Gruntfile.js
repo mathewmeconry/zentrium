@@ -14,6 +14,7 @@ module.exports = function(grunt) {
       js: {
         src: [
           'public/js/utils.js',
+          'public/js/schedule_view.js',
           'public/js/set_view.js',
         ],
         dest: 'public/js/bundle.js'

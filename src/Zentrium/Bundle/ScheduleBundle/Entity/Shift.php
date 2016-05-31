@@ -4,21 +4,22 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 /**
  * @ORM\Entity
  */
-class Requirement extends AbstractPlanItem
+class Shift extends AbstractPlanItem
 {
     /**
-     * @var RequirementSet
+     * @var Schedule
      *
      * @Assert\NotNull
      *
-     * @ORM\ManyToOne(targetEntity="RequirementSet", inversedBy="requirements")
+     * @ORM\ManyToOne(targetEntity="Schedule", inversedBy="shifts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    protected $set;
+    protected $schedule;
 
     /**
      * @var Task
@@ -31,14 +32,14 @@ class Requirement extends AbstractPlanItem
     protected $task;
 
     /**
-     * @var int
+     * @var User
      *
      * @Assert\NotNull
-     * @Assert\Range(min=0)
      *
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    protected $count;
+    protected $user;
 
     public function __construct()
     {
@@ -47,17 +48,17 @@ class Requirement extends AbstractPlanItem
 
     public function getPlan()
     {
-        return $this->getSet();
+        return $this->getSchedule();
     }
 
-    public function getSet()
+    public function getSchedule()
     {
-        return $this->set;
+        return $this->schedule;
     }
 
-    public function setSet($set)
+    public function setSchedule($schedule)
     {
-        $this->set = $set;
+        $this->schedule = $schedule;
 
         return $this;
     }
@@ -74,14 +75,14 @@ class Requirement extends AbstractPlanItem
         return $this;
     }
 
-    public function getCount()
+    public function getUser()
     {
-        return $this->count;
+        return $this->user;
     }
 
-    public function setCount($count)
+    public function setUser($user)
     {
-        $this->count = $count;
+        $this->user = $user;
 
         return $this;
     }

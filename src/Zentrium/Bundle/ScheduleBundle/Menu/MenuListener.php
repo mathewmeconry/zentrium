@@ -10,6 +10,7 @@ class MenuListener
     {
         $menu = $event->getMenu()->addChild('zentrium_schedule.menu.schedule', ['route' => 'schedules', 'labelAttributes' => ['icon' => 'fa fa-calendar']]);
 
+        $menu->addChild('zentrium_schedule.menu.overview', ['route' => 'schedules']);
         $menu->addChild('zentrium_schedule.menu.requirements', ['route' => 'schedule_requirements']);
         $menu->addChild('zentrium_schedule.menu.tasks', ['route' => 'schedule_tasks']);
         $menu->addChild('zentrium_schedule.menu.skills', ['route' => 'schedule_skills']);

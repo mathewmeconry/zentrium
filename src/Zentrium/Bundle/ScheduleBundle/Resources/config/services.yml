@@ -3,6 +3,10 @@ services:
         class: Zentrium\Bundle\ScheduleBundle\Entity\RequirementSetManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    zentrium_schedule.manager.schedule:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\ScheduleManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     zentrium_schedule.manager.skill:
         class: Zentrium\Bundle\ScheduleBundle\Entity\SkillManager
         arguments: ["@doctrine.orm.entity_manager"]

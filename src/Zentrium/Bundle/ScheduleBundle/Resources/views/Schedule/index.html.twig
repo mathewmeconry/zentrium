@@ -1,0 +1,39 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title_full %}{{ 'zentrium_schedule.schedule.list.title'|trans }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ 'zentrium_schedule.schedule.list.title'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ 'zentrium_schedule.schedule.field.name'|trans }}</th>
+          <th>{{ 'zentrium_schedule.schedule.field.begin'|trans }}</th>
+          <th>{{ 'zentrium_schedule.schedule.field.end'|trans }}</th>
+          <th>{{ 'zentrium_schedule.schedule.field.published'|trans }}</th>
+          <th>{{ 'zentrium_schedule.schedule.field.updated'|trans }}</th>
+          <th class="col-tools"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for schedule in schedules %}
+        <tr>
+          <td>{{ schedule.id }}</td>
+          <td><a href="{{ path('schedule_view', {'schedule': schedule.id}) }}">{{ schedule.name }}</a></td>
+          <td>{{ schedule.begin|date('d.m.Y H:i') }}</td>
+          <td>{{ schedule.end|date('d.m.Y H:i') }}</td>
+          <td>{% if schedule.published %}<i class="fa fa-check"></i>{% endif %}</td>
+          <td>{{ schedule.updated|ago }}</td>
+          <td class="col-tools">
+            <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}"><i class="fa fa-pencil"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

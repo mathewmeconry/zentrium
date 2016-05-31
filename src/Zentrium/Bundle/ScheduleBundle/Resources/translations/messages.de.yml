@@ -1,11 +1,12 @@
 zentrium_schedule:
     layout:
-        schedule: Einsatzplan
+        schedule: Einsatzplanung
         requirements: Bedarfsplanung
         tasks: Aufgaben
         skills: Qualifikationen
     menu:
         schedule: Einsatzplan
+        overview: Übersicht
         requirements: Bedarfsplanung
         tasks: Aufgaben
         skills: Qualifikationen
@@ -14,8 +15,25 @@ zentrium_schedule:
             name: Name
             begin: Beginn
             end: Ende
+            updated: Letzte Aktualisierung
         view:
             title: Bedarf
+    schedule:
+        field:
+            name: Name
+            begin: Beginn
+            end: Ende
+            updated: Letzte Aktualisierung
+            published: Veröffentlicht
+        form:
+            saved: Der Einsatzplan wurde erfolgreich gespeichert.
+        list:
+            title: Übersicht
+        edit:
+            title: Einsatzplan bearbeiten
+        view:
+            title: Einsatzplan
+            change_layout: Layout wechseln
     skill:
         field:
             short_name: Abkürzung
