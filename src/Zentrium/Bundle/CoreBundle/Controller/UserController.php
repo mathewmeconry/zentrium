@@ -2,12 +2,14 @@
 
 namespace Zentrium\Bundle\CoreBundle\Controller;
 
+use FOS\UserBundle\Event\FormEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\CoreBundle\Form\Type\UserType;
+use Zentrium\Bundle\CoreBundle\User\UserEvents;
 
 class UserController extends Controller
 {
@@ -50,6 +52,10 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $dispatcher = $this->get('event_dispatcher');
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(UserEvents::EDIT_SUCCESS, new FormEvent($form, $request));
+
             $manager = $this->get('fos_user.user_manager');
             $manager->updateUser($user);
 
