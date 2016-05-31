@@ -3,6 +3,8 @@
 namespace Zentrium\Bundle\ScheduleBundle\Controller;
 
 use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -77,7 +79,7 @@ class RequirementSetController extends Controller
         return [
             'set' => $set,
             'config' => [
-                'begin' => $set->getBegin()->format(DateTime::ATOM),
+                'begin' => $this->serializeDate($set->getBegin()),
                 'duration' => $set->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $set->getSlotDuration(),
                 'requirements' => $router->generate('schedule_requirement_set_requirements', ['set' => $set->getId()]),
@@ -158,8 +160,18 @@ class RequirementSetController extends Controller
             'id' => $requirement->getId(),
             'resourceId' => $requirement->getTask()->getId(),
             'title' => (string) $requirement->getCount(),
-            'start' => $requirement->getFrom()->format(DateTime::ATOM),
-            'end' => $requirement->getTo()->format(DateTime::ATOM),
+            'start' => $this->serializeDate($requirement->getFrom()),
+            'end' => $this->serializeDate($requirement->getTo()),
         ];
+    }
+
+    private function serializeDate(DateTimeInterface $date)
+    {
+        static $timezone;
+        if ($timezone === null) {
+            $timezone = new DateTimeZone(date_default_timezone_get());
+        }
+
+        return $date->setTimezone($timezone)->format(DateTime::ATOM);
     }
 }
