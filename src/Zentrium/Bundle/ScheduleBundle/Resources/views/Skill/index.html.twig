@@ -1,0 +1,32 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_schedule.layout.skills'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium_schedule.skill.field.name'|trans }}</th>
+          <th>{{ 'zentrium_schedule.skill.field.short_name'|trans }}</th>
+          <th>{{ 'zentrium_schedule.skill.field.user_count'|trans }}</th>
+          <th class="col-tools"><a href="{{ path('schedule_skill_new') }}"><i class="fa fa-plus"></i></a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in skills %}
+        {% set skill = row[0] %}
+        {% set userCount = row[1] %}
+        <tr>
+          <td>{{ skill.name }}</td>
+          <td>{{ skill.shortName }}</td>
+          <td><a href="{{ path('schedule_skill_list', {'skill': skill.id}) }}"><span class="label label-{% if userCount > 0 %}primary{% else %}default{% endif %}">{{ userCount }}</span></a></td>
+          <td class="col-tools"><a href="{{ path('schedule_skill_edit', {'skill': skill.id}) }}"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

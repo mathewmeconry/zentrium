@@ -3,6 +3,10 @@ services:
         class: Zentrium\Bundle\ScheduleBundle\Entity\RequirementSetManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    zentrium_schedule.manager.skill:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\SkillManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     zentrium_schedule.manager.task:
         class: Zentrium\Bundle\ScheduleBundle\Entity\TaskManager
         arguments: ["@doctrine.orm.entity_manager"]
@@ -11,3 +15,10 @@ services:
         class: Zentrium\Bundle\ScheduleBundle\Menu\MenuListener
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
+
+    zentrium_schedule.form.user_extension:
+        class: Zentrium\Bundle\ScheduleBundle\Form\Extension\UserTypeExtension
+        arguments: ["@zentrium_schedule.manager.skill"]
+        tags:
+            - { name: form.type_extension, extended_type: Zentrium\Bundle\CoreBundle\Form\Type\UserType }
+            - { name: kernel.event_listener, event: zentrium.user.edit.success, method: onSuccess }

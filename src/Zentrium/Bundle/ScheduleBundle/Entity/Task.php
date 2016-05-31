@@ -50,6 +50,14 @@ class Task
     protected $notes;
 
     /**
+     * @var Skill|null
+     *
+     * @ORM\ManyToOne(targetEntity="Skill")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    protected $skill;
+
+    /**
      * @var string
      *
      * @Assert\NotBlank
@@ -101,6 +109,18 @@ class Task
     public function setNotes($notes)
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getSkill()
+    {
+        return $this->skill;
+    }
+
+    public function setSkill($skill)
+    {
+        $this->skill = $skill;
 
         return $this;
     }

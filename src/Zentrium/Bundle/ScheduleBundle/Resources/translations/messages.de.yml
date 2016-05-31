@@ -3,10 +3,12 @@ zentrium_schedule:
         schedule: Einsatzplan
         requirements: Bedarfsplanung
         tasks: Aufgaben
+        skills: Qualifikationen
     menu:
         schedule: Einsatzplan
         requirements: Bedarfsplanung
         tasks: Aufgaben
+        skills: Qualifikationen
     requirement_set:
         field:
             name: Name
@@ -14,12 +16,25 @@ zentrium_schedule:
             end: Ende
         view:
             title: Bedarf
+    skill:
+        field:
+            short_name: Abkürzung
+            name: Name
+            user_count: Anzahl
+        form:
+            saved: Die Qualifikation wurde erfolgreich gespeichert.
+        new:
+            title: Neue Qualifikation
+        edit:
+            title: Qualifikation bearbeiten
     task:
         field:
             code: Kürzel
             name: Name
             notes: Bemerkungen
+            skill: Anforderung
         form:
+            no_skill: Keine Qualifikation nötig
             saved: Die Aufgabe wurde erfolgreich gespeichert.
         view:
             new: Neue Aufgabe
@@ -27,3 +42,6 @@ zentrium_schedule:
             title: Neue Aufgabe
         edit:
             title: Aufgabe bearbeiten
+    user:
+        field:
+            skills: Qualifikationen

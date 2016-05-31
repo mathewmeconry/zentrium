@@ -11,6 +11,7 @@
           <th class="col-color"></th>
           <th>{{ 'zentrium_schedule.task.field.code'|trans }}</th>
           <th>{{ 'zentrium_schedule.task.field.name'|trans }}</th>
+          <th>{{ 'zentrium_schedule.task.field.skill'|trans }}</th>
           <th>{{ 'zentrium_schedule.task.field.notes'|trans }}</th>
           <th class="col-right"><a href="{{ path('schedule_task_new') }}" data-original-title="{{ 'zentrium_schedule.task.view.new'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a></th>
         </tr>
@@ -21,6 +22,7 @@
           <td class="col-color"><div class="color-swatch" style="background-color: {{ task.color }}"></div></td>
           <td>{{ task.code }}</td>
           <td>{{ task.name }}</td>
+          <td>{% if task.skill %}<a href="{{ path('schedule_skill_list', {'skill': task.skill.id}) }}">{{ task.skill.name }}</a>{% endif %}</td>
           <td>{{ task.notes|nl2br }}</td>
           <td class="col-right"><a href="{{ path('schedule_task_edit', {'task': task.id}) }}"><i class="fa fa-pencil"></i></a></td>
         </tr>

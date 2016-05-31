@@ -1,0 +1,31 @@
+{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+
+{% block title_full %}{{ skill.name }} - {{ 'zentrium_schedule.layout.skills'|trans }}{% endblock %}
+{% block title %}{{ skill.name }}{% endblock %}
+
+{% block content %}
+<div class="box">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
+          <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
+          <th class="col-tools"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in skill.users %}
+        <tr>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.firstName }}</td>
+          <td class="col-tools">
+            <a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

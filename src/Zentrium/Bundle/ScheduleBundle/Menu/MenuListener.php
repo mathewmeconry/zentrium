@@ -12,5 +12,6 @@ class MenuListener
 
         $menu->addChild('zentrium_schedule.menu.requirements', ['route' => 'schedule_requirements']);
         $menu->addChild('zentrium_schedule.menu.tasks', ['route' => 'schedule_tasks']);
+        $menu->addChild('zentrium_schedule.menu.skills', ['route' => 'schedule_skills']);
     }
 }
