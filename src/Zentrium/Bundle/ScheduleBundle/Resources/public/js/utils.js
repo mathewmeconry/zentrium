@@ -55,16 +55,13 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     select: function(start, end, jsEvent, view, resource) {
       $view.fullCalendar('unselect');
 
-      if(!view.displayEvents.start) {
-        view.displayEvents = Zentrium.Schedule.pause(view.displayEvents);
-      }
-
       var eventPrototype = {
         id: generateId(),
         resourceId: resource.id,
         start: start,
         end: end,
         className: 'schedule-operation-pending',
+        editable: false,
       };
 
       var updateHelper = function (events, time) {
@@ -96,4 +93,9 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     },
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
   }, config));
+
+  var view = $view.fullCalendar('getView');
+  view.displayEvents = Zentrium.Schedule.pause(view.displayEvents);
+
+  return $view;
 };

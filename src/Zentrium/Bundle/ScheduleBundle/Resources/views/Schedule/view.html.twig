@@ -15,4 +15,19 @@
     <div id="schedule" data-config="{{ config|json_encode|e('html_attr') }}"></div>
   </div>
 </div>
+<div class="modal fade" tabindex="-1" id="shift-edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button id="shift-delete" type="button" class="btn btn-danger pull-left" tabindex="102">{{ 'zentrium.form.delete'|trans }}</button>
+        <button id="shift-save" type="button" class="btn btn-primary" tabindex="101">{{ 'zentrium.form.save'|trans }}</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

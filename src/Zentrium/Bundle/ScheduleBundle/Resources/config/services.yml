@@ -11,6 +11,10 @@ services:
         class: Zentrium\Bundle\ScheduleBundle\Entity\SkillManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    zentrium_schedule.manager.shift:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\ShiftManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     zentrium_schedule.manager.task:
         class: Zentrium\Bundle\ScheduleBundle\Entity\TaskManager
         arguments: ["@doctrine.orm.entity_manager"]

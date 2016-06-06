@@ -2,16 +2,20 @@ var Zentrium = Zentrium || {};
 
 Zentrium.TOKEN = Cookies.get('XSRF-TOKEN');
 
-Zentrium.post = function (url, data) {
+Zentrium.request = function (method, url, data) {
   return $.ajax({
     url: url,
     data: data,
     dataType: 'json',
-    method: 'POST',
+    method: method,
     headers: {
       'X-XSRF-TOKEN': Zentrium.TOKEN
     }
   });
+};
+
+Zentrium.post = function (url, data) {
+  return Zentrium.request('POST', url, data);
 };
 
 Zentrium.addFlash = function (type, message, autoClose) {

@@ -25,6 +25,7 @@ zentrium:
             text: Es ist ein unbekannter Fehler aufgetreten. Sollte das Problem weiterhin bestehen, kontaktiere bitte einen Administrator.
     form:
         color: Farbe
+        delete: Löschen
         save: Speichern
     security:
         login: Login

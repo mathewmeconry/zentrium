@@ -5,14 +5,19 @@ namespace Zentrium\Bundle\ScheduleBundle\Controller;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\ScheduleType;
+use Zentrium\Bundle\ScheduleBundle\Form\Type\ShiftEditType;
+use Zentrium\Bundle\ScheduleBundle\Form\Type\ShiftNewType;
 
 /**
  * @Route("/schedules")
@@ -121,26 +126,82 @@ class ScheduleController extends Controller
         return [
             'schedule' => $schedule,
             'config' => [
+                'scheduleId' => $schedule->getId(),
                 'layout' => $layout,
-                'begin' => $schedule->getBegin()->format(DateTime::ATOM),
+                'begin' => $this->serializeDate($schedule->getBegin()),
                 'duration' => $schedule->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $schedule->getSlotDuration(),
                 'shifts' => $router->generate('schedule_view_shifts', ['schedule' => $schedule->getId(), 'layout' => $layout]),
                 'tasks' => $router->generate('schedule_view_tasks', ['schedule' => $schedule->getId()]),
                 'users' => $router->generate('schedule_view_users', ['schedule' => $schedule->getId()]),
+                'endpoint' => $router->generate('schedule_shift_new', ['layout' => $layout]),
             ],
         ];
     }
 
+    /**
+     * @Route("/shifts/new", name="schedule_shift_new", options={"protect": true})
+     * @Method("POST")
+     */
+    public function newShiftAction(Request $request)
+    {
+        $shift = new Shift();
+
+        return $this->handleShiftEdit($request, $shift, ShiftNewType::class);
+    }
+
+    /**
+     * @Route("/shifts/{shift}", name="schedule_shift_edit", options={"protect": true})
+     * @Method("PATCH")
+     */
+    public function editShiftAction(Request $request, Shift $shift)
+    {
+        return $this->handleShiftEdit($request, $shift, ShiftEditType::class);
+    }
+
+    /**
+     * @Route("/shifts/{shift}", name="schedule_shift_delete", options={"protect": true})
+     * @Method("DELETE")
+     */
+    public function deleteShiftAction(Request $request, Shift $shift)
+    {
+        $manager = $this->get('zentrium_schedule.manager.shift');
+        $manager->delete($shift);
+
+        return new Response('', Response::HTTP_NO_CONTENT);
+    }
+
+    private function handleShiftEdit(Request $request, Shift $shift, $formClass)
+    {
+        $form = $this->createForm($formClass, $shift);
+
+        $form->submit($request->request->get($form->getName()), false);
+
+        if (!$form->isValid()) {
+            throw new BadRequestHttpException();
+        }
+
+        $manager = $this->get('zentrium_schedule.manager.shift');
+        $manager->save($shift);
+
+        return new JsonResponse([
+            'shift' => $this->serializeShift($shift, $this->getLayout($request)),
+        ]);
+    }
+
     private function serializeShift(Shift $shift, $layout)
     {
+        $router = $this->get('router');
+
         return [
             'id' => $shift->getId(),
             'resourceId' => ($layout === self::USER_LAYOUT ? $shift->getUser()->getId() : $shift->getTask()->getId()),
+            'valueId' => ($layout === self::USER_LAYOUT ? $shift->getTask()->getId() : $shift->getUser()->getId()),
             'title' => ($layout === self::USER_LAYOUT ? $shift->getTask()->getName() : $shift->getUser()->getName()),
             'start' => $this->serializeDate($shift->getFrom()),
             'end' => $this->serializeDate($shift->getTo()),
             'color' => $shift->getTask()->getColor(),
+            'endpoint' => $router->generate('schedule_shift_edit', ['shift' => $shift->getId(), 'layout' => $layout]),
         ];
     }
 

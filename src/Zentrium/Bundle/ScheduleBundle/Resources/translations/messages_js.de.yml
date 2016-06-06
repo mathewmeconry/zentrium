@@ -2,6 +2,10 @@ zentrium_schedule:
     requirement_set:
         view:
             modify_prompt: "Anpassung:"
+    shift:
+        edit:
+            choose_user: Benutzer auswählen
+            choose_task: Aufgabe auswählen
     task:
         field:
             name: Name
