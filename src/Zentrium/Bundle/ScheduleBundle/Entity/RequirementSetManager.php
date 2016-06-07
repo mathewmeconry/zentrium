@@ -34,6 +34,26 @@ class RequirementSetManager
         return $this->repository->findBy([], ['name' => 'ASC']);
     }
 
+    public function findComparables(AbstractPlan $plan)
+    {
+        $qb = $this->repository->createQueryBuilder('s');
+        $qb
+            ->where('s.begin < :end AND s.end > :begin')
+            ->orderBy('s.name', 'ASC')
+            ->setParameter('begin', $plan->getBegin())
+            ->setParameter('end', $plan->getEnd())
+        ;
+
+        if ($plan instanceof RequirementSet) {
+            $qb
+                ->andWhere('s.id != :id')
+                ->setParameter('id', $plan->getId())
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getTasks(RequirementSet $set)
     {
         $query = $this->em

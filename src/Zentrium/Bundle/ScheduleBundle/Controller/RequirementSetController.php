@@ -13,8 +13,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
+use Zentrium\Bundle\ScheduleBundle\Entity\AbstractItem;
+use Zentrium\Bundle\ScheduleBundle\Entity\AbstractPlan;
 use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
+use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\ModifyOperationType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\SetOperationType;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\ModifyOperation;
@@ -72,21 +75,22 @@ class RequirementSetController extends Controller
      */
     public function viewAction(RequirementSet $set)
     {
-        $router = $this->get('router');
+        $comparables = $this->get('zentrium_schedule.manager.requirement_set')->findComparables($set);
 
         $operations = [
-            'set' => $router->generate('schedule_requirement_set_set', ['set' => $set->getId()]),
-            'modify' => $router->generate('schedule_requirement_set_modify', ['set' => $set->getId()]),
+            'set' => $this->generateUrl('schedule_requirement_set_set', ['set' => $set->getId()]),
+            'modify' => $this->generateUrl('schedule_requirement_set_modify', ['set' => $set->getId()]),
         ];
 
         return [
             'set' => $set,
+            'comparables' => $comparables,
             'config' => [
                 'begin' => $this->serializeDate($set->getBegin()),
                 'duration' => $set->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $set->getSlotDuration(),
-                'requirements' => $router->generate('schedule_requirement_set_requirements', ['set' => $set->getId()]),
-                'tasks' => $router->generate('schedule_requirement_set_tasks'),
+                'requirements' => $this->generateUrl('schedule_requirement_set_requirements', ['set' => $set->getId()]),
+                'tasks' => $this->generateUrl('schedule_requirement_set_tasks'),
                 'operations' => $operations,
             ],
         ];
@@ -125,6 +129,167 @@ class RequirementSetController extends Controller
         $form = $this->createForm(SetOperationType::class, new SetOperation());
 
         return $this->handleOperation($request, $set, $form);
+    }
+
+    /**
+     * @Route("/{set}/compare/{subject}", name="schedule_requirement_set_compare")
+     * @Template
+     */
+    public function compareAction(RequirementSet $set, RequirementSet $subject)
+    {
+        return $this->handleDiffView($set, $subject, $this->generateUrl('schedule_requirement_set_compare_data', ['set' => $set->getId(), 'subject' => $subject->getId()]));
+    }
+
+    /**
+     * @Route("/{set}/compare/{subject}/diff.json", name="schedule_requirement_set_compare_data")
+     * @Template
+     */
+    public function compareDataAction(Request $request, RequirementSet $set, RequirementSet $subject)
+    {
+        return $this->handleDiffData($request, $set, $subject->getRequirements(), null, function ($a, $b) {
+            $diff = $b - $a;
+
+            return [
+                'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $a, $b),
+                'color' => ($diff == 0 ? '#009900' : '#ff2222'),
+            ];
+        });
+    }
+
+    /**
+     * @Route("/{set}/check/{schedule}", name="schedule_requirement_set_compare_schedule")
+     * @Template
+     */
+    public function compareScheduleAction(RequirementSet $set, Schedule $schedule)
+    {
+        return $this->handleDiffView($set, $schedule, $this->generateUrl('schedule_requirement_set_compare_schedule_data', ['set' => $set->getId(), 'schedule' => $schedule->getId()]));
+    }
+
+    /**
+     * @Route("/{set}/check/{schedule}/diff.json", name="schedule_requirement_set_compare_schedule_data")
+     * @Template
+     */
+    public function compareScheduleDataAction(Request $request, RequirementSet $set, Schedule $schedule)
+    {
+        return $this->handleDiffData($request, $set, $schedule->getShifts(), 1, function ($a, $b) {
+            $diff = $b - $a;
+
+            return [
+                'title' => sprintf('%s (%d/%d)', ($diff == 0 ? '✔' : (string) $diff), $a, $b),
+                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ff2222' : '#ffaa00')),
+            ];
+        });
+    }
+
+    private function handleDiffView(RequirementSet $set, AbstractPlan $subject, $dataUrl)
+    {
+        if (!$set->getPeriod()->contains($subject->getPeriod())) {
+            $this->addFlash('warning', 'zentrium_schedule.requirement_set.compare.warn_boundaries', [
+                '%a%' => $set->getName(),
+                '%b%' => $subject->getName(),
+            ]);
+        }
+
+        if ($subject->getSlotDuration() % $set->getSlotDuration() != 0 || !$set->isAligned($subject->getBegin())) {
+            $this->addFlash('warning', 'zentrium_schedule.requirement_set.compare.warn_alignment', [
+                '%a%' => $set->getName(),
+                '%b%' => $subject->getName(),
+            ]);
+        }
+
+        return [
+            'set' => $set,
+            'subject' => $subject,
+            'config' => [
+                'begin' => $this->serializeDate($set->getBegin()),
+                'duration' => $set->getPeriod()->getTimestampInterval(),
+                'slotDuration' => $set->getSlotDuration(),
+                'requirements' => $dataUrl,
+                'tasks' => $this->generateUrl('schedule_requirement_set_tasks'),
+            ],
+        ];
+    }
+
+    /**
+     * @param RequirementSet $set
+     * @param AbstractItem[] $subjectCollection
+     * @param int|null       $subjectCount
+     * @param callable       $formatter
+     */
+    private function handleDiffData(Request $request, RequirementSet $set, $subjectCollection, $subjectCount, $formatter)
+    {
+        $tz = new \DateTimeZone(date_default_timezone_get());
+        $begin = $set->getBegin()->setTimezone($tz)->getTimestamp();
+        $slotDuration = $set->getSlotDuration();
+        $slotCount = $set->getSlotCount();
+
+        // build row prototype
+        $rowPrototype = [];
+        $it = \DateTimeImmutable::createFromFormat('U', $set->getBegin()->getTimestamp(), $set->getBegin()->getTimezone());
+        $it = $it->setTimezone($tz);
+        $itDiff = new \DateInterval('PT'.$slotDuration.'S');
+        for ($i = 0;$i < $slotCount;$i++) {
+            $nextIt = $it->add($itDiff);
+            $rowPrototype[] = [
+                'set' => 0,
+                'subject' => 0,
+                'start' => $this->serializeDate($it),
+                'end' => $this->serializeDate($nextIt),
+            ];
+            $it = $nextIt;
+        }
+
+        // fill matrix
+        $fillMatrix = function ($matrix, $rowPrototype, $key, $collection, $count) use ($tz, $begin, $slotCount, $slotDuration) {
+            foreach ($collection as $item) {
+                $taskId = $item->getTask()->getId();
+                if (!isset($matrix[$taskId])) {
+                    $matrix[$taskId] = $rowPrototype;
+                }
+                $firstSlot = floor(($item->getFrom()->setTimezone($tz)->getTimestamp() - $begin) / $slotDuration);
+                $lastSlot = ceil(($item->getTo()->setTimezone($tz)->getTimestamp() - $begin) / $slotDuration);
+                for ($i = max($firstSlot, 0);$i < min($lastSlot, $slotCount); $i++) {
+                    $matrix[$taskId][$i][$key] += ($count !== null ? $count : $item->getCount());
+                }
+            }
+
+            return $matrix;
+        };
+        $matrix = [];
+        $matrix = $fillMatrix($matrix, $rowPrototype, 'set', $set->getRequirements(), null);
+        $matrix = $fillMatrix($matrix, $rowPrototype, 'subject', $subjectCollection, $subjectCount);
+
+        // merge cells
+        $result = [];
+        foreach ($matrix as $taskId => $cells) {
+            $last = ['set' => 0, 'subject' => 0];
+            $pending = null;
+            foreach ($cells as $cell) {
+                if ($last['set'] == $cell['set'] && $last['subject'] == $cell['subject']) {
+                    if ($pending) {
+                        $pending['end'] = $cell['end'];
+                    }
+                } else {
+                    if ($pending) {
+                        $result[] = $pending;
+                        $pending = null;
+                    }
+                    if ($cell['set'] != 0 || $cell['subject'] != 0) {
+                        $diff = $cell['set'] - $cell['subject'];
+                        $pending = array_merge($cell, [
+                            'id' => (count($result) + 1),
+                            'resourceId' => $taskId,
+                        ], $formatter($cell['set'], $cell['subject']));
+                    }
+                }
+                $last = $cell;
+            }
+            if ($pending) {
+                $result[] = $pending;
+            }
+        }
+
+        return new JsonResponse($result);
     }
 
     private function handleOperation(Request $request, RequirementSet $set, FormInterface $form)

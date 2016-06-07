@@ -124,20 +124,22 @@ class ScheduleController extends Controller
     public function viewAction(Request $request, Schedule $schedule)
     {
         $layout = $this->getLayout($request);
-        $router = $this->get('router');
+
+        $comparableSets = $this->get('zentrium_schedule.manager.requirement_set')->findComparables($schedule);
 
         return [
             'schedule' => $schedule,
+            'comparableSets' => $comparableSets,
             'config' => [
                 'scheduleId' => $schedule->getId(),
                 'layout' => $layout,
                 'begin' => $this->serializeDate($schedule->getBegin()),
                 'duration' => $schedule->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $schedule->getSlotDuration(),
-                'shifts' => $router->generate('schedule_view_shifts', ['schedule' => $schedule->getId(), 'layout' => $layout]),
-                'tasks' => $router->generate('schedule_view_tasks', ['schedule' => $schedule->getId()]),
-                'users' => $router->generate('schedule_view_users', ['schedule' => $schedule->getId()]),
-                'endpoint' => $router->generate('schedule_shift_new', ['layout' => $layout]),
+                'shifts' => $this->generateUrl('schedule_view_shifts', ['schedule' => $schedule->getId(), 'layout' => $layout]),
+                'tasks' => $this->generateUrl('schedule_view_tasks', ['schedule' => $schedule->getId()]),
+                'users' => $this->generateUrl('schedule_view_users', ['schedule' => $schedule->getId()]),
+                'endpoint' => $this->generateUrl('schedule_shift_new', ['layout' => $layout]),
             ],
         ];
     }
@@ -194,8 +196,6 @@ class ScheduleController extends Controller
 
     private function serializeShift(Shift $shift, $layout)
     {
-        $router = $this->get('router');
-
         return [
             'id' => $shift->getId(),
             'resourceId' => ($layout === self::USER_LAYOUT ? $shift->getUser()->getId() : $shift->getTask()->getId()),
@@ -204,7 +204,7 @@ class ScheduleController extends Controller
             'start' => $this->serializeDate($shift->getFrom()),
             'end' => $this->serializeDate($shift->getTo()),
             'color' => $shift->getTask()->getColor(),
-            'endpoint' => $router->generate('schedule_shift_edit', ['shift' => $shift->getId(), 'layout' => $layout]),
+            'endpoint' => $this->generateUrl('schedule_shift_edit', ['shift' => $shift->getId(), 'layout' => $layout]),
         ];
     }
 

@@ -71,7 +71,7 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
             return eventData.resourceId == resource.id;
           });
           for(var i in events) {
-            $view.fullCalendar('renderEvent', events[i], true);
+            $view.fullCalendar('renderEvent', events[i]);
           }
         }
       };

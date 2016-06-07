@@ -18,6 +18,14 @@ zentrium_schedule:
             updated: Letzte Aktualisierung
         view:
             title: Bedarf
+            compare: Plan vergleichen
+        compare:
+            title: Vergleich zwischen «%a%» und «%b%»
+            reverse: Vergleich umkehren
+            warn_boundaries: «%b%» wird nicht komplett von «%a%» abgedeckt. Gewisse Unterschiede können deshalb nicht angezeigt werden.
+            warn_alignment: Das Zeitraster von «%b%» ist nicht mit jenem von «%a%» kompatibel. Es können Rundungsfehler auftreten.
+        compare_schedule:
+            title: Stand von «%schedule%» bezüglich «%set%»
     schedule:
         field:
             name: Name
@@ -33,6 +41,7 @@ zentrium_schedule:
             title: Einsatzplan bearbeiten
         view:
             title: Einsatzplan
+            compare: Plan abgleichen
             change_layout: Layout wechseln
     skill:
         field:

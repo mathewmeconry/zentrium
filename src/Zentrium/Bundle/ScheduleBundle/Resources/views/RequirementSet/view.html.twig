@@ -7,6 +7,18 @@
 <div class="box box-primary">
   <div class="box-header">
     <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.view.title'|trans }}</h3>
+    <div class="box-tools">
+      {% if comparables|length %}
+      <div class="btn-group">
+        <button type="button" class="btn btn-box-tool" data-toggle="dropdown" data-original-title="{{ 'zentrium_schedule.requirement_set.view.compare'|trans }}"><i class="fa fa-adjust"></i></button>
+        <ul class="dropdown-menu">
+          {% for comparable in comparables %}
+          <li><a href="{{ path('schedule_requirement_set_compare', {'set': set.id, 'subject': comparable.id}) }}">{{ comparable.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
   </div>
   <div class="box-body no-padding">
     <div id="schedule-requirement-set" data-config="{{ config|json_encode|e('html_attr') }}"></div>

@@ -17,6 +17,7 @@ module.exports = function(grunt) {
       js: {
         src: [
           'public/js/helpers.js',
+          'public/js/layout.js',
           'public/js/form.js',
         ],
         dest: 'public/js/bundle.js'
