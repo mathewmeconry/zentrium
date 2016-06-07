@@ -2,4 +2,4 @@ FOS\UserBundle\Model\User:
     properties:
         username:
             - NotBlank: ~
-            - Regex: '/^[a-z]+(\.[a-z]+)*$/'
+            - Regex: '/^[a-z0-9]+(\.[a-z0-9]+)*$/'
