@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $users = $this->get('zentrium.repository.user')->findAll();
+        $users = $this->get('zentrium.repository.user')->findAllWithGroups();
 
         return ['users' => $users];
     }

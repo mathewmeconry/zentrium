@@ -26,7 +26,7 @@
           <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
           <td>{% if user.mobilePhone %}<a href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}</td>
           <td>
-            {% for group in user.groups %}<span class="label label-primary">{{ group.shortName }}</span> {% endfor %}
+            {% for group in user.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
           </td>
           <td class="col-tools">
             {% if not user.enabled %}<i class="fa fa-lock"></i>{% endif %}

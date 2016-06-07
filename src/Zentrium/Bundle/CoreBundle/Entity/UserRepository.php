@@ -15,6 +15,17 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findAllWithGroups()
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->addSelect('g')
+            ->leftJoin('u.groups', 'g')
+            ->orderBy('u.lastName')
+            ->addOrderBy('u.firstName');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function count()
     {
         $qb = $this->createQueryBuilder('u')
