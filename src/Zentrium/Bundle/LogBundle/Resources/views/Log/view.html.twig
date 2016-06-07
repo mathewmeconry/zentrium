@@ -17,7 +17,7 @@
       <dt>{{ 'zentrium_log.log.field.updated'|trans }}</dt>
       <dd>{{ log.updated|date('d.m.Y H:i') }}</dd>
       <dt>{{ 'zentrium_log.log.field.labels'|trans }}</dt>
-      <dd>{% if log.labels|length %}{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span> {% endfor %}{% else %}-{% endif %}</dd>
+      <dd>{% if log.labels|length %}{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>&#32;{% endfor %}{% else %}-{% endif %}</dd>
     </dl>
   </div>
 </div>
