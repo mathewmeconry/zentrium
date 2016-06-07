@@ -38,6 +38,8 @@ module.exports = function(grunt) {
           'node_modules/admin-lte/plugins/fastclick/fastclick.min.js',
           'node_modules/admin-lte/plugins/select2/select2.min.js',
           'node_modules/admin-lte/plugins/select2/i18n/de.js',
+          'node_modules/admin-lte/plugins/datepicker/bootstrap-datepicker.js',
+          'node_modules/admin-lte/plugins/datepicker/locales/bootstrap-datepicker.de.js',
           'node_modules/admin-lte/dist/js/app.min.js',
           'node_modules/jquery-minicolors/jquery.minicolors.min.js',
           'node_modules/sortablejs/Sortable.min.js',

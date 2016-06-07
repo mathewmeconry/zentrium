@@ -10,9 +10,9 @@
         <tr>
           <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
           <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
-          <th>{{ 'zentrium.user.field.username'|trans }}</th>
           <th>{{ 'zentrium.user.field.email'|trans }}</th>
           <th>{{ 'zentrium.user.field.mobile_phone'|trans }}</th>
+          <th>{{ 'zentrium.user.field.title'|trans }}</th>
           <th>{{ 'zentrium.user.field.groups'|trans }}</th>
           <th class="col-tools">{% if is_granted('ROLE_ADMINISTRATOR') %}<a href="{{ path('user_new') }}"><i class="fa fa-plus"></i></a>{% endif %}</th>
         </tr>
@@ -22,9 +22,9 @@
         <tr>
           <td>{{ user.lastName }}</td>
           <td>{{ user.firstName }}</td>
-          <td>{{ user.username }}</td>
           <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
           <td>{% if user.mobilePhone %}<a href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}</td>
+          <td>{{ user.title }}</td>
           <td>
             {% for group in user.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
           </td>

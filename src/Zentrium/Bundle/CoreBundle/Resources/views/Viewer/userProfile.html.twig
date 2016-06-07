@@ -10,6 +10,14 @@
       <dd>{{ user.lastName }}</dd>
       <dt>{{ 'zentrium.user.field.first_name'|trans }}</dt>
       <dd>{{ user.firstName }}</dd>
+      {% if user.birthday %}
+      <dt>{{ 'zentrium.user.field.birthday'|trans }}</dt>
+      <dd>{{ user.birthday|date('d.m.Y') }}</dd>
+      {% endif %}
+      {% if user.title %}
+      <dt>{{ 'zentrium.user.field.title'|trans }}</dt>
+      <dd>{{ user.title }}</dd>
+      {% endif %}
       <dt>{{ 'zentrium.user.field.email'|trans }}</dt>
       <dd>{{ user.email }}</dd>
       <dt>{{ 'zentrium.user.field.mobile_phone'|trans }}</dt>

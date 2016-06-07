@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\CoreBundle\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -41,6 +42,24 @@ class User extends BaseUser
     protected $firstName;
 
     /**
+     * @var string
+     *
+     * @Assert\Choice(choices={"male", "female"})
+     *
+     * @ORM\Column(name="gender", type="string", length=8, nullable=true)
+     */
+    protected $gender;
+
+    /**
+     * @var DateTimeInterface
+     *
+     * @Assert\Type(type="DateTimeInterface")
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $birthday;
+
+    /**
      * @var PhoneNumber
      *
      * @AssertPhoneNumber
@@ -48,6 +67,13 @@ class User extends BaseUser
      * @ORM\Column(type="phone_number", nullable=true)
      */
     protected $mobilePhone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $title;
 
     /**
      * @var Collection
@@ -92,6 +118,30 @@ class User extends BaseUser
         return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
     }
 
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
     public function getMobilePhone()
     {
         return $this->mobilePhone;
@@ -100,6 +150,18 @@ class User extends BaseUser
     public function setMobilePhone($mobilePhone)
     {
         $this->mobilePhone = $mobilePhone;
+
+        return $this;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
         return $this;
     }

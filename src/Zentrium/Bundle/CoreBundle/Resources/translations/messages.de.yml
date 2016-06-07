@@ -25,6 +25,7 @@ zentrium:
             text: Es ist ein unbekannter Fehler aufgetreten. Sollte das Problem weiterhin bestehen, kontaktiere bitte einen Administrator.
     form:
         color: Farbe
+        gender: Geschlecht
         delete: Löschen
         save: Speichern
     security:
@@ -52,6 +53,9 @@ zentrium:
         closing: |
             Beste Grüsse,
             dein Zentrium-Administrator
+    gender:
+        male: männlich
+        female: weiblich
     group:
         title: Gruppen
         field:
@@ -70,6 +74,9 @@ zentrium:
             email: E-Mail
             mobile_phone: Telefon
             enabled: Aktiv
+            gender: Geschlecht
+            birthday: Geburtstag
+            title: Position/Funktion
         form:
             saved: Die Daten wurden erfolgreich aktualisiert.
         list:
