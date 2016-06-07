@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\MapBundle\Entity\FeatureLayer;
 use Zentrium\Bundle\MapBundle\Entity\Layer;
 use Zentrium\Bundle\MapBundle\Entity\Map;
@@ -22,6 +23,8 @@ use Zentrium\Bundle\MapBundle\Form\Type\MapViewportType;
  */
 class MapController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/", name="maps")
      */

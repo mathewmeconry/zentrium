@@ -6,11 +6,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\LogBundle\Entity\Log;
 use Zentrium\Bundle\LogBundle\Form\Type\LogType;
 
 class LogController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/logs", name="logs")
      * @Template

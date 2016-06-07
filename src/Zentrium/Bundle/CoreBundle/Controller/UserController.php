@@ -13,6 +13,8 @@ use Zentrium\Bundle\CoreBundle\User\UserEvents;
 
 class UserController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/users", name="users")
      * @Template

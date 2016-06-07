@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\ScheduleType;
@@ -26,6 +27,8 @@ class ScheduleController extends Controller
 {
     const TASK_LAYOUT = 'task';
     const USER_LAYOUT = 'user';
+
+    use ControllerTrait;
 
     /**
      * @Route("/", name="schedules")

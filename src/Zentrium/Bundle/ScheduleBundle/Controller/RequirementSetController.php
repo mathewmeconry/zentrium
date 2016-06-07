@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\ModifyOperationType;
@@ -24,6 +25,8 @@ use Zentrium\Bundle\ScheduleBundle\RequirementSet\SetOperation;
  */
 class RequirementSetController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/", name="schedule_requirements")
      * @Template

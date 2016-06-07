@@ -6,11 +6,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\LogBundle\Entity\Label;
 use Zentrium\Bundle\LogBundle\Form\Type\LabelType;
 
 class LabelController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/logs/labels/new", name="log_label_new")
      * @Template

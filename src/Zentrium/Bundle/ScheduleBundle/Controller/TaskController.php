@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\ScheduleBundle\Entity\Task;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\TaskType;
 
@@ -14,6 +15,8 @@ use Zentrium\Bundle\ScheduleBundle\Form\Type\TaskType;
  */
 class TaskController extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/", name="schedule_tasks")
      * @Template

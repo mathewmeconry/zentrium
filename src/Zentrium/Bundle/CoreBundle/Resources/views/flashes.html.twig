@@ -4,7 +4,7 @@
   <div class="alert alert-{{ type }} alert-dismissible">
     <button data-dismiss="alert" class="close" type="button">×</button>
     {% if alertIcons[type] is defined %}<i class="icon fa fa-{{ alertIcons[type] }}"></i>{% endif %}
-    {{ flash|trans }}
+    {{ flash }}
   </div>
   {% endfor %}
 {% endfor %}
