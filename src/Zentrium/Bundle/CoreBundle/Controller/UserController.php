@@ -3,11 +3,13 @@
 namespace Zentrium\Bundle\CoreBundle\Controller;
 
 use FOS\UserBundle\Event\FormEvent;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Entity\User;
+use Zentrium\Bundle\CoreBundle\Form\Type\UserAccountType;
 use Zentrium\Bundle\CoreBundle\Form\Type\UserType;
 use Zentrium\Bundle\CoreBundle\User\UserEvents;
 
@@ -28,6 +30,7 @@ class UserController extends Controller
 
     /**
      * @Route("/users/new", name="user_new")
+     * @Secure("ROLE_ADMINISTRATOR")
      * @Template
      */
     public function newAction(Request $request)
@@ -49,7 +52,8 @@ class UserController extends Controller
 
     private function handleEdit(Request $request, User $user)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $formClass = ($this->isGranted('ROLE_ADMINISTRATOR') ? UserAccountType::class : UserType::class);
+        $form = $this->createForm($formClass, $user);
 
         $form->handleRequest($request);
 

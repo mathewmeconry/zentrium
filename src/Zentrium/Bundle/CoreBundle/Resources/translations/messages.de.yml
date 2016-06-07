@@ -74,6 +74,8 @@ zentrium:
             saved: Die Daten wurden erfolgreich aktualisiert.
         list:
             title: Benutzer
+        edit:
+            title: Benutzer bearbeiten
         new:
             title: Neuer Benutzer
     viewer:

@@ -14,7 +14,7 @@
           <th>{{ 'zentrium.user.field.email'|trans }}</th>
           <th>{{ 'zentrium.user.field.mobile_phone'|trans }}</th>
           <th>{{ 'zentrium.user.field.groups'|trans }}</th>
-          <th class="col-tools"><a href="{{ path('user_new') }}"><i class="fa fa-plus"></i></a></th>
+          <th class="col-tools">{% if is_granted('ROLE_ADMINISTRATOR') %}<a href="{{ path('user_new') }}"><i class="fa fa-plus"></i></a>{% endif %}</th>
         </tr>
       </thead>
       <tbody>
