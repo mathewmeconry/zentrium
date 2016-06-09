@@ -113,9 +113,13 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getName()
+    public function getName($sortable = false)
     {
-        return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+        if ($sortable) {
+            return sprintf('%s %s', $this->getLastName(), $this->getFirstName());
+        } else {
+            return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+        }
     }
 
     public function getGender()

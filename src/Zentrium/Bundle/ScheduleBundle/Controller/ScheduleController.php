@@ -134,7 +134,7 @@ class ScheduleController extends Controller
         foreach ($users as $user) {
             $result[] = [
                 'id' => $user->getId(),
-                'name' => $user->getName(),
+                'name' => $user->getName(true),
             ];
         }
 
