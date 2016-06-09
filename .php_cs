@@ -12,6 +12,7 @@ return Symfony\CS\Config\Config::create()
         '-empty_return',
         '-phpdoc_separation',
         '-pre_increment',
+        '-unneeded_control_parentheses',
         'ordered_use',
         'short_array_syntax',
     ])
