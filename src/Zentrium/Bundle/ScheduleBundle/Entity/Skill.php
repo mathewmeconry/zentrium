@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Zentrium\Bundle\ScheduleBundle\Entity\SkillRepository")
  */
 class Skill
 {
@@ -37,7 +37,7 @@ class Skill
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="skills")
      */
     protected $users;
 

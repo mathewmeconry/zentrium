@@ -1,0 +1,46 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_schedule.layout.users'|trans }}{% endblock %}
+
+{% block content %}
+<div class="box">
+  <div class="box-body no-padding">
+    <table class="table table-striped schedule-users">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
+          <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
+          <th></th>
+          <th>{{ 'zentrium.user.field.birthday'|trans }}</th>
+          <th>{{ 'zentrium.user.field.title'|trans }}</th>
+          <th>{{ 'zentrium.user.field.groups'|trans }}</th>
+          <th>{{ 'zentrium_schedule.user.field.skills'|trans }}</th>
+          <th class="col-user-notes">{{ 'zentrium_schedule.user.field.notes'|trans }}</th>
+          <th class="col-tools"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.base.lastName }}</td>
+          <td>{{ user.base.firstName }}</td>
+          <td>{% if user.base.gender %}<i class="fa fa-{% if user.base.gender == 'male' %}mars{% else %}venus{% endif %}"></i>{% endif %}</td>
+          <td>{{ user.base.birthday|date('d.m.Y') }}</td>
+          <td>{{ user.base.title }}</td>
+          <td>
+            {% for group in user.base.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
+          </td>
+          <td>
+            {% for skill in user.skills %}<span class="label label-primary">{{ skill.shortName }}</span>&#32;{% endfor %}
+          </td>
+          <td class="col-user-notes">{{ user.notes|nl2br }}</td>
+          <td class="col-tools">
+            <a href="{{ path('user_edit', {'user': user.base.id}) }}?schedule"><i class="fa fa-pencil"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

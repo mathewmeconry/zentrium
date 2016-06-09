@@ -4,12 +4,14 @@ zentrium_schedule:
         requirements: Bedarfsplanung
         tasks: Aufgaben
         skills: Qualifikationen
+        users: Personen
     menu:
         schedule: Einsatzplan
         overview: Übersicht
         requirements: Bedarfsplanung
         tasks: Aufgaben
         skills: Qualifikationen
+        users: Personen
     requirement_set:
         field:
             name: Name
@@ -71,4 +73,5 @@ zentrium_schedule:
             title: Aufgabe bearbeiten
     user:
         field:
+            notes: Bemerkungen
             skills: Qualifikationen

@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,6 +51,7 @@ class SkillController extends Controller
 
     /**
      * @Route("/{skill}/list", name="schedule_skill_list")
+     * @ParamConverter("skill", options={"repository_method" = "findWithUsers"})
      * @Template
      */
     public function listAction(Skill $skill)

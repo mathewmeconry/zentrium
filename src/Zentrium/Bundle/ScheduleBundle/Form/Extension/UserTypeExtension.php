@@ -3,50 +3,54 @@
 namespace Zentrium\Bundle\ScheduleBundle\Form\Extension;
 
 use FOS\UserBundle\Event\FormEvent;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
-use Zentrium\Bundle\CoreBundle\Form\Type\UserType;
-use Zentrium\Bundle\CoreBundle\Util\SnapshotCollection;
-use Zentrium\Bundle\ScheduleBundle\Entity\Skill;
-use Zentrium\Bundle\ScheduleBundle\Entity\SkillManager;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Form\Type\UserType as BaseUserType;
+use Zentrium\Bundle\ScheduleBundle\Entity\UserManager;
+use Zentrium\Bundle\ScheduleBundle\Form\Type\UserType;
 
 class UserTypeExtension extends AbstractTypeExtension
 {
-    private $skillManager;
+    private $userManager;
+    private $router;
 
-    public function __construct(SkillManager $skillManager)
+    public function __construct(UserManager $userManager, RouterInterface $router)
     {
-        $this->skillManager = $skillManager;
+        $this->userManager = $userManager;
+        $this->router = $router;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $builder->getData();
-        $skills = $this->skillManager->findByUser($user);
+        $user = $this->userManager->findOneByBase($builder->getData());
 
-        $builder->add('skills', EntityType::class, [
-            'required' => false,
-            'label' => 'zentrium_schedule.user.field.skills',
-            'class' => Skill::class,
-            'choice_label' => 'name',
-            'multiple' => true,
+        $builder->add('schedule', UserType::class, [
+            'label' => false,
             'mapped' => false,
             'position' => ['before' => 'save'],
-            'data' => new SnapshotCollection($skills),
+            'data' => $user,
+            'constraints' => [
+                new Assert\Valid(),
+            ],
         ]);
     }
 
     public function onSuccess(FormEvent $event)
     {
-        $user = $event->getForm()->getData();
-        $skills = $event->getForm()->get('skills')->getData();
+        $user = $event->getForm()->get('schedule')->getData();
 
-        $this->skillManager->updateUser($user, $skills);
+        $this->userManager->save($user);
+
+        if ($event->getRequest()->query->has('schedule')) {
+            $event->setResponse(new RedirectResponse($this->router->generate('schedule_users')));
+        }
     }
 
     public function getExtendedType()
     {
-        return UserType::class;
+        return BaseUserType::class;
     }
 }

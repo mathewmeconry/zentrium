@@ -58,16 +58,20 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $dispatcher = $this->get('event_dispatcher');
             $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(UserEvents::EDIT_SUCCESS, new FormEvent($form, $request));
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(UserEvents::EDIT_SUCCESS, $event);
 
             $manager = $this->get('fos_user.user_manager');
             $manager->updateUser($user);
 
-            $this->addFlash('success', 'zentrium.user.form.saved');
+            $response = $event->getResponse();
+            if ($response === null) {
+                $response = $this->redirectToRoute('users');
+                $this->addFlash('success', 'zentrium.user.form.saved');
+            }
 
-            return $this->redirectToRoute('users');
+            return $response;
         }
 
         return [
