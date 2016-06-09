@@ -84,10 +84,19 @@ $(function() {
     $modal.modal('show');
   }
 
+  var eventSources = [{
+    url: config.shifts
+  }];
+  if(config.layout == 'user') {
+    eventSources.push({
+      url: config.availabilities
+    });
+  }
+
   var options = {
     selectable: !!config.endpoint,
     editable: !!config.endpoint,
-    events: config.shifts,
+    eventSources: eventSources,
     eventClick: (config.endpoint ? function (event, jsEvent, view) {
       if(event.editable === false) {
         return;

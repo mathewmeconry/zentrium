@@ -35,6 +35,7 @@
           </td>
           <td class="col-user-notes">{{ user.notes|nl2br }}</td>
           <td class="col-tools">
+            <a href="{{ path('schedule_user_availability', {'user': user.base.id}) }}" title="{{ 'zentrium_schedule.user.list.availability'|trans }}"><i class="fa fa-check-circle"></i></a>
             <a href="{{ path('user_edit', {'user': user.base.id}) }}?schedule"><i class="fa fa-pencil"></i></a>
           </td>
         </tr>

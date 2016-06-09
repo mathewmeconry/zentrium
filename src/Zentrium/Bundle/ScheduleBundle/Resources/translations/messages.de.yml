@@ -12,6 +12,12 @@ zentrium_schedule:
         tasks: Aufgaben
         skills: Qualifikationen
         users: Personen
+    availability:
+        field:
+            from: Von
+            to: Bis
+        form:
+            saved: Der Eintrag zur Anwesenheit von %user% wurde gespeichert.
     requirement_set:
         field:
             name: Name
@@ -75,3 +81,7 @@ zentrium_schedule:
         field:
             notes: Bemerkungen
             skills: Qualifikationen
+        list:
+            availability: Anwesenheit
+        availability:
+            title: Anwesenheit

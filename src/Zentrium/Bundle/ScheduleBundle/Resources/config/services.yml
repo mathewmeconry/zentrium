@@ -1,4 +1,8 @@
 services:
+    zentrium_schedule.manager.availability:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\AvailabilityManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     zentrium_schedule.manager.requirement_set:
         class: Zentrium\Bundle\ScheduleBundle\Entity\RequirementSetManager
         arguments: ["@doctrine.orm.entity_manager"]

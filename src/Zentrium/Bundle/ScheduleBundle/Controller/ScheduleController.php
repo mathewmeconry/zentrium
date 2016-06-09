@@ -83,6 +83,48 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/availabilities.json", name="schedule_view_availabilities")
+     */
+    public function viewAvailabilitiesAction(Request $request, Schedule $schedule)
+    {
+        $availabilities = $this->get('zentrium_schedule.manager.availability')->findOverlapping($schedule->getPeriod());
+
+        $result = [];
+        $coveredUsers = [];
+        foreach ($availabilities as $availability) {
+            $userId = $availability->getUser()->getBase()->getId();
+            $coveredUsers[$userId] = true;
+            $result[] = [
+                'id' => 'a'.$availability->getId(),
+                'resourceId' => $userId,
+                'start' => $this->serializeDate($availability->getFrom()),
+                'end' => $this->serializeDate($availability->getTo()),
+                'color' => '#DDDDDD',
+                'rendering' => 'inverse-background',
+            ];
+        }
+
+        $users = $this->get('zentrium.repository.user')->findAll();
+        $dummyDate = $this->serializeDate(new DateTime('1980-01-01'));
+        foreach ($users as $user) {
+            if (isset($coveredUsers[$user->getId()])) {
+                continue;
+            }
+            // dummy entry to activate inverse-background rendering
+            $result[] = [
+                'id' => 'dummy'.$user->getId(),
+                'resourceId' => $user->getId(),
+                'start' => $dummyDate,
+                'end' => $dummyDate,
+                'color' => '#DDDDDD',
+                'rendering' => 'inverse-background',
+            ];
+        }
+
+        return new JsonResponse($result);
+    }
+
+    /**
      * @Route("/{schedule}/users.json", name="schedule_view_users")
      */
     public function viewUsersAction(Request $request, Schedule $schedule)
@@ -137,6 +179,7 @@ class ScheduleController extends Controller
                 'duration' => $schedule->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $schedule->getSlotDuration(),
                 'shifts' => $this->generateUrl('schedule_view_shifts', ['schedule' => $schedule->getId(), 'layout' => $layout]),
+                'availabilities' => $this->generateUrl('schedule_view_availabilities', ['schedule' => $schedule->getId()]),
                 'tasks' => $this->generateUrl('schedule_view_tasks', ['schedule' => $schedule->getId()]),
                 'users' => $this->generateUrl('schedule_view_users', ['schedule' => $schedule->getId()]),
                 'endpoint' => $this->generateUrl('schedule_shift_new', ['layout' => $layout]),

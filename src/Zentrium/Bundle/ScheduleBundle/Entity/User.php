@@ -36,10 +36,16 @@ class User
      */
     protected $skills;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Availability", mappedBy="user", cascade="all")
+     */
+    protected $availabilities;
+
     public function __construct(BaseUser $base)
     {
         $this->base = $base;
         $this->skills = new ArrayCollection();
+        $this->availabilities = new ArrayCollection();
     }
 
     public function getBase()
@@ -67,6 +73,18 @@ class User
     public function setSkills($skills)
     {
         $this->skills = $skills;
+
+        return $this;
+    }
+
+    public function getAvailabilities()
+    {
+        return $this->availabilities;
+    }
+
+    public function setAvailabilities($availabilities)
+    {
+        $this->availabilities = $availabilities;
 
         return $this;
     }

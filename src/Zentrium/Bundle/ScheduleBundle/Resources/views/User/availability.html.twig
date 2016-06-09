@@ -1,0 +1,36 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title_full %}{{ user.base.name }} - {{ 'zentrium_schedule.layout.users'|trans }}{% endblock %}
+{% block title %}{{ user.base.name }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium_schedule.user.availability.title'|trans }}</h3>
+  </div>
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium_schedule.availability.field.from'|trans }}</th>
+          <th>{{ 'zentrium_schedule.availability.field.to'|trans }}</th>
+          <th class="col-tools">
+            <a href="{{ path('schedule_user_availability_new', {'user': user.base.id}) }}"><i class="fa fa-plus"></i></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for availability in user.availabilities %}
+        <tr>
+          <td>{{ availability.from|date('d.m.Y H:i') }}</td>
+          <td>{{ availability.to|date('d.m.Y H:i') }}</td>
+          <td class="col-tools">
+            <a href="{{ path('schedule_user_availability_edit', {'availability': availability.id}) }}"><i class="fa fa-pencil"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

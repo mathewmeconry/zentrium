@@ -14,7 +14,16 @@ $(function () {
     var $this = $(this);
     $this.datepicker({
       autoclose: true,
-      format: $this.attr('data-format'),
+      format: $this.attr('data-date-format'),
+      language: language,
+    });
+  });
+
+  $('div.form-inline.datepicker-input').each(function () {
+    var $this = $(this);
+    $this.find('input').first().datepicker({
+      autoclose: true,
+      format: $this.attr('data-date-format'),
       language: language,
     });
   });
