@@ -38,6 +38,7 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity="Availability", mappedBy="user", cascade="all")
+     * @ORM\OrderBy({"from"="ASC"})
      */
     protected $availabilities;
 
