@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\CoreBundle\Twig;
 
+use League\Period\Period;
 use Sonata\IntlBundle\Templating\Helper\DateTimeHelper;
 use Symfony\Component\Translation\TranslatorInterface;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper;
@@ -43,6 +44,7 @@ class Extension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('without', [$this, 'withoutFilter']),
             new \Twig_SimpleFilter('formatList', [$this, 'formatListFilter']),
+            new \Twig_SimpleFilter('duration', [$this, 'durationFilter']),
             new \Twig_SimpleFilter('localizedDate', [$this, 'localizedDateFilter']),
             new \Twig_SimpleFilter('phoneNumber', [$this->phoneNumberHelper, 'format']),
         ];
@@ -132,6 +134,39 @@ class Extension extends \Twig_Extension
         } else {
             return $last;
         }
+    }
+
+    /**
+     * Formats a Period in a human-readable manner.
+     *
+     * @param Period $period
+     *
+     * @return string
+     */
+    public function durationFilter($period)
+    {
+        if (!($period instanceof Period)) {
+            return $period;
+        }
+
+        $seconds = round($period->getTimestampInterval());
+        $hours = floor($seconds / 3600);
+        $seconds -= $hours * 3600;
+        $minutes = floor($seconds / 60);
+        $seconds -= $minutes * 60;
+
+        $parts = [];
+        if ($hours > 0) {
+            $parts[] = $this->translator->transChoice('zentrium.twig.duration.hours', $hours, ['%hours%' => $hours]);
+        }
+        if ($minutes > 0) {
+            $parts[] = $this->translator->transChoice('zentrium.twig.duration.minutes', $minutes, ['%minutes%' => $minutes]);
+        }
+        if ($seconds > 0 || ($hours == 0 && $minutes == 0)) {
+            $parts[] = $this->translator->transChoice('zentrium.twig.duration.seconds', $seconds, ['%seconds%' => $seconds]);
+        }
+
+        return implode(' ', $parts);
     }
 
     /**

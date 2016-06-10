@@ -1,0 +1,42 @@
+{% extends 'ZentriumCoreBundle::layoutViewer.html.twig' %}
+
+{% block title %}{{ 'zentrium_schedule.viewer.shifts.title'|trans }}{% endblock %}
+
+{% block content %}
+{% set lastLabel = '' %}
+<ul class="timeline">
+  {% for entry in entries %}
+    {% set label = entry.time|localizedDate('date_full') %}
+    {% if label != lastLabel %}
+      <li class="time-label">
+        <span>{{ label }}</span>
+      </li>
+      {% set lastLabel = label %}
+    {% endif %}
+    <li>
+    {% if entry.type == 'shift' %}
+      {% set shift = entry.shift %}
+      <i class="fa fa-suitcase" style="color: #fff; background-color: {{ shift.task.color }}"></i>
+      <div class="timeline-item">
+        <span class="time"><i class="fa fa-clock-o"></i> {{ shift.period|duration }}</span>
+        <h3 class="timeline-header no-border">{{ 'zentrium_schedule.viewer.shifts.header'|trans({'%from%': shift.from|date('H:i'), '%to%': shift.to|date('H:i'), '%task%': shift.task.name, '%task_code%': shift.task.code}) }}</h3>
+      </div>
+    {% elseif entry.type == 'available' %}
+      <i class="fa fa-sign-in bg-green"></i>
+      <div class="timeline-item">
+        <div class="timeline-body">{{ 'zentrium_schedule.viewer.shifts.available'|trans({'%from%': entry.time|date('H:i')}) }}</div>
+      </div>
+    {% elseif entry.type == 'unavailable' %}
+      <i class="fa fa-sign-out bg-red"></i>
+      <div class="timeline-item">
+        <div class="timeline-body">{{ 'zentrium_schedule.viewer.shifts.unavailable'|trans({'%from%': entry.time|date('H:i')}) }}</div>
+      </div>
+    {% elseif entry.type == 'message' %}
+      <div class="timeline-item">
+        <div class="timeline-body">{{ entry.message }}</div>
+      </div>
+    {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

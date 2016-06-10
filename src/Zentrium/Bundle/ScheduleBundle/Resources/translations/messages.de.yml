@@ -12,6 +12,8 @@ zentrium_schedule:
         tasks: Aufgaben
         skills: Qualifikationen
         users: Personen
+        viewer:
+            shifts: Meine Einsätze
     availability:
         field:
             from: Von
@@ -85,3 +87,9 @@ zentrium_schedule:
             availability: Anwesenheit
         availability:
             title: Anwesenheit
+    viewer:
+        shifts:
+            title: Meine Einsätze
+            header: "%task% (%task_code%) von %from% bis %to%"
+            available: "Anwesend ab %from%"
+            unavailable: "Abwesend ab %from%"

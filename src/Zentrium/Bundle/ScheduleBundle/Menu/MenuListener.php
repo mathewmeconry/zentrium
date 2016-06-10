@@ -16,4 +16,9 @@ class MenuListener
         $menu->addChild('zentrium_schedule.menu.users', ['route' => 'schedule_users']);
         $menu->addChild('zentrium_schedule.menu.skills', ['route' => 'schedule_skills']);
     }
+
+    public function onCreateViewerMenu(ConfigureMenuEvent $event)
+    {
+        $event->getMenu()->addChild('zentrium_schedule.menu.viewer.shifts', ['route' => 'schedule_viewer_shifts']);
+    }
 }

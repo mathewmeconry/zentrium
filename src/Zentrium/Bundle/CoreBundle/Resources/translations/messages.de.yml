@@ -55,6 +55,10 @@ zentrium:
             datetime_medium: EEE, dd.MM.yyyy HH:mm
             datetime_long: EEE, d. MMMM yyyy HH:mm
             datetime_full: EEEE, d. MMMM yyyy HH:mm
+        duration:
+            hours: "%hours% h"
+            minutes: "%minutes% min"
+            seconds: "%seconds% s"
     email:
         salutation: Hallo %firstname%!
         closing: |
