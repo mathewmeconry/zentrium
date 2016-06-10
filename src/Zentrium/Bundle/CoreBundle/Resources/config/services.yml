@@ -17,7 +17,7 @@ services:
 
     zentrium.oauth_server.application_manager:
         class: Zentrium\Bundle\CoreBundle\Entity\ApplicationManager
-        arguments: ["@fos_oauth_server.entity_manager", %fos_oauth_server.model.client.class%]
+        arguments: ["@fos_oauth_server.entity_manager", "%fos_oauth_server.model.client.class%"]
 
     zentrium.menu.builder:
         class: Zentrium\Bundle\CoreBundle\Menu\MenuBuilder
@@ -42,16 +42,16 @@ services:
         class: Zentrium\Bundle\CoreBundle\Request\RequestBodyParamConverter
         arguments:
             - "@fos_rest.serializer"
-            - %fos_rest.serializer.exclusion_strategy.groups%
-            - %fos_rest.serializer.exclusion_strategy.version%
+            - "%fos_rest.serializer.exclusion_strategy.groups%"
+            - "%fos_rest.serializer.exclusion_strategy.version%"
             - "@fos_rest.validator"
-            - %fos_rest.converter.request_body.validation_errors_argument%
+            - "%fos_rest.converter.request_body.validation_errors_argument%"
         tags:
             - { name: request.param_converter, converter: zentrium.request_body }
 
     zentrium.templating.helper.phone_number:
         class: Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper
-        arguments: ["@libphonenumber.phone_number_util", %zentrium.default_country%]
+        arguments: ["@libphonenumber.phone_number_util", "%zentrium.default_country%"]
         public: false
         tags:
             - { name: templating.helper, alias: phone_number }
