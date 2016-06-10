@@ -23,8 +23,8 @@
         <tr>
           <td>{{ schedule.id }}</td>
           <td><a href="{{ path('schedule_view', {'schedule': schedule.id}) }}">{{ schedule.name }}</a></td>
-          <td>{{ schedule.begin|date('d.m.Y H:i') }}</td>
-          <td>{{ schedule.end|date('d.m.Y H:i') }}</td>
+          <td>{{ schedule.begin|localizedDate('datetime_long') }}</td>
+          <td>{{ schedule.end|localizedDate('datetime_long') }}</td>
           <td>{% if schedule.published %}<i class="fa fa-check"></i>{% endif %}</td>
           <td>{{ schedule.updated|ago }}</td>
           <td class="col-tools">

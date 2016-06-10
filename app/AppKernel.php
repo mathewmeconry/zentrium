@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Ivory\OrderedFormBundle\IvoryOrderedFormBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
             new Zentrium\Bundle\MapBundle\ZentriumMapBundle(),

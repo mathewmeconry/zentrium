@@ -20,8 +20,8 @@
         <tr>
           <td>{{ set.id }}</td>
           <td><a href="{{ path('schedule_requirement_set_view', {'set': set.id}) }}">{{ set.name }}</a></td>
-          <td>{{ set.begin|date('d.m.Y H:i') }}</td>
-          <td>{{ set.end|date('d.m.Y H:i') }}</td>
+          <td>{{ set.begin|localizedDate('datetime_long') }}</td>
+          <td>{{ set.end|localizedDate('datetime_long') }}</td>
           <td>{{ set.updated|ago }}</td>
         </tr>
         {% endfor %}

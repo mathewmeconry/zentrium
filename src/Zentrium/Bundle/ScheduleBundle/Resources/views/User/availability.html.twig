@@ -22,8 +22,8 @@
       <tbody>
         {% for availability in user.availabilities %}
         <tr>
-          <td>{{ availability.from|date('d.m.Y H:i') }}</td>
-          <td>{{ availability.to|date('d.m.Y H:i') }}</td>
+          <td>{{ availability.from|localizedDate('datetime_full') }}</td>
+          <td>{{ availability.to|localizedDate('datetime_full') }}</td>
           <td class="col-tools">
             <a href="{{ path('schedule_user_availability_edit', {'availability': availability.id}) }}"><i class="fa fa-pencil"></i></a>
           </td>

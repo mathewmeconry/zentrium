@@ -48,6 +48,13 @@ zentrium:
         format_list:
             and: und
             or: oder
+        datetime:
+            date_medium: EEE, dd.MM.yyyy
+            date_long: EEE, d. MMMM yyyy
+            date_full: EEEE, d. MMMM yyyy
+            datetime_medium: EEE, dd.MM.yyyy HH:mm
+            datetime_long: EEE, d. MMMM yyyy HH:mm
+            datetime_full: EEEE, d. MMMM yyyy HH:mm
     email:
         salutation: Hallo %firstname%!
         closing: |

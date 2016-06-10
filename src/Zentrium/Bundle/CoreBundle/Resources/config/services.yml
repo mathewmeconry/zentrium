@@ -58,7 +58,10 @@ services:
 
     zentrium.twig.extension:
         class: Zentrium\Bundle\CoreBundle\Twig\Extension
-        arguments: ["@translator", "@zentrium.templating.helper.phone_number"]
+        arguments:
+            - "@translator"
+            - "@zentrium.templating.helper.phone_number"
+            - "@sonata.intl.templating.helper.datetime"
         public: false
         tags:
             - { name: twig.extension }

@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\CoreBundle\Twig;
 
+use Sonata\IntlBundle\Templating\Helper\DateTimeHelper;
 use Symfony\Component\Translation\TranslatorInterface;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper;
 
@@ -18,14 +19,20 @@ class Extension extends \Twig_Extension
     private $phoneNumberHelper;
 
     /**
+     * @var DateTimeHelper
+     */
+    private $dateTimeHelper;
+
+    /**
      * Constructor.
      *
      * @param TranslatorInterface $translator
      */
-    public function __construct(TranslatorInterface $translator, PhoneNumberHelper $phoneNumberHelper)
+    public function __construct(TranslatorInterface $translator, PhoneNumberHelper $phoneNumberHelper, DateTimeHelper $dateTimeHelper)
     {
         $this->translator = $translator;
         $this->phoneNumberHelper = $phoneNumberHelper;
+        $this->dateTimeHelper = $dateTimeHelper;
     }
 
     /**
@@ -36,6 +43,7 @@ class Extension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('without', [$this, 'withoutFilter']),
             new \Twig_SimpleFilter('formatList', [$this, 'formatListFilter']),
+            new \Twig_SimpleFilter('localizedDate', [$this, 'localizedDateFilter']),
             new \Twig_SimpleFilter('phoneNumber', [$this->phoneNumberHelper, 'format']),
         ];
     }
@@ -124,6 +132,16 @@ class Extension extends \Twig_Extension
         } else {
             return $last;
         }
+    }
+
+    /**
+     * Uses SonataIntlBundle to format a date.
+     */
+    public function localizedDateFilter($date, $patternId)
+    {
+        $pattern = $this->translator->trans('zentrium.twig.datetime.'.$patternId);
+
+        return $this->dateTimeHelper->format($date, $pattern);
     }
 
     /**
