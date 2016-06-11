@@ -16,3 +16,9 @@ services:
         class: Zentrium\Bundle\TimesheetBundle\Menu\MenuListener
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
+
+    zentrium_timesheet.validator.not_overlapping:
+        class: Zentrium\Bundle\TimesheetBundle\Validator\Constraints\NotOverlappingValidator
+        arguments: ["@zentrium_timesheet.manager.entry"]
+        tags:
+            - { name: validator.constraint_validator }

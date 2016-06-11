@@ -40,6 +40,25 @@ class EntryManager
         return $qb->getQuery()->getResult();
     }
 
+    public function isOverlapping(Entry $entry)
+    {
+        $qb = $this->repository->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.start < :end')
+            ->andWhere('e.end > :start')
+            ->andWhere('e.user = :user')
+            ->setParameter('start', $entry->getStart())
+            ->setParameter('end', $entry->getEnd())
+            ->setParameter('user', $entry->getUser())
+        ;
+
+        if ($entry->getId() !== null) {
+            $qb->andWhere('e.id != :id')->setParameter('id', $entry->getId());
+        }
+
+        return intval($qb->getQuery()->getSingleScalarResult()) > 0;
+    }
+
     public function save(Entry $entry)
     {
         $this->em->transactional(function (EntityManager $em) use ($entry) {

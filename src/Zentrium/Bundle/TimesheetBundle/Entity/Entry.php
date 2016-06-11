@@ -4,8 +4,11 @@ namespace Zentrium\Bundle\TimesheetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\TimesheetBundle\Validator\Constraints as AssertTimesheet;
 
 /**
+ * @AssertTimesheet\NotOverlapping
+ *
  * @ORM\Entity
  */
 class Entry
