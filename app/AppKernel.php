@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
             new Zentrium\Bundle\MapBundle\ZentriumMapBundle(),
             new Zentrium\Bundle\ScheduleBundle\ZentriumScheduleBundle(),
+            new Zentrium\Bundle\TimesheetBundle\ZentriumTimesheetBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

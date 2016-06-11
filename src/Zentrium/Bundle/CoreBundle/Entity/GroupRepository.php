@@ -13,4 +13,11 @@ class GroupRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function createSortedQueryBuilder()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.name')
+        ;
+    }
 }

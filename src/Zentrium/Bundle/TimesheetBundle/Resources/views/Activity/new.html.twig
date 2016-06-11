@@ -1,0 +1,16 @@
+{% extends 'ZentriumTimesheetBundle::layout.html.twig' %}
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+
+{% block title_full %}{{ 'zentrium_timesheet.activity.list.title'|trans }} - {{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+{% block title %}{{ 'zentrium_timesheet.activity.list.title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium_timesheet.activity.new.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+  </div>
+</div>
+{% endblock %}

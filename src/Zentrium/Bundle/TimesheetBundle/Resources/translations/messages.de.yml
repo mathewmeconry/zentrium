@@ -1,0 +1,49 @@
+zentrium_timesheet:
+    layout:
+        timesheet: Zeiterfassung
+    menu:
+        timesheet: Zeiterfassung
+        entries: Übersicht
+        activity: Aktivitäten
+    entry:
+        field:
+            id: ID
+            user: Benutzer
+            start: Beginn
+            end: Ende
+            duration: Dauer
+            activity: Aktivität
+            notes: Bemerkungen
+        form:
+            saved: Der Eintrag wurde erfolgreich gespeichert.
+        list:
+            title: Einträge
+            new: Neuer Eintrag
+            export: Export
+        new:
+            title: Eintrag erfassen
+        edit:
+            title: Eintrag bearbeiten
+    activity:
+        field:
+            name: Name
+        form:
+            saved: Die Aktivität wurde erfolgreich gespeichert.
+        list:
+            title: Aktivitäten
+            new: Neue Aktivität
+        edit:
+            title: Aktivität bearbeiten
+        new:
+            title: Neue Aktivität
+    export:
+        title: Export
+        filename: Zeiterfassung %date%
+        filename_date: d.m.Y
+        parameter:
+            from: Von
+            to: Bis
+            user_filter: Benutzer-Filter
+            group_filter: Gruppen-Filter
+        form:
+            submit: Exportieren

@@ -1,0 +1,27 @@
+{% extends 'ZentriumTimesheetBundle::layout.html.twig' %}
+
+{% block title_full %}{{ 'zentrium_timesheet.activity.list.title'|trans }} - {{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+{% block title %}{{ 'zentrium_timesheet.activity.list.title'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium_timesheet.activity.field.name'|trans }}</th>
+          <th class="col-right"><a href="{{ path('timesheet_activity_new') }}" data-original-title="{{ 'zentrium_timesheet.activity.list.new'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for activity in activities %}
+        <tr>
+          <td>{{ activity.name }}</td>
+          <td class="col-right"><a href="{{ path('timesheet_activity_edit', {'activity': activity.id}) }}"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'ZentriumTimesheetBundle::layout.html.twig' %}
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+
+{% block title %}{{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium_timesheet.entry.new.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+  </div>
+</div>
+{% endblock %}

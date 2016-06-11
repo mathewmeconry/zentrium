@@ -1,0 +1,43 @@
+{% extends 'ZentriumTimesheetBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped timesheet-entries">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium_timesheet.entry.field.id'|trans }}</th>
+          <th>{{ 'zentrium_timesheet.entry.field.user'|trans }}</th>
+          <th>{{ 'zentrium_timesheet.entry.field.start'|trans }}</th>
+          <th>{{ 'zentrium_timesheet.entry.field.end'|trans }}</th>
+          <th>{{ 'zentrium_timesheet.entry.field.duration'|trans }}</th>
+          <th>{{ 'zentrium_timesheet.entry.field.activity'|trans }}</th>
+          <th class="col-entry-notes">{{ 'zentrium_timesheet.entry.field.notes'|trans }}</th>
+          <th class="col-tools">
+            <a href="{{ path('timesheet_entries_export') }}" data-original-title="{{ 'zentrium_timesheet.entry.list.export'|trans }}" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+            <a href="{{ path('timesheet_entry_new') }}" data-original-title="{{ 'zentrium_timesheet.entry.list.new'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+        <tr>
+          <td>{{ entry.id }}</td>
+          <td>{{ entry.user.name }}</td>
+          <td>{{ entry.start|localizedDate('datetime_medium') }}</td>
+          <td>{{ entry.end|localizedDate('datetime_medium') }}</td>
+          <td>{{ entry.duration|duration }}</td>
+          <td>{{ entry.activity.name }}</td>
+          <td class="col-entry-notes">{{ entry.notes|nl2br }}</td>
+          <td class="col-tools">
+            <a href="{{ path('timesheet_entry_edit', {'entry': entry.id}) }}"><i class="fa fa-pencil"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -24,3 +24,7 @@ map:
 schedule:
     resource: "@ZentriumScheduleBundle/Controller/"
     type:     annotation
+
+timesheet:
+    resource: "@ZentriumTimesheetBundle/Controller/"
+    type:     annotation

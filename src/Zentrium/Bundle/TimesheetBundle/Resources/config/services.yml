@@ -1,0 +1,18 @@
+services:
+    zentrium_timesheet.export:
+        class: Zentrium\Bundle\TimesheetBundle\Export\Exporter
+        arguments: ["@zentrium_timesheet.manager.entry", "@translator"]
+        lazy: true
+
+    zentrium_timesheet.manager.activity:
+        class: Zentrium\Bundle\TimesheetBundle\Entity\ActivityManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    zentrium_timesheet.manager.entry:
+        class: Zentrium\Bundle\TimesheetBundle\Entity\EntryManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    zentrium_timesheet.menu_listener:
+        class: Zentrium\Bundle\TimesheetBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
