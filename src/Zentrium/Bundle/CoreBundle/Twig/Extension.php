@@ -139,17 +139,20 @@ class Extension extends \Twig_Extension
     /**
      * Formats a Period in a human-readable manner.
      *
-     * @param Period $period
+     * @param Period|int $period
      *
      * @return string
      */
     public function durationFilter($period)
     {
-        if (!($period instanceof Period)) {
+        if ($period instanceof Period) {
+            $period = $period->getTimestampInterval();
+        }
+        if (!is_int($period) && !is_float($period)) {
             return $period;
         }
 
-        $seconds = round($period->getTimestampInterval());
+        $seconds = abs(round($period));
         $hours = floor($seconds / 3600);
         $seconds -= $hours * 3600;
         $minutes = floor($seconds / 60);
@@ -166,7 +169,7 @@ class Extension extends \Twig_Extension
             $parts[] = $this->translator->transChoice('zentrium.twig.duration.seconds', $seconds, ['%seconds%' => $seconds]);
         }
 
-        return implode(' ', $parts);
+        return ($period < 0 ? '- ' : '').implode(' ', $parts);
     }
 
     /**
