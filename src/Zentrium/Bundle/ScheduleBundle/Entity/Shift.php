@@ -4,7 +4,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Zentrium\Bundle\CoreBundle\Entity\User;
+use Zentrium\Bundle\CoreBundle\Entity\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -32,7 +32,7 @@ class Shift extends AbstractPlanItem
     protected $task;
 
     /**
-     * @var User
+     * @var BaseUser
      *
      * @Assert\NotNull
      *

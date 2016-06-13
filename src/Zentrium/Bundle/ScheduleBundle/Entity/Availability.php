@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use League\Period\Period;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Entity\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -20,7 +21,7 @@ class Availability
     protected $id;
 
     /**
-     * @var User
+     * @var BaseUser
      *
      * @Assert\NotNull
      *

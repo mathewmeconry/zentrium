@@ -46,11 +46,11 @@ class UserManager
         $rows = $qb->getQuery()->getResult();
 
         $result = [];
-        for ($i = 0;$i < count($rows); $i += 2) {
-            if ($rows[$i + 1] !== null) {
-                $result[] = $rows[$i + 1];
-            } elseif ($rows[$i] !== null) {
-                $result[] = new User($rows[$i]);
+        foreach ($rows as $row) {
+            if ($row instanceof User) {
+                $result[$row->getBase()->getId()] = $row;
+            } elseif ($row instanceof BaseUser && !isset($result[$row->getId()])) {
+                $result[$row->getId()] = new User($row);
             }
         }
 

@@ -5,7 +5,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use League\Period\Period;
-use Zentrium\Bundle\CoreBundle\Entity\User;
+use Zentrium\Bundle\CoreBundle\Entity\User as BaseUser;
 
 class AvailabilityManager
 {
@@ -37,7 +37,7 @@ class AvailabilityManager
         return $qb->getQuery()->getResult();
     }
 
-    public function findUpcomingByUser(User $user)
+    public function findUpcomingByUser(BaseUser $user)
     {
         $qb = $this->repository->createQueryBuilder('a')
             ->where('a.user = :user')
