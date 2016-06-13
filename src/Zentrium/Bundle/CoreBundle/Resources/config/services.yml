@@ -9,6 +9,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
 
+    zentrium.form.extension.change_password:
+        class: Zentrium\Bundle\CoreBundle\Form\Extension\ChangePasswordTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: FOS\UserBundle\Form\Type\ChangePasswordFormType }
+
     zentrium.form.type.phone_number:
         class:  Zentrium\Bundle\CoreBundle\Form\Type\PhoneNumberType
         arguments: ["@libphonenumber.phone_number_util", "@zentrium.templating.helper.phone_number"]

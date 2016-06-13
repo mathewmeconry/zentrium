@@ -3,3 +3,6 @@ FOS\UserBundle\Model\User:
         username:
             - NotBlank: ~
             - Regex: '/^[a-z0-9]+(\.[a-z0-9]+)*$/'
+        plainPassword:
+            - NotBlank: { message: fos_user.password.blank, groups: [Registration, ResetPassword, ChangePassword] }
+            - Length: { min: 6, max: 100, minMessage: fos_user.password.short, groups: [Registration, Profile, ResetPassword, ChangePassword] }

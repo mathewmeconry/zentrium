@@ -101,3 +101,7 @@ zentrium:
         switch_back: Lese-Modus verlassen
         user_profile:
             title: Mein Profil
+            title_sub: Persönliche Angaben
+            change_password: Passwort ändern
+        change_password:
+            title: Passwort ändern
