@@ -27,6 +27,7 @@ class EntryType extends AbstractType
                 'choice_label' => function (User $user) {
                     return $user->getName(true);
                 },
+                'placeholder' => '',
             ])
             ->add('start', DateTimeType::class, [
                 'label' => 'zentrium_timesheet.entry.field.start',
@@ -41,6 +42,7 @@ class EntryType extends AbstractType
                     return $repo->createSortedQueryBuilder();
                 },
                 'choice_label' => 'name',
+                'placeholder' => '',
             ])
             ->add('notes', TextareaType::class, [
                 'label' => 'zentrium_timesheet.entry.field.notes',
