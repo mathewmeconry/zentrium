@@ -25,7 +25,7 @@
           <td>{{ user.base.lastName }}</td>
           <td>{{ user.base.firstName }}</td>
           <td>{% if user.base.gender %}<i class="fa fa-{% if user.base.gender == 'male' %}mars{% else %}venus{% endif %}"></i>{% endif %}</td>
-          <td>{{ user.base.birthday|date('d.m.Y') }}</td>
+          <td>{% if user.base.birthday %}{{ user.base.birthday|date('d.m.Y') }}{% endif %}</td>
           <td>{{ user.base.title }}</td>
           <td>
             {% for group in user.base.groups %}<span class="label label-primary" title="{{ group.name }}">{{ group.shortName }}</span>&#32;{% endfor %}
