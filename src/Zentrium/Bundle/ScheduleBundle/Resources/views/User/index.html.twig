@@ -28,10 +28,10 @@
           <td>{{ user.base.birthday|date('d.m.Y') }}</td>
           <td>{{ user.base.title }}</td>
           <td>
-            {% for group in user.base.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
+            {% for group in user.base.groups %}<span class="label label-primary" title="{{ group.name }}">{{ group.shortName }}</span>&#32;{% endfor %}
           </td>
           <td>
-            {% for skill in user.skills %}<span class="label label-primary">{{ skill.shortName }}</span>&#32;{% endfor %}
+            {% for skill in user.skills %}<span class="label label-primary" title="{{ skill.name }}">{{ skill.shortName }}</span>&#32;{% endfor %}
           </td>
           <td class="col-user-notes">{{ user.notes|nl2br }}</td>
           <td class="col-tools">
