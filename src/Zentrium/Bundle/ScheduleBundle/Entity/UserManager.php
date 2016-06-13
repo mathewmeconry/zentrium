@@ -63,7 +63,9 @@ class UserManager
 
         if ($user === null) {
             $user = new User($base);
-            $this->save($user);
+            if ($base->getId() !== null) {
+                $this->save($user);
+            }
         }
 
         return $user;

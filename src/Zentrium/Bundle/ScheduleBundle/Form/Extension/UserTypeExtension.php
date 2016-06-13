@@ -25,7 +25,12 @@ class UserTypeExtension extends AbstractTypeExtension
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->userManager->findOneByBase($builder->getData());
+        $baseUser = $builder->getData();
+        if ($baseUser->getId() === null) {
+            return;
+        }
+
+        $user = $this->userManager->findOneByBase($baseUser);
 
         $builder->add('schedule', UserType::class, [
             'label' => false,
@@ -40,9 +45,10 @@ class UserTypeExtension extends AbstractTypeExtension
 
     public function onSuccess(FormEvent $event)
     {
-        $user = $event->getForm()->get('schedule')->getData();
-
-        $this->userManager->save($user);
+        if ($event->getForm()->has('schedule')) {
+            $user = $event->getForm()->get('schedule')->getData();
+            $this->userManager->save($user);
+        }
 
         if ($event->getRequest()->query->has('schedule')) {
             $event->setResponse(new RedirectResponse($this->router->generate('schedule_users')));
