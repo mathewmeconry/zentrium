@@ -86,7 +86,7 @@ zentrium:
             mobile_phone: Telefon
             enabled: Aktiv
             gender: Geschlecht
-            birthday: Geburtstag
+            birthday: Geburtsdatum
             title: Position/Funktion
         form:
             saved: Die Daten wurden erfolgreich aktualisiert.
