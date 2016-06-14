@@ -2,10 +2,14 @@ zentrium_schedule:
     requirement_set:
         view:
             modify_prompt: "Anpassung:"
+    schedule:
+        view:
+            user_availability: Verfügbarkeit
     shift:
         edit:
             choose_user: Benutzer auswählen
             choose_task: Aufgabe auswählen
+            insufficient_skills: Qualifikationen nicht erfüllt
     task:
         field:
             name: Name

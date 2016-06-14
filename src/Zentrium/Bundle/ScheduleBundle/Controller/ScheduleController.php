@@ -129,12 +129,28 @@ class ScheduleController extends Controller
      */
     public function viewUsersAction(Request $request, Schedule $schedule)
     {
-        $users = $this->get('zentrium.repository.user')->findAll();
+        $users = $this->get('zentrium_schedule.manager.user')->findAll();
+
         $result = [];
         foreach ($users as $user) {
+            $groups = array_map(function ($group) {
+                return $group->getShortName();
+            }, $user->getBase()->getGroups()->toArray());
+
+            $skills = array_map(function ($skill) {
+                return [
+                    'id' => $skill->getId(),
+                    'name' => $skill->getShortName(),
+                ];
+            }, $user->getSkills()->toArray());
+
             $result[] = [
-                'id' => $user->getId(),
-                'name' => $user->getName(true),
+                'id' => $user->getBase()->getId(),
+                'name' => $user->getBase()->getName(true),
+                'groups' => $groups,
+                'skills' => $skills,
+                'notes' => $user->getNotes(),
+                'availability' => $this->generateUrl('schedule_user_availability', ['user' => $user->getBase()->getId()]),
             ];
         }
 
@@ -153,6 +169,7 @@ class ScheduleController extends Controller
                 'id' => $task->getId(),
                 'name' => $task->getName(),
                 'code' => $task->getCode(),
+                'skill' => (($skill = $task->getSkill()) !== null ? $skill->getId() : null),
             ];
         }
 

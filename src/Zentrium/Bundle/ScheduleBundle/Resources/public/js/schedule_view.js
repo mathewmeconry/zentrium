@@ -16,6 +16,9 @@ $(function() {
   Zentrium.request('GET', config.layout == 'task' ? config.users : config.tasks).done(function (data) {
     modalSelectData = $.map(data, function (row) {
       row.text = row.name;
+      if (row.groups && row.groups.length) {
+        row.text += ' (' + row.groups.join(', ') + ')';
+      }
       return row;
     });
   });
@@ -42,11 +45,23 @@ $(function() {
   function editEvent(event, view, data, persistent) {
     $modal.find('h4').text(Translator.trans(config.layout == 'task' ? 'zentrium_schedule.shift.edit.choose_user' : 'zentrium_schedule.shift.edit.choose_task'));
 
+    var resource = $view.fullCalendar('getResourceById', event.resourceId);
+    var $warningIcon = $('<i class="fa fa-warning"></i>').attr('title', Translator.trans('zentrium_schedule.shift.edit.insufficient_skills'));
     var $select = $('<select tabindex="100"></select>');
     $modal.find('.modal-body').empty().append($select);
     $select.select2({
       width: '100%',
       data: modalSelectData,
+      templateResult: function (state) {
+        var $result = $('<span></span>').text(state.text);
+        if (
+          (resource.skill && !_.findWhere(state.skills, { id: resource.skill})) ||
+          (state.skill && !_.findWhere(resource.skills, { id: state.skill }))
+        ) {
+          $result.append($warningIcon.clone());
+        }
+        return $result;
+      },
     }).val(event.valueId).trigger('change');
 
     $modalSave.off();
@@ -137,9 +152,29 @@ $(function() {
       resourceColumns: [
         {
           labelText: Translator.trans('zentrium_schedule.user.field.name'),
-          field: 'name'
-        },
+          text: function (resource) {
+            if(resource.groups.length) {
+              return resource.name + ' (' + resource.groups.join(', ') + ')';
+            } else {
+              return resource.name;
+            }
+          }
+        }
       ],
+      resourceRender: function (resource, $columns, $cells) {
+        var $cellContent = $columns.first().find('.fc-cell-content');
+
+        var $actions = $('<span class="schedule-column-actions"></span>');
+        $actions.append($('<a><i class="fa fa-check-circle"></i></a>').attr('href', resource.availability).attr('title', Translator.trans('zentrium_schedule.schedule.view.user_availability')));
+        for(var i in resource.skills) {
+          $actions.prepend($('<span class="label label-primary"></span>').text(resource.skills[i].name));
+        }
+        $cellContent.prepend($actions);
+
+        $cellContent.find('.fc-cell-text').tooltip({
+          title: resource.notes,
+        });
+      },
       resources: config.users,
     });
   }

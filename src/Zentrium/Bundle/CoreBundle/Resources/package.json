@@ -8,7 +8,8 @@
     "jquery-minicolors": "^2.1.10",
     "js-cookie": "^2.1.1",
     "sortablejs": "^1.4.2",
-    "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release"
+    "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "findup-sync": "^0.4.1",

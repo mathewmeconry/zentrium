@@ -32,6 +32,7 @@ module.exports = function(grunt) {
           'public/js/modernizr.min.js',
           '<%= config.root %>/vendor/willdurand/js-translation-bundle/Bazinga/Bundle/JsTranslationBundle/Resources/public/js/translator.min.js',
           '<%= config.root %>/web/js/translations/*/*.js',
+          'node_modules/underscore/underscore-min.js',
           'node_modules/jquery/dist/jquery.min.js',
           'node_modules/admin-lte/bootstrap/js/bootstrap.min.js',
           'node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',

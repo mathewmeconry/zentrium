@@ -35,6 +35,11 @@
       "version": "2.20.0",
       "from": "source-sans-pro@git://github.com/adobe-fonts/source-sans-pro.git#release",
       "resolved": "git://github.com/adobe-fonts/source-sans-pro.git#4463d0c33e6567df4da97406642c64028e103630"
+    },
+    "underscore": {
+      "version": "1.8.3",
+      "from": "underscore@",
+      "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz"
     }
   }
 }
