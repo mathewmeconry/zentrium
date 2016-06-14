@@ -62,4 +62,16 @@ $(function() {
       $view.fullCalendar('updateEvent', eventData);
     });
   });
+
+  if(screenfull.enabled) {
+    var $fullscreenBtn = $('<button class="btn btn-box-tool"><i class="fa fa-arrows-alt"></i></button>');
+    $fullscreenBtn.tooltip({
+      title: Translator.trans('zentrium.fullscreen.enter')
+    });
+    $fullscreenBtn.click(function () {
+      screenfull.request($view[0]);
+      return false;
+    });
+    $('.box-primary .box-tools').append($fullscreenBtn);
+  }
 });

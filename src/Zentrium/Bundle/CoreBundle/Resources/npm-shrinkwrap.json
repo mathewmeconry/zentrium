@@ -26,6 +26,11 @@
       "from": "js-cookie@",
       "resolved": "https://registry.npmjs.org/js-cookie/-/js-cookie-2.1.1.tgz"
     },
+    "screenfull": {
+      "version": "3.0.0",
+      "from": "screenfull@",
+      "resolved": "https://registry.npmjs.org/screenfull/-/screenfull-3.0.0.tgz"
+    },
     "sortablejs": {
       "version": "1.4.2",
       "from": "sortablejs@",

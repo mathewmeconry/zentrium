@@ -4,6 +4,7 @@
 <div class="box box-primary">
   <div class="box-header">
     <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.compare_schedule.title'|trans({'%set%': set.name, '%schedule%': subject.name}) }}</h3>
+    <div class="box-tools"></div>
   </div>
   <div class="box-body no-padding">
     <div id="schedule-requirement-set" data-config="{{ config|json_encode|e('html_attr') }}"></div>
