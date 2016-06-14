@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\TimesheetBundle\Entity\Entry;
+use Zentrium\Bundle\TimesheetBundle\Event\EntryEvents;
+use Zentrium\Bundle\TimesheetBundle\Event\GetResponseEntryEvent;
 use Zentrium\Bundle\TimesheetBundle\Export\ExportParameters;
 use Zentrium\Bundle\TimesheetBundle\Form\Type\EntryType;
 use Zentrium\Bundle\TimesheetBundle\Form\Type\ExportParametersType;
@@ -78,6 +80,14 @@ class EntryController extends Controller
 
     private function handleEdit(Request $request, Entry $entry)
     {
+        $dispatcher = $this->get('event_dispatcher');
+
+        $event = new GetResponseEntryEvent($entry, $request);
+        $dispatcher->dispatch(EntryEvents::EDIT_INITIALIZE, $event);
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
         $form = $this->createForm(EntryType::class, $entry);
 
         $form->handleRequest($request);
@@ -85,6 +95,12 @@ class EntryController extends Controller
         if ($form->isValid()) {
             $manager = $this->get('zentrium_timesheet.manager.entry');
             $manager->save($entry);
+
+            $event = new GetResponseEntryEvent($entry, $request);
+            $dispatcher->dispatch(EntryEvents::EDIT_COMPLETED, $event);
+            if (null !== $event->getResponse()) {
+                return $event->getResponse();
+            }
 
             $this->addFlash('success', 'zentrium_timesheet.entry.form.saved');
 
