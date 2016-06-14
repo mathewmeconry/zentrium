@@ -15,6 +15,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('zentrium_schedule');
 
+        $rootNode
+            ->children()
+                ->booleanNode('timesheet')->defaultFalse()->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

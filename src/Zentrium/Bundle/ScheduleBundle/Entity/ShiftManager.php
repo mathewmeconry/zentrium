@@ -25,6 +25,11 @@ class ShiftManager
         $this->repository = $em->getRepository(Shift::class);
     }
 
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
     public function findUpcomingByUser(BaseUser $user)
     {
         $qb = $this->repository->createQueryBuilder('s')

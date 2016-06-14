@@ -53,6 +53,9 @@ zentrium_schedule:
             title: Einsatzplan
             compare: Plan abgleichen
             change_layout: Layout wechseln
+    shift:
+        edit:
+            timesheet: Zeit erfassen
     skill:
         field:
             short_name: Abkürzung

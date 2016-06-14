@@ -4,11 +4,26 @@ namespace Zentrium\Bundle\ScheduleBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class ZentriumScheduleExtension extends Extension
+class ZentriumScheduleExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (isset($bundles['ZentriumTimesheetBundle'])) {
+            $container->prependExtensionConfig('zentrium_schedule', [
+                'timesheet' => true,
+            ]);
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -19,5 +34,10 @@ class ZentriumScheduleExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('zentrium_schedule.timesheet', $config['timesheet']);
+        if ($config['timesheet']) {
+            $loader->load('services_timesheet.yml');
+        }
     }
 }

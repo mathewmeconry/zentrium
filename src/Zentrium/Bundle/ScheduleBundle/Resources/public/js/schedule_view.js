@@ -11,6 +11,12 @@ $(function() {
   $modal.data('bs.modal').enforceFocus = $.noop; // https://github.com/select2/select2/issues/600
   var $modalSave = $('#shift-save');
   var $modalDelete = $('#shift-delete');
+  var $modalTimesheet = $('#shift-timesheet');
+  $modalTimesheet.mouseup(function (e) {
+    if(e.which != 3) {
+      $modal.modal('hide');
+    }
+  });
 
   var modalSelectData = [];
   Zentrium.request('GET', config.layout == 'task' ? config.users : config.tasks).done(function (data) {
@@ -89,13 +95,18 @@ $(function() {
         $view.fullCalendar('updateEvent', event);
         $modal.modal('hide');
       });
+      $modalTimesheet.show();
+      $modalTimesheet.attr('href', event.timesheet);
     } else {
       $modalDelete.hide();
+      $modalTimesheet.hide();
     }
 
-    $modal.one('shown.bs.modal', function () {
-      $select.select2('open');
-    });
+    if(moment().diff(event.start) < 0) { // event has not started yet
+      $modal.one('shown.bs.modal', function () {
+        $select.select2('open');
+      });
+    }
     $modal.modal('show');
   }
 

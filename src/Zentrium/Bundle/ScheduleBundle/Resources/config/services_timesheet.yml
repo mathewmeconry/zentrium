@@ -1,0 +1,6 @@
+services:
+    zentrium_schedule.timesheet.entry_listener:
+        class: Zentrium\Bundle\ScheduleBundle\EventListener\TimesheetEntryListener
+        arguments: ["@zentrium_schedule.manager.shift"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium_timesheet.entry.edit.initialize, method: onEditInitialize }

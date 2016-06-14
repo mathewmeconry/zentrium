@@ -189,6 +189,7 @@ class ScheduleController extends Controller
         return [
             'schedule' => $schedule,
             'comparableSets' => $comparableSets,
+            'timesheet' => $this->getParameter('zentrium_schedule.timesheet'),
             'config' => [
                 'scheduleId' => $schedule->getId(),
                 'layout' => $layout,
@@ -256,7 +257,7 @@ class ScheduleController extends Controller
 
     private function serializeShift(Shift $shift, $layout)
     {
-        return [
+        $result = [
             'id' => $shift->getId(),
             'resourceId' => ($layout === self::USER_LAYOUT ? $shift->getUser()->getId() : $shift->getTask()->getId()),
             'valueId' => ($layout === self::USER_LAYOUT ? $shift->getTask()->getId() : $shift->getUser()->getId()),
@@ -266,6 +267,12 @@ class ScheduleController extends Controller
             'color' => $shift->getTask()->getColor(),
             'endpoint' => $this->generateUrl('schedule_shift_edit', ['shift' => $shift->getId(), 'layout' => $layout]),
         ];
+
+        if ($this->getParameter('zentrium_schedule.timesheet')) {
+            $result['timesheet'] = $this->generateUrl('timesheet_entry_new', ['shift' => $shift->getId()]);
+        }
+
+        return $result;
     }
 
     private function serializeDate(DateTimeInterface $date)
