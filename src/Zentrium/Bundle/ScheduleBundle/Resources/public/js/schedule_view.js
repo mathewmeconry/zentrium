@@ -35,6 +35,9 @@ $(function() {
       $view.fullCalendar('removeEvents', event.id);
       $view.fullCalendar('renderEvent', data.shift, true);
       view.displayEvents.start();
+      if(crosstab.supported) {
+        crosstab.broadcast('schedule:change', { id: config.scheduleId });
+      }
     }).fail(function () {
       event.className = 'schedule-operation-failed';
       $view.fullCalendar('updateEvent', event);
@@ -86,6 +89,9 @@ $(function() {
       $modalDelete.click(function () {
         Zentrium.request('DELETE', event.endpoint).done(function () {
           $view.fullCalendar('removeEvents', event.id);
+          if(crosstab.supported) {
+            crosstab.broadcast('schedule:change', { id: config.scheduleId });
+          }
         }).fail(function () {
           event.className = 'schedule-operation-failed';
           $view.fullCalendar('updateEvent', event);
@@ -203,4 +209,26 @@ $(function() {
     data[config.layout == 'task' ? 'task' : 'user'] = resource.id;
     editEvent(pendingEvent, view, data, false);
   });
+
+  if(crosstab.supported) {
+    setInterval(function () {
+      crosstab.broadcast('schedule:advertise', {
+        id: config.scheduleId,
+        name: config.name,
+        begin: moment(config.begin).valueOf(),
+        slotDuration: config.slotDuration,
+        slotWidth: $view.fullCalendar('getView').timeGrid.slotWidth,
+      });
+    }, 2000);
+
+    var $scrollers = $view.find('.fc-time-area .fc-scroller');
+    $scrollers.on('scroll', _.throttle(function () {
+      var scroll = $view.fullCalendar('getView').queryScroll();
+      crosstab.broadcast('schedule:scroll', {
+        id: config.scheduleId,
+        top: scroll.top,
+        left: scroll.left
+      });
+    }, 500, { leading: false }));
+  }
 });

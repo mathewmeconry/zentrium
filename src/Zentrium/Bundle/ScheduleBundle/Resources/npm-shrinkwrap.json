@@ -1,6 +1,11 @@
 {
   "name": "zentrium-schedule-bundle",
   "dependencies": {
+    "crosstab": {
+      "version": "0.2.12",
+      "from": "crosstab@",
+      "resolved": "https://registry.npmjs.org/crosstab/-/crosstab-0.2.12.tgz"
+    },
     "fullcalendar": {
       "version": "2.7.2",
       "from": "fullcalendar@^2.7.2",

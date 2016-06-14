@@ -192,6 +192,7 @@ class ScheduleController extends Controller
             'timesheet' => $this->getParameter('zentrium_schedule.timesheet'),
             'config' => [
                 'scheduleId' => $schedule->getId(),
+                'name' => $schedule->getName(),
                 'layout' => $layout,
                 'begin' => $this->serializeDate($schedule->getBegin()),
                 'duration' => $schedule->getPeriod()->getTimestampInterval(),

@@ -2,6 +2,7 @@
   "name": "zentrium-schedule-bundle",
   "private": true,
   "dependencies": {
+    "crosstab": "^0.2.12",
     "fullcalendar": "^2.7.2",
     "fullcalendar-scheduler": "^1.3.1"
   },

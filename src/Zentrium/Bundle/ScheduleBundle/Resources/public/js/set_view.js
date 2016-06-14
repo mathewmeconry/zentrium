@@ -74,4 +74,80 @@ $(function() {
     });
     $('.box-primary .box-tools').append($fullscreenBtn);
   }
+
+  if(crosstab.supported) {
+    var activeSchedule = {};
+    var schedules = {};
+    var timeouts = {};
+    var slotWidth = $view.fullCalendar('getView').timeGrid.slotWidth;
+    var beginSerialized = moment(config.begin).valueOf();
+
+    var $menu = $('<div class="btn-group"><button data-toggle="dropdown" class="btn btn-box-tool"><i class="fa fa-link"></i></button><ul class="dropdown-menu"></ul></div>');
+    $menu.find('button').attr('data-title', Translator.trans('zentrium_schedule.requirement_set.view.synchronization.start')).tooltip();
+    var $stop = $('<button class="btn btn-box-tool" data-toggle="dropdown"><i class="fa fa-unlink"></i></button>');
+    $stop.attr('data-title', Translator.trans('zentrium_schedule.requirement_set.view.synchronization.stop')).tooltip();
+    $stop.click(function () {
+      activeSchedule.id = null;
+      updateMenu();
+    });
+    $('.box-primary .box-tools').prepend($menu).prepend($stop);
+
+    var updateMenu = function () {
+      if(activeSchedule.id) {
+        $menu.hide();
+        $stop.show();
+      } else if(Object.keys(schedules).length) {
+        var $ul = $menu.find('ul');
+        $ul.empty();
+        for(var i in schedules) {
+          $ul.append($('<li></li>').append($('<a></a>').text(schedules[i].name).data('id', schedules[i].id)));
+        }
+        $ul.on('click', 'a', function () {
+          var id = $(this).data('id');
+          activeSchedule.id = id;
+          updateMenu();
+        });
+        $menu.show();
+        $stop.hide();
+      } else {
+        $menu.hide();
+        $stop.hide();
+      }
+    };
+
+    updateMenu();
+
+    crosstab.on('schedule:advertise', function (message) {
+      var schedule = message.data;
+      if(schedule.begin != beginSerialized || schedule.slotWidth != slotWidth || schedule.slotDuration != config.slotDuration) {
+        return;
+      }
+      schedules[schedule.id] = schedule;
+      if(schedule.id in timeouts) {
+        clearTimeout(timeouts[schedule.id]);
+      }
+      timeouts[schedule.id] = setTimeout(function () {
+        if(activeSchedule.id == schedule.id) {
+          activeSchedule.id = null;
+        }
+        delete schedules[schedule.id];
+        updateMenu();
+      }, 4000);
+      updateMenu();
+    });
+
+    crosstab.on('schedule:change', function (message) {
+      if(message.data.id == activeSchedule.id) {
+        $view.fullCalendar('refetchEvents');
+      }
+    });
+
+    crosstab.on('schedule:scroll', function (message) {
+      if(message.data.id == activeSchedule.id) {
+        var view = $view.fullCalendar('getView');
+        var oldScroll = view.queryScroll();
+        view.setScroll({ top: oldScroll.top, left: message.data.left });
+      }
+    });
+  }
 });

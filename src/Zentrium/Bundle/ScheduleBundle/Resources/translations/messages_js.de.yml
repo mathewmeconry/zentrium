@@ -2,6 +2,9 @@ zentrium_schedule:
     requirement_set:
         view:
             modify_prompt: "Anpassung:"
+            synchronization:
+                start: Scrolling synchronisieren
+                stop: Synchronisierung stoppen
     schedule:
         view:
             user_availability: Verfügbarkeit
