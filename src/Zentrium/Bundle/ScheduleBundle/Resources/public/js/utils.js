@@ -97,5 +97,21 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
   var view = $view.fullCalendar('getView');
   view.displayEvents = Zentrium.Schedule.pause(view.displayEvents);
 
+  $(window).keydown(function(e) {
+    if(e.keyCode != 37 && e.keyCode != 39) { // left/right arrow keys
+      return;
+    }
+    var view = $view.fullCalendar('getView');
+    var slotWidth = view.timeGrid.slotWidth;
+    var oldScroll = view.queryScroll();
+    var newScroll = { top: oldScroll.top };
+    if(e.keyCode == 37) {
+      newScroll.left = Math.round((oldScroll.left - slotWidth) / slotWidth) * slotWidth;
+    } else {
+      newScroll.left = Math.round((oldScroll.left + slotWidth) / slotWidth) * slotWidth;
+    }
+    view.setScroll(newScroll);
+  });
+
   return $view;
 };
