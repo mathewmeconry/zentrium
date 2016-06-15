@@ -5,6 +5,7 @@ namespace Zentrium\Bundle\CoreBundle\Twig;
 use League\Period\Period;
 use Sonata\IntlBundle\Templating\Helper\DateTimeHelper;
 use Symfony\Component\Translation\TranslatorInterface;
+use Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper;
 
 class Extension extends \Twig_Extension
@@ -25,15 +26,21 @@ class Extension extends \Twig_Extension
     private $dateTimeHelper;
 
     /**
+     * @var DurationHelper
+     */
+    private $durationHelper;
+
+    /**
      * Constructor.
      *
      * @param TranslatorInterface $translator
      */
-    public function __construct(TranslatorInterface $translator, PhoneNumberHelper $phoneNumberHelper, DateTimeHelper $dateTimeHelper)
+    public function __construct(TranslatorInterface $translator, PhoneNumberHelper $phoneNumberHelper, DateTimeHelper $dateTimeHelper, DurationHelper $durationHelper)
     {
         $this->translator = $translator;
         $this->phoneNumberHelper = $phoneNumberHelper;
         $this->dateTimeHelper = $dateTimeHelper;
+        $this->durationHelper = $durationHelper;
     }
 
     /**
@@ -137,39 +144,15 @@ class Extension extends \Twig_Extension
     }
 
     /**
-     * Formats a Period in a human-readable manner.
+     * Formats a duration in a human-readable manner.
      *
-     * @param Period|int $period
+     * @param Period|int $duration
      *
      * @return string
      */
-    public function durationFilter($period)
+    public function durationFilter($duration)
     {
-        if ($period instanceof Period) {
-            $period = $period->getTimestampInterval();
-        }
-        if (!is_int($period) && !is_float($period)) {
-            return $period;
-        }
-
-        $seconds = abs(round($period));
-        $hours = floor($seconds / 3600);
-        $seconds -= $hours * 3600;
-        $minutes = floor($seconds / 60);
-        $seconds -= $minutes * 60;
-
-        $parts = [];
-        if ($hours > 0) {
-            $parts[] = $this->translator->transChoice('zentrium.twig.duration.hours', $hours, ['%hours%' => $hours]);
-        }
-        if ($minutes > 0) {
-            $parts[] = $this->translator->transChoice('zentrium.twig.duration.minutes', $minutes, ['%minutes%' => $minutes]);
-        }
-        if ($seconds > 0 || ($hours == 0 && $minutes == 0)) {
-            $parts[] = $this->translator->transChoice('zentrium.twig.duration.seconds', $seconds, ['%seconds%' => $seconds]);
-        }
-
-        return ($period < 0 ? '- ' : '').implode(' ', $parts);
+        return $this->durationHelper->format($duration);
     }
 
     /**

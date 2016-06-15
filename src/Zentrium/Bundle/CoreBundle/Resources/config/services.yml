@@ -54,6 +54,13 @@ services:
         tags:
             - { name: request.param_converter, converter: zentrium.request_body }
 
+    zentrium.templating.helper.duration:
+        class: Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper
+        arguments: ["@translator"]
+        public: false
+        tags:
+            - { name: templating.helper, alias: duration }
+
     zentrium.templating.helper.phone_number:
         class: Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper
         arguments: ["@libphonenumber.phone_number_util", "%zentrium.default_country%"]
@@ -67,6 +74,7 @@ services:
             - "@translator"
             - "@zentrium.templating.helper.phone_number"
             - "@sonata.intl.templating.helper.datetime"
+            - "@zentrium.templating.helper.duration"
         public: false
         tags:
             - { name: twig.extension }
