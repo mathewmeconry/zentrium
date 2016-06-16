@@ -73,3 +73,13 @@ services:
         arguments: ["@zentrium_schedule.manager.user", "@zentrium.templating.helper.duration"]
         tags:
             - { name: zentrium_schedule.schedule.constraint_validator, type: skill }
+
+    zentrium_schedule.schedule.constraint.separation.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SeparationBuilder
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_builder, type: separation }
+
+    zentrium_schedule.schedule.constraint.separation.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SeparationValidator
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_validator, type: separation }

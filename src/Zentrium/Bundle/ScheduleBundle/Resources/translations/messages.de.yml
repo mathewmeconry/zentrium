@@ -35,6 +35,10 @@ zentrium_schedule:
             description: Stellt sicher, dass Personen höchstens eine gewisse Dauer ohne Pause im Einsatz sind.
             label: Maximale Dauer
             message: %user% ist am %begin% mehr als %max_duration% ohne Pause im Einsatz.
+        separation:
+            name: Überlappungsfreie Schichten
+            description: Stellt sicher, dass alle Schichten überlappungsfrei sind und keine Person an zwei Orten gleichzeitig im Einsatz ist.
+            message: %user% ist zur selben Zeit in mehrere Schichten eingeteilt.
         skill:
             name: Anforderungen erfüllt
             description: Prüft ob alle Personen über die nötigen Qualifikationen verfügen.
