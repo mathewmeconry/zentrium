@@ -17,6 +17,14 @@ $(function() {
         field: 'code'
       },
     ],
+    resourceRender: function (resource, $columns, $cells) {
+      var $row = $columns.first().parent();
+      $row.tooltip({
+        title: resource.notes,
+        placement: 'right',
+        container: 'body',
+      });
+    },
     resources: config.tasks,
     events: config.requirements,
   }, function (start, end, jsEvent, view, resource, eventPrototype, updateHelper) {

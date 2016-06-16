@@ -162,6 +162,14 @@ $(function() {
           field: 'code'
         },
       ],
+      resourceRender: function (resource, $columns, $cells) {
+        var $row = $columns.first().parent();
+        $row.tooltip({
+          title: resource.notes,
+          placement: 'right',
+          container: 'body',
+        });
+      },
       resources: config.tasks,
     });
   } else {
@@ -188,8 +196,11 @@ $(function() {
         }
         $cellContent.prepend($actions);
 
-        $cellContent.find('.fc-cell-text').tooltip({
+        var $row = $columns.first().parent();
+        $row.tooltip({
           title: resource.notes,
+          placement: 'right',
+          container: 'body',
         });
       },
       resources: config.users,

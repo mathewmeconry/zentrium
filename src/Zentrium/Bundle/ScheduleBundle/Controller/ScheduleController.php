@@ -253,6 +253,7 @@ class ScheduleController extends Controller
                 'name' => $task->getName(),
                 'code' => $task->getCode(),
                 'skill' => (($skill = $task->getSkill()) !== null ? $skill->getId() : null),
+                'notes' => $task->getNotes(),
             ];
         }
 

@@ -73,6 +73,7 @@ class RequirementSetController extends Controller
                 'name' => $task->getName(),
                 'code' => $task->getCode(),
                 'eventColor' => $task->getColor(),
+                'notes' => $task->getNotes(),
             ];
         }
 
