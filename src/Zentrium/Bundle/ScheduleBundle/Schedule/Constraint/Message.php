@@ -10,7 +10,7 @@ class Message implements MessageInterface
     private $level;
     private $messageKey;
     private $messageParameters;
-    private $entities;
+    private $elements;
     private $period;
 
     public function __construct(ConstraintInterface $constraint, $level, $messageKey, $messageParameters = [], $elements = [], Period $period = null)
