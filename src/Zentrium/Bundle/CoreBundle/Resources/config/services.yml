@@ -61,6 +61,13 @@ services:
         tags:
             - { name: templating.helper, alias: duration }
 
+    zentrium.templating.helper.datetime:
+        class: Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper
+        arguments: ["@sonata.intl.templating.helper.datetime", "@translator"]
+        public: false
+        tags:
+            - { name: templating.helper, alias: datetime }
+
     zentrium.templating.helper.phone_number:
         class: Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper
         arguments: ["@libphonenumber.phone_number_util", "%zentrium.default_country%"]
@@ -73,7 +80,7 @@ services:
         arguments:
             - "@translator"
             - "@zentrium.templating.helper.phone_number"
-            - "@sonata.intl.templating.helper.datetime"
+            - "@zentrium.templating.helper.datetime"
             - "@zentrium.templating.helper.duration"
         public: false
         tags:

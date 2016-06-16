@@ -2,9 +2,10 @@
 
 namespace Zentrium\Bundle\CoreBundle\Twig;
 
+use DateTimeInterface;
 use League\Period\Period;
-use Sonata\IntlBundle\Templating\Helper\DateTimeHelper;
 use Symfony\Component\Translation\TranslatorInterface;
+use Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\PhoneNumberHelper;
 
@@ -156,13 +157,15 @@ class Extension extends \Twig_Extension
     }
 
     /**
-     * Uses SonataIntlBundle to format a date.
+     * Formats a date in a human-readable manner.
+     *
+     * @param DateTimeInterface $date
+     *
+     * @return string
      */
     public function localizedDateFilter($date, $patternId)
     {
-        $pattern = $this->translator->trans('zentrium.twig.datetime.'.$patternId);
-
-        return $this->dateTimeHelper->format($date, $pattern);
+        return $this->dateTimeHelper->format($date, $patternId);
     }
 
     /**
