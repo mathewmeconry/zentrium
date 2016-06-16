@@ -5,11 +5,13 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use League\Period\Period;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Zentrium\Bundle\CoreBundle\Entity\TimestampableTrait;
 
 /**
  * @ORM\MappedSuperclass
+ * @UniqueEntity("name")
  */
 abstract class AbstractPlan
 {
@@ -27,7 +29,7 @@ abstract class AbstractPlan
      *
      * @Assert\NotBlank
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $name;
 
