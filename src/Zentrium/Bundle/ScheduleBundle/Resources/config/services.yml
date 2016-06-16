@@ -62,3 +62,14 @@ services:
         arguments: ["@zentrium.templating.helper.duration", "@zentrium.templating.helper.datetime"]
         tags:
             - { name: zentrium_schedule.schedule.constraint_validator, type: max_duration }
+
+    zentrium_schedule.schedule.constraint.skill.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SkillBuilder
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_builder, type: skill }
+
+    zentrium_schedule.schedule.constraint.skill.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SkillValidator
+        arguments: ["@zentrium_schedule.manager.user", "@zentrium.templating.helper.duration"]
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_validator, type: skill }
