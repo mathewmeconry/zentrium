@@ -19,6 +19,7 @@ use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\ModifyOperationType;
+use Zentrium\Bundle\ScheduleBundle\Form\Type\RequirementSetType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\SetOperationType;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\ModifyOperation;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\SetOperation;
@@ -41,6 +42,15 @@ class RequirementSetController extends Controller
         return [
             'sets' => $sets,
         ];
+    }
+
+    /**
+     * @Route("/new", name="schedule_requirement_set_new")
+     * @Template
+     */
+    public function newAction(Request $request)
+    {
+        return $this->handleEdit($request, new RequirementSet());
     }
 
     /**
@@ -129,6 +139,27 @@ class RequirementSetController extends Controller
         $form = $this->createForm(SetOperationType::class, new SetOperation());
 
         return $this->handleOperation($request, $set, $form);
+    }
+
+    /**
+     * @Route("/{set}/copy", name="schedule_requirement_set_copy")
+     * @Template
+     */
+    public function copyAction(Request $request, RequirementSet $set)
+    {
+        $copy = $set->copy();
+        $copy->setName($copy->getName().$this->get('translator')->trans('zentrium_schedule.requirement_set.copy.name_appendix'));
+
+        return $this->handleEdit($request, $copy);
+    }
+
+    /**
+     * @Route("/{set}/edit", name="schedule_requirement_set_edit")
+     * @Template
+     */
+    public function editAction(Request $request, RequirementSet $set)
+    {
+        return $this->handleEdit($request, $set);
     }
 
     /**
@@ -320,6 +351,29 @@ class RequirementSetController extends Controller
             'requirements' => $requirements,
             'updated' => $set->getUpdated()->getTimestamp(),
         ]);
+    }
+
+    private function handleEdit(Request $request, RequirementSet $set)
+    {
+        $form = $this->createForm(RequirementSetType::class, $set, [
+            'with_period' => $set->getRequirements()->isEmpty(),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $manager = $this->get('zentrium_schedule.manager.requirement_set');
+            $manager->save($set);
+
+            $this->addFlash('success', 'zentrium_schedule.requirement_set.form.saved');
+
+            return $this->redirectToRoute('schedule_requirement_set_view', ['set' => $set->getId()]);
+        }
+
+        return [
+            'set' => $set,
+            'form' => $form->createView(),
+        ];
     }
 
     private function serializeRequirement(Requirement $requirement)

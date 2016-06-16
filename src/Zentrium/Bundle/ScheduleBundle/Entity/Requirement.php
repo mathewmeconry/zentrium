@@ -85,4 +85,13 @@ class Requirement extends AbstractPlanItem
 
         return $this;
     }
+
+    public function copy()
+    {
+        $copy = parent::copy();
+        $copy->setTask($this->getTask());
+        $copy->setCount($this->getCount());
+
+        return $copy;
+    }
 }

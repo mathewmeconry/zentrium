@@ -39,4 +39,16 @@ class RequirementSet extends AbstractPlan
 
         return $this;
     }
+
+    public function copy()
+    {
+        $copy = parent::copy();
+        foreach ($this->getRequirements() as $requirement) {
+            $requirementCopy = $requirement->copy();
+            $requirementCopy->setSet($copy);
+            $copy->getRequirements()->add($requirementCopy);
+        }
+
+        return $copy;
+    }
 }

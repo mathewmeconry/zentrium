@@ -13,6 +13,9 @@
           <th>{{ 'zentrium_schedule.requirement_set.field.begin'|trans }}</th>
           <th>{{ 'zentrium_schedule.requirement_set.field.end'|trans }}</th>
           <th>{{ 'zentrium_schedule.requirement_set.field.updated'|trans }}</th>
+          <th class="col-tools">
+            <a href="{{ path('schedule_requirement_set_new') }}" title="{{ 'zentrium_schedule.requirement_set.list.new'|trans }}"><i class="fa fa-plus"></i></a>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +26,10 @@
           <td>{{ set.begin|localizedDate('datetime_long') }}</td>
           <td>{{ set.end|localizedDate('datetime_long') }}</td>
           <td>{{ set.updated|ago }}</td>
+          <td class="col-tools">
+            <a href="{{ path('schedule_requirement_set_copy', {'set': set.id}) }}" title="{{ 'zentrium_schedule.requirement_set.list.copy'|trans }}"><i class="fa fa-copy"></i></a>
+            <a href="{{ path('schedule_requirement_set_edit', {'set': set.id}) }}" title="{{ 'zentrium_schedule.requirement_set.list.edit'|trans }}"><i class="fa fa-pencil"></i></a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

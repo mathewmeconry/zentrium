@@ -40,10 +40,25 @@ zentrium_schedule:
             name: Name
             begin: Beginn
             end: Ende
+            slot_duration: Zeiteinheit
             updated: Letzte Aktualisierung
+        form:
+            saved: Der Plan wurde erfolgreich gespeichert.
+        list:
+            new: Neuer Plan
+            copy: Kopieren
+            edit: Bearbeiten
         view:
             title: Bedarf
             compare: Plan vergleichen
+            edit: Plan bearbeiten
+        new:
+            title: Neuer Plan
+        edit:
+            title: Plan bearbeiten
+        copy:
+            title: Plan kopieren
+            name_appendix: " (Kopie)"
         compare:
             title: Vergleich zwischen «%a%» und «%b%»
             reverse: Vergleich umkehren

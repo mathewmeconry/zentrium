@@ -75,4 +75,11 @@ class RequirementSetManager
 
         return $set;
     }
+
+    public function save(RequirementSet $set)
+    {
+        $this->em->transactional(function (EntityManager $em) use ($set) {
+            $em->persist($set);
+        });
+    }
 }

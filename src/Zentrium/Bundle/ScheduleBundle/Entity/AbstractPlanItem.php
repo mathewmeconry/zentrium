@@ -94,4 +94,13 @@ abstract class AbstractPlanItem
 
         return $this->period;
     }
+
+    protected function copy()
+    {
+        $copy = new static();
+        $copy->setFrom(clone $this->getFrom());
+        $copy->setTo(clone $this->getTo());
+
+        return $copy;
+    }
 }

@@ -148,4 +148,15 @@ abstract class AbstractPlan
 
         return ($diff % $this->slotDuration == 0);
     }
+
+    protected function copy()
+    {
+        $copy = new static();
+        $copy->setName($this->getName());
+        $copy->setBegin(clone $this->getBegin());
+        $copy->setEnd(clone $this->getEnd());
+        $copy->setSlotDuration($this->getSlotDuration());
+
+        return $copy;
+    }
 }
