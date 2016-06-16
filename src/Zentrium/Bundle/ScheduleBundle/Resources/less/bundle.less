@@ -49,3 +49,55 @@ table.schedule-users {
         margin-left: 8px;
     }
 }
+
+.schedule-validate-loading, .schedule-validate-success {
+    padding: 40px 0;
+    font-size: 130%;
+    text-align: center;
+    display: none;
+}
+
+.schedule-validate-loading .fa {
+    font-size: 200%;
+}
+
+.schedule-validate-success .fa {
+    color: #008D4C;
+    font-size: 300%;
+}
+
+.schedule-validate-message {
+    position: relative;
+    padding-left: 45px;
+}
+
+.schedule-validate-icon {
+    position: absolute;
+    left: 15px;
+    width: 15px;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .fa {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.schedule-validate-details {
+    font-size: 90%;
+    display: block;
+}
+
+.schedule-constraint-type-description {
+    font-size: 90%;
+    display: block;
+}

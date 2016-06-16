@@ -6,6 +6,7 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -66,6 +67,88 @@ class ScheduleController extends Controller
             'schedule' => $schedule,
             'form' => $form->createView(),
         ];
+    }
+
+    /**
+     * @Route("/{schedule}/validate", name="schedule_validate")
+     * @Template
+     */
+    public function validateAction(Request $request, Schedule $schedule)
+    {
+        $constraints = $this->get('zentrium_schedule.manager.constraint')->findAll();
+
+        if ($request->query->has('constraints')) {
+            $activeConstraints = array_map('intval', explode(' ', $request->query->get('constraints')));
+        } else {
+            $activeConstraints = null;
+        }
+
+        $defaultConstraints = array_map(function ($constraint) {
+            return $constraint->getId();
+        }, $schedule->getDefaultConstraints()->toArray());
+
+        return [
+            'schedule' => $schedule,
+            'constraints' => $constraints,
+            'active' => $activeConstraints,
+            'defaults' => $defaultConstraints,
+        ];
+    }
+
+    /**
+     * @Route("/{schedule}/validate/result.json", name="schedule_validate_result")
+     * @ParamConverter("schedule", options={"repository_method": "findWithAssociations"})
+     */
+    public function validateResultAction(Request $request, Schedule $schedule)
+    {
+        $ids = array_map('intval', explode(' ', $request->query->get('constraints')));
+        $constraints = $this->get('zentrium_schedule.manager.constraint')->loadMultiple($ids);
+
+        $messages = $this->get('zentrium_schedule.schedule.constraint_checker')->check($schedule, $constraints);
+
+        $translator = $this->get('translator');
+        $result = [];
+        foreach ($messages as $message) {
+            $result[] = [
+                'level' => $message->getLevel(),
+                'message' => $translator->trans($message->getMessageKey(), $message->getMessageParameters()),
+                'constraintName' => $message->getConstraint()->getName(),
+            ];
+        }
+
+        return new JsonResponse($result);
+    }
+
+    /**
+     * @Route("/{schedule}/validate/defaults.json", name="schedule_validate_defaults", options={"protect": true})
+     * @Method("PATCH")
+     */
+    public function validateDefaultsAction(Request $request, Schedule $schedule)
+    {
+        $ids = array_unique(array_map('intval', $request->request->get('defaults', [])));
+
+        $delete = [];
+        foreach ($schedule->getDefaultConstraints() as $key => $constraint) {
+            $pos = array_search($constraint->getId(), $ids, true);
+            if ($pos === false) {
+                $delete[] = $key;
+            } else {
+                unset($ids[$pos]);
+            }
+        }
+
+        foreach ($delete as $key) {
+            $schedule->getDefaultConstraints()->remove($key);
+        }
+
+        $new = $this->get('zentrium_schedule.manager.constraint')->findMultiple($ids);
+        foreach ($new as $constraint) {
+            $schedule->getDefaultConstraints()->add($constraint);
+        }
+
+        $this->get('zentrium_schedule.manager.schedule')->save($schedule);
+
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     /**

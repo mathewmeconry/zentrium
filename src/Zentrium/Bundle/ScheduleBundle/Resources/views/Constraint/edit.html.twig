@@ -1,0 +1,17 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+
+{% block title_full %}{{ constraint.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ constraint.name }}{% endblock %}
+{% block title_sub %}{{ builder.name|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium_schedule.constraint.edit.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+  </div>
+</div>
+{% endblock %}

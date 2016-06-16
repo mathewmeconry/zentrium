@@ -20,6 +20,21 @@ zentrium_schedule:
             to: Bis
         form:
             saved: Der Eintrag zur Anwesenheit von %user% wurde gespeichert.
+    constraint:
+        field:
+            name: Name
+        form:
+            saved: Die Regel wurde gespeichert.
+        new:
+            title: Neue Regel
+        edit:
+            title: Regel bearbeiten
+        no_validator: Die Regel konnte nicht geprüft werden, da dieser Regel-Typ nicht unterstützt wird.
+        max_duration:
+            name: Maximale Einsatzdauer
+            description: Stellt sicher, dass Personen höchstens eine gewisse Dauer ohne Pause im Einsatz sind.
+            label: Maximale Dauer
+            message: %user% ist am %begin% mehr als %max_duration% ohne Pause im Einsatz.
     requirement_set:
         field:
             name: Name
@@ -47,11 +62,22 @@ zentrium_schedule:
             saved: Der Einsatzplan wurde erfolgreich gespeichert.
         list:
             title: Übersicht
+            edit: Bearbeiten
+            validate: Überprüfen
         edit:
             title: Einsatzplan bearbeiten
+        validate:
+            title_results: Meldungen
+            title_constraints: Regeln
+            success: Alle Regeln sind erfüllt!
+            loading: Plan wird geprüft...
+            new_constraint: Neue Regel
+            save_defaults: Regel-Auswahl speichern
+            reset: Regel-Auswahl zurücksetzen
         view:
             title: Einsatzplan
             compare: Plan abgleichen
+            validate: Plan überprüfen
             change_layout: Layout wechseln
     shift:
         edit:

@@ -1,0 +1,57 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title_full %}{{ schedule.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ schedule.name }}{% endblock %}
+
+{% set config = {
+  'endpoint': path('schedule_validate_result', {'schedule': schedule.id}),
+  'defaultsEndpoint': path('schedule_validate_defaults', {'schedule': schedule.id}),
+  'active': active,
+  'defaults': defaults
+} %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_schedule.schedule.validate.title_results'|trans }}</h3>
+      </div>
+      <div class="box-body schedule-validate" id="schedule-validate" data-config="{{ config|json_encode|e('html_attr') }}">
+        <div class="schedule-validate-success">
+          <p><i class="fa fa-check-circle"></i></p>
+          <p>{{ 'zentrium_schedule.schedule.validate.success'|trans }}</p>
+        </div>
+        <div class="schedule-validate-loading">
+          <p><i class="fa fa-cog fa-spin fa-fw"></i></p>
+          <p>{{ 'zentrium_schedule.schedule.validate.loading'|trans }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="box box-solid" id="schedule-validate-constraints">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'zentrium_schedule.schedule.validate.title_constraints'|trans }}</h3>
+        <div class="box-tools">
+          <a href="#" id="schedule-validate-save" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.validate.save_defaults'|trans }}"><i class="fa fa-floppy-o"></i></a>
+          <a href="#" id="schedule-validate-reset" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.validate.reset'|trans }}"><i class="fa fa-undo"></i></a>
+          <a href="{{ path('schedule_constraint_new', {'return': schedule.id}) }}" class="btn btn-box-tool" data-title="{{ 'zentrium_schedule.schedule.validate.new_constraint'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          {% for constraint in constraints %}
+          <li data-constraint-id="{{ constraint.id }}">
+            <a href="#">{{ constraint.name }}</a>
+            <div class="pill-tools">
+              <a href="{{ path('schedule_constraint_edit', {'constraint': constraint.id, 'return': schedule.id}) }}"><i class="fa fa-pencil"></i></a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

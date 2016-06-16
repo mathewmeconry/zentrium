@@ -3,6 +3,10 @@ services:
         class: Zentrium\Bundle\ScheduleBundle\Entity\AvailabilityManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    zentrium_schedule.manager.constraint:
+        class: Zentrium\Bundle\ScheduleBundle\Entity\ConstraintManager
+        arguments: ["@doctrine.orm.entity_manager", "@jms_serializer"]
+
     zentrium_schedule.manager.requirement_set:
         class: Zentrium\Bundle\ScheduleBundle\Entity\RequirementSetManager
         arguments: ["@doctrine.orm.entity_manager"]
@@ -39,3 +43,22 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Zentrium\Bundle\CoreBundle\Form\Type\UserType }
             - { name: kernel.event_listener, event: zentrium.user.edit.success, method: onSuccess }
+
+    zentrium_schedule.schedule.constraint_checker:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Checker
+        arguments: ["@zentrium_schedule.schedule.constraint_registry"]
+
+    zentrium_schedule.schedule.constraint_registry:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Registry
+
+    zentrium_schedule.schedule.constraint.max_duration.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\MaxDurationBuilder
+        arguments: ["@form.factory"]
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_builder, type: max_duration }
+
+    zentrium_schedule.schedule.constraint.max_duration.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\MaxDurationValidator
+        arguments: ["@zentrium.templating.helper.duration", "@zentrium.templating.helper.datetime"]
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_validator, type: max_duration }

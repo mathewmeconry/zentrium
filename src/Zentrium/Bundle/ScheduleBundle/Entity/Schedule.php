@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Zentrium\Bundle\ScheduleBundle\Entity\ScheduleRepository")
  */
 class Schedule extends AbstractPlan
 {
@@ -20,6 +20,14 @@ class Schedule extends AbstractPlan
      * @ORM\OneToMany(targetEntity="Shift", mappedBy="schedule", cascade="ALL", orphanRemoval=true)
      */
     protected $shifts;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Constraint")
+     * @ORM\JoinTable(name="schedule_default_constraint")
+     */
+    protected $defaultConstraints;
 
     /**
      * @var bool
@@ -35,6 +43,7 @@ class Schedule extends AbstractPlan
         parent::__construct();
 
         $this->shifts = new ArrayCollection();
+        $this->defaultConstraints = new ArrayCollection();
         $this->published = false;
     }
 
@@ -46,6 +55,18 @@ class Schedule extends AbstractPlan
     public function setShifts($shifts)
     {
         $this->shifts = $shifts;
+
+        return $this;
+    }
+
+    public function getDefaultConstraints()
+    {
+        return $this->defaultConstraints;
+    }
+
+    public function setDefaultConstraints($defaultConstraints)
+    {
+        $this->defaultConstraints = $defaultConstraints;
 
         return $this;
     }

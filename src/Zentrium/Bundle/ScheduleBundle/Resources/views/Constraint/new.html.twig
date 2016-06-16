@@ -1,0 +1,21 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block title_full %}{{ 'zentrium_schedule.constraint.new.title'|trans }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ 'zentrium_schedule.constraint.new.title'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <ul class="nav nav-pills nav-stacked">
+      {% for type, builder in builders %}
+      <li>
+        <a href="{{ path('schedule_constraint_new_form', {'type': type|replace({'_': '-'}), 'return': return}) }}">
+          {{ builder.name|trans }}
+          {% if builder.description %}<span class="schedule-constraint-type-description">{{ builder.description|trans }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

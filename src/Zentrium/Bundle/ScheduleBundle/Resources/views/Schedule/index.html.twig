@@ -28,7 +28,8 @@
           <td>{% if schedule.published %}<i class="fa fa-check"></i>{% endif %}</td>
           <td>{{ schedule.updated|ago }}</td>
           <td class="col-tools">
-            <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}"><i class="fa fa-pencil"></i></a>
+            <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
+            <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.edit'|trans }}"><i class="fa fa-pencil"></i></a>
           </td>
         </tr>
         {% endfor %}
