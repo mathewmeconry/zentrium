@@ -46,6 +46,7 @@ module.exports = function(grunt) {
           'node_modules/sortablejs/Sortable.min.js',
           'node_modules/sortablejs/jquery.binding.js',
           'node_modules/js-cookie/src/js.cookie.js',
+          'node_modules/urijs/src/URI.min.js',
           'node_modules/screenfull/dist/screenfull.js',
           'public/js/bundle.js',
         ],

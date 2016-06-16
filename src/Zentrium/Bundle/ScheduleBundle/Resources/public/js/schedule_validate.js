@@ -13,6 +13,7 @@ $(function () {
   var config = $results.data('config');
   var active = (_.isArray(config.active) ? config.active : config.defaults.slice(0));
   var request = null;
+  var uri = (Modernizr.history ? URI() : null);
 
   var $constraints = $('#schedule-validate-constraints li');
   var $loading = $results.find('.schedule-validate-loading');
@@ -61,6 +62,9 @@ $(function () {
     var isDefault = (active.length === config.defaults.length && _.difference(active, config.defaults).length === 0);
     $save.toggle(!isDefault);
     $reset.toggle(!isDefault);
+    if(uri) {
+      window.history.replaceState({}, null, uri.query(isDefault ? '' : { constraints: active.join(' ') }));
+    }
     if(fetch !== false) {
       $list.hide();
       $success.hide();

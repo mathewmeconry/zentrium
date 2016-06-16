@@ -10,7 +10,8 @@
     "screenfull": "^3.0.0",
     "sortablejs": "^1.4.2",
     "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "urijs": "^1.18.1"
   },
   "devDependencies": {
     "findup-sync": "^0.4.1",

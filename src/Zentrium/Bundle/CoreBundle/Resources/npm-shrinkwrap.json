@@ -45,6 +45,11 @@
       "version": "1.8.3",
       "from": "underscore@",
       "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz"
+    },
+    "urijs": {
+      "version": "1.18.1",
+      "from": "urijs@",
+      "resolved": "https://registry.npmjs.org/urijs/-/urijs-1.18.1.tgz"
     }
   }
 }
