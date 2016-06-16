@@ -86,4 +86,13 @@ class Shift extends AbstractPlanItem
 
         return $this;
     }
+
+    public function copy()
+    {
+        $copy = parent::copy();
+        $copy->setTask($this->getTask());
+        $copy->setUser($this->getUser());
+
+        return $copy;
+    }
 }

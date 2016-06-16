@@ -73,14 +73,22 @@ zentrium_schedule:
             end: Ende
             updated: Letzte Aktualisierung
             published: Veröffentlicht
+            slot_duration: Zeiteinheit
         form:
             saved: Der Einsatzplan wurde erfolgreich gespeichert.
         list:
             title: Übersicht
+            new: Neuer Einsatzplan
+            copy: Kopieren
             edit: Bearbeiten
             validate: Überprüfen
+        new:
+            title: Einsatzplan erstellen
         edit:
             title: Einsatzplan bearbeiten
+        copy:
+            title: Einsatzplan kopieren
+            name_appendix: " (Kopie)"
         validate:
             title_results: Meldungen
             title_constraints: Regeln
@@ -93,6 +101,7 @@ zentrium_schedule:
             title: Einsatzplan
             compare: Plan abgleichen
             validate: Plan überprüfen
+            edit: Plan bearbeiten
             change_layout: Layout wechseln
     shift:
         edit:

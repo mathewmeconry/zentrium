@@ -45,28 +45,33 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/new", name="schedule_new")
+     * @Template
+     */
+    public function newAction(Request $request)
+    {
+        return $this->handleEdit($request, new Schedule());
+    }
+
+    /**
      * @Route("/{schedule}/edit", name="schedule_edit")
      * @Template
      */
     public function editAction(Request $request, Schedule $schedule)
     {
-        $form = $this->createForm(ScheduleType::class, $schedule);
+        return $this->handleEdit($request, $schedule);
+    }
 
-        $form->handleRequest($request);
+    /**
+     * @Route("/{schedule}/copy", name="schedule_copy")
+     * @Template
+     */
+    public function copyAction(Request $request, Schedule $schedule)
+    {
+        $copy = $schedule->copy();
+        $copy->setName($copy->getName().$this->get('translator')->trans('zentrium_schedule.schedule.copy.name_appendix'));
 
-        if ($form->isValid()) {
-            $manager = $this->get('zentrium_schedule.manager.schedule');
-            $manager->save($schedule);
-
-            $this->addFlash('success', 'zentrium_schedule.schedule.form.saved');
-
-            return $this->redirectToRoute('schedules');
-        }
-
-        return [
-            'schedule' => $schedule,
-            'form' => $form->createView(),
-        ];
+        return $this->handleEdit($request, $copy);
     }
 
     /**
@@ -338,6 +343,29 @@ class ScheduleController extends Controller
         return new JsonResponse([
             'shift' => $this->serializeShift($shift, $this->getLayout($request)),
         ]);
+    }
+
+    private function handleEdit(Request $request, Schedule $schedule)
+    {
+        $form = $this->createForm(ScheduleType::class, $schedule, [
+            'with_period' => $schedule->getShifts()->isEmpty(),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $manager = $this->get('zentrium_schedule.manager.schedule');
+            $manager->save($schedule);
+
+            $this->addFlash('success', 'zentrium_schedule.schedule.form.saved');
+
+            return $this->redirectToRoute('schedule_view', ['schedule' => $schedule->getId()]);
+        }
+
+        return [
+            'schedule' => $schedule,
+            'form' => $form->createView(),
+        ];
     }
 
     private function serializeShift(Shift $shift, $layout)

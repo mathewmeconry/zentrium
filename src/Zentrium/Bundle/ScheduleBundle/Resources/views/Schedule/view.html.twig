@@ -10,6 +10,7 @@
     <div class="box-tools">
       <a href="?layout={% if config.layout == 'task' %}user{% else %}task{% endif %}" class="btn btn-box-tool" data-original-title="{{ 'zentrium_schedule.schedule.view.change_layout'|trans }}" data-toggle="tooltip"><i class="fa fa-outdent"></i></a>
       <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.view.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
+      <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
       {% if comparableSets|length %}
       <div class="btn-group">
         <button type="button" class="btn btn-box-tool" data-toggle="dropdown" data-original-title="{{ 'zentrium_schedule.schedule.view.compare'|trans }}"><i class="fa fa-adjust"></i></button>

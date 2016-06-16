@@ -82,4 +82,20 @@ class Schedule extends AbstractPlan
 
         return $this;
     }
+
+    public function copy()
+    {
+        $copy = parent::copy();
+        foreach ($this->getShifts() as $shift) {
+            $shiftCopy = $shift->copy();
+            $shiftCopy->setSchedule($copy);
+            $copy->getShifts()->add($shiftCopy);
+        }
+        foreach ($this->getDefaultConstraints() as $constraint) {
+            $copy->getDefaultConstraints()->add($constraint);
+        }
+        $copy->setPublished(false);
+
+        return $copy;
+    }
 }

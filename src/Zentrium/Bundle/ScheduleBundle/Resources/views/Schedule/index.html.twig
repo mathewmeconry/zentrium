@@ -15,7 +15,9 @@
           <th>{{ 'zentrium_schedule.schedule.field.end'|trans }}</th>
           <th>{{ 'zentrium_schedule.schedule.field.published'|trans }}</th>
           <th>{{ 'zentrium_schedule.schedule.field.updated'|trans }}</th>
-          <th class="col-tools"></th>
+          <th class="col-tools">
+            <a href="{{ path('schedule_new') }}" title="{{ 'zentrium_schedule.schedule.list.new'|trans }}"><i class="fa fa-plus"></i></a>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +30,7 @@
           <td>{% if schedule.published %}<i class="fa fa-check"></i>{% endif %}</td>
           <td>{{ schedule.updated|ago }}</td>
           <td class="col-tools">
+            <a href="{{ path('schedule_copy', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.copy'|trans }}"><i class="fa fa-copy"></i></a>
             <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
             <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.edit'|trans }}"><i class="fa fa-pencil"></i></a>
           </td>
