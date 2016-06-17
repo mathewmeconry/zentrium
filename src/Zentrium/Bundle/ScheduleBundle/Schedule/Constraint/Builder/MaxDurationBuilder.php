@@ -3,20 +3,11 @@
 namespace Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Zentrium\Bundle\CoreBundle\Form\Type\DurationType;
 
 class MaxDurationBuilder implements ConfigurableBuilderInterface
 {
-    private $formFactory;
-    private $durationHelper;
-
-    public function __construct(FormFactoryInterface $formFactory)
-    {
-        $this->formFactory = $formFactory;
-    }
-
     /**
      * {@inheritdoc}
      */
