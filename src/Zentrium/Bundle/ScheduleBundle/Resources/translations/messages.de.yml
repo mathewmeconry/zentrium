@@ -43,6 +43,11 @@ zentrium_schedule:
             name: Anforderungen erfüllt
             description: Prüft ob alle Personen über die nötigen Qualifikationen verfügen.
             message: %user% ist während %duration% ohne die nötige Qualifikation «%skill%» im Einsatz.
+        sleep:
+            name: Schlaf
+            description: Stellt sicher, dass jede Person genügend Schlaf hat.
+            label: Minimale Schlafdauer
+            message: %user% schläft ab %date% nicht genügend.
     requirement_set:
         field:
             name: Name

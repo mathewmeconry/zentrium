@@ -63,6 +63,16 @@ services:
         tags:
             - { name: zentrium_schedule.schedule.constraint_validator, type: max_duration }
 
+    zentrium_schedule.schedule.constraint.separation.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SeparationBuilder
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_builder, type: separation }
+
+    zentrium_schedule.schedule.constraint.separation.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SeparationValidator
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_validator, type: separation }
+
     zentrium_schedule.schedule.constraint.skill.builder:
         class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SkillBuilder
         tags:
@@ -74,12 +84,13 @@ services:
         tags:
             - { name: zentrium_schedule.schedule.constraint_validator, type: skill }
 
-    zentrium_schedule.schedule.constraint.separation.builder:
-        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SeparationBuilder
+    zentrium_schedule.schedule.constraint.sleep.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SleepBuilder
         tags:
-            - { name: zentrium_schedule.schedule.constraint_builder, type: separation }
+            - { name: zentrium_schedule.schedule.constraint_builder, type: sleep }
 
-    zentrium_schedule.schedule.constraint.separation.validator:
-        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SeparationValidator
+    zentrium_schedule.schedule.constraint.sleep.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SleepValidator
+        arguments: ["@zentrium.templating.helper.datetime"]
         tags:
-            - { name: zentrium_schedule.schedule.constraint_validator, type: separation }
+            - { name: zentrium_schedule.schedule.constraint_validator, type: sleep }
