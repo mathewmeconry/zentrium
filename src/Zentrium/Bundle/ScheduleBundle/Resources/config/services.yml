@@ -62,6 +62,17 @@ services:
         tags:
             - { name: zentrium_schedule.schedule.constraint_validator, type: max_duration }
 
+    zentrium_schedule.schedule.constraint.pause.builder:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\PauseBuilder
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_builder, type: pause }
+
+    zentrium_schedule.schedule.constraint.pause.validator:
+        class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\PauseValidator
+        arguments: ["@zentrium.templating.helper.datetime", "@zentrium.templating.helper.duration"]
+        tags:
+            - { name: zentrium_schedule.schedule.constraint_validator, type: pause }
+
     zentrium_schedule.schedule.constraint.separation.builder:
         class: Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Builder\SeparationBuilder
         tags:
