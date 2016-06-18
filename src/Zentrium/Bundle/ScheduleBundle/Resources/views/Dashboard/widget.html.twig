@@ -1,0 +1,10 @@
+<div class="small-box bg-aqua">
+  <div class="inner">
+    <h3>{{ count }}</h3>
+    <p>{{ 'zentrium_schedule.dashboard.text'|transchoice(count) }}</p>
+  </div>
+  <div class="icon">
+    <i class="fa fa-{{ 'zentrium_schedule.shift.icon'|trans }}"></i>
+  </div>
+  <a class="small-box-footer" href="{{ path('schedules') }}">{{ 'zentrium_schedule.dashboard.show'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+</div>

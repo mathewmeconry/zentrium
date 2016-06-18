@@ -54,6 +54,9 @@ zentrium_schedule:
             description: Stellt sicher, dass jede Person genügend Schlaf hat.
             label: Minimale Schlafdauer
             message: %user% schläft ab %date% nicht genügend.
+    dashboard:
+        text: publizierte Schicht|publizierte Schichten
+        show: Anzeigen
     requirement_set:
         field:
             name: Name
@@ -123,6 +126,7 @@ zentrium_schedule:
             edit: Plan bearbeiten
             change_layout: Layout wechseln
     shift:
+        icon: briefcase
         edit:
             timesheet: Zeit erfassen
     skill:

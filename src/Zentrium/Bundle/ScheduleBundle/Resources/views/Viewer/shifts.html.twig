@@ -16,7 +16,7 @@
     <li>
     {% if entry.type == 'shift' %}
       {% set shift = entry.shift %}
-      <i class="fa fa-suitcase" style="color: #fff; background-color: {{ shift.task.color }}"></i>
+      <i class="fa fa-{{ 'zentrium_schedule.shift.icon'|trans }}" style="color: #fff; background-color: {{ shift.task.color }}"></i>
       <div class="timeline-item">
         <span class="time"><i class="fa fa-clock-o"></i> {{ shift.period|duration }}</span>
         <h3 class="timeline-header no-border">{{ 'zentrium_schedule.viewer.shifts.header'|trans({'%from%': shift.from|date('H:i'), '%to%': shift.to|date('H:i'), '%task%': shift.task.name, '%task_code%': shift.task.code}) }}</h3>

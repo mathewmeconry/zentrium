@@ -1,4 +1,10 @@
 services:
+    zentrium_schedule.dashboard_listener:
+        class: Zentrium\Bundle\ScheduleBundle\Dashboard\DashboardListener
+        arguments: ["@templating", "@zentrium_schedule.manager.shift"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
+
     zentrium_schedule.manager.availability:
         class: Zentrium\Bundle\ScheduleBundle\Entity\AvailabilityManager
         arguments: ["@doctrine.orm.entity_manager"]

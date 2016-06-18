@@ -25,6 +25,17 @@ class ShiftManager
         $this->repository = $em->getRepository(Shift::class);
     }
 
+    public function countPublished()
+    {
+        $qb = $this->repository->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->leftJoin('s.schedule', 'p')
+            ->where('p.published = 1')
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function find($id)
     {
         return $this->repository->find($id);
