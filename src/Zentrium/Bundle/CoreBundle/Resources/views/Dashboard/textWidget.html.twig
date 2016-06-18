@@ -1,0 +1,11 @@
+<div class="box box-solid text-widget">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ widget.title }}</h3>
+    <div class="box-tools">
+      <a href="{{ path('widget_text_edit', {'widget': widget.id}) }}" class="btn btn-box-tool"><i class="fa fa-pencil"></i></a>
+    </div>
+  </div>
+  <div class="box-body">
+    {{ content|raw }}
+  </div>
+</div>

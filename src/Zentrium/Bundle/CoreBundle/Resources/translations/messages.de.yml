@@ -4,6 +4,10 @@ zentrium:
         user_count_widget:
             users: Benutzer
             show: Anzeigen
+        position:
+            top: Oben
+            sidebar: Seite
+            center: Mitte
     layout:
         main_menu: Hauptmenü
         version: Version
@@ -97,6 +101,20 @@ zentrium:
             title: Benutzer bearbeiten
         new:
             title: Neuer Benutzer
+    text_widget:
+        field:
+            title: Titel
+            content: Inhalt
+            position: Position
+            priority: Sortierung
+        form:
+            saved: Das Widget wurde erfolgreich gespeichert.
+        dashboard:
+            new: Neues Widget erstellen
+        new:
+            title: Neues Widget
+        edit:
+            title: Widget bearbeiten
     viewer:
         switch: Lese-Modus einschalten
         switch_back: Lese-Modus verlassen

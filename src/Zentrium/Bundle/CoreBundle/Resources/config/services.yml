@@ -1,11 +1,27 @@
 services:
+    zentrium.commonmark.environment:
+        class: League\CommonMark\Environment
+        factory: [League\CommonMark\Environment, createCommonMarkEnvironment]
+        lazy: true
+        calls:
+            - [addDocumentProcessor, ["@zentrium.commonmark.processor.link"]]
+
+    zentrium.commonmark.converter:
+        class: League\CommonMark\CommonMarkConverter
+        lazy: true
+        arguments: [{ safe: true}, "@zentrium.commonmark.environment"]
+
+    zentrium.commonmark.processor.link:
+        class: Zentrium\Bundle\CoreBundle\CommonMark\LinkProcessor
+        lazy: true
+
     zentrium.csrf.route_matcher:
         class: Zentrium\Bundle\CoreBundle\Csrf\RouteMatcher
         arguments: ["@router", _options]
 
     zentrium.dashboard.listener:
         class: Zentrium\Bundle\CoreBundle\Dashboard\DashboardListener
-        arguments: ["@templating", "@zentrium.repository.user"]
+        arguments: ["@templating", "@zentrium.repository.user", "@zentrium.manager.text_widget", "@zentrium.commonmark.converter"]
         tags:
             - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
 
@@ -23,6 +39,10 @@ services:
     zentrium.oauth_server.application_manager:
         class: Zentrium\Bundle\CoreBundle\Entity\ApplicationManager
         arguments: ["@fos_oauth_server.entity_manager", "%fos_oauth_server.model.client.class%"]
+
+    zentrium.manager.text_widget:
+        class: Zentrium\Bundle\CoreBundle\Entity\TextWidgetManager
+        arguments: ["@doctrine.orm.entity_manager"]
 
     zentrium.menu.builder:
         class: Zentrium\Bundle\CoreBundle\Menu\MenuBuilder

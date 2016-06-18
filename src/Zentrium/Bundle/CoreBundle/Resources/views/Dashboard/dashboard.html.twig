@@ -3,7 +3,7 @@
 {% block title %}{{ 'zentrium.dashboard.title'|trans }}{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row dashboard-top">
   {% set xsWidths = distributeGrid(12, 6, widgetsTop|length) %}
   {% set lgWidths = distributeGrid(12, 3, widgetsTop|length) %}
   {% for widget in widgetsTop %}
