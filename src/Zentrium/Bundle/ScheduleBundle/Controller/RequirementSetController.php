@@ -183,7 +183,7 @@ class RequirementSetController extends Controller
 
             return [
                 'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $a, $b),
-                'color' => ($diff == 0 ? '#009900' : '#ff2222'),
+                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ffaa00' : '#ff2222')),
             ];
         });
     }
