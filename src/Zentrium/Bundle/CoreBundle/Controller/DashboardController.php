@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Dashboard\BuildDashboardEvent;
 use Zentrium\Bundle\CoreBundle\Dashboard\DashboardEvents;
+use Zentrium\Bundle\CoreBundle\Dashboard\Position;
 
 class DashboardController extends Controller
 {
@@ -25,9 +26,9 @@ class DashboardController extends Controller
         $this->get('event_dispatcher')->dispatch(DashboardEvents::BUILD_DASHBOARD, $event);
 
         return [
-            'widgetsTop' => $event->getWidgets(BuildDashboardEvent::POSITION_TOP),
-            'widgetsCenter' => $event->getWidgets(BuildDashboardEvent::POSITION_CENTER),
-            'widgetsSidebar' => $event->getWidgets(BuildDashboardEvent::POSITION_SIDEBAR),
+            'widgetsTop' => $event->getWidgets(Position::TOP),
+            'widgetsCenter' => $event->getWidgets(Position::CENTER),
+            'widgetsSidebar' => $event->getWidgets(Position::SIDEBAR),
         ];
     }
 }

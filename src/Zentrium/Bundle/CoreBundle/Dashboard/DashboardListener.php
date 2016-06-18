@@ -19,10 +19,10 @@ class DashboardListener
     public function onBuildDashboard(BuildDashboardEvent $event)
     {
         $userCount = $this->userRepository->count();
-        $userCountWidget = $this->engine->render(
+        $content = $this->engine->render(
             'ZentriumCoreBundle:Dashboard:userCountWidget.html.twig',
             ['count' => $userCount]
         );
-        $event->addWidget(BuildDashboardEvent::POSITION_TOP, $userCountWidget, -50);
+        $event->addWidget(Position::TOP, $content, -50);
     }
 }

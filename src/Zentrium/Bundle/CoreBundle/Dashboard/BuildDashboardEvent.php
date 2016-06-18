@@ -6,10 +6,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 class BuildDashboardEvent extends Event
 {
-    const POSITION_TOP = 'top';
-    const POSITION_CENTER = 'center';
-    const POSITION_SIDEBAR = 'sidebar';
-
     private $widgets;
 
     public function __construct()
