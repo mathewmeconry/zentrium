@@ -33,8 +33,6 @@ class AppKernel extends Kernel
             new Ivory\OrderedFormBundle\IvoryOrderedFormBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
-            new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
-            new Zentrium\Bundle\MapBundle\ZentriumMapBundle(),
             new Zentrium\Bundle\ScheduleBundle\ZentriumScheduleBundle(),
             new Zentrium\Bundle\TimesheetBundle\ZentriumTimesheetBundle(),
         ];
