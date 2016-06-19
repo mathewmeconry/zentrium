@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\ScheduleBundle\ZentriumScheduleBundle(),
             new Zentrium\Bundle\TimesheetBundle\ZentriumTimesheetBundle(),
+            new Vkaf\Bundle\OperationBundle\VkafOperationBundle(),
             new Vkaf\Bundle\OafBundle\VkafOafBundle(),
         ];
 

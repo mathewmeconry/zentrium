@@ -1,0 +1,24 @@
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    {% for day, lineup in days %}
+    <li class="{% if loop.first %}active{% endif %}"><a href="#lineup{{ loop.index0 }}" data-toggle="tab">{{ date(day)|format_date('EEEE') }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="tab-content">
+    {% for day, lineup in days %}
+    <div class="tab-pane{% if loop.first %} active{% endif %} no-padding" id="lineup{{ loop.index0 }}">
+      <table class="table">
+        <tbody>
+          {% for entry in lineup %}
+          <tr>
+            <td>{{ entry.artist }}</td>
+            <td>{{ entry.stage }}</td>
+            <td>{{ entry.begin|date('H:i') }} - {{ entry.end|date('H:i') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+</div>

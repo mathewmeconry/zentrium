@@ -1,0 +1,53 @@
+<?php
+
+namespace Vkaf\Bundle\OafBundle\Dashboard;
+
+use DateInterval;
+use Symfony\Component\Templating\EngineInterface;
+use Vkaf\Bundle\OafBundle\Lineup\LineupManager;
+use Zentrium\Bundle\CoreBundle\Dashboard\BuildDashboardEvent;
+
+class DashboardListener
+{
+    private $templating;
+    private $lineupManager;
+
+    public function __construct(EngineInterface $templating, LineupManager $lineupManager)
+    {
+        $this->templating = $templating;
+        $this->lineupManager = $lineupManager;
+    }
+
+    public function onBuildDashboard(BuildDashboardEvent $event)
+    {
+        if (($lineup = $this->lineupManager->get()) !== null) {
+            $lineupWidget = $this->templating->render(
+                'VkafOafBundle:Dashboard:lineup.html.twig',
+                ['days' => $this->groupByDay($lineup)]
+            );
+            $event->addWidget(BuildDashboardEvent::POSITION_TOP, $lineupWidget);
+        }
+    }
+
+    private function groupByDay(array $lineup)
+    {
+        $dayInterval = new DateInterval('P1D');
+        $days = [];
+        foreach ($lineup as $row) {
+            $day = $row['begin'];
+            if ($day->format('H') < 6) {
+                $day = clone $day;
+                $day->sub($dayInterval);
+            }
+
+            $dayKey = $day->format('Y-m-d');
+            if (!isset($days[$dayKey])) {
+                $days[$dayKey] = [];
+            }
+
+            $days[$dayKey][] = $row;
+        }
+
+        return $days;
+    }
+}

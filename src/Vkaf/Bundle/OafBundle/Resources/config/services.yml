@@ -1,1 +1,10 @@
-services: []
+services:
+    vkaf_oaf.dashboard_listener:
+        class: Vkaf\Bundle\OafBundle\Dashboard\DashboardListener
+        arguments: ["@templating", "@vkaf_oaf.lineup"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
+
+    vkaf_oaf.lineup:
+        class: Vkaf\Bundle\OafBundle\Lineup\LineupManager
+        arguments: ["%vkaf_oaf.lineup_path%"]

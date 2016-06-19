@@ -15,6 +15,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('vkaf_oaf');
 
+        $rootNode
+            ->children()
+                ->arrayNode('lineup')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('path')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

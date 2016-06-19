@@ -19,5 +19,7 @@ class VkafOafExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('vkaf_oaf.lineup_path', $config['lineup']['path']);
     }
 }

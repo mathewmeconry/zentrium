@@ -160,3 +160,8 @@ swiftmailer:
     username: "%mailer_user%"
     password: "%mailer_password%"
     spool: { type: memory }
+
+# OAF Configuration
+vkaf_oaf:
+    lineup:
+        path: "%kernel.root_dir%/../data/lineup.json"
