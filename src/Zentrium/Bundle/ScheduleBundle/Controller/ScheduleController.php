@@ -249,12 +249,28 @@ class ScheduleController extends Controller
                 'name' => $user->getBase()->getName(true),
                 'groups' => $groups,
                 'skills' => $skills,
-                'notes' => $user->getNotes(),
+                'notes' => $this->buildUserNotes($user),
                 'availability' => $this->generateUrl('schedule_user_availability', ['user' => $user->getBase()->getId()]),
             ];
         }
 
         return new JsonResponse($result);
+    }
+
+    private function buildUserNotes($user)
+    {
+        $lines = [];
+        if (($birthday = $user->getBase()->getBirthday()) !== null) {
+            $lines[] = $user->getBase()->getBirthday()->format('d.m.Y');
+        }
+        if ($user->getBase()->getTitle() !== null) {
+            $lines[] = $user->getBase()->getTitle();
+        }
+        if ($user->getNotes() !== null) {
+            $lines[] = $user->getNotes();
+        }
+
+        return implode(' – ', $lines);
     }
 
     /**
