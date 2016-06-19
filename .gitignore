@@ -16,3 +16,4 @@ node_modules/
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/js/translations/
