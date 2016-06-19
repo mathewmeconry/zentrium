@@ -29,9 +29,9 @@ module.exports = function(grunt) {
         src: [
           'node_modules/fullcalendar/node_modules/moment/min/moment.min.js',
           'node_modules/fullcalendar/node_modules/moment/locale/de.js',
-          'node_modules/fullcalendar/dist/fullcalendar.min.js',
+          'node_modules/fullcalendar/dist/fullcalendar.js',
           'node_modules/fullcalendar/dist/lang/de.js',
-          'node_modules/fullcalendar-scheduler/dist/scheduler.min.js',
+          'node_modules/fullcalendar-scheduler/dist/scheduler.js',
           'node_modules/crosstab/src/crosstab.js',
           'public/js/bundle.js',
         ],

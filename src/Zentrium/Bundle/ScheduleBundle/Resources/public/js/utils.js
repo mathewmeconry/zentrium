@@ -1,6 +1,25 @@
 var Zentrium = Zentrium || {};
 Zentrium.Schedule = Zentrium.Schedule || {};
 
+// Emphasize quarter of a day
+$.fullCalendar.views.timeline.resourceClass.prototype.instantiateGrid = _.wrap($.fullCalendar.views.timeline.resourceClass.prototype.instantiateGrid, function (func) {
+  var grid = func.apply(this, arguments);
+  grid.slatCellHtml = _.wrap(grid.slatCellHtml, function (func) {
+    var args = [].slice.call(arguments, 1);
+    classes = [];
+    if(args[0].hour() === 0 && args[0].minute() === 0) {
+      classes.push('schedule-slat-day');
+    }
+    if(args[0].hour() % 6 === 0 && args[0].minute() === 0) {
+      classes.push('schedule-slat-quarter');
+    }
+    html = func.apply(this, args);
+    html = html.replace('class="', 'class="' + classes.join(' ') + ' ');
+    return html;
+  });
+  return grid;
+});
+
 Zentrium.Schedule.pause = function (func, paused) {
   var lastArgs;
   var lastThis;
