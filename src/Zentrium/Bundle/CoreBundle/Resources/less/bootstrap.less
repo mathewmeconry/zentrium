@@ -1,1 +1,38 @@
 @import (inline) '../node_modules/admin-lte/bootstrap/css/bootstrap.min.css';
+
+.dropdown-menu > .dropdown-submenu {
+    position: relative;
+
+    > .dropdown-menu {
+        top: 0;
+        right: 100%;
+        margin-top: -6px;
+        margin-right: 1px;
+    }
+
+    &:hover > .dropdown-menu {
+        display: block;
+    }
+
+    > a {
+        cursor:pointer;
+    }
+
+    > a:before {
+        display: block;
+        content: ' ';
+        float: left;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 5px 5px 0;
+        border-right-color: #ccc;
+        margin-top: 5px;
+        margin-left: -10px;
+    }
+
+    &:hover > a:before {
+        border-right-color: #666;
+    }
+}

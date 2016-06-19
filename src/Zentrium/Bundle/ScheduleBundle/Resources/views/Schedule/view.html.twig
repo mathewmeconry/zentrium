@@ -3,12 +3,63 @@
 {% block title_full %}{{ schedule.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
 {% block title %}{{ schedule.name }}{% endblock %}
 
+{% set filterSubjects = [] %}
+{% if groupFilter %}
+  {% set filterSubjects = filterSubjects|merge(['zentrium_schedule.schedule.view.filter.subject_group'|trans({'%group%': groupFilter.name})]) %}
+{% endif %}
+{% if skillFilter %}
+  {% set filterSubjects = filterSubjects|merge(['zentrium_schedule.schedule.view.filter.subject_skill'|trans({'%skill%': skillFilter.name})]) %}
+{% endif %}
+
 {% block content%}
 <div class="box box-primary">
   <div class="box-header">
-    <h3 class="box-title">{{ 'zentrium_schedule.schedule.view.title'|trans }}</h3>
+    <h3 class="box-title">
+      {% if filterSubjects|length %}
+        {{ 'zentrium_schedule.schedule.view.title_filtered'|trans({'%subject%': filterSubjects|formatList}) }}
+      {% else %}
+        {{ 'zentrium_schedule.schedule.view.title'|trans }}
+      {% endif %}
+    </h3>
     <div class="box-tools">
-      <a href="?layout={% if config.layout == 'task' %}user{% else %}task{% endif %}" class="btn btn-box-tool" data-original-title="{{ 'zentrium_schedule.schedule.view.change_layout'|trans }}" data-toggle="tooltip"><i class="fa fa-outdent"></i></a>
+      <a href="{{ path('schedule_view', routeParameters|merge({'layout': (config.layout == 'task' ? 'user' : 'task')})) }}" class="btn btn-box-tool" data-title="{{ 'zentrium_schedule.schedule.view.change_layout'|trans }}" data-toggle="tooltip"><i class="fa fa-outdent"></i></a>
+      <div class="btn-group">
+        <button type="button" class="btn btn-box-tool" data-toggle="dropdown" data-title="{{ 'zentrium_schedule.schedule.view.filter.title'|trans }}"><i class="fa fa-filter"></i></button>
+        <ul class="dropdown-menu">
+          {% if groupFilter or skillFilter %}
+          <li><a href="{{ path('schedule_view', routeParameters|merge({'group': null, 'skill': null})) }}">{{ 'zentrium_schedule.schedule.view.filter.reset_all'|trans }}</a></li>
+          <li role="separator" class="divider"></li>
+          {% endif %}
+          <li class="dropdown-submenu">
+            <a>{{ 'zentrium_schedule.schedule.view.filter.skills'|trans }}</a>
+            <ul class="dropdown-menu">
+              {% if skillFilter %}
+              <li><a href="{{ path('schedule_view', routeParameters|merge({'skill': null})) }}">{{ 'zentrium_schedule.schedule.view.filter.reset'|trans }}</a></li>
+              <li role="separator" class="divider"></li>
+              {% endif %}
+              {% for skill in skills %}
+              <li class="{% if skillFilter and skill.id == skillFilter.id %}active{% endif %}">
+                <a href="{{ path('schedule_view', routeParameters|merge({'skill': skill.id})) }}">{{ skill.name }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a>{{ 'zentrium_schedule.schedule.view.filter.groups'|trans }}</a>
+            <ul class="dropdown-menu">
+              {% if groupFilter %}
+              <li><a href="{{ path('schedule_view', routeParameters|merge({'group': null})) }}">{{ 'zentrium_schedule.schedule.view.filter.reset'|trans }}</a></li>
+              <li role="separator" class="divider"></li>
+              {% endif %}
+              {% for group in groups %}
+              <li class="{% if groupFilter and group.id == groupFilter.id %}active{% endif %}">
+                <a href="{{ path('schedule_view', routeParameters|merge({'group': group.id})) }}">{{ group.name }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
       <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.view.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
       <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
       {% if comparableSets|length %}

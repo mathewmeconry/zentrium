@@ -121,10 +121,19 @@ zentrium_schedule:
             reset: Regel-Auswahl zurücksetzen
         view:
             title: Einsatzplan
+            title_filtered: Einsatzplan für %subject%
             compare: Plan abgleichen
             validate: Plan überprüfen
             edit: Plan bearbeiten
             change_layout: Layout wechseln
+            filter:
+                title: Filter
+                reset_all: Alle Filter zurücksetzen
+                reset: Filter zurücksetzen
+                groups: Gruppen
+                skills: Qualifikationen
+                subject_group: Gruppe «%group%»
+                subject_skill: Qualifikation «%skill%»
     shift:
         icon: briefcase
         edit:

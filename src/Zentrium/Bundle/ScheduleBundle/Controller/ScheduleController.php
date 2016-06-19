@@ -217,7 +217,19 @@ class ScheduleController extends Controller
      */
     public function viewUsersAction(Request $request, Schedule $schedule)
     {
-        $users = $this->get('zentrium_schedule.manager.user')->findAll();
+        $groupFilter = $this->getGroupFilter($request);
+        $skillFilter = $this->getSkillFilter($request);
+        if ($this->getLayout($request) !== self::USER_LAYOUT) {
+            $users = $this->get('zentrium_schedule.manager.user')->findAll();
+        } elseif ($groupFilter && $skillFilter) {
+            $users = $this->get('zentrium_schedule.manager.user')->findByGroupAndSkill($groupFilter, $skillFilter);
+        } elseif ($groupFilter) {
+            $users = $this->get('zentrium_schedule.manager.user')->findByGroup($groupFilter);
+        } elseif ($skillFilter) {
+            $users = $this->get('zentrium_schedule.manager.user')->findBySkill($skillFilter);
+        } else {
+            $users = $this->get('zentrium_schedule.manager.user')->findAll();
+        }
 
         $result = [];
         foreach ($users as $user) {
@@ -248,9 +260,14 @@ class ScheduleController extends Controller
     /**
      * @Route("/{schedule}/tasks.json", name="schedule_view_tasks")
      */
-    public function viewTasksAction()
+    public function viewTasksAction(Request $request)
     {
-        $tasks = $this->get('zentrium_schedule.manager.task')->findAll();
+        if ($this->getLayout($request) === self::TASK_LAYOUT && ($skillFilter = $this->getSkillFilter($request)) !== null) {
+            $tasks = $this->get('zentrium_schedule.manager.task')->findBySkill($skillFilter);
+        } else {
+            $tasks = $this->get('zentrium_schedule.manager.task')->findAll();
+        }
+
         $result = [];
         foreach ($tasks as $task) {
             $result[] = [
@@ -272,12 +289,24 @@ class ScheduleController extends Controller
     public function viewAction(Request $request, Schedule $schedule)
     {
         $layout = $this->getLayout($request);
+        $groupFilter = $this->getGroupFilter($request);
+        $skillFilter = $this->getSkillFilter($request);
+
+        $skills = $this->get('zentrium_schedule.manager.skill')->findAll();
+        $groups = $this->get('fos_user.group_manager')->findGroups();
 
         $comparableSets = $this->get('zentrium_schedule.manager.requirement_set')->findComparables($schedule);
+
+        $routeParameters = array_merge($request->query->all(), ['schedule' => $schedule->getId()]);
 
         return [
             'schedule' => $schedule,
             'comparableSets' => $comparableSets,
+            'skills' => $skills,
+            'groups' => $groups,
+            'groupFilter' => $groupFilter,
+            'skillFilter' => $skillFilter,
+            'routeParameters' => $routeParameters,
             'timesheet' => $this->getParameter('zentrium_schedule.timesheet'),
             'config' => [
                 'scheduleId' => $schedule->getId(),
@@ -286,10 +315,10 @@ class ScheduleController extends Controller
                 'begin' => $this->serializeDate($schedule->getBegin()),
                 'duration' => $schedule->getPeriod()->getTimestampInterval(),
                 'slotDuration' => $schedule->getSlotDuration(),
-                'shifts' => $this->generateUrl('schedule_view_shifts', ['schedule' => $schedule->getId(), 'layout' => $layout]),
-                'availabilities' => $this->generateUrl('schedule_view_availabilities', ['schedule' => $schedule->getId()]),
-                'tasks' => $this->generateUrl('schedule_view_tasks', ['schedule' => $schedule->getId()]),
-                'users' => $this->generateUrl('schedule_view_users', ['schedule' => $schedule->getId()]),
+                'shifts' => $this->generateUrl('schedule_view_shifts', $routeParameters),
+                'availabilities' => $this->generateUrl('schedule_view_availabilities', $routeParameters),
+                'tasks' => $this->generateUrl('schedule_view_tasks', $routeParameters),
+                'users' => $this->generateUrl('schedule_view_users', $routeParameters),
                 'endpoint' => $this->generateUrl('schedule_shift_new', ['layout' => $layout]),
             ],
         ];
@@ -401,5 +430,25 @@ class ScheduleController extends Controller
     private function getLayout(Request $request)
     {
         return ($request->query->get('layout') === self::TASK_LAYOUT ? self::TASK_LAYOUT : self::USER_LAYOUT);
+    }
+
+    private function getGroupFilter(Request $request)
+    {
+        $groupId = intval($request->query->get('group'));
+        if ($groupId <= 0) {
+            return;
+        }
+
+        return $this->get('fos_user.group_manager')->findGroupBy(['id' => $groupId]);
+    }
+
+    private function getSkillFilter(Request $request)
+    {
+        $skillId = intval($request->query->get('skill'));
+        if ($skillId <= 0) {
+            return;
+        }
+
+        return $this->get('zentrium_schedule.manager.skill')->find($skillId);
     }
 }

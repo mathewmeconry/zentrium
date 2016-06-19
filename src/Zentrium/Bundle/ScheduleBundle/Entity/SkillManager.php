@@ -23,6 +23,11 @@ class SkillManager
         $this->repository = $em->getRepository(Skill::class);
     }
 
+    public function find($id)
+    {
+        return $this->repository->find($id);
+    }
+
     public function findAll()
     {
         return $this->repository->findBy([], ['name' => 'ASC']);
