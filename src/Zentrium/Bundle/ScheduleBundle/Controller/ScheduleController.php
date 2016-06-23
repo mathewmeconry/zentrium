@@ -192,7 +192,7 @@ class ScheduleController extends Controller
                 'resourceId' => $userId,
                 'start' => $this->serializeDate($availability->getFrom()),
                 'end' => $this->serializeDate($availability->getTo()),
-                'color' => '#DDDDDD',
+                'color' => '#cccccc',
                 'rendering' => 'inverse-background',
             ];
         }
@@ -209,7 +209,7 @@ class ScheduleController extends Controller
                 'resourceId' => $user->getId(),
                 'start' => $dummyDate,
                 'end' => $dummyDate,
-                'color' => '#DDDDDD',
+                'color' => '#cccccc',
                 'rendering' => 'inverse-background',
             ];
         }
