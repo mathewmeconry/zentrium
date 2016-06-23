@@ -82,7 +82,7 @@ zentrium_schedule:
             title: Plan kopieren
             name_appendix: " (Kopie)"
         compare:
-            title: Vergleich zwischen «%a%» und «%b%»
+            title: Vergleich von «%base%» zu «%current%»
             reverse: Vergleich umkehren
             warn_boundaries: «%b%» wird nicht komplett von «%a%» abgedeckt. Gewisse Unterschiede können deshalb nicht angezeigt werden.
             warn_alignment: Das Zeitraster von «%b%» ist nicht mit jenem von «%a%» kompatibel. Es können Rundungsfehler auftreten.

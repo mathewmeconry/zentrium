@@ -178,11 +178,11 @@ class RequirementSetController extends Controller
      */
     public function compareDataAction(Request $request, RequirementSet $set, RequirementSet $subject)
     {
-        return $this->handleDiffData($request, $set, $subject->getRequirements(), null, function ($a, $b) {
-            $diff = $b - $a;
+        return $this->handleDiffData($request, $set, $subject->getRequirements(), null, function ($current, $base) {
+            $diff = $current - $base;
 
             return [
-                'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $a, $b),
+                'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $base, $current),
                 'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ffaa00' : '#ff2222')),
             ];
         });
@@ -203,12 +203,12 @@ class RequirementSetController extends Controller
      */
     public function compareScheduleDataAction(Request $request, RequirementSet $set, Schedule $schedule)
     {
-        return $this->handleDiffData($request, $set, $schedule->getShifts(), 1, function ($a, $b) {
-            $diff = $b - $a;
+        return $this->handleDiffData($request, $set, $schedule->getShifts(), 1, function ($required, $assigned) {
+            $diff = $assigned - $required;
 
             return [
-                'title' => sprintf('%s (%d/%d)', ($diff == 0 ? '✔' : (string) $diff), $a, $b),
-                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ff2222' : '#ffaa00')),
+                'title' => sprintf('%s (%d/%d)', ($diff == 0 ? '✔' : (string) $diff), $assigned, $required),
+                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ffaa00' : '#ff2222')),
             ];
         });
     }

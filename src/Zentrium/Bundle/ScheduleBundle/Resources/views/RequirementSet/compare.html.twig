@@ -3,7 +3,7 @@
 {% block content%}
 <div class="box box-primary">
   <div class="box-header">
-    <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.compare.title'|trans({'%a%': set.name, '%b%': subject.name}) }}</h3>
+    <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.compare.title'|trans({'%base%': subject.name, '%current%': set.name}) }}</h3>
     <div class="box-tools">
       <a href="{{ path('schedule_requirement_set_compare', {'set': subject.id, 'subject': set.id}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="{{ 'zentrium_schedule.requirement_set.compare.reverse'|trans }}"><i class="fa fa-exchange"></i></a>
     </div>
