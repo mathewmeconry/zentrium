@@ -11,7 +11,11 @@
           <th>{{ 'zentrium_schedule.skill.field.name'|trans }}</th>
           <th>{{ 'zentrium_schedule.skill.field.short_name'|trans }}</th>
           <th>{{ 'zentrium_schedule.skill.field.user_count'|trans }}</th>
-          <th class="col-tools"><a href="{{ path('schedule_skill_new') }}"><i class="fa fa-plus"></i></a></th>
+          <th class="col-tools">
+            {% if is_granted('ROLE_SCHEDULER') %}
+            <a href="{{ path('schedule_skill_new') }}"><i class="fa fa-plus"></i></a>
+            {% endif %}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +26,11 @@
           <td>{{ skill.name }}</td>
           <td>{{ skill.shortName }}</td>
           <td><a href="{{ path('schedule_skill_list', {'skill': skill.id}) }}"><span class="label label-{% if userCount > 0 %}primary{% else %}default{% endif %}">{{ userCount }}</span></a></td>
-          <td class="col-tools"><a href="{{ path('schedule_skill_edit', {'skill': skill.id}) }}"><i class="fa fa-pencil"></i></a></td>
+          <td class="col-tools">
+            {% if is_granted('ROLE_SCHEDULER') %}
+            <a href="{{ path('schedule_skill_edit', {'skill': skill.id}) }}"><i class="fa fa-pencil"></i></a>
+            {% endif %}
+          </td>
         </tr>
         {% endfor %}
       </tbody>

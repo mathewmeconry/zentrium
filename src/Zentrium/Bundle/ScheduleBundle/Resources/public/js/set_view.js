@@ -6,7 +6,7 @@ $(function() {
   var config = $view.data('config');
 
   Zentrium.Schedule.setup($view, config, {
-    selectable: !!config.operations,
+    selectable: !_.isEmpty(config.operations),
     resourceColumns: [
       {
         labelText: Translator.trans('zentrium_schedule.task.field.name'),

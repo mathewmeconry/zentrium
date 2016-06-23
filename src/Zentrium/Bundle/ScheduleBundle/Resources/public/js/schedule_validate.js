@@ -60,7 +60,7 @@ $(function () {
       $this.toggleClass('active', _.contains(active, $this.data('constraint-id')));
     });
     var isDefault = (active.length === config.defaults.length && _.difference(active, config.defaults).length === 0);
-    $save.toggle(!isDefault);
+    $save.toggle(!isDefault && _.isString(config.defaultsEndpoint));
     $reset.toggle(!isDefault);
     if(uri) {
       window.history.replaceState({}, null, uri.query(isDefault ? '' : { constraints: active.join(' ') }));

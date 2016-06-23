@@ -5,6 +5,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Controller;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -46,6 +47,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/new", name="schedule_requirement_set_new")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -88,10 +90,14 @@ class RequirementSetController extends Controller
     {
         $comparables = $this->get('zentrium_schedule.manager.requirement_set')->findComparables($set);
 
-        $operations = [
-            'set' => $this->generateUrl('schedule_requirement_set_set', ['set' => $set->getId()]),
-            'modify' => $this->generateUrl('schedule_requirement_set_modify', ['set' => $set->getId()]),
-        ];
+        if ($this->isGranted('ROLE_SCHEDULER')) {
+            $operations = [
+                'set' => $this->generateUrl('schedule_requirement_set_set', ['set' => $set->getId()]),
+                'modify' => $this->generateUrl('schedule_requirement_set_modify', ['set' => $set->getId()]),
+            ];
+        } else {
+            $operations = [];
+        }
 
         return [
             'set' => $set,
@@ -122,6 +128,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/modify", name="schedule_requirement_set_modify", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("POST")
      */
     public function modifyAction(Request $request, RequirementSet $set)
@@ -133,6 +140,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/set", name="schedule_requirement_set_set", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("POST")
      */
     public function setAction(Request $request, RequirementSet $set)
@@ -144,6 +152,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/copy", name="schedule_requirement_set_copy")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function copyAction(Request $request, RequirementSet $set)
@@ -156,6 +165,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/edit", name="schedule_requirement_set_edit")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, RequirementSet $set)
@@ -178,11 +188,11 @@ class RequirementSetController extends Controller
      */
     public function compareDataAction(Request $request, RequirementSet $set, RequirementSet $subject)
     {
-        return $this->handleDiffData($request, $set, $subject->getRequirements(), null, function ($a, $b) {
-            $diff = $b - $a;
+        return $this->handleDiffData($request, $set, $subject->getRequirements(), null, function ($current, $base) {
+            $diff = $current - $base;
 
             return [
-                'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $a, $b),
+                'title' => sprintf('%s (%d → %d)', ($diff == 0 ? '=' : ($diff > 0 ? '+'.$diff : $diff)), $base, $current),
                 'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ffaa00' : '#ff2222')),
             ];
         });
@@ -203,12 +213,12 @@ class RequirementSetController extends Controller
      */
     public function compareScheduleDataAction(Request $request, RequirementSet $set, Schedule $schedule)
     {
-        return $this->handleDiffData($request, $set, $schedule->getShifts(), 1, function ($a, $b) {
-            $diff = $b - $a;
+        return $this->handleDiffData($request, $set, $schedule->getShifts(), 1, function ($required, $assigned) {
+            $diff = $assigned - $required;
 
             return [
-                'title' => sprintf('%s (%d/%d)', ($diff == 0 ? '✔' : (string) $diff), $a, $b),
-                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ff2222' : '#ffaa00')),
+                'title' => sprintf('%s (%d/%d)', ($diff == 0 ? '✔' : (string) $diff), $assigned, $required),
+                'color' => ($diff == 0 ? '#009900' : ($diff > 0 ? '#ffaa00' : '#ff2222')),
             ];
         });
     }

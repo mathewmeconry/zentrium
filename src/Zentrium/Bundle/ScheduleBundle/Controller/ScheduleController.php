@@ -5,6 +5,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Controller;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -46,6 +47,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/new", name="schedule_new")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -55,6 +57,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/{schedule}/edit", name="schedule_edit")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, Schedule $schedule)
@@ -64,6 +67,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/{schedule}/copy", name="schedule_copy")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function copyAction(Request $request, Schedule $schedule)
@@ -126,6 +130,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/{schedule}/validate/defaults.json", name="schedule_validate_defaults", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("PATCH")
      */
     public function validateDefaultsAction(Request $request, Schedule $schedule)
@@ -187,7 +192,7 @@ class ScheduleController extends Controller
                 'resourceId' => $userId,
                 'start' => $this->serializeDate($availability->getFrom()),
                 'end' => $this->serializeDate($availability->getTo()),
-                'color' => '#DDDDDD',
+                'color' => '#cccccc',
                 'rendering' => 'inverse-background',
             ];
         }
@@ -204,7 +209,7 @@ class ScheduleController extends Controller
                 'resourceId' => $user->getId(),
                 'start' => $dummyDate,
                 'end' => $dummyDate,
-                'color' => '#DDDDDD',
+                'color' => '#cccccc',
                 'rendering' => 'inverse-background',
             ];
         }
@@ -257,22 +262,6 @@ class ScheduleController extends Controller
         return new JsonResponse($result);
     }
 
-    private function buildUserNotes($user)
-    {
-        $lines = [];
-        if (($birthday = $user->getBase()->getBirthday()) !== null) {
-            $lines[] = $user->getBase()->getBirthday()->format('d.m.Y');
-        }
-        if ($user->getBase()->getTitle() !== null) {
-            $lines[] = $user->getBase()->getTitle();
-        }
-        if ($user->getNotes() !== null) {
-            $lines[] = $user->getNotes();
-        }
-
-        return implode(' – ', $lines);
-    }
-
     /**
      * @Route("/{schedule}/tasks.json", name="schedule_view_tasks")
      */
@@ -311,6 +300,8 @@ class ScheduleController extends Controller
         $skills = $this->get('zentrium_schedule.manager.skill')->findAll();
         $groups = $this->get('fos_user.group_manager')->findGroups();
 
+        $editable = ($this->isGranted('ROLE_SCHEDULER') && $layout === self::USER_LAYOUT);
+
         $comparableSets = $this->get('zentrium_schedule.manager.requirement_set')->findComparables($schedule);
 
         $routeParameters = array_merge($request->query->all(), ['schedule' => $schedule->getId()]);
@@ -335,13 +326,14 @@ class ScheduleController extends Controller
                 'availabilities' => $this->generateUrl('schedule_view_availabilities', $routeParameters),
                 'tasks' => $this->generateUrl('schedule_view_tasks', $routeParameters),
                 'users' => $this->generateUrl('schedule_view_users', $routeParameters),
-                'endpoint' => $this->generateUrl('schedule_shift_new', ['layout' => $layout]),
+                'endpoint' => $editable ? $this->generateUrl('schedule_shift_new', ['layout' => $layout]) : null,
             ],
         ];
     }
 
     /**
      * @Route("/shifts/new", name="schedule_shift_new", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("POST")
      */
     public function newShiftAction(Request $request)
@@ -353,6 +345,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/shifts/{shift}", name="schedule_shift_edit", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("PATCH")
      */
     public function editShiftAction(Request $request, Shift $shift)
@@ -362,6 +355,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/shifts/{shift}", name="schedule_shift_delete", options={"protect": true})
+     * @Secure("ROLE_SCHEDULER")
      * @Method("DELETE")
      */
     public function deleteShiftAction(Request $request, Shift $shift)
@@ -441,6 +435,22 @@ class ScheduleController extends Controller
         }
 
         return $date->setTimezone($timezone)->format(DateTime::ATOM);
+    }
+
+    private function buildUserNotes($user)
+    {
+        $lines = [];
+        if (($birthday = $user->getBase()->getBirthday()) !== null) {
+            $lines[] = $user->getBase()->getBirthday()->format('d.m.Y');
+        }
+        if ($user->getBase()->getTitle() !== null) {
+            $lines[] = $user->getBase()->getTitle();
+        }
+        if ($user->getNotes() !== null) {
+            $lines[] = $user->getNotes();
+        }
+
+        return implode(' – ', $lines);
     }
 
     private function getLayout(Request $request)
