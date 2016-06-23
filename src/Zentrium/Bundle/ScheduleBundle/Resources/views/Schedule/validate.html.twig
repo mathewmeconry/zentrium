@@ -5,7 +5,7 @@
 
 {% set config = {
   'endpoint': path('schedule_validate_result', {'schedule': schedule.id}),
-  'defaultsEndpoint': path('schedule_validate_defaults', {'schedule': schedule.id}),
+  'defaultsEndpoint': is_granted('ROLE_SCHEDULER') ? path('schedule_validate_defaults', {'schedule': schedule.id}) : null,
   'active': active,
   'defaults': defaults
 } %}
@@ -36,7 +36,9 @@
         <div class="box-tools">
           <a href="#" id="schedule-validate-save" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.validate.save_defaults'|trans }}"><i class="fa fa-floppy-o"></i></a>
           <a href="#" id="schedule-validate-reset" class="btn btn-box-tool" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.schedule.validate.reset'|trans }}"><i class="fa fa-undo"></i></a>
+          {% if is_granted('ROLE_SCHEDULER') %}
           <a href="{{ path('schedule_constraint_new', {'return': schedule.id}) }}" class="btn btn-box-tool" data-title="{{ 'zentrium_schedule.schedule.validate.new_constraint'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+          {% endif %}
         </div>
       </div>
       <div class="box-body no-padding">
@@ -45,7 +47,9 @@
           <li data-constraint-id="{{ constraint.id }}">
             <a href="#">{{ constraint.name }}</a>
             <div class="pill-tools">
+              {% if is_granted('ROLE_SCHEDULER') %}
               <a href="{{ path('schedule_constraint_edit', {'constraint': constraint.id, 'return': schedule.id}) }}"><i class="fa fa-pencil"></i></a>
+              {% endif %}
             </div>
           </li>
           {% endfor %}

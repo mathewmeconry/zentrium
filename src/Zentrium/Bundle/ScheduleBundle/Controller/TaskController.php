@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Controller;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +33,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/new", name="schedule_task_new")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -41,6 +43,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/{task}/edit", name="schedule_task_edit")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, Task $task)

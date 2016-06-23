@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Controller;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,6 +24,7 @@ class ConstraintController extends Controller
 
     /**
      * @Route("/new/{type}", name="schedule_constraint_new_form", requirements={"type": "[a-z0-9-]+"})
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function newFormAction(Request $request, $type)
@@ -41,6 +43,7 @@ class ConstraintController extends Controller
 
     /**
      * @Route("/new", name="schedule_constraint_new")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -55,6 +58,7 @@ class ConstraintController extends Controller
 
     /**
      * @Route("/{constraint}/edit", name="schedule_constraint_edit")
+     * @Secure("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, Constraint $constraint)

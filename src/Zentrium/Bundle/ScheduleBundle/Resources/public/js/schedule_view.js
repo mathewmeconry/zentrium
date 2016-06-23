@@ -125,11 +125,12 @@ $(function() {
     });
   }
 
+  var editable = _.isString(config.endpoint);
   var options = {
-    selectable: !!config.endpoint,
-    editable: !!config.endpoint,
+    selectable: editable,
+    editable: editable,
     eventSources: eventSources,
-    eventClick: (config.endpoint ? function (event, jsEvent, view) {
+    eventClick: (editable ? function (event, jsEvent, view) {
       if(event.editable === false) {
         return;
       }
