@@ -140,7 +140,7 @@ $(function() {
         }
         delete schedules[schedule.id];
         updateMenu();
-      }, 4000);
+      }, 60 * 1000);
       updateMenu();
     });
 
