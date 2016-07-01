@@ -1,0 +1,4 @@
+Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet:
+    properties:
+        requirements:
+            groups: [details]

@@ -1,0 +1,5 @@
+Zentrium\Bundle\ScheduleBundle\Entity\Requirement:
+    properties:
+        task:
+            serialized_name: task_id
+            type: Relation<Zentrium\Bundle\ScheduleBundle\Entity\Task>

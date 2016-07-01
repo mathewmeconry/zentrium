@@ -1,0 +1,4 @@
+Zentrium\Bundle\ScheduleBundle\Entity\Skill:
+    properties:
+        users:
+            exclude: true
