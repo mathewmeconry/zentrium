@@ -15,6 +15,13 @@ security:
             fos_oauth:  true
             stateless:  true
             anonymous:  false
+        kiosk:
+            pattern:    ^/kiosk
+            stateless:  true
+            anonymous:  false
+            guard:
+                authenticators:
+                    - vkaf_oaf.security.kiosk_authenticator
         main:
             pattern: ^/
             form_login:
@@ -29,5 +36,6 @@ security:
         - { path: ^/password/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/viewer/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/kiosk, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^, role: ROLE_MANAGER }

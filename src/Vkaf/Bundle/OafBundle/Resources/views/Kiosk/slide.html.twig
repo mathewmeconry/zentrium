@@ -1,0 +1,24 @@
+{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ 'vkaf_oaf.kiosk.title'|trans }}{% endblock %}
+
+{% block body_class %}hold-transition kiosk-page{% endblock %}
+
+{% block body %}
+<div class="kiosk-refresh" data-config="{{ {'next': next|default, 'duration': duration|default(60)}|json_encode|e('html_attr') }}"></div>
+<div class="wrapper">
+    {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/zentriumschedule/css/bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('bundles/vkafoaf/css/bundle.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/zentriumschedule/js/bundle.min.js') }}"></script>
+<script src="{{ asset('bundles/vkafoaf/js/bundle.min.js') }}"></script>
+{% endblock %}

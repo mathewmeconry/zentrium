@@ -1,0 +1,8 @@
+vkaf_oaf:
+    kiosk:
+        title: Kiosk
+        unauthorized_title: Ungültiger Zugangscode
+        unauthorized: Der übergebene Zugangscode konnte keinem registrierten Terminal zugeordnet werden.
+        welcome: |
+            Herzlich Willkommen
+            am Openair Frauenfeld!

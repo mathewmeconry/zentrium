@@ -20,3 +20,7 @@ schedule:
 timesheet:
     resource: "@ZentriumTimesheetBundle/Controller/"
     type:     annotation
+
+oaf:
+    resource: "@VkafOafBundle/Controller/"
+    type:     annotation

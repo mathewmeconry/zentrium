@@ -8,3 +8,8 @@ services:
     vkaf_oaf.lineup:
         class: Vkaf\Bundle\OafBundle\Lineup\LineupManager
         arguments: ["%vkaf_oaf.lineup_path%"]
+
+    vkaf_oaf.security.kiosk_authenticator:
+        class: Vkaf\Bundle\OafBundle\Security\KioskAuthenticator
+        arguments: ["@doctrine.orm.entity_manager", "@templating"]
+        lazy: true
