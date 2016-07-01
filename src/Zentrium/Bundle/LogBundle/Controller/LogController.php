@@ -2,10 +2,12 @@
 
 namespace Zentrium\Bundle\LogBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
 use Zentrium\Bundle\LogBundle\Entity\Comment;
 use Zentrium\Bundle\LogBundle\Entity\Log;
@@ -80,6 +82,25 @@ class LogController extends Controller
     public function editAction(Request $request, Log $log)
     {
         return $this->handleEdit($request, $log);
+    }
+
+    /**
+     * @Route("/logs/{log}/status", name="log_status", options={"protect": true})
+     * @Method("PATCH")
+     */
+    public function statusAction(Request $request, Log $log)
+    {
+        $status = $request->request->get('status');
+
+        if (in_array($status, Log::getStatuses())) {
+            $em = $this->getDoctrine()->getManager();
+
+            $log->setStatus($status);
+            $em->persist($log);
+            $em->flush();
+        }
+
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     /**

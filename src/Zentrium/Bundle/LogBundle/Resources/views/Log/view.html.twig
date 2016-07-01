@@ -9,6 +9,14 @@
     <h3 class="box-title">{{ log.title }}</h3>
     {% for label in log.labels %}&#32;<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>{% endfor %}
     <div class="box-tools pull-right">
+      <div class="btn-group" data-log-status-endpoint="{{ path('log_status', {'log': log.id}) }}">
+        <button type="button" class="btn btn-box-tool" data-toggle="dropdown"><i class="fa fa-{{ logUtils.statusIcon(log.status) }}"></i></button>
+        <ul class="dropdown-menu">
+          {% for status in log.statuses %}
+          <li{% if log.status == status %} class="active"{% endif %}><a href="#" data-log-status="{{ status }}"><i class="fa fa-{{ logUtils.statusIcon(status) }}"></i> {{ ('zentrium_log.status.'~status)|trans }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
       <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
     </div>
   </div>

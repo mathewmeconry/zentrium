@@ -6,3 +6,8 @@
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset('bundles/zentriumlog/css/bundle.css') }}">
 {% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/zentriumlog/js/bundle.js') }}"></script>
+{% endblock %}
