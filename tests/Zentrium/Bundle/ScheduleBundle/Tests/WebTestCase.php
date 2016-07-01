@@ -10,6 +10,7 @@ class WebTestCase extends BaseWebTestCase
     {
         $classes = parent::getAllFixtureClasses();
         $classes[] = 'Zentrium\Bundle\ScheduleBundle\Tests\DataFixtures\ORM\LoadScheduleData';
+        $classes[] = 'Zentrium\Bundle\ScheduleBundle\Tests\DataFixtures\ORM\LoadUserData';
 
         return $classes;
     }

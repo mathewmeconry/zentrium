@@ -19,7 +19,7 @@ class ScheduleControllerTest extends WebTestCase
     public function testNew()
     {
         $this->loadAllFixtures();
-        $this->loginByReference('user-manager');
+        $this->loginByReference('user-scheduler');
         $client = static::makeClient();
         $client->followRedirects();
 
@@ -38,6 +38,16 @@ class ScheduleControllerTest extends WebTestCase
         $crawler = $client->submit($form);
         $this->assertStatusCode(200, $client);
         $this->assertSame('/schedules/2', $client->getRequest()->getPathInfo());
+    }
+
+    public function testNewAsManager()
+    {
+        $this->loadAllFixtures();
+        $this->loginByReference('user-manager');
+        $client = static::makeClient();
+
+        $crawler = $client->request('GET', '/schedules/new');
+        $this->assertStatusCode(403, $client);
     }
 
     public function testValidateWithoutConstraints()

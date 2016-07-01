@@ -2,14 +2,14 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Tests\Controller;
 
-use Zentrium\Bundle\CoreBundle\Tests\WebTestCase;
+use Zentrium\Bundle\ScheduleBundle\Tests\WebTestCase;
 
 class ConstraintControllerTest extends WebTestCase
 {
     public function testNew()
     {
         $this->loadAllFixtures();
-        $this->loginByReference('user-manager');
+        $this->loginByReference('user-scheduler');
         $client = static::makeClient();
 
         $crawler = $client->request('GET', '/schedules/constraints/new');
@@ -24,5 +24,15 @@ class ConstraintControllerTest extends WebTestCase
             $client->click($typeLink);
             $this->assertStatusCode(200, $client);
         }
+    }
+
+    public function testNewAsManager()
+    {
+        $this->loadAllFixtures();
+        $this->loginByReference('user-manager');
+        $client = static::makeClient();
+
+        $crawler = $client->request('GET', '/schedules/constraints/new');
+        $this->assertStatusCode(403, $client);
     }
 }
