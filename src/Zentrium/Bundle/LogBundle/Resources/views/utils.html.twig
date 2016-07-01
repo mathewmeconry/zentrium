@@ -1,0 +1,3 @@
+{% macro statusIcon(status) %}
+{{ {'open': 'circle', 'onhold': 'pause-circle', 'done': 'check-circle', 'invalid': 'times-circle'}[status] }}
+{% endmacro %}

@@ -21,16 +21,18 @@
           <tr>
             <th>#</th>
             <th>{{ 'zentrium_log.log.field.title'|trans }}</th>
-            <th>{{ 'zentrium_log.log.field.updated'|trans }}</th>
             <th>{{ 'zentrium_log.log.field.labels'|trans }}</th>
+            <th>{{ 'zentrium_log.log.field.updated'|trans }}</th>
+            <th></th>
         </thead>
         <tbody>
           {% for log in logs %}
           <tr>
             <td>{{ log.id }}</td>
             <td><a href="{{ path('log_view', {'log': log.id}) }}">{{ log.title }}</a></td>
+            <td>{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>&#x20;{% endfor %}</td>
             <td>{{ log.updated|ago }}</td>
-            <td>{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span> {% endfor %}</td>
+            <td>{% if commentCounts[log.id]|default %}<span class="label label-default pull-right">{{ commentCounts[log.id] }} <i class="fa fa-comment"></i></span>{% endif %}</td>
           </tr>
           {% endfor %}
         </tbody>

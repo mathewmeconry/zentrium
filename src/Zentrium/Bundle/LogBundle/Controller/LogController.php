@@ -7,7 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
+use Zentrium\Bundle\LogBundle\Entity\Comment;
 use Zentrium\Bundle\LogBundle\Entity\Log;
+use Zentrium\Bundle\LogBundle\Form\Type\CommentType;
 use Zentrium\Bundle\LogBundle\Form\Type\LogType;
 
 class LogController extends Controller
@@ -30,6 +32,7 @@ class LogController extends Controller
         $logRepository = $this->getDoctrine()->getRepository('ZentriumLogBundle:Log');
         $logs = $logRepository->findByStatusWithLabels($activeStatus, $activeLabels);
         $statusCounts = $logRepository->aggregateByStatus();
+        $commentCounts = $logRepository->countComments();
 
         $labels = $this->getDoctrine()->getRepository('ZentriumLogBundle:Label')->findAll();
 
@@ -39,6 +42,7 @@ class LogController extends Controller
             'activeLabels' => $activeLabels,
             'statuses' => Log::getStatuses(),
             'statusCounts' => $statusCounts,
+            'commentCounts' => $commentCounts,
             'labels' => $labels,
         ];
     }
@@ -49,7 +53,10 @@ class LogController extends Controller
      */
     public function newAction(Request $request)
     {
-        return $this->handleEdit($request, new Log());
+        $log = new Log();
+        $log->setAuthor($this->getUser());
+
+        return $this->handleEdit($request, $log);
     }
 
     /**
@@ -58,8 +65,11 @@ class LogController extends Controller
      */
     public function viewAction(Request $request, Log $log)
     {
+        $commentForm = $this->createForm(CommentType::class, new Comment());
+
         return [
             'log' => $log,
+            'commentForm' => $commentForm->createView(),
         ];
     }
 
@@ -70,6 +80,34 @@ class LogController extends Controller
     public function editAction(Request $request, Log $log)
     {
         return $this->handleEdit($request, $log);
+    }
+
+    /**
+     * @Route("/logs/{log}/comments/new", name="log_comment_new")
+     * @Template
+     */
+    public function newCommentAction(Request $request, Log $log)
+    {
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+        $comment->setLog($log);
+        $log->triggerUpdate();
+        $log->getComments()->add($comment);
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($log);
+            $em->flush();
+
+            $this->addFlash('success', 'zentrium_log.comment.form.saved');
+        }
+
+        return $this->redirectToRoute('log_view', ['log' => $log->getId()]);
     }
 
     private function handleEdit(Request $request, Log $log)

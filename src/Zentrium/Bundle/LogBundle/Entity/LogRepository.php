@@ -10,6 +10,7 @@ class LogRepository extends EntityRepository
     public function findByStatusWithLabels($status, array $labels)
     {
         $qb = $this->createQueryBuilder('log')
+            ->addSelect('label')
             ->orderBy('log.updated', 'DESC')
             ->leftJoin('log.labels', 'label')
             ->where('log.status = :status')
@@ -33,6 +34,17 @@ class LogRepository extends EntityRepository
             ->select('l.status')
             ->addSelect('COUNT(l)')
             ->groupBy('l.status');
+
+        return $qb->getQuery()->getResult(ColumnHydrator::NAME);
+    }
+
+    public function countComments()
+    {
+        $qb = $this->createQueryBuilder('l', 'l.id')
+            ->select('l.id')
+            ->addSelect('COUNT(c.id)')
+            ->leftJoin('l.comments', 'c')
+            ->groupBy('l.id');
 
         return $qb->getQuery()->getResult(ColumnHydrator::NAME);
     }

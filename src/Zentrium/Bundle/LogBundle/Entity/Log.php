@@ -4,7 +4,10 @@ namespace Zentrium\Bundle\LogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Entity\TimestampableTrait;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="Zentrium\Bundle\LogBundle\Entity\LogRepository")
@@ -17,6 +20,8 @@ class Log
     const STATUS_ON_HOLD = 'onhold';
     const STATUS_DONE = 'done';
     const STATUS_INVALID = 'invalid';
+
+    use TimestampableTrait;
 
     /**
      * @ORM\Id
@@ -37,6 +42,13 @@ class Log
     /**
      * @var string
      *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $details;
+
+    /**
+     * @var string
+     *
      * @Assert\NotNull
      * @Assert\Choice(callback="getStatuses")
      *
@@ -50,24 +62,38 @@ class Log
     protected $labels;
 
     /**
-     * @var \DateTime
+     * @var User
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @Assert\NotNull
+     *
+     * @ORM\ManyToOne(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
-    protected $created;
+    protected $author;
 
     /**
-     * @var \DateTime
+     * @var ArrayCollection
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @Assert\Valid
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="log", cascade="ALL")
+     * @ORM\OrderBy({"created"="ASC"})
      */
-    protected $updated;
+    protected $comments;
+
+    /**
+     * @var DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="change", field={"title", "details"})
+     * @ORM\Column(type="datetime")
+     */
+    protected $edited;
 
     public function __construct()
     {
         $this->labels = new ArrayCollection();
-        $this->created = new \DateTime();
-        $this->updated = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId()
@@ -83,6 +109,18 @@ class Log
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    public function setDetails($details)
+    {
+        $this->details = $details;
 
         return $this;
     }
@@ -111,22 +149,40 @@ class Log
         return $this;
     }
 
-    public function getCreated()
+    public function getComments()
     {
-        return $this->created;
+        return $this->comments;
     }
 
-    public function getUpdated()
+    public function setComments($comments)
     {
-        return $this->updated;
+        $this->comments = $comments;
+
+        return $this;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
-    public function update()
+    public function getAuthor()
     {
-        $this->updated = new \DateTime();
+        return $this->author;
+    }
+
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getEdited()
+    {
+        return $this->edited;
+    }
+
+    public function setEdited($edited)
+    {
+        $this->edited = $edited;
+
+        return $this;
     }
 
     public static function getStatuses()
