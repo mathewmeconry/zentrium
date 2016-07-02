@@ -37,6 +37,20 @@ class AvailabilityManager
         return $qb->getQuery()->getResult();
     }
 
+    public function findOverlappingByUser(Period $period, User $user)
+    {
+        $qb = $this->repository->createQueryBuilder('a')
+            ->where('a.from < :end')
+            ->andWhere('a.to > :begin')
+            ->andWhere('a.user = :user')
+            ->setParameter('begin', $period->getStartDate())
+            ->setParameter('end', $period->getEndDate())
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findUpcomingByUser(BaseUser $user)
     {
         $qb = $this->repository->createQueryBuilder('a')

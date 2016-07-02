@@ -1,0 +1,11 @@
+{% extends 'ZentriumScheduleBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/vkafoaf/css/bundle.min.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/vkafoaf/js/bundle.min.js') }}"></script>
+{% endblock %}

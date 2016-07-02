@@ -1,0 +1,20 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title_full %}{{ user.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    {% for s in schedules %}
+    <li{% if s.id == schedule.id %} class="active"{% endif %}><a href="{{ path('oaf_schedule_user', {'user': user.id, 'schedule': s.id}) }}">{{ s.name }}</a></li>
+    {% endfor %}
+    <li class="pull-right"><a class="text-muted" href="{{ path('schedule_user_availability', {'user': user.id}) }}" data-toggle="tooltip" data-title="{{ 'zentrium_schedule.user.list.availability'|trans }}"><i class="fa fa-check-circle"></i></a></li>
+  </ul>
+  <div class="tab-content no-padding">
+    <div class="tab-pane active">
+      <div id="oaf-user-schedule" data-config="{{ scheduleConfig|json_encode|e('html_attr') }}"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+<div class="box box-solid text-widget">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'vkaf_oaf.dashboard.user_schedule.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form, {'action': path('oaf_schedule_user_dashboard')}) }}
+  </div>
+</div>

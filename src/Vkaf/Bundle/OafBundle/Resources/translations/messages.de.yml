@@ -6,3 +6,7 @@ vkaf_oaf:
         welcome: |
             Herzlich Willkommen
             am Openair Frauenfeld!
+    dashboard:
+        user_schedule:
+            title: Individueller Einsatzplan
+            show: Anzeigen
