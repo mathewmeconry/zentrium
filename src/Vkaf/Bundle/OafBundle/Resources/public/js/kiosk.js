@@ -1,7 +1,7 @@
 $(function () {
   var $indicator = $('.kiosk-refresh');
   var config = $indicator.data('config');
-  if(!config.duration) {
+  if(!_.isObject(config)) {
     return;
   }
 

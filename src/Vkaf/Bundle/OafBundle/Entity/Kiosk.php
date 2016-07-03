@@ -39,6 +39,12 @@ class Kiosk implements UserInterface
      */
     protected $token;
 
+    /**
+     * @ORM\OneToMany(targetEntity="KioskSlide", mappedBy="kiosk", cascade="all")
+     * @ORM\OrderBy({"order"="ASC"})
+     */
+    protected $slides;
+
     public function getId()
     {
         return $this->id;
@@ -64,6 +70,18 @@ class Kiosk implements UserInterface
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getSlides()
+    {
+        return $this->slides;
+    }
+
+    public function setSlides($slides)
+    {
+        $this->slides = $slides;
 
         return $this;
     }

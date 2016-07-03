@@ -3,6 +3,8 @@ vkaf_oaf:
         title: Kiosk
         unauthorized_title: Ungültiger Zugangscode
         unauthorized: Der übergebene Zugangscode konnte keinem registrierten Terminal zugeordnet werden.
+        exception: Die Folie kann aufgrund eines Fehlers nicht angezeigt werden.
+        no_slides: Es wurden noch keine Folien hinzugefügt.
         welcome: |
             Herzlich Willkommen
             am Openair Frauenfeld!

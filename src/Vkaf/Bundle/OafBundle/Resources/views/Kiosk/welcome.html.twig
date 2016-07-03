@@ -1,11 +1,9 @@
 {% extends "VkafOafBundle:Kiosk:slide.html.twig" %}
 
-{% set duration = 15 %}
-
 {% block content %}
 <div class="box box-primary kiosk-welcome">
-    <div class="box-body">
-        <h1>{{ 'vkaf_oaf.kiosk.welcome'|trans|nl2br }}</h1>
-    </div>
+  <div class="box-body">
+    <h1>{{ message|default('vkaf_oaf.kiosk.welcome'|trans)|nl2br }}</h1>
+  </div>
 </div>
 {% endblock %}

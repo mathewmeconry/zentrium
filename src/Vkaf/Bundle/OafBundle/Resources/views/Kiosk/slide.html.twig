@@ -5,9 +5,10 @@
 {% block body_class %}hold-transition kiosk-page{% endblock %}
 
 {% block body %}
-<div class="kiosk-refresh" data-config="{{ {'next': next|default, 'duration': duration|default(60)}|json_encode|e('html_attr') }}"></div>
+<div class="kiosk-refresh" data-config="{{ next|json_encode|e('html_attr') }}"></div>
 <div class="wrapper">
-    {% block content %}{% endblock %}
+  {% block content %}
+  {% endblock %}
 </div>
 {% endblock %}
 

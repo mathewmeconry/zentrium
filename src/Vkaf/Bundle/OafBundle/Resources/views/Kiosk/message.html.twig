@@ -1,0 +1,7 @@
+{% extends "VkafOafBundle:Kiosk:slide.html.twig" %}
+
+{% block content %}
+<div class="alert alert-info kiosk-message">
+  <h4>{{ message|trans(message_parameters|default([])) }}</h4>
+</div>
+{% endblock %}

@@ -9,6 +9,15 @@ services:
         class: Vkaf\Bundle\OafBundle\Lineup\LineupManager
         arguments: ["%vkaf_oaf.lineup_path%"]
 
+    vkaf_oaf.kiosk.slide_manager:
+        class: Vkaf\Bundle\OafBundle\Kiosk\Slide\SlideManager
+        arguments: ["@templating"]
+
+    vkaf_oaf.kiosk.slide.welcome:
+        class: Vkaf\Bundle\OafBundle\Kiosk\Slide\WelcomeSlide
+        tags:
+            - { name: vkaf_oaf.kiosk.slide, type: welcome }
+
     vkaf_oaf.security.kiosk_authenticator:
         class: Vkaf\Bundle\OafBundle\Security\KioskAuthenticator
         arguments: ["@doctrine.orm.entity_manager", "@templating"]
