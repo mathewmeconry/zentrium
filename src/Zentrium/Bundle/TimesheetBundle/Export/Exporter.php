@@ -40,6 +40,8 @@ class Exporter
             $this->translator->trans('zentrium.user.field.first_name'),
             $this->translator->trans('zentrium_timesheet.entry.field.activity'),
             $this->translator->trans('zentrium_timesheet.entry.field.notes'),
+            $this->translator->trans('zentrium_timesheet.entry.field.created'),
+            $this->translator->trans('zentrium_timesheet.entry.field.author'),
         ];
         fputcsv($fp, $header);
 
@@ -54,6 +56,8 @@ class Exporter
                 $entry->getUser()->getFirstName(),
                 $entry->getActivity()->getName(),
                 $entry->getNotes(),
+                $entry->getCreated()->format('Y-m-d H:i:s'),
+                $entry->getAuthor() !== null ? $entry->getAuthor()->getName(true) : '',
             ];
             fputcsv($fp, $row);
         }
@@ -79,11 +83,11 @@ class Exporter
         ;
 
         if ($parameters->getUserFilter() !== null) {
-            $criteria->andWhere(Criteria::expr()->eq('u', $parameters->getUserFilter()));
+            $criteria->andWhere(Criteria::expr()->eq('user', $parameters->getUserFilter()));
         }
 
         if ($parameters->getGroupFilter() !== null) {
-            $criteria->andWhere(Criteria::expr()->eq('g', $parameters->getGroupFilter()));
+            $criteria->andWhere(Criteria::expr()->eq('groups', $parameters->getGroupFilter()));
         }
 
         return $criteria;

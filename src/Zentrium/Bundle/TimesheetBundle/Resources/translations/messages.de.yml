@@ -14,6 +14,8 @@ zentrium_timesheet:
             duration: Dauer
             activity: Aktivität
             notes: Bemerkungen
+            created: Erfassungsdatum
+            author: Erfasser
         form:
             saved: Der Eintrag wurde erfolgreich gespeichert.
         list:
