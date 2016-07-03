@@ -47,6 +47,20 @@ class Log
     protected $details;
 
     /**
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $deadline;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $source;
+
+    /**
      * @var string
      *
      * @Assert\NotNull
@@ -121,6 +135,30 @@ class Log
     public function setDetails($details)
     {
         $this->details = $details;
+
+        return $this;
+    }
+
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    public function setSource($source)
+    {
+        $this->source = $source;
 
         return $this;
     }

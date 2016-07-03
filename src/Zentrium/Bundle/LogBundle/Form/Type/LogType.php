@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Zentrium\Bundle\CoreBundle\Form\Type\DateTimeType;
 use Zentrium\Bundle\LogBundle\Entity\Label;
 use Zentrium\Bundle\LogBundle\Entity\LabelRepository;
 use Zentrium\Bundle\LogBundle\Entity\Log;
@@ -23,6 +24,14 @@ class LogType extends AbstractType
             ])
             ->add('details', TextareaType::class, [
                 'label' => 'zentrium_log.log.field.details',
+                'required' => false,
+            ])
+            ->add('source', TextType::class, [
+                'label' => 'zentrium_log.log.field.source',
+                'required' => false,
+            ])
+            ->add('deadline', DateTimeType::class, [
+                'label' => 'zentrium_log.log.field.deadline',
                 'required' => false,
             ])
             ->add('status', ChoiceType::class, [

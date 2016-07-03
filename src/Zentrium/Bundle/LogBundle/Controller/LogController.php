@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\LogBundle\Controller;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -46,6 +47,7 @@ class LogController extends Controller
             'statusCounts' => $statusCounts,
             'commentCounts' => $commentCounts,
             'labels' => $labels,
+            'now' => new DateTime(),
         ];
     }
 
@@ -72,6 +74,7 @@ class LogController extends Controller
         return [
             'log' => $log,
             'commentForm' => $commentForm->createView(),
+            'now' => new DateTime(),
         ];
     }
 

@@ -47,6 +47,9 @@ zentrium_log:
             status: Status
             title: Titel
             updated: Letzte Aktualisierung
+            created: Erfassungsdatum
+            deadline: Frist
+            source: Auftraggeber/Melder
         form:
             saved: Der Eintrag wurde erfolgreich gespeichert.
     status:

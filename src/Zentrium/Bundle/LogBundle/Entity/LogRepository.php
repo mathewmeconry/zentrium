@@ -11,7 +11,9 @@ class LogRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('log')
             ->addSelect('label')
-            ->orderBy('log.updated', 'DESC')
+            ->addSelect('-log.deadline AS HIDDEN reversedDeadline')
+            ->orderBy('reversedDeadline', 'DESC') // equal to NULLS LAST
+            ->addOrderBy('log.created', 'DESC')
             ->leftJoin('log.labels', 'label')
         ;
 

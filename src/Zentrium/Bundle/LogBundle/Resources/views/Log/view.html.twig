@@ -19,6 +19,8 @@
       </div>
       <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
     </div>
+    {% if log.source %}<p class="log">{{ 'zentrium_log.log.field.source'|trans }}: {{ log.source }}</p>{% endif %}
+    {% if log.deadline %}<p>{{ 'zentrium_log.log.field.deadline'|trans }}: <span class="{% if log.deadline < now and log.status == 'open' %}text-danger{% endif %}">{{ log.deadline|localizedDate('datetime_medium') }} ({{ log.deadline|ago }})</span></p>{% endif %}
   </div>
   <div class="box-body">
     {{ log.details|default('-')|nl2br }}

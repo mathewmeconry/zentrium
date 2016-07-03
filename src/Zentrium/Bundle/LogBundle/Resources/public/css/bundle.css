@@ -6,6 +6,10 @@
     margin-left: 10px;
 }
 
+.log-entry-header .box-header p {
+    margin: 10px 0 0 0;
+}
+
 .log-entry-meta {
     color: #999;
     float: right;

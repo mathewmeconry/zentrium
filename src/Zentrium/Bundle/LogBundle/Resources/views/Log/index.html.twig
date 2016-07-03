@@ -22,7 +22,8 @@
             <th class="col-status"></th>
             <th>{{ 'zentrium_log.log.field.title'|trans }}</th>
             <th>{{ 'zentrium_log.log.field.labels'|trans }}</th>
-            <th>{{ 'zentrium_log.log.field.updated'|trans }}</th>
+            <th>{{ 'zentrium_log.log.field.created'|trans }}</th>
+            <th>{{ 'zentrium_log.log.field.deadline'|trans }}</th>
             <th></th>
         </thead>
         <tbody>
@@ -31,7 +32,8 @@
             <td class="col-status">{{ logUtils.statusIcon(log.status) }}</td>
             <td><a href="{{ path('log_view', {'log': log.id}) }}">{{ log.title }}</a></td>
             <td>{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>&#x20;{% endfor %}</td>
-            <td>{{ log.updated|ago }}</td>
+            <td>{{ log.created|localizedDate('datetime_medium') }}</td>
+            <td>{% if log.deadline %}<span class="{% if log.deadline < now and log.status == 'open' %}text-danger{% endif %}">{{ log.deadline|localizedDate('datetime_medium') }} ({{ log.deadline|ago }})</span>{% endif %}</td>
             <td>{% if commentCounts[log.id]|default %}<span class="label label-default pull-right">{{ commentCounts[log.id] }} <i class="fa fa-comment"></i></span>{% endif %}</td>
           </tr>
           {% endfor %}
