@@ -77,6 +77,22 @@ class Entry
      */
     protected $author;
 
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $approvedAt;
+
+    /**
+     * @var User
+     *
+     * @Assert\Expression("this.isApproved() === (this.getApprovedBy() !== null)")
+     *
+     * @ORM\ManyToOne(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     */
+    protected $approvedBy;
+
     public function __construct()
     {
     }
@@ -159,6 +175,35 @@ class Entry
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function isApproved()
+    {
+        return $this->approvedAt !== null;
+    }
+
+    public function getApprovedAt()
+    {
+        return $this->approvedAt;
+    }
+
+    public function setApprovedAt($approvedAt)
+    {
+        $this->approvedAt = $approvedAt;
+
+        return $this;
+    }
+
+    public function getApprovedBy()
+    {
+        return $this->approvedBy;
+    }
+
+    public function setApprovedBy($approvedBy)
+    {
+        $this->approvedBy = $approvedBy;
 
         return $this;
     }

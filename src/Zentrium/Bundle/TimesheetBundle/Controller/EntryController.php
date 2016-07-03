@@ -76,6 +76,12 @@ class EntryController extends Controller
      */
     public function editAction(Request $request, Entry $entry)
     {
+        if ($entry->isApproved()) {
+            $this->addFlash('error', 'zentrium_timesheet.entry.form.approved');
+
+            return $this->redirectToRoute('timesheet_entries');
+        }
+
         return $this->handleEdit($request, $entry);
     }
 

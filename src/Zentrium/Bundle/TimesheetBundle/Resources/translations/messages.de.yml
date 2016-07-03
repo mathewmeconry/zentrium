@@ -16,12 +16,16 @@ zentrium_timesheet:
             notes: Bemerkungen
             created: Erfassungsdatum
             author: Erfasser
+            approved_by: Bestätigt durch
+            approved_at: Bestätigungsdatum
         form:
             saved: Der Eintrag wurde erfolgreich gespeichert.
+            approved: Dieser Eintrag ist bereits bestätigt und kann deshalb nicht mehr bearbeitet werden.
         list:
             title: Einträge
             new: Neuer Eintrag
             export: Export
+            approved: Dieser Eintrag wurde am %date% durch %user% bestätigt.
         new:
             title: Eintrag erfassen
         edit:

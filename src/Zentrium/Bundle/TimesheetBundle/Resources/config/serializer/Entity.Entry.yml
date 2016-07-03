@@ -9,3 +9,5 @@ Zentrium\Bundle\TimesheetBundle\Entity\Entry:
         author:
             serialized_name: author_id
             type: Relation<Zentrium\Bundle\CoreBundle\Entity\User>
+        approvedBy:
+            type: Relation<Zentrium\Bundle\CoreBundle\Entity\User>

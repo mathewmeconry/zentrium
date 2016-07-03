@@ -42,6 +42,8 @@ class Exporter
             $this->translator->trans('zentrium_timesheet.entry.field.notes'),
             $this->translator->trans('zentrium_timesheet.entry.field.created'),
             $this->translator->trans('zentrium_timesheet.entry.field.author'),
+            $this->translator->trans('zentrium_timesheet.entry.field.approved_at'),
+            $this->translator->trans('zentrium_timesheet.entry.field.approved_by'),
         ];
         fputcsv($fp, $header);
 
@@ -59,6 +61,10 @@ class Exporter
                 $entry->getCreated()->format('Y-m-d H:i:s'),
                 $entry->getAuthor() !== null ? $entry->getAuthor()->getName(true) : '',
             ];
+            if ($entry->isApproved()) {
+                $row[] = $entry->getApprovedAt()->format('Y-m-d H:i:s');
+                $row[] = $entry->getApprovedBy()->getName(true);
+            }
             fputcsv($fp, $row);
         }
 

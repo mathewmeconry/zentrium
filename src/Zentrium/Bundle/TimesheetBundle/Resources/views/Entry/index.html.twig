@@ -32,7 +32,11 @@
           <td>{{ entry.activity.name }}</td>
           <td class="col-entry-notes">{{ entry.notes|nl2br }}</td>
           <td class="col-tools">
+            {% if entry.approved %}
+            <i class="fa fa-check" data-toggle="tooltip" data-title="{{ 'zentrium_timesheet.entry.list.approved'|trans({'%user%': entry.approvedBy.name, '%date%': entry.approvedAt|localizedDate('datetime_medium')})|e('html_attr') }}"></i>
+            {% else %}
             <a href="{{ path('timesheet_entry_edit', {'entry': entry.id}) }}"><i class="fa fa-pencil"></i></a>
+            {% endif %}
           </td>
         </tr>
         {% endfor %}
