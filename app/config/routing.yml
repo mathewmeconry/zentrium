@@ -13,6 +13,10 @@ core:
     resource: "@ZentriumCoreBundle/Controller/"
     type:     annotation
 
+log:
+    resource: "@ZentriumLogBundle/Controller/"
+    type:     annotation
+
 schedule:
     resource: "@ZentriumScheduleBundle/Controller/"
     type:     annotation
