@@ -24,9 +24,9 @@ class LogController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $activeStatus = $request->query->get('status', Log::STATUS_OPEN);
+        $activeStatus = $request->query->get('status');
         if (!in_array($activeStatus, Log::getStatuses())) {
-            throw $this->createNotFoundException('Unknown status.');
+            $activeStatus = null;
         }
 
         $activeLabels = array_unique(array_filter(array_map('intval', explode(' ', $request->query->get('labels')))));

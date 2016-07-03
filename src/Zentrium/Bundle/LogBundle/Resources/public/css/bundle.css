@@ -11,3 +11,7 @@
     float: right;
     font-size: 12px;
 }
+
+.col-status {
+    width: 20px;
+}

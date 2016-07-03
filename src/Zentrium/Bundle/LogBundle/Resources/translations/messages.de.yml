@@ -13,6 +13,7 @@ zentrium_log:
         labels: Labels
         status: Status
         title:
+            all: Alle Einträge
             open: Offene Einträge
             onhold: Wartende Einträge
             done: Erledigte Einträge

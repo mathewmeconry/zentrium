@@ -13,8 +13,14 @@ class LogRepository extends EntityRepository
             ->addSelect('label')
             ->orderBy('log.updated', 'DESC')
             ->leftJoin('log.labels', 'label')
-            ->where('log.status = :status')
-            ->setParameter('status', $status);
+        ;
+
+        if ($status !== null) {
+            $qb
+                ->where('log.status = :status')
+                ->setParameter('status', $status)
+            ;
+        }
 
         if (!empty($labels)) {
             $qb

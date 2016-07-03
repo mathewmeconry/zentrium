@@ -1,4 +1,4 @@
-{% extends "ZentriumScheduleBundle::layout.html.twig" %}
+{% extends "ZentriumLogBundle::layout.html.twig" %}
 {% import "ZentriumLogBundle::utils.html.twig" as logUtils %}
 
 {% block title %}{{ 'zentrium_log.layout.log'|trans }}{% endblock %}
@@ -14,7 +14,7 @@
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
           {% for status in statuses %}
-          <li{% if status == activeStatus %} class="active"{% endif %}><a href="{{ path('logs', {'status': status, 'labels': activeLabels|join(' ')}) }}"><i class="fa fa-{{ logUtils.statusIcon(status) }}"></i> {{ ('zentrium_log.status.'~status)|trans }} {% if statusCounts[status] is defined %}<span class="label label-primary pull-right">{{ statusCounts[status] }}</span>{% endif %}</a></li>
+          <li{% if status == activeStatus %} class="active"{% endif %}><a href="{{ path('logs', {'status': (status != activeStatus ? status : null), 'labels': activeLabels|join(' ')}) }}">{{ logUtils.statusIcon(status) }} {{ ('zentrium_log.status.'~status)|trans }} {% if statusCounts[status] is defined %}<span class="label label-primary pull-right">{{ statusCounts[status] }}</span>{% endif %}</a></li>
           {% endfor %}
         </ul>
       </div>
