@@ -15,7 +15,7 @@ zentrium_log:
         title:
             all: Alle Einträge
             open: Offene Einträge
-            onhold: Wartende Einträge
+            onhold: Einträge in Bearbeitung
             done: Erledigte Einträge
             invalid: Ungültige Einträge
         label_reset: Zurücksetzen
@@ -51,6 +51,6 @@ zentrium_log:
             saved: Der Eintrag wurde erfolgreich gespeichert.
     status:
         open: Offen
-        onhold: Wartend
+        onhold: In Bearbeitung
         done: Erledigt
         invalid: Ungültig
