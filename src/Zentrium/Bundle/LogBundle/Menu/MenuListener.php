@@ -10,10 +10,8 @@ class MenuListener
     {
         $menu = $event->getMenu()->addChild('zentrium_log.menu.log', [
             'route' => 'logs',
+            'routeParameters' => ['status' => 'open'],
             'labelAttributes' => ['icon' => 'fa fa-book'],
-        ])->setExtra('routes', [['pattern' => '/^log_.*/']]);
-
-        $menu->addChild('zentrium_log.menu.list', ['route' => 'logs']);
-        $menu->addChild('zentrium_log.menu.new', ['route' => 'log_new']);
+        ])->setExtra('routes', [['pattern' => '/^log(s|_.*)$/']]);
     }
 }

@@ -1,0 +1,17 @@
+.log-entry-header .box-header .label {
+    vertical-align: 20%;
+}
+
+.log-entry-header .box-header h3 + .label {
+    margin-left: 10px;
+}
+
+.log-entry-meta {
+    color: #999;
+    float: right;
+    font-size: 12px;
+}
+
+.col-status {
+    width: 20px;
+}

@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Zentrium\Bundle\LogBundle\Entity\Label;
@@ -19,6 +20,10 @@ class LogType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'zentrium_log.log.field.title',
+            ])
+            ->add('details', TextareaType::class, [
+                'label' => 'zentrium_log.log.field.details',
+                'required' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'zentrium_log.log.field.status',

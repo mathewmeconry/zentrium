@@ -1,24 +1,45 @@
-{% extends 'ZentriumCoreBundle::layout.html.twig' %}
+{% extends 'ZentriumLogBundle::layout.html.twig' %}
+{% form_theme commentForm 'ZentriumCoreBundle::form.html.twig' %}
 
 {% block title %}{{ 'zentrium_log.layout.log'|trans }}{% endblock %}
 
-{% block content%}
-<div class="box box-primary">
+{% block content %}
+<div class="box box-primary log-entry-header">
   <div class="box-header with-border">
     <h3 class="box-title">{{ log.title }}</h3>
+    {% for label in log.labels %}&#32;<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>{% endfor %}
     <div class="box-tools pull-right">
+      <div class="btn-group" data-log-status-endpoint="{{ path('log_status', {'log': log.id}) }}">
+        <button type="button" class="btn btn-box-tool" data-toggle="dropdown">{{ logUtils.statusIcon(log.status) }}</button>
+        <ul class="dropdown-menu">
+          {% for status in log.statuses %}
+          <li{% if log.status == status %} class="active"{% endif %}><a href="#" data-log-status="{{ status }}">{{ logUtils.statusIcon(status) }} {{ ('zentrium_log.status.'~status)|trans }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
       <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
     </div>
   </div>
   <div class="box-body">
-    <dl>
-      <dt>{{ 'zentrium_log.log.field.status'|trans }}</dt>
-      <dd>{{ ('zentrium_log.status.'~log.status)|trans }}</dd>
-      <dt>{{ 'zentrium_log.log.field.updated'|trans }}</dt>
-      <dd>{{ log.updated|date('d.m.Y H:i') }}</dd>
-      <dt>{{ 'zentrium_log.log.field.labels'|trans }}</dt>
-      <dd>{% if log.labels|length %}{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>&#32;{% endfor %}{% else %}-{% endif %}</dd>
-    </dl>
+    {{ log.details|default('-')|nl2br }}
+  </div>
+  <div class="box-footer">
+    <div class="log-entry-meta">{{ log.author.name }} · {{ log.created|localizedDate('datetime_medium') }}{% if log.edited != log.created %} ({{ 'zentrium_log.view.edited'|trans({'%ago%': log.edited|ago}) }}){% endif %}</div>
+  </div>
+</div>
+{% for comment in log.comments %}
+<div class="box box-solid">
+  <div class="box-body">
+    {{ comment.message|default('-')|nl2br }}
+  </div>
+  <div class="box-footer">
+    <div class="log-entry-meta">{{ comment.author.name }} · {{ comment.created|localizedDate('datetime_medium') }}{% if comment.updated != comment.created %} ({{ 'zentrium_log.view.edited'|trans({'%ago%': commment.updated|ago}) }}){% endif %}</div>
+  </div>
+</div>
+{% endfor %}
+<div class="box box-solid">
+  <div class="box-body">
+    {{ form(commentForm, {'action': path('log_comment_new', {'log': log.id})}) }}
   </div>
 </div>
 {% endblock %}

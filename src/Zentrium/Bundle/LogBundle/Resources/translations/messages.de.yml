@@ -13,6 +13,7 @@ zentrium_log:
         labels: Labels
         status: Status
         title:
+            all: Alle Einträge
             open: Offene Einträge
             onhold: Wartende Einträge
             done: Erledigte Einträge
@@ -27,6 +28,11 @@ zentrium_log:
         title: Eintrag bearbeiten
     view:
         edit: Bearbeiten
+        edited: bearbeitet %ago%
+    comment:
+        form:
+            save: Kommentar speichern
+            saved: Dein Kommentar wurde erfolgreich gespeichert.
     label:
         new:
             title: Neues Label
@@ -36,6 +42,7 @@ zentrium_log:
             saved: Das Label wurde erfolgreich gespeichert.
     log:
         field:
+            details: Beschreibung
             labels: Labels
             status: Status
             title: Titel

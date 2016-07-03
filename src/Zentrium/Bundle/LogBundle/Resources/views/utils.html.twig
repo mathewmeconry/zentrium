@@ -1,0 +1,9 @@
+{% macro statusIcon(status) %}
+{% import _self as self %}
+{% set icon = {'open': 'circle', 'onhold': 'pause-circle', 'done': 'check-circle', 'invalid': 'times-circle'}[status] %}
+<i class="fa fa-{{ icon }} text-{{ self.statusColor(status) }}"></i>
+{% endmacro %}
+
+{% macro statusColor(status) %}
+{{ {'open': 'red', 'onhold': 'yellow', 'done': 'green', 'invalid': 'gray-dark'}[status] }}
+{% endmacro %}
