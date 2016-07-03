@@ -29,7 +29,7 @@ class LogController extends Controller
             throw $this->createNotFoundException('Unknown status.');
         }
 
-        $activeLabels = array_unique(array_filter(array_map('intval', explode(',', $request->query->get('labels')))));
+        $activeLabels = array_unique(array_filter(array_map('intval', explode(' ', $request->query->get('labels')))));
 
         $logRepository = $this->getDoctrine()->getRepository('ZentriumLogBundle:Log');
         $logs = $logRepository->findByStatusWithLabels($activeStatus, $activeLabels);
