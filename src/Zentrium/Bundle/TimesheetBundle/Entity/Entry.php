@@ -4,15 +4,19 @@ namespace Zentrium\Bundle\TimesheetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Entity\TimestampableTrait;
 use Zentrium\Bundle\TimesheetBundle\Validator\Constraints as AssertTimesheet;
 
 /**
  * @AssertTimesheet\NotOverlapping
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Entry
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -65,6 +69,13 @@ class Entry
      * @ORM\Column(type="text", nullable=true)
      */
     protected $notes;
+
+    /**
+     * @var User|null
+     *
+     * @ORM\ManyToOne(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     */
+    protected $author;
 
     public function __construct()
     {
@@ -136,6 +147,18 @@ class Entry
     public function setNotes($notes)
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -1,0 +1,11 @@
+Zentrium\Bundle\TimesheetBundle\Entity\Entry:
+    properties:
+        user:
+            serialized_name: user_id
+            type: Relation<Zentrium\Bundle\CoreBundle\Entity\User>
+        activity:
+            serialized_name: activity_id
+            type: Relation<Zentrium\Bundle\TimesheetBundle\Entity\Activity>
+        author:
+            serialized_name: author_id
+            type: Relation<Zentrium\Bundle\CoreBundle\Entity\User>

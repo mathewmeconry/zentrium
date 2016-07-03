@@ -34,6 +34,6 @@ class RelationHandler
             $id = array_shift($id);
         }
 
-        return $ids;
+        return $id;
     }
 }

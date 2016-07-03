@@ -65,6 +65,7 @@ class EntryController extends Controller
         $entry = new Entry();
         $entry->setStart(new DateTime());
         $entry->setEnd(new DateTime());
+        $entry->setAuthor($this->getUser());
 
         return $this->handleEdit($request, $entry);
     }

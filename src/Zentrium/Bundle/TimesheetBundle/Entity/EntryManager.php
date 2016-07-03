@@ -26,14 +26,29 @@ class EntryManager
 
     public function findAll()
     {
-        return $this->repository->findBy([], ['start' => 'ASC']);
+        $qb = $this->repository->createQueryBuilder('entry')
+            ->addSelect('user')
+            ->addSelect('activity')
+            ->addSelect('author')
+            ->leftJoin('entry.user', 'user')
+            ->leftJoin('entry.author', 'author')
+            ->leftJoin('entry.activity', 'activity')
+            ->orderBy('entry.start', 'DESC')
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findByCriteria(Criteria $criteria)
     {
-        $qb = $this->repository->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->leftJoin('u.groups', 'g')
+        $qb = $this->repository->createQueryBuilder('entry')
+            ->addSelect('user')
+            ->addSelect('activity')
+            ->addSelect('author')
+            ->leftJoin('entry.user', 'user')
+            ->leftJoin('entry.author', 'author')
+            ->leftJoin('entry.activity', 'activity')
+            ->leftJoin('user.groups', 'groups')
             ->addCriteria($criteria)
         ;
 
