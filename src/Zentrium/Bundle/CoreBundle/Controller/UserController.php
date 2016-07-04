@@ -50,6 +50,19 @@ class UserController extends Controller
         return $this->handleEdit($request, $user);
     }
 
+    /**
+     * @Route("/users/{user}/labels", name="user_labels")
+     * @Secure("ROLE_ADMINISTRATOR")
+     */
+    public function labelsAction(Request $request, User $user)
+    {
+        return $this->render('@zentrium/User/labels.html.twig', array(
+            'firstname' => $user->getFirstName(),
+            'lastname' => $user->getLastName(),
+            'groups' => $user->getGroupNames()
+        ));
+    }
+
     private function handleEdit(Request $request, User $user)
     {
         $formClass = ($this->isGranted('ROLE_ADMINISTRATOR') ? UserAccountType::class : UserType::class);
