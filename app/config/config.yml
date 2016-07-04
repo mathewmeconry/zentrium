@@ -40,6 +40,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         app_version: "%version%"
+    paths:
+        "%kernel.root_dir%/../src/Zentrium/Bundle/CoreBundle/Resources/views": zentrium
 
 # Doctrine Configuration
 doctrine:
