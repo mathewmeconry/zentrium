@@ -89,6 +89,7 @@ zentrium:
             groups: Gruppen
             email: E-Mail
             mobile_phone: Telefon
+            present: Anwesend
             enabled: Aktiv
             gender: Geschlecht
             birthday: Geburtsdatum

@@ -82,11 +82,19 @@ class User extends BaseUser
      */
     protected $groups;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $present;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->groups = new ArrayCollection();
+        $this->present = false;
     }
 
     public function getLastName()
@@ -146,6 +154,13 @@ class User extends BaseUser
         return $this;
     }
 
+    public function setPresent($present)
+    {
+        $this->present = $present;
+
+        return $this;
+    }
+
     public function getMobilePhone()
     {
         return $this->mobilePhone;
@@ -168,5 +183,10 @@ class User extends BaseUser
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getPresent()
+    {
+        return $this->present;
     }
 }
