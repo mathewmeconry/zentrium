@@ -29,7 +29,8 @@
                         <td>{% if user.mobilePhone %}<a
                                 href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}
                         </td>
-                        <td>{% if user.present %}<span style="color:green;">Anwesend</span>{% else %}<span style="color:red;">Nicht anwesend</span>{% endif %}</td>
+                        <td>{% if user.present %}<span style="color:green;">Anwesend</span>{% else %}<span
+                                    style="color:red;">Nicht anwesend</span>{% endif %}</td>
                         <td>{{ user.title }}</td>
                         <td>
                             {% for group in user.groups %}<span
@@ -58,7 +59,14 @@
 
                 function _onInputEvent(e) {
                     _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                    _tableFilter(_findTables(_input.getAttribute('data-table')));
+                }
+
+                function _findTables(className) {
+                    return document.getElementsByClassName(className);
+                }
+
+                function _tableFilter(tables) {
                     Arr.forEach.call(tables, function (table) {
                         Arr.forEach.call(table.tBodies, function (tbody) {
                             Arr.forEach.call(tbody.rows, _filter);
@@ -75,6 +83,10 @@
                     init: function () {
                         var input = document.getElementById('search');
                         input.oninput = _onInputEvent;
+                    },
+                    search: function (input) {
+                        _input = input;
+                        _tableFilter(_findTables(_input.getAttribute('data-table')));
                     }
                 };
             })(Array.prototype);
@@ -83,6 +95,10 @@
                 if (document.readyState === 'complete') {
                     LightTableFilter.init();
                 }
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                LightTableFilter.search(document.getElementById('search'));
             });
 
         })(document);
