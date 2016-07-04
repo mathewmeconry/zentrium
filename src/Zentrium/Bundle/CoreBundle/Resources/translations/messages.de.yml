@@ -96,6 +96,7 @@ zentrium:
             title: Position/Funktion
         form:
             saved: Die Daten wurden erfolgreich aktualisiert.
+            labels: Labels Drucken
         list:
             title: Benutzer
         edit:
