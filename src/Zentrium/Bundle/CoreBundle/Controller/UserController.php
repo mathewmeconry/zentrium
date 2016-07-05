@@ -53,14 +53,15 @@ class UserController extends Controller
     /**
      * @Route("/users/{user}/labels", name="user_labels")
      * @Secure("ROLE_MANAGER")
+     * @Template
      */
     public function labelsAction(Request $request, User $user)
     {
-        return $this->render('@zentrium/User/labels.html.twig', array(
+        return [
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
-            'groups' => $user->getGroupNames()
-        ));
+            'groups' => $user->getGroupNames(),
+        ];
     }
 
     private function handleEdit(Request $request, User $user)

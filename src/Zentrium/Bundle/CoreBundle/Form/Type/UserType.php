@@ -2,15 +2,14 @@
 
 namespace Zentrium\Bundle\CoreBundle\Form\Type;
 
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Zentrium\Bundle\CoreBundle\Entity\Group;
 use Zentrium\Bundle\CoreBundle\Entity\User;
 
@@ -42,7 +41,7 @@ class UserType extends AbstractType
             ])
             ->add('present', CheckboxType::class, [
                 'label' => 'zentrium.user.field.present',
-                'required' => false
+                'required' => false,
             ])
             ->add('groups', EntityType::class, [
                 'required' => false,
@@ -53,11 +52,11 @@ class UserType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'zentrium.form.save',
-                'attr' => array('class' => 'btn-primary')
+                'attr' => ['class' => 'btn-primary'],
             ])
             ->add('labels', ButtonType::class, [
                 'label' => 'zentrium.user.form.labels',
-                'attr' => array('class' => 'pull-right')
+                'attr' => ['class' => 'pull-right'],
             ])
         ;
     }

@@ -83,7 +83,7 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
