@@ -1,0 +1,9 @@
+Zentrium\Bundle\CoreBundle\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        lastName:
+            expose: true
+        firstName:
+            expose: true
