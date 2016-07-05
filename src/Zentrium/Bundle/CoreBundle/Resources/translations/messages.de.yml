@@ -89,6 +89,7 @@ zentrium:
             groups: Gruppen
             email: E-Mail
             mobile_phone: Telefon
+            bednumber: Bettnummer
             enabled: Aktiv
             gender: Geschlecht
             birthday: Geburtsdatum
