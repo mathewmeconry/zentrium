@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,6 +42,10 @@ class UserType extends AbstractType
             ])
             ->add('present', CheckboxType::class, [
                 'label' => 'zentrium.user.field.present',
+                'required' => false,
+            ])
+            ->add('bednumber', NumberType::class, [
+                'label' => 'zentrium.user.field.bednumber',
                 'required' => false,
             ])
             ->add('groups', EntityType::class, [

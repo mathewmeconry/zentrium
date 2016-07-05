@@ -89,6 +89,13 @@ class User extends BaseUser
      */
     protected $present;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", length=3, nullable=true)
+     */
+    protected $bednumber;
+
     public function __construct()
     {
         parent::__construct();
@@ -188,5 +195,17 @@ class User extends BaseUser
     public function getPresent()
     {
         return $this->present;
+    }
+
+    public function getBednumber()
+    {
+        return $this->bednumber;
+    }
+
+    public function setBednumber($bednumber)
+    {
+        $this->bednumber = $bednumber;
+
+        return $this;
     }
 }

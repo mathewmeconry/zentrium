@@ -90,6 +90,7 @@ zentrium:
             email: E-Mail
             mobile_phone: Telefon
             present: Anwesend
+            bednumber: Bettnummer
             enabled: Aktiv
             gender: Geschlecht
             birthday: Geburtsdatum
