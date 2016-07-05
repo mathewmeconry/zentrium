@@ -69,6 +69,13 @@ class User extends BaseUser
     protected $mobilePhone;
 
     /**
+     * @var BedNumber
+     *
+     * @ORM\Column(type="integer", length=3, nullable=true)
+     */
+    protected $bednumber;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -166,6 +173,18 @@ class User extends BaseUser
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getBednumber()
+    {
+        return $this->bednumber;
+    }
+
+    public function setBednumber($bednumber)
+    {
+        $this->bednumber = $bednumber;
 
         return $this;
     }
