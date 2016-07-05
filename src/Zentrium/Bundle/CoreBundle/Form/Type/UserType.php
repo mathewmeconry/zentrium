@@ -4,6 +4,7 @@ namespace Zentrium\Bundle\CoreBundle\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,6 +32,10 @@ class UserType extends AbstractType
             ])
             ->add('mobilePhone', PhoneNumberType::class, [
                 'label' => 'zentrium.user.field.mobile_phone',
+                'required' => false,
+            ])
+            ->add('bednumber', NumberType::class, [
+                'label' => 'zentrium.user.field.bednumber',
                 'required' => false,
             ])
             ->add('title', TextType::class, [
