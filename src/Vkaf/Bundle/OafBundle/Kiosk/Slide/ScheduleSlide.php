@@ -2,14 +2,14 @@
 
 namespace Vkaf\Bundle\OafBundle\Kiosk\Slide;
 
-use Zentrium\Bundle\ScheduleBundle\Entity\ShiftManager;
-use League\Period\Period;
-use Zentrium\Bundle\CoreBundle\Entity\UserRepository;
-use Zentrium\Bundle\CoreBundle\Entity\User;
-use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
+use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
-use DateTime;
+use League\Period\Period;
+use Zentrium\Bundle\CoreBundle\Entity\User;
+use Zentrium\Bundle\CoreBundle\Entity\UserRepository;
+use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
+use Zentrium\Bundle\ScheduleBundle\Entity\ShiftManager;
 
 class ScheduleSlide implements SlideInterface
 {
@@ -29,13 +29,13 @@ class ScheduleSlide implements SlideInterface
 
         $shifts = $this->shiftManager->findPublishedInPeriod($period);
         $serializedShifts = [];
-        foreach($shifts as $shift) {
+        foreach ($shifts as $shift) {
             $serializedShifts[] = $this->serializeShift($shift);
         }
 
         $users = $this->userRepository->findAll();
         $serializedUsers = [];
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $serializedUsers[] = $this->serializeUser($user);
         }
         $partitionIndex = ceil(count($users) / 2);
