@@ -3,39 +3,104 @@
 {% block title %}{{ 'zentrium.user.list.title'|trans }}{% endblock %}
 
 {% block content %}
-<div class="box">
-  <div class="box-body no-padding">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
-          <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
-          <th>{{ 'zentrium.user.field.email'|trans }}</th>
-          <th>{{ 'zentrium.user.field.mobile_phone'|trans }}</th>
-          <th>{{ 'zentrium.user.field.title'|trans }}</th>
-          <th>{{ 'zentrium.user.field.groups'|trans }}</th>
-          <th class="col-tools">{% if is_granted('ROLE_ADMINISTRATOR') %}<a href="{{ path('user_new') }}"><i class="fa fa-plus"></i></a>{% endif %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        <tr>
-          <td>{{ user.lastName }}</td>
-          <td>{{ user.firstName }}</td>
-          <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
-          <td>{% if user.mobilePhone %}<a href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}</td>
-          <td>{{ user.title }}</td>
-          <td>
-            {% for group in user.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
-          </td>
-          <td class="col-tools">
-            {% if not user.enabled %}<i class="fa fa-lock"></i>{% endif %}
-            <a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i></a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+    <input id="search" class="form-control" placeholder="Suchen..." data-table="order-table"/>
+    <div class="box">
+        <div class="box-body no-padding">
+            <table id="user-table" class="table table-striped order-table">
+                <thead>
+                <tr>
+                    <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.email'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.mobile_phone'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.present'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.title'|trans }}</th>
+                    <th>{{ 'zentrium.user.field.groups'|trans }}</th>
+                    <th class="col-tools">{% if is_granted('ROLE_ADMINISTRATOR') %}<a href="{{ path('user_new') }}"><i
+                                    class="fa fa-plus"></i></a>{% endif %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                        <td>{% if user.mobilePhone %}<a
+                                href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}
+                        </td>
+                        <td>{% if user.present %}<span style="color:green;">Anwesend</span>{% else %}<span
+                                    style="color:red;">Nicht anwesend</span>{% endif %}</td>
+                        <td>{{ user.title }}</td>
+                        <td>
+                            {% for group in user.groups %}<span
+                                    class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}
+                        </td>
+                        <td class="col-tools">
+                            {% if not user.enabled %}<i class="fa fa-lock"></i>{% endif %}
+                            <a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        (function (document) {
+            'use strict';
+
+            var LightTableFilter = (function (Arr) {
+
+                var _input;
+
+                function _onInputEvent(e) {
+                    _input = e.target;
+                    _tableFilter(_findTables(_input.getAttribute('data-table')));
+                }
+
+                function _findTables(className) {
+                    return document.getElementsByClassName(className);
+                }
+
+                function _tableFilter(tables) {
+                    Arr.forEach.call(tables, function (table) {
+                        Arr.forEach.call(table.tBodies, function (tbody) {
+                            Arr.forEach.call(tbody.rows, _filter);
+                        });
+                    });
+                }
+
+                function _filter(row) {
+                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                }
+
+                return {
+                    init: function () {
+                        var input = document.getElementById('search');
+                        input.oninput = _onInputEvent;
+                    },
+                    search: function (input) {
+                        _input = input;
+                        _tableFilter(_findTables(_input.getAttribute('data-table')));
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function () {
+                if (document.readyState === 'complete') {
+                    LightTableFilter.init();
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                LightTableFilter.search(document.getElementById('search'));
+            });
+
+        })(document);
+    </script>
 {% endblock %}
