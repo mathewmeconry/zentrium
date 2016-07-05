@@ -29,8 +29,9 @@
                         <td>{% if user.mobilePhone %}<a
                                 href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% endif %}
                         </td>
-                        <td>{% if user.present %}<span style="color:green;">Anwesend</span>{% else %}<span
-                                    style="color:red;">Nicht anwesend</span>{% endif %}</td>
+                        <td>{% if user.present %}<span
+                                    style="color:green;">{{ 'zentrium.user.list.present'|trans }}</span>{% else %}<span
+                                    style="color:red;">{{ 'zentrium.user.list.absent'|trans }}</span>{% endif %}</td>
                         <td>{{ user.title }}</td>
                         <td>
                             {% for group in user.groups %}<span

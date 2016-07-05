@@ -89,7 +89,7 @@ zentrium:
             groups: Gruppen
             email: E-Mail
             mobile_phone: Telefon
-            present: Anwesend
+            present: Anwesenheit
             bednumber: Bettnummer
             enabled: Aktiv
             gender: Geschlecht
@@ -100,6 +100,8 @@ zentrium:
             labels: Labels Drucken
         list:
             title: Benutzer
+            absent: Abwesend
+            present: Anwesend
         edit:
             title: Benutzer bearbeiten
         new:

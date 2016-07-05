@@ -60,7 +60,7 @@ class UserController extends Controller
         return [
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
-            'groups' => $user->getGroupNames(),
+            'groups' => $user->getGroups(),
         ];
     }
 
