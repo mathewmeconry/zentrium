@@ -52,7 +52,7 @@ class UserController extends Controller
 
     /**
      * @Route("/users/{user}/labels", name="user_labels")
-     * @Secure("ROLE_ADMINISTRATOR")
+     * @Secure("ROLE_MANAGER")
      */
     public function labelsAction(Request $request, User $user)
     {
