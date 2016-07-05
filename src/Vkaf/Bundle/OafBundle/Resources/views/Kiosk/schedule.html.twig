@@ -1,0 +1,20 @@
+{% extends "VkafOafBundle:Kiosk:slide.html.twig" %}
+
+{% set config = {
+  'slotDuration': slotDuration,
+  'begin': begin,
+  'duration': duration,
+  'shifts': shifts,
+  'userPartitions': userPartitions,
+} %}
+
+{% block content %}
+<div class="box box-primary kiosk-schedule" data-config="{{ config|json_encode|e('html_attr') }}">
+  <div class="box-body no-padding">
+    <div class="kiosk-schedule-left"></div>
+    <div class="kiosk-schedule-right"></div>
+    {% dump(shifts) %}
+    {% dump(userPartitions) %}
+  </div>
+</div>
+{% endblock %}

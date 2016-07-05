@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Zentrium\Bundle\CoreBundle\Entity\User as BaseUser;
+use League\Period\Period;
 
 class ShiftManager
 {
@@ -53,6 +54,25 @@ class ShiftManager
             ->orderBy('s.from')
             ->setParameter('user', $user)
             ->setParameter('now', new DateTime())
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findPublishedInPeriod(Period $period)
+    {
+        $qb = $this->repository->createQueryBuilder('s')
+            ->addSelect('t')
+            ->addSelect('u')
+            ->leftJoin('s.schedule', 'p')
+            ->leftJoin('s.task', 't')
+            ->leftJoin('s.user', 'u')
+            ->where('s.from <= :end')
+            ->andWhere('s.to >= :start')
+            ->andWhere('p.published = 1')
+            ->orderBy('s.from')
+            ->setParameter('start', $period->getStartDate())
+            ->setParameter('end', $period->getEndDate())
         ;
 
         return $qb->getQuery()->getResult();
