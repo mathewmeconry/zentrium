@@ -3,7 +3,9 @@
     <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
 </head>
 <body>
-<div style="margin: auto;width: 50%;">
+<div>
+    <h4>{{ slotDate|localizedDate('date_full') }}</h4>
+    <h3>{{ slotDate|date('H:i') }}</h3>
     {% for row in groupedShifts %}
         <div style="font-weight: bold;">{{ row.task.name (row.task.code) }}</div>
         {% for user in row.start %}
