@@ -92,12 +92,12 @@ class ScheduleController extends Controller
             }
         }
 
-        return $this->render('VkafOafBundle:Schedule:slotPrint.html.twig', array(
+        return $this->render('VkafOafBundle:Schedule:slotPrint.html.twig', [
             'schedule' => $schedule,
             'slot' => $slot,
             'slotDate' => $slotDate,
-            'groupedShifts' => $groupedShifts
-        ));
+            'groupedShifts' => $groupedShifts,
+        ]);
     }
 
     /**
