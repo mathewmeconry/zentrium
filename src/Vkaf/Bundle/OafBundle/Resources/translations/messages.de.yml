@@ -39,3 +39,8 @@ vkaf_oaf:
         field:
             resource: Gerät
             user: Benutzer
+    schedule:
+        slot:
+            ending: Schicht-Ende
+            changing: Schicht-Wechsel
+            beginning: Schicht-Beginn

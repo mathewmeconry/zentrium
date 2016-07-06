@@ -1,3 +1,54 @@
 .popover-content > .less-padding {
     margin: -4px -9px;
 }
+
+.slot-header {
+    text-align: center;
+    position: relative;
+
+    h3 {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    h4 {
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .slot-prev, .slot-next {
+        display: block;
+        position: absolute;
+        top: 50%;
+        text-align: center;
+        transform: translateY(-50%);
+        padding: 20px 10px;
+    }
+
+    .slot-prev {
+        left: 0;
+    }
+
+    .slot-next {
+        right: 0;
+    }
+}
+
+.slot-left {
+    .box-body, .box-header {
+        text-align: right;
+    }
+}
+
+.slot-center {
+    .box-body, .box-header {
+        text-align: center;
+    }
+}
+
+.slot-shift-begin, .slot-shift-end {
+    color: #000;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+    margin: 0 0 10px 0;
+    padding: 3px 6px;
+}

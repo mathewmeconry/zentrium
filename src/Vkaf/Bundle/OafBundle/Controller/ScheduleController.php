@@ -24,6 +24,45 @@ use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 class ScheduleController extends Controller
 {
     /**
+     * @Route("/{schedule}/slots/{slot}", name="oaf_schedule_slot")
+     * @Template
+     */
+    public function slotAction(Schedule $schedule, $slot)
+    {
+        $slot = intval($slot);
+        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
+            throw $this->createNotFoundException();
+        }
+
+        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+
+        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
+        $groupedShifts = [];
+        foreach ($shifts as $shift) {
+            $userId = $shift->getUser()->getId();
+            if (!isset($groupedShifts[$userId])) {
+                $groupedShifts[$userId] = [
+                    'user' => $shift->getUser(),
+                    'ending' => [],
+                    'beginning' => [],
+                ];
+            }
+            if ($shift->getTo() == $slotDate) {
+                $groupedShifts[$userId]['ending'][] = $shift;
+            } else {
+                $groupedShifts[$userId]['beginning'][] = $shift;
+            }
+        }
+
+        return [
+            'schedule' => $schedule,
+            'slot' => $slot,
+            'slotDate' => $slotDate,
+            'groupedShifts' => $groupedShifts,
+        ];
+    }
+
+    /**
      * @Route("/user/dashboard", name="oaf_schedule_user_dashboard")
      * @Template
      */

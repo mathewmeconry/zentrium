@@ -32,6 +32,7 @@
           <td>{% if schedule.published %}<i class="fa fa-check"></i>{% endif %}</td>
           <td>{{ schedule.updated|ago }}</td>
           <td class="col-tools">
+            <a href="{{ path('oaf_schedule_slot', {'schedule': schedule.id, 'slot': 0}) }}"><i class="fa fa-exchange"></i></a>
             <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
             {% if is_granted('ROLE_SCHEDULER') %}
             <a href="{{ path('schedule_copy', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.copy'|trans }}"><i class="fa fa-copy"></i></a>
