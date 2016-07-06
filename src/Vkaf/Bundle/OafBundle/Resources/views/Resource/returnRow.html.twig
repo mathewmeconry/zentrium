@@ -1,0 +1,10 @@
+<td>{{ assignment.id }}</td>
+<td>{{ assignment.user.name(true) }}</td>
+<td>{{ assignment.resource.label }}</td>
+<td>{{ assignment.assignedAt|localizedDate('datetime_medium') }}</td>
+<td>{% if assignment.returnedAt %}{{ assignment.returnedAt|localizedDate('datetime_medium') }}{% endif %}</td>
+<td class="col-right">
+  {% if not assignment.returnedAt %}
+  <a href="#" class="oaf-resource-return" data-target="{{ path('oaf_resource_return', {'assignment': assignment.id}) }}"><i class="fa fa-arrow-circle-o-left"></i></a>
+  {% endif %}
+</td>

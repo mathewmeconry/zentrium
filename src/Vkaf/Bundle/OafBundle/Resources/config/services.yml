@@ -9,6 +9,19 @@ services:
         class: Vkaf\Bundle\OafBundle\Lineup\LineupManager
         arguments: ["%vkaf_oaf.lineup_path%"]
 
+    vkaf_oaf.menu_listener:
+        class: Vkaf\Bundle\OafBundle\Menu\MenuListener
+        tags:
+            - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu }
+
+    vkaf_oaf.manager.resource:
+        class: Vkaf\Bundle\OafBundle\Entity\ResourceManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    vkaf_oaf.manager.resource_assignment:
+        class: Vkaf\Bundle\OafBundle\Entity\ResourceAssignmentManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     vkaf_oaf.kiosk.slide_manager:
         class: Vkaf\Bundle\OafBundle\Kiosk\Slide\SlideManager
         arguments: ["@templating"]

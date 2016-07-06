@@ -1,4 +1,9 @@
 vkaf_oaf:
+    layout:
+        resources: Geräte
+    menu:
+        resource: Geräte
+        resource_assign: Geräte-Ausleihe
     kiosk:
         title: Kiosk
         unauthorized_title: Ungültiger Zugangscode
@@ -12,3 +17,25 @@ vkaf_oaf:
         user_schedule:
             title: Individueller Einsatzplan
             show: Anzeigen
+    resource:
+        field:
+            label: Name
+            owner: Eigentümer
+        form:
+            saved: Gerät wurde erfolgreich gespeichert.
+            assigned: Das Gerät wurde %user% zugewiesen.
+            returned: Das Gerät wurde durch %user% zurückgegeben.
+            assign: Ausgeben
+        list:
+            new: Neues Gerät
+            edit: Gerät bearbeiten
+        new:
+            title: Neues Gerät
+        assign:
+            title: Geräte-Ausleihe
+            title_assign: Ausgabe
+            title_return: Rücknahme
+    resource_assignment:
+        field:
+            resource: Gerät
+            user: Benutzer
