@@ -1,0 +1,4 @@
+parameters:
+    database_name: oaf2016
+    database_user: oaf2016
+    database_password: oaf2016
