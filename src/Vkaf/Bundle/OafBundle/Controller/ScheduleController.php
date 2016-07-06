@@ -63,6 +63,44 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/slots/{slot}/print", name="oaf_schedule_slot_print")
+     */
+    public function slotPrintAction(Schedule $schedule, $slot)
+    {
+        $slot = intval($slot);
+        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
+            throw $this->createNotFoundException();
+        }
+
+        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+
+        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
+        $groupedShifts = [];
+        foreach ($shifts as $shift) {
+            $taskid = $shift->getTask()->getId();
+            if (!isset($groupedShifts[$taskid])) {
+                $groupedShifts[$taskid] = [];
+                $groupedShifts[$taskid]['start'] = [];
+                $groupedShifts[$taskid]['end'] = [];
+                $groupedShifts[$taskid]['task'] = $shift->getTask();
+            }
+
+            if ($shift->getTo() == $slotDate) {
+                $groupedShifts[$taskid]['end'][] = $shift->getUser();
+            } else {
+                $groupedShifts[$taskid]['start'][] = $shift->getUser();
+            }
+        }
+
+        return $this->render('VkafOafBundle:Schedule:slotPrint.html.twig', array(
+            'schedule' => $schedule,
+            'slot' => $slot,
+            'slotDate' => $slotDate,
+            'groupedShifts' => $groupedShifts
+        ));
+    }
+
+    /**
      * @Route("/user/dashboard", name="oaf_schedule_user_dashboard")
      * @Template
      */
