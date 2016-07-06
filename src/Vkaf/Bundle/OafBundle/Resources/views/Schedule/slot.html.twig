@@ -21,6 +21,7 @@
         {% endif %}
         <h4>{{ slotDate|localizedDate('date_full') }}</h4>
         <h3>{{ slotDate|date('H:i') }}</h3>
+        <div class="pull-right"><a href="{{ path('oaf_schedule_slot_print', {'schedule': schedule.id, 'slot': slot}) }}" target="_blank"><i class="fa fa-print"></i></a></div>
       </div>
     </div>
   </div>
