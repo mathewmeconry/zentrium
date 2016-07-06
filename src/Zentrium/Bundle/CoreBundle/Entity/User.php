@@ -96,6 +96,13 @@ class User extends BaseUser
      */
     protected $bednumber;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $foodNotes;
+
     public function __construct()
     {
         parent::__construct();
@@ -205,6 +212,18 @@ class User extends BaseUser
     public function setBednumber($bednumber)
     {
         $this->bednumber = $bednumber;
+
+        return $this;
+    }
+
+    public function getFoodNotes()
+    {
+        return $this->foodNotes;
+    }
+
+    public function setFoodNotes($foodNotes)
+    {
+        $this->foodNotes = $foodNotes;
 
         return $this;
     }

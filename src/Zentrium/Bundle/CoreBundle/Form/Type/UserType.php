@@ -48,6 +48,10 @@ class UserType extends AbstractType
                 'label' => 'zentrium.user.field.bednumber',
                 'required' => false,
             ])
+            ->add('foodNotes', TextType::class, [
+                'label' => 'zentrium.user.field.food_notes',
+                'required' => false,
+            ])
             ->add('groups', EntityType::class, [
                 'required' => false,
                 'label' => 'zentrium.user.field.groups',

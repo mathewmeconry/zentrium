@@ -91,6 +91,7 @@ zentrium:
             mobile_phone: Telefon
             present: Anwesenheit
             bednumber: Bettnummer
+            food_notes: Essenswünsche
             enabled: Aktiv
             gender: Geschlecht
             birthday: Geburtsdatum
