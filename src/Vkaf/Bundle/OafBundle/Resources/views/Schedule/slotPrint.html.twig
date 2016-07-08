@@ -7,26 +7,24 @@
     <h4>{{ slotDate|localizedDate('date_full') }}</h4>
     <h3>{{ slotDate|date('H:i') }}</h3>
     {% for row in groupedShifts %}
-        {% if row.task.id != 17 %}
-            <div style="font-weight: bold;">{{ row.task.name (row.task.code) }}</div>
-            {% for user in row.start %}
-                <div>
-                    <i class="fa fa-long-arrow-right"></i> {{ user.name }}
-                    {% for group in user.groups %}
-                        {{ group.shortName }}
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            {% for user in row.end %}
-                <div>
-                    <i class="fa fa-long-arrow-left"></i> {{ user.name }}
-                    {% for group in user.groups %}
-                        {{ group.shortName }}
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            <br>
-        {% endif %}
+        <div style="font-weight: bold;">{{ row.task.name (row.task.code) }}</div>
+        {% for user in row.start %}
+            <div>
+                <i class="fa fa-long-arrow-right"></i> {{ user.name }}
+                {% for group in user.groups %}
+                    {{ group.shortName }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% for user in row.end %}
+            <div>
+                <i class="fa fa-long-arrow-left"></i> {{ user.name }}
+                {% for group in user.groups %}
+                    {{ group.shortName }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <br>
     {% endfor %}
 </div>
 </body>

@@ -67,9 +67,17 @@ class Task
      */
     protected $color;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $informative;
+
     public function __construct()
     {
         $this->color = self::DEFAULT_COLOR;
+        $this->informative = false;
     }
 
     public function getId()
@@ -133,6 +141,18 @@ class Task
     public function setColor($color)
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function isInformative()
+    {
+        return $this->informative;
+    }
+
+    public function setInformative($informative)
+    {
+        $this->informative = $informative;
 
         return $this;
     }

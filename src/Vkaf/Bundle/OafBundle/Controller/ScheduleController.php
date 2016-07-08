@@ -39,6 +39,9 @@ class ScheduleController extends Controller
         $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
         $groupedShifts = [];
         foreach ($shifts as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
             $userId = $shift->getUser()->getId();
             if (!isset($groupedShifts[$userId])) {
                 $groupedShifts[$userId] = [
@@ -64,6 +67,7 @@ class ScheduleController extends Controller
 
     /**
      * @Route("/{schedule}/slots/{slot}/print", name="oaf_schedule_slot_print")
+     * @Template
      */
     public function slotPrintAction(Schedule $schedule, $slot)
     {
@@ -77,6 +81,9 @@ class ScheduleController extends Controller
         $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
         $groupedShifts = [];
         foreach ($shifts as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
             $taskid = $shift->getTask()->getId();
             if (!isset($groupedShifts[$taskid])) {
                 $groupedShifts[$taskid] = [];
@@ -92,12 +99,12 @@ class ScheduleController extends Controller
             }
         }
 
-        return $this->render('VkafOafBundle:Schedule:slotPrint.html.twig', [
+        return [
             'schedule' => $schedule,
             'slot' => $slot,
             'slotDate' => $slotDate,
             'groupedShifts' => $groupedShifts,
-        ]);
+        ];
     }
 
     /**

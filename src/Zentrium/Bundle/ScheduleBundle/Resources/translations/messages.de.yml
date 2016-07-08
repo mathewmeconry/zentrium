@@ -155,6 +155,7 @@ zentrium_schedule:
             name: Name
             notes: Bemerkungen
             skill: Anforderung
+            informative: informell
         form:
             no_skill: Keine Qualifikation nötig
             saved: Die Aufgabe wurde erfolgreich gespeichert.
