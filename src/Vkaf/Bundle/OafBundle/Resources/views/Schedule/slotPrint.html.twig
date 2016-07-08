@@ -14,6 +14,7 @@
                 {% for group in user.groups %}
                     {{ group.shortName }}
                 {% endfor %}
+                {% if user.bednumber %}({{ 'zentrium.user.field.bednumber'|trans }} {{ user.bednumber }}){% endif %}
             </div>
         {% endfor %}
         {% for user in row.end %}
