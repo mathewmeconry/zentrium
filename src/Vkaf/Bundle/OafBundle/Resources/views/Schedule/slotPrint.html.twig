@@ -7,7 +7,7 @@
     <h4>{{ slotDate|localizedDate('date_full') }}</h4>
     <h3>{{ slotDate|date('H:i') }}</h3>
     {% for row in groupedShifts %}
-        <div style="font-weight: bold;">{{ row.task.name (row.task.code) }}</div>
+        <div style="font-weight: bold;">{{ row.task.name }} ({{ row.task.code }})</div>
         {% for user in row.start %}
             <div>
                 <i class="fa fa-long-arrow-right"></i> {{ user.name }}
