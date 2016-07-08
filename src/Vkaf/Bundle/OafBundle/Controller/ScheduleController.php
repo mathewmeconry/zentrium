@@ -24,6 +24,17 @@ use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 class ScheduleController extends Controller
 {
     /**
+     * @Route("/{schedule}/slots/next", name="oaf_schedule_slot_next")
+     */
+    public function slotNextAction(Schedule $schedule)
+    {
+        $offset = time() - $schedule->getBegin()->getTimestamp();
+        $slot = max(0, min($schedule->getSlotCount(), ceil($offset / $schedule->getSlotDuration())));
+
+        return $this->redirectToRoute('oaf_schedule_slot', ['schedule' => $schedule->getId(), 'slot' => $slot]);
+    }
+
+    /**
      * @Route("/{schedule}/slots/{slot}", name="oaf_schedule_slot")
      * @Template
      */

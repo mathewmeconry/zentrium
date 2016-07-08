@@ -23,6 +23,7 @@
     </h3>
     <div class="box-tools">
       <a href="{{ path('schedule_view', routeParameters|merge({'layout': (config.layout == 'task' ? 'user' : 'task')})) }}" class="btn btn-box-tool" data-title="{{ 'zentrium_schedule.schedule.view.change_layout'|trans }}" data-toggle="tooltip"><i class="fa fa-outdent"></i></a>
+      <a href="{{ path('oaf_schedule_slot_next', {'schedule': schedule.id}) }}" class="btn btn-box-tool"><i class="fa fa-exchange"></i></a>
       <div class="btn-group">
         <button type="button" class="btn btn-box-tool" data-toggle="dropdown" data-title="{{ 'zentrium_schedule.schedule.view.filter.title'|trans }}"><i class="fa fa-filter"></i></button>
         <ul class="dropdown-menu">
