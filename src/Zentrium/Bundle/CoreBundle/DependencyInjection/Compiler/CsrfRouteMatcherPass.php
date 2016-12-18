@@ -16,10 +16,6 @@ class CsrfRouteMatcherPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('dunglas_angular_csrf.validation_listener')) {
-            continue;
-        }
-
         $listenerDefinition = $container->getDefinition('dunglas_angular_csrf.validation_listener');
         $listenerDefinition->replaceArgument(1, new Reference('zentrium.csrf.route_matcher'));
 

@@ -16,10 +16,6 @@ class PasswordResetListenerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('fos_user.listener.resetting')) {
-            continue;
-        }
-
         $definition = $container->getDefinition('fos_user.listener.resetting');
         $definition->setClass(PasswordResetListener::class);
     }
