@@ -63,23 +63,17 @@ services:
         factory: ["@doctrine", getRepository]
         arguments: [Zentrium\Bundle\CoreBundle\Entity\User]
 
-    zentrium.request.converter:
-        class: Zentrium\Bundle\CoreBundle\Request\RequestBodyParamConverter
-        arguments:
-            - "@fos_rest.serializer"
-            - "%fos_rest.serializer.exclusion_strategy.groups%"
-            - "%fos_rest.serializer.exclusion_strategy.version%"
-            - "@fos_rest.validator"
-            - "%fos_rest.converter.request_body.validation_errors_argument%"
-        tags:
-            - { name: request.param_converter, converter: zentrium.request_body }
-
     zentrium.serializer.relation_handler:
         class: Zentrium\Bundle\CoreBundle\Serializer\RelationHandler
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: jms_serializer.handler, type: Relation, direction: serialization, format: json, method: serializeRelation }
             - { name: jms_serializer.handler, type: RelationCollection, direction: serialization, format: json, method: serializeRelationCollection }
+
+    zentrium.serializer.validation_exception_handler:
+        class: Zentrium\Bundle\CoreBundle\Serializer\ValidationExceptionHandler
+        tags:
+            - { name: jms_serializer.handler, type: ValidationException, direction: serialization, format: json, method: serialize }
 
     zentrium.templating.helper.duration:
         class: Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper
@@ -112,9 +106,3 @@ services:
         public: false
         tags:
             - { name: twig.extension }
-
-    zentrium.view.validation_exception_listener:
-        class: Zentrium\Bundle\CoreBundle\View\ValidationExceptionListener
-        arguments: ["@fos_rest.exception_handler", "@fos_rest.view_handler"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
