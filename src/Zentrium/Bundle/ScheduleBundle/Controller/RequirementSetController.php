@@ -270,7 +270,7 @@ class RequirementSetController extends Controller
         $it = \DateTimeImmutable::createFromFormat('U', $set->getBegin()->getTimestamp(), $set->getBegin()->getTimezone());
         $it = $it->setTimezone($tz);
         $itDiff = new \DateInterval('PT'.$slotDuration.'S');
-        for ($i = 0;$i < $slotCount;$i++) {
+        for ($i = 0; $i < $slotCount; $i++) {
             $nextIt = $it->add($itDiff);
             $rowPrototype[] = [
                 'set' => 0,
@@ -290,7 +290,7 @@ class RequirementSetController extends Controller
                 }
                 $firstSlot = floor(($item->getFrom()->setTimezone($tz)->getTimestamp() - $begin) / $slotDuration);
                 $lastSlot = ceil(($item->getTo()->setTimezone($tz)->getTimestamp() - $begin) / $slotDuration);
-                for ($i = max($firstSlot, 0);$i < min($lastSlot, $slotCount); $i++) {
+                for ($i = max($firstSlot, 0); $i < min($lastSlot, $slotCount); $i++) {
                     $matrix[$taskId][$i][$key] += ($count !== null ? $count : $item->getCount());
                 }
             }

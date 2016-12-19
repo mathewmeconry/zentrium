@@ -42,7 +42,8 @@ class PhoneNumberHelper
     /**
      * Formats a phone number.
      *
-     * @param  PhoneNumber     $number
+     * @param PhoneNumber $number
+     *
      * @return string|int|null $format
      */
     public function format(PhoneNumber $number, $format = null)

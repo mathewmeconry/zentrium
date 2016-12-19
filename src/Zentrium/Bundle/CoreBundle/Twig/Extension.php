@@ -71,8 +71,9 @@ class Extension extends \Twig_Extension
     /**
      * Returns an array without certain values.
      *
-     * @param  array $array
-     * @param  mixed $exclude
+     * @param array $array
+     * @param mixed $exclude
+     *
      * @return array
      */
     public function withoutFilter($array, $exclude)
@@ -95,8 +96,9 @@ class Extension extends \Twig_Extension
     /**
      * Returns a list as human-readable list.
      *
-     * @param  mixed  $list
-     * @param  array  $options
+     * @param mixed $list
+     * @param array $options
+     *
      * @return string
      */
     public function formatListFilter($list, array $options = [])
@@ -171,9 +173,10 @@ class Extension extends \Twig_Extension
     /**
      * Distributes boxes in a grid such that every row is filled completely.
      *
-     * @param  int   $columns  Number of columns
-     * @param  int   $minWidth Minimum width of each box
-     * @param  int   $boxes    Number of boxes
+     * @param int $columns  Number of columns
+     * @param int $minWidth Minimum width of each box
+     * @param int $boxes    Number of boxes
+     *
      * @return array Width of each box
      */
     public function distributeGridFunction($columns, $minWidth, $boxes)
