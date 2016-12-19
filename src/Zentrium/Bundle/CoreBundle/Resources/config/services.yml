@@ -9,7 +9,7 @@ services:
     zentrium.commonmark.converter:
         class: League\CommonMark\CommonMarkConverter
         lazy: true
-        arguments: [{ safe: true}, "@zentrium.commonmark.environment"]
+        arguments: [{ html_input: escape, allow_unsafe_links: false }, "@zentrium.commonmark.environment"]
 
     zentrium.commonmark.processor.link:
         class: Zentrium\Bundle\CoreBundle\CommonMark\LinkProcessor
