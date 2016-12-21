@@ -15,10 +15,7 @@ class SleepValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $dateTimeHelper = $this->getMockBuilder('\Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $dateTimeHelper = $this->createMock('\Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper');
         $dateTimeHelper->method('format')->will($this->returnCallback(function ($date) {
             return $date->format('Y-m-d H:i:s');
         }));
@@ -96,7 +93,7 @@ class SleepValidatorTest extends \PHPUnit_Framework_TestCase
 
     private function mockUser($id, $name)
     {
-        $user = $this->getMock('Zentrium\Bundle\CoreBundle\Entity\User');
+        $user = $this->createMock('Zentrium\Bundle\CoreBundle\Entity\User');
         $user->method('getId')->willReturn($id);
         $user->method('getName')->willReturn($name);
 

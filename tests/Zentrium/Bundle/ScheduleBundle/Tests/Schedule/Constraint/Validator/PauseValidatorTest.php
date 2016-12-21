@@ -14,18 +14,12 @@ class PauseValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $dateTimeHelper = $this->getMockBuilder('\Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $dateTimeHelper = $this->createMock('\Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper');
         $dateTimeHelper->method('format')->will($this->returnCallback(function ($date) {
             return $date->format('Y-m-d H:i:s');
         }));
 
-        $durationHelper = $this->getMockBuilder('\Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $durationHelper = $this->createMock('\Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper');
         $durationHelper->method('format')->will($this->returnCallback(function ($duration) {
             return (string) $duration;
         }));
@@ -40,7 +34,7 @@ class PauseValidatorTest extends \PHPUnit_Framework_TestCase
         $schedule->setEnd(new DateTimeImmutable('2015-05-05 18:00:00'));
         $schedule->setSlotDuration(3600);
 
-        $user = $this->getMock('Zentrium\Bundle\CoreBundle\Entity\User');
+        $user = $this->createMock('Zentrium\Bundle\CoreBundle\Entity\User');
         $user->method('getId')->willReturn(1);
         $user->method('getName')->willReturn('name');
 
@@ -70,7 +64,7 @@ class PauseValidatorTest extends \PHPUnit_Framework_TestCase
         $schedule->setEnd(new DateTimeImmutable('2015-05-05 18:00:00'));
         $schedule->setSlotDuration(3600);
 
-        $user = $this->getMock('Zentrium\Bundle\CoreBundle\Entity\User');
+        $user = $this->createMock('Zentrium\Bundle\CoreBundle\Entity\User');
         $user->method('getId')->willReturn(1);
         $user->method('getName')->willReturn('name');
 
