@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% spaceless %}
 {% set title = block('title')|trim %}
+{% set title_sub = block('title_sub') ?? '' %}
 <html lang="{{ app.request.locale }}">
 <head>
   <meta charset="utf-8">
@@ -55,7 +56,7 @@
     <div class="content-wrapper">
       {% if title %}
       <section class="content-header">
-        <h1>{{ title|raw }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub|raw }}</small>{% endif %}</h1>
+        <h1>{{ title|raw }}{% if title_sub %}<small>{{ title_sub|raw }}</small>{% endif %}</h1>
       </section>
       {% endif %}
       <section class="content">

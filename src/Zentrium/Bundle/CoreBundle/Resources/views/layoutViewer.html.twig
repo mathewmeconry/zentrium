@@ -44,7 +44,7 @@
   <div class="content-wrapper">
     <div class="container">
       <section class="content-header">
-        <h1>{{ title }}{% set title_sub = block('title_sub') %}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
+        <h1>{{ title }}{% if title_sub %}<small>{{ title_sub }}</small>{% endif %}</h1>
       </section>
       <section class="content">
         {% include 'ZentriumCoreBundle::flashes.html.twig' %}
