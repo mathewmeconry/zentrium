@@ -150,7 +150,7 @@ class MapController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->get('zentrium_map.manager.map')->save($map);
 
             $this->addFlash('success', 'zentrium_map.map.form.saved');

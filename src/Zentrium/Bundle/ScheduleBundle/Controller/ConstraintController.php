@@ -94,7 +94,7 @@ class ConstraintController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             if (isset($form['parameters'])) {
                 $parameters = $builder->handleFormData($parameters, $form['parameters']->getData());
             }

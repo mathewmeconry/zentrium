@@ -70,7 +70,7 @@ class SkillController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->get('zentrium_schedule.manager.skill');
             $manager->save($skill);
 

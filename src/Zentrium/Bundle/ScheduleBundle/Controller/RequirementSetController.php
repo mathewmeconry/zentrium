@@ -338,7 +338,7 @@ class RequirementSetController extends Controller
     {
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             return new JsonResponse(['success' => false], 400);
         }
 
@@ -372,7 +372,7 @@ class RequirementSetController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->get('zentrium_schedule.manager.requirement_set');
             $manager->save($set);
 

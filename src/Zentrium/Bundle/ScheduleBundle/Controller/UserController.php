@@ -78,7 +78,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->get('zentrium_schedule.manager.availability');
             $manager->save($availability);
 
