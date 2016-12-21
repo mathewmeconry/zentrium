@@ -13,11 +13,11 @@ class RequestBodyParamConverterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $serializer = $this->getMockBuilder('FOS\RestBundle\Serializer\Serializer')->getMock();
+        $serializer = $this->createMock('FOS\RestBundle\Serializer\Serializer');
 
-        $error = $this->getMockBuilder('Symfony\Component\Validator\ConstraintViolationInterface')->getMock();
+        $error = $this->createMock('Symfony\Component\Validator\ConstraintViolationInterface');
 
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterface')->getMock();
+        $validator = $this->createMock('Symfony\Component\Validator\Validator\ValidatorInterface');
         $validator
             ->expects($this->once())
             ->method('validate')
