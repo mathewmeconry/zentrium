@@ -34,26 +34,26 @@ zentrium_schedule:
             name: Maximale Einsatzdauer
             description: Stellt sicher, dass Personen höchstens eine gewisse Dauer ohne Pause im Einsatz sind.
             label: Maximale Dauer
-            message: %user% ist am %begin% mehr als %max_duration% ohne Pause im Einsatz.
+            message: "%user% ist am %begin% mehr als %max_duration% ohne Pause im Einsatz."
         pause:
             name: Pause
             description: Stellt sicher, dass nach einer gewissen Einsatzdauer eine Pause eingelegt wird.
             label_limit: Maximale Einsatzdauer (Zwischenpausen ausgenommen)
             label_pause: Mindestdauer der Pause
-            message: %user% hat von %from% bis %to% keine Pause die mindestens %pause% dauert.
+            message: "%user% hat von %from% bis %to% keine Pause die mindestens %pause% dauert."
         separation:
             name: Überlappungsfreie Schichten
             description: Stellt sicher, dass alle Schichten überlappungsfrei sind und keine Person an zwei Orten gleichzeitig im Einsatz ist.
-            message: %user% ist zur selben Zeit in mehrere Schichten eingeteilt.
+            message: "%user% ist zur selben Zeit in mehrere Schichten eingeteilt."
         skill:
             name: Anforderungen erfüllt
             description: Prüft ob alle Personen über die nötigen Qualifikationen verfügen.
-            message: %user% ist während %duration% ohne die nötige Qualifikation «%skill%» im Einsatz.
+            message: "%user% ist während %duration% ohne die nötige Qualifikation «%skill%» im Einsatz."
         sleep:
             name: Schlaf
             description: Stellt sicher, dass jede Person genügend Schlaf hat.
             label: Minimale Schlafdauer
-            message: %user% schläft ab %date% nicht genügend.
+            message: "%user% schläft ab %date% nicht genügend."
     dashboard:
         text: publizierte Schicht|publizierte Schichten
         show: Anzeigen

@@ -7,7 +7,6 @@ use League\Period\Period;
 use Symfony\Component\Validator\Constraints as Assert;
 use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
-use Zentrium\Bundle\ScheduleBundle\Entity\Task;
 use Zentrium\Bundle\ScheduleBundle\Util\SlotUtil;
 
 class ModifyOperation implements OperationInterface

@@ -31,8 +31,6 @@ class SnapshotCollection implements Collection
         $this->takeSnapshot();
     }
 
-    /**
-     */
     public function takeSnapshot()
     {
         $this->snapshot = $this->collection->toArray();
@@ -54,7 +52,9 @@ class SnapshotCollection implements Collection
         return array_udiff_assoc(
             $this->snapshot,
             $this->collection->toArray(),
-            function ($a, $b) { return $a === $b ? 0 : 1; }
+            function ($a, $b) {
+                return $a === $b ? 0 : 1;
+            }
         );
     }
 
@@ -66,7 +66,9 @@ class SnapshotCollection implements Collection
         return array_udiff_assoc(
             $this->collection->toArray(),
             $this->snapshot,
-            function ($a, $b) { return $a === $b ? 0 : 1; }
+            function ($a, $b) {
+                return $a === $b ? 0 : 1;
+            }
         );
     }
 

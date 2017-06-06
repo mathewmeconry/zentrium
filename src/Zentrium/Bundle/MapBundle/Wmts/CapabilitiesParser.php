@@ -360,7 +360,7 @@ class CapabilitiesParser
         $doubleLists = ['TopLeftCorner'];
         foreach ($result as $key => &$value) {
             if (in_array($key, $doubles)) {
-                $value = doubleval($value);
+                $value = floatval($value);
             } elseif (in_array($key, $doubleLists)) {
                 $value = array_map('doubleval', explode(' ', $value));
             }

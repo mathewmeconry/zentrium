@@ -55,7 +55,7 @@ class EntryApiController extends FOSRestController
         ]);
 
         $form->handleRequest($request);
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             throw new BadRequestHttpException();
         }
 

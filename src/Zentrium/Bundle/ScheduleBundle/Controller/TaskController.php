@@ -57,7 +57,7 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->get('zentrium_schedule.manager.task');
             $manager->save($task);
 

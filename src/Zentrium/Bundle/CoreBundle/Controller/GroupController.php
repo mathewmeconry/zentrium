@@ -69,7 +69,7 @@ class GroupController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $groupManager = $this->get('fos_user.group_manager');
 
             $event = new FormEvent($form, $request);

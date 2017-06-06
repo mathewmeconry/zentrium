@@ -16,7 +16,8 @@ class GridDistributor
     /**
      * Distribute a number of boxes such that every row is filled.
      *
-     * @param  int   $n Number of boxes
+     * @param int $n Number of boxes
+     *
      * @return array Widths of all boxes
      */
     public function distribute($n)

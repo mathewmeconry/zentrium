@@ -2,8 +2,6 @@
 
 namespace Zentrium\Bundle\TimesheetBundle\Event;
 
-use Symfony\Component\HttpFoundation\Response;
-
 class GetResponseEntryEvent extends EntryEvent
 {
     private $response;

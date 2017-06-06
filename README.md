@@ -29,7 +29,7 @@ grunt
 
 ## System Requirements
 
- * PHP ≥ 5.5
+ * PHP ≥ 7.0
  * php-intl
  * NPM
  * Grunt

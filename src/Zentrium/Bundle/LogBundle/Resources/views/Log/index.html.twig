@@ -1,4 +1,5 @@
 {% extends 'ZentriumLogBundle:Log:layoutSidebar.html.twig' %}
+{% import "ZentriumLogBundle::utils.html.twig" as logUtils %}
 
 {% block content_top %}<a href="{{ path('log_new') }}" class="btn btn-primary btn-block margin-bottom">{{ 'zentrium_log.menu.new'|trans }}</a>{% endblock %}
 
