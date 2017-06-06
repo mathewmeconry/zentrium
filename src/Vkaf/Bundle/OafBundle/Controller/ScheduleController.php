@@ -128,7 +128,7 @@ class ScheduleController extends Controller
 
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->redirectToRoute('home');
         }
 

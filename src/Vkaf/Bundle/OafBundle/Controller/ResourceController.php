@@ -60,7 +60,7 @@ class ResourceController extends Controller
 
         $assignForm->handleRequest($request);
 
-        if ($assignForm->isValid()) {
+        if ($assignForm->isSubmitted() && $assignForm->isValid()) {
             $manager = $this->get('vkaf_oaf.manager.resource_assignment');
             $manager->save($newAssignment);
 
@@ -109,7 +109,7 @@ class ResourceController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->get('vkaf_oaf.manager.resource');
             $manager->save($resource);
 
