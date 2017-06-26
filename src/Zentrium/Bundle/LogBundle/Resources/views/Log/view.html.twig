@@ -20,11 +20,18 @@
       </div>
       <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
     </div>
-    {% if log.source %}<p class="log">{{ 'zentrium_log.log.field.source'|trans }}: {{ log.source }}</p>{% endif %}
+    {% if log.location %}<p>{{ 'zentrium_log.log.field.location'|trans }}: {{ log.location }}</p>{% endif %}
+    {% if log.source %}<p>{{ 'zentrium_log.log.field.source'|trans }}: {{ log.source }}</p>{% endif %}
+    <p>{{ 'zentrium_log.log.field.reported'|trans }}: {{ log.reported|default(log.created)|localizedDate('datetime_medium') }} ({{ log.deadline|default(log.created)|ago }})</p>
     {% if log.deadline %}<p>{{ 'zentrium_log.log.field.deadline'|trans }}: <span class="{% if log.deadline < now and log.status == 'open' %}text-danger{% endif %}">{{ log.deadline|localizedDate('datetime_medium') }} ({{ log.deadline|ago }})</span></p>{% endif %}
   </div>
   <div class="box-body">
-    {{ log.details|default('-')|nl2br }}
+    <p>{{ log.details|default('-')|nl2br }}</p>
+    {% if log.resolution %}
+    <div class="attachment-block">
+      <div class="attachment-text">{{ log.resolution|default('-')|nl2br }}</div>
+    </div>
+    {% endif %}
   </div>
   <div class="box-footer">
     <div class="log-entry-meta">{{ log.author.name }} · {{ log.created|localizedDate('datetime_medium') }}{% if log.edited != log.created %} ({{ 'zentrium_log.view.edited'|trans({'%ago%': log.edited|ago}) }}){% endif %}</div>

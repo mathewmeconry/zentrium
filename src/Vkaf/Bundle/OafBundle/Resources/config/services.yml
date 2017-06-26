@@ -45,3 +45,8 @@ services:
         class: Vkaf\Bundle\OafBundle\Security\KioskAuthenticator
         arguments: ["@doctrine.orm.entity_manager", "@templating"]
         lazy: true
+
+    vkaf_oaf.twig.extension:
+        class: Vkaf\Bundle\OafBundle\Twig\Extension
+        tags:
+            - { name: twig.extension }

@@ -26,12 +26,24 @@ class LogType extends AbstractType
                 'label' => 'zentrium_log.log.field.details',
                 'required' => false,
             ])
+            ->add('location', TextType::class, [
+                'label' => 'zentrium_log.log.field.location',
+                'required' => false,
+            ])
             ->add('source', TextType::class, [
                 'label' => 'zentrium_log.log.field.source',
                 'required' => false,
             ])
+            ->add('reported', DateTimeType::class, [
+                'label' => 'zentrium_log.log.field.reported',
+                'required' => false,
+            ])
             ->add('deadline', DateTimeType::class, [
                 'label' => 'zentrium_log.log.field.deadline',
+                'required' => false,
+            ])
+            ->add('resolution', TextareaType::class, [
+                'label' => 'zentrium_log.log.field.resolution',
                 'required' => false,
             ])
             ->add('status', ChoiceType::class, [

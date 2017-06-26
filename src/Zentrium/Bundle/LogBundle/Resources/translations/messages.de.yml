@@ -4,7 +4,7 @@ zentrium_log:
     menu:
         list: Übersicht
         log: Journal
-        new: Erfassen
+        new: Eintrag erfassen
     dashboard:
         log_widget:
             open_logs: offener Eintrag|offene Einträge
@@ -22,6 +22,9 @@ zentrium_log:
         label_new: Neues Label
         with_labels: mit Label %labels%|mit Labels %labels%
         empty: Es sind keine Einträge mit den gewählten Kriterien vorhanden.
+        filter: Filter
+        filter_reset: Alle Einträge
+        deadline: bis %date%
     new:
         title: Eintrag erfassen
     edit:
@@ -42,14 +45,18 @@ zentrium_log:
             saved: Das Label wurde erfolgreich gespeichert.
     log:
         field:
+            id: ID
             details: Beschreibung
             labels: Labels
             status: Status
             title: Titel
             updated: Letzte Aktualisierung
             created: Erfassungsdatum
+            reported: Meldungsdatum
             deadline: Frist
             source: Auftraggeber/Melder
+            location: Ort
+            resolution: Lösung
         form:
             saved: Der Eintrag wurde erfolgreich gespeichert.
     status:

@@ -34,6 +34,7 @@ class Log
      * @var string
      *
      * @Assert\NotBlank
+     * @Assert\Length(max=100)
      *
      * @ORM\Column(type="string", length=100)
      */
@@ -51,14 +52,39 @@ class Log
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
+    protected $reported;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
     protected $deadline;
 
     /**
      * @var string
      *
+     * @Assert\Length(max=100)
+     *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     protected $source;
+
+    /**
+     * @var string
+     *
+     * @Assert\Length(max=100)
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $location;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $resolution;
 
     /**
      * @var string
@@ -99,7 +125,7 @@ class Log
      * @var DateTime
      *
      * @Gedmo\Timestampable(on="create")
-     * @Gedmo\Timestampable(on="change", field={"title", "details"})
+     * @Gedmo\Timestampable(on="change", field={"title", "details", "reported", "deadline", "source", "location", "resolution"})
      * @ORM\Column(type="datetime")
      */
     protected $edited;
@@ -139,6 +165,18 @@ class Log
         return $this;
     }
 
+    public function getReported()
+    {
+        return $this->reported;
+    }
+
+    public function setReported($reported)
+    {
+        $this->reported = $reported;
+
+        return $this;
+    }
+
     public function getDeadline()
     {
         return $this->deadline;
@@ -159,6 +197,30 @@ class Log
     public function setSource($source)
     {
         $this->source = $source;
+
+        return $this;
+    }
+
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getResolution()
+    {
+        return $this->resolution;
+    }
+
+    public function setResolution($resolution)
+    {
+        $this->resolution = $resolution;
 
         return $this;
     }
