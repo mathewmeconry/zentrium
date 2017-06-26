@@ -34,7 +34,7 @@ class SlideManagerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Vkaf\Bundle\OafBundle\Kiosk\Slide\RenderException
+     * @expectedException \Vkaf\Bundle\OafBundle\Kiosk\Slide\RenderException
      */
     public function testRenderInvalidType()
     {
