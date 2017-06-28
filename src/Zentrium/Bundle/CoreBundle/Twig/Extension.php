@@ -153,9 +153,9 @@ class Extension extends \Twig_Extension
      *
      * @return string
      */
-    public function durationFilter($duration)
+    public function durationFilter($duration, array $options = [])
     {
-        return $this->durationHelper->format($duration);
+        return $this->durationHelper->format($duration, $options);
     }
 
     /**
