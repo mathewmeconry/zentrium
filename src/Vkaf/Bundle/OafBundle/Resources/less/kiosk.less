@@ -51,3 +51,41 @@
         border-left: 1px solid #aaa;
     }
 }
+
+.kiosk-schedule-list {
+    table {
+        table-layout: fixed;
+    }
+
+    th:nth-child(2n+1) {
+        width: 20ch;
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+
+        &:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 5ch;
+            content: '';
+        }
+    }
+
+    tr:nth-child(even) td:after {
+        background: linear-gradient(to right, fade(#ffffff, 0%) 0%, #ffffff 75%);
+    }
+
+    tr:nth-child(odd) td:after {
+        background: linear-gradient(to right, fade(#f9f9f9, 0%) 0%, #f9f9f9 75%);
+    }
+
+    .label + .label {
+        margin-left: 0.6em;
+    }
+}

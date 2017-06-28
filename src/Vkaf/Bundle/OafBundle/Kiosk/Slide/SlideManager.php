@@ -2,6 +2,7 @@
 
 namespace Vkaf\Bundle\OafBundle\Kiosk\Slide;
 
+use Doctrine\Common\Inflector\Inflector;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -65,7 +66,7 @@ class SlideManager
 
         $response = $this->types[$type]->render($options, $next);
         if (is_array($response)) {
-            $response = new Response($this->templating->render('VkafOafBundle:Kiosk:'.$type.'.html.twig', $response));
+            $response = new Response($this->templating->render('VkafOafBundle:Kiosk:'.Inflector::camelize($type).'.html.twig', $response));
         }
 
         return $response;

@@ -32,6 +32,12 @@ services:
         tags:
             - { name: vkaf_oaf.kiosk.slide, type: schedule }
 
+    vkaf_oaf.kiosk.slide.schedule_list:
+        class: Vkaf\Bundle\OafBundle\Kiosk\Slide\ScheduleListSlide
+        arguments: ["@zentrium_schedule.manager.shift", "@zentrium.repository.user"]
+        tags:
+            - { name: vkaf_oaf.kiosk.slide, type: schedule_list }
+
     vkaf_oaf.kiosk.slide.welcome:
         class: Vkaf\Bundle\OafBundle\Kiosk\Slide\WelcomeSlide
         tags:

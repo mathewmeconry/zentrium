@@ -1,0 +1,40 @@
+{% extends "VkafOafBundle:Kiosk:slide.html.twig" %}
+
+{% block content %}
+<div class="box box-primary kiosk-schedule-list">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          {% for column in columns %}
+            <th>Name</th>
+            <th>Nächste Schichten</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in range(0, columns[0]|length - 1) %}
+        <tr>
+          {% for column in columns %}
+            {% if column[i] is defined %}
+            <td>{{ column[i].user.name(true) }}</td>
+            <td>
+              {% if column[i].shifts|length %}
+                {% for shift in column[i].shifts %}
+                <span class="label" style="background-color: {{ shift.task.color }}">{{ shift.from|date('H:i') }} - {{ shift.to|date('H:i') }}</span>
+                {% endfor %}
+              {% else %}
+                <span class="text-muted">{{ 'vkaf_oaf.kiosk.schedule_list.no_shifts'|trans({'%hours%': horizon}) }}</span>
+              {% endif %}
+            </td>
+            {% else %}
+            <td colspan="2"></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -13,6 +13,8 @@ vkaf_oaf:
         welcome: |
             Herzlich Willkommen
             am Openair Frauenfeld!
+        schedule_list:
+            no_shifts: Keine Einsätze in den nächsten %hours% Stunden.
     dashboard:
         user_schedule:
             title: Individueller Einsatzplan
