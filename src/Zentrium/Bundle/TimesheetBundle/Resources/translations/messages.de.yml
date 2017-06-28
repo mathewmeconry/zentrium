@@ -47,9 +47,17 @@ zentrium_timesheet:
         filename: Zeiterfassung %date%
         filename_date: d.m.Y
         parameter:
+            format: Format
             from: Von
             to: Bis
             user_filter: Benutzer-Filter
             group_filter: Gruppen-Filter
         form:
             submit: Exportieren
+        format:
+            csv: CSV/Excel
+            report: Report
+        report:
+            signature_host: Unterschrift OK
+            signature_group: Unterschrift Abteilung
+            signature_user: Unterschrift VK

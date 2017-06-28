@@ -3,3 +3,73 @@
         width: 25%;
     }
 }
+
+.timesheet-report {
+    color: #000;
+
+    @page {
+        margin: 1cm;
+    }
+
+    h1 {
+        font-size: 18pt;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 15pt;
+        text-align: center;
+    }
+
+    h4 {
+        font-size: 12pt;
+    }
+
+    header, section {
+        page-break-inside: avoid;
+        margin-bottom: 2cm;
+        overflow: hidden;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    td, th {
+        font-size: 10pt;
+        padding: 0.5em 0.5em 0.5em 0;
+        border-bottom: 1pt solid fade(black, 30%);
+    }
+
+    .summary {
+        font-weight: bold;
+    }
+
+    .notes {
+        width: 25%;
+    }
+
+    .duration {
+        width: 10%;
+        text-align: right;
+    }
+
+    .flags {
+        width: 5%;
+    }
+
+    .signatures {
+        text-align: right;
+    }
+
+    .signature {
+        display: inline-block;
+        text-align: left;
+        width: 30%;
+        margin: 2cm 0 0 5%;
+        border-top: 1pt solid #000;
+        font-size: 9pt;
+        padding: 0.3em;
+    }
+}

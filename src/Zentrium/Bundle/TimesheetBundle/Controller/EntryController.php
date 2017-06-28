@@ -48,7 +48,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->get('zentrium_timesheet.export')->export($parameters);
+            return $this->get('zentrium_timesheet.export.'.$parameters->getFormat())->export($parameters);
         }
 
         return [

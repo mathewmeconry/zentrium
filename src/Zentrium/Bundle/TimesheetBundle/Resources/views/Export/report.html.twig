@@ -1,0 +1,87 @@
+{% extends 'ZentriumTimesheetBundle::layout.html.twig' %}
+
+{% block title %}{{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+
+{% block body_class %}timesheet-report{% endblock %}
+
+{% set durationOptions = {'format': 'compact', 'with_seconds': false} %}
+
+{% block body %}
+<header>
+  <h1>{{ 'zentrium_timesheet.layout.timesheet'|trans }}</h1>
+  <h2>{{ parameters.from|localizedDate('date_medium') }}{% if parameters.to != parameters.from %} - {{ parameters.to|localizedDate('date_medium') }}{% endif %}</h2>
+  {% if parameters.groupFilter %}
+  <h2>{{ parameters.groupFilter.name }}</h2>
+  {% endif %}
+</header>
+{% if not parameters.userFilter %}
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>{{ 'zentrium_timesheet.entry.field.user'|trans }}</th>
+        <th>{{ 'zentrium_timesheet.entry.field.activity'|trans }}</th>
+        <th class="duration">{{ 'zentrium_timesheet.entry.field.duration'|trans }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      {% for activity in row.activities %}
+      <tr>
+        <td>{{ row.user.name(true) }}</td>
+        <td>{{ activity.activity.name }}</td>
+        <td class="duration">{{ activity.duration|duration(durationOptions) }}</td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+      <tr class="summary">
+        <td colspan="2"></td>
+        <td class="duration">{{ duration|duration(durationOptions) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% if parameters.groupFilter or parameters.userFilter %}
+  <div class="signatures">
+    <div class="signature">{{ 'zentrium_timesheet.export.report.signature_host'|trans }}</div>
+    <div class="signature">{{ 'zentrium_timesheet.export.report.signature_group'|trans }}</div>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+{% for row in rows %}
+<section>
+  <h4>{{ row.user.name(true )}}</h4>
+  <table>
+    <thead>
+      <th>{{ 'zentrium_timesheet.entry.field.start'|trans }}</th>
+      <th>{{ 'zentrium_timesheet.entry.field.end'|trans }}</th>
+      <th>{{ 'zentrium_timesheet.entry.field.activity'|trans }}</th>
+      <th class="notes">{{ 'zentrium_timesheet.entry.field.notes'|trans }}</th>
+      <th class="flags"></th>
+      <th class="duration">{{ 'zentrium_timesheet.entry.field.duration'|trans }}</th>
+    </thead>
+    <tbody>
+      {% for entry in row.entries %}
+      <tr>
+        <td>{{ entry.start|localizedDate('datetime_medium') }}</td>
+        <td>{{ entry.end|localizedDate('datetime_medium') }}</td>
+        <td>{{ entry.activity.name }}</td>
+        <td class="notes">{{ entry.notes }}</td>
+        <td class="flags">{% if not entry.approved %}<span class="fa fa-unlock"></span>{% endif %}</td>
+        <td class="duration">{{ entry.duration|duration(durationOptions) }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="summary">
+        <td colspan="5"></td>
+        <td class="duration">{{ row.duration|duration(durationOptions) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% if parameters.groupFilter or parameters.userFilter %}
+  <div class="signatures">
+    <div class="signature">{{ 'zentrium_timesheet.export.report.signature_user'|trans }}</div>
+  </div>
+  {% endif %}
+</section>
+{% endfor %}
+{% endblock %}

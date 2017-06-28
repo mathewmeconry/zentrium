@@ -47,7 +47,7 @@ class Exporter
         ];
         fputcsv($fp, $header);
 
-        $entries = $this->manager->findByCriteria($this->buildCriteria($parameters));
+        $entries = $this->fetchEntries($parameters);
         foreach ($entries as $entry) {
             $row = [
                 $entry->getId(),
@@ -77,7 +77,7 @@ class Exporter
         return $this->buildResponse($content, $filename, 'text/comma-separated-values');
     }
 
-    private function buildCriteria(ExportParameters $parameters)
+    protected function fetchEntries(ExportParameters $parameters)
     {
         $to = clone $parameters->getTo();
         $to = $to->setTime(23, 59, 59);
@@ -96,7 +96,7 @@ class Exporter
             $criteria->andWhere(Criteria::expr()->eq('groups', $parameters->getGroupFilter()));
         }
 
-        return $criteria;
+        return $this->manager->findByCriteria($criteria);
     }
 
     private function buildResponse($content, $filename, $mimeType)

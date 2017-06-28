@@ -13,6 +13,12 @@ use Zentrium\Bundle\CoreBundle\Entity\User;
 class ExportParameters
 {
     /**
+     * @Assert\NotNull
+     * @Assert\Choice({"csv", "report"})
+     */
+    protected $format;
+
+    /**
      * @var DateTime
      *
      * @Assert\NotNull
@@ -41,6 +47,18 @@ class ExportParameters
     {
         $this->from = new DateTime();
         $this->to = new DateTime();
+    }
+
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    public function setFormat($format)
+    {
+        $this->format = $format;
+
+        return $this;
     }
 
     public function getFrom()

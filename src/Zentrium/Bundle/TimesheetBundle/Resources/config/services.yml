@@ -1,7 +1,15 @@
 services:
     zentrium_timesheet.export:
+        alias: zentrium_timesheet.export.csv
+
+    zentrium_timesheet.export.csv:
         class: Zentrium\Bundle\TimesheetBundle\Export\Exporter
         arguments: ["@zentrium_timesheet.manager.entry", "@translator"]
+        lazy: true
+
+    zentrium_timesheet.export.report:
+        class: Zentrium\Bundle\TimesheetBundle\Export\ReportExporter
+        arguments: ["@zentrium_timesheet.manager.entry", "@translator", "@twig"]
         lazy: true
 
     zentrium_timesheet.manager.activity:
