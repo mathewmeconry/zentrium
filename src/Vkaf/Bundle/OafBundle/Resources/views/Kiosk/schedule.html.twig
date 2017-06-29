@@ -8,6 +8,8 @@
   'userPartitions': userPartitions,
 } %}
 
+{% block body_class %}{{ parent() }} kiosk-page-full{% endblock %}
+
 {% block content %}
 <div class="box box-primary kiosk-schedule" data-config="{{ config|json_encode|e('html_attr') }}">
   <div class="box-body no-padding">
