@@ -198,19 +198,20 @@ class ScheduleController extends Controller
         }
 
         $users = $this->get('zentrium.repository.user')->findAll();
-        $dummyDate = $this->serializeDate(new DateTime('1980-01-01'));
+        $scheduleBegin = $this->serializeDate($schedule->getBegin());
+        $scheduleEnd = $this->serializeDate($schedule->getEnd());
         foreach ($users as $user) {
-            if (isset($coveredUsers[$user->getId()])) {
+            $userId = $user->getId();
+            if (isset($coveredUsers[$userId])) {
                 continue;
             }
-            // dummy entry to activate inverse-background rendering
             $result[] = [
-                'id' => 'dummy'.$user->getId(),
-                'resourceId' => $user->getId(),
-                'start' => $dummyDate,
-                'end' => $dummyDate,
+                'id' => 'a'.$userId,
+                'resourceId' => $userId,
+                'start' => $scheduleBegin,
+                'end' => $scheduleEnd,
                 'color' => '#cccccc',
-                'rendering' => 'inverse-background',
+                'rendering' => 'background',
             ];
         }
 
