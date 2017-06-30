@@ -10,7 +10,9 @@
         <tr>
           <th>{{ 'zentrium.group.field.name'|trans }}</th>
           <th>{{ 'zentrium.group.field.short_name'|trans }}</th>
+          {% if is_granted('ROLE_ADMINISTRATOR') %}
           <th class="col-right"><a href="{{ path('group_new') }}"><i class="fa fa-plus"></i></a></th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
@@ -18,7 +20,9 @@
         <tr>
           <td>{{ group.name }}</td>
           <td>{{ group.shortName }}</td>
+          {% if is_granted('ROLE_ADMINISTRATOR') %}
           <td class="col-right"><a href="{{ path('group_edit', {'group': group.id}) }}"><i class="fa fa-pencil"></i></a></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
