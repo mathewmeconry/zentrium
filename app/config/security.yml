@@ -6,6 +6,9 @@ security:
         fos_userbundle:
             id: fos_user.user_provider.username
 
+    role_hierarchy:
+        ROLE_USER: []
+
     firewalls:
         api_auth_token:
             pattern:    ^/api/auth/token

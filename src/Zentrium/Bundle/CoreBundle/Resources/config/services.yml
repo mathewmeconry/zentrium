@@ -36,6 +36,12 @@ services:
         tags:
             - { name: form.type }
 
+    zentrium.form.type.role:
+        class:  Zentrium\Bundle\CoreBundle\Form\Type\RoleType
+        arguments: ["@zentrium.roles"]
+        tags:
+            - { name: form.type }
+
     zentrium.oauth_server.application_manager:
         class: Zentrium\Bundle\CoreBundle\Entity\ApplicationManager
         arguments: ["@fos_oauth_server.entity_manager", "%fos_oauth_server.model.client.class%"]
@@ -62,6 +68,9 @@ services:
         class: Zentrium\Bundle\CoreBundle\Entity\UserRepository
         factory: ["@doctrine", getRepository]
         arguments: [Zentrium\Bundle\CoreBundle\Entity\User]
+
+    zentrium.roles:
+        class: Zentrium\Bundle\CoreBundle\Security\RoleHierarchy
 
     zentrium.serializer.relation_handler:
         class: Zentrium\Bundle\CoreBundle\Serializer\RelationHandler
