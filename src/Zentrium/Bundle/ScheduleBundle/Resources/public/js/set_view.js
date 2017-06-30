@@ -154,7 +154,7 @@ $(function() {
       if(message.data.id == activeSchedule.id) {
         var view = $view.fullCalendar('getView');
         var oldScroll = view.queryScroll();
-        view.setScroll({ top: oldScroll.top, left: message.data.left });
+        view.applyScroll({ top: oldScroll.top, left: message.data.left });
       }
     });
   }
