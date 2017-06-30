@@ -30,6 +30,7 @@ zentrium:
     form:
         color: Farbe
         gender: Geschlecht
+        role: Rolle
         delete: Löschen
         save: Speichern
     security:
@@ -101,6 +102,13 @@ zentrium:
             title: Benutzer bearbeiten
         new:
             title: Neuer Benutzer
+    role:
+        administrator:
+            label: Administrator
+            description: Zugriff auf die Benutzer- und Rollenverwaltung
+        manager:
+            label: Verwalter
+            description: Allgemeiner Zugriff auf den Verwaltungsbereich
     text_widget:
         field:
             title: Titel

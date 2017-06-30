@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\CsrfRouteMatcherPass;
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\PasswordResetListenerPass;
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RequestBodyParamConverterPass;
+use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RoleHierarchyPass;
+use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RoleRegistrationPass;
 
 class ZentriumCoreBundle extends Bundle
 {
@@ -20,5 +22,10 @@ class ZentriumCoreBundle extends Bundle
         $container->addCompilerPass(new CsrfRouteMatcherPass());
         $container->addCompilerPass(new PasswordResetListenerPass());
         $container->addCompilerPass(new RequestBodyParamConverterPass());
+        $container->addCompilerPass(new RoleHierarchyPass());
+        $container->addCompilerPass(new RoleRegistrationPass([
+            'ROLE_MANAGER' => ['zentrium.role.manager', []],
+            'ROLE_ADMINISTRATOR' => ['zentrium.role.administrator', ['ROLE_MANAGER']],
+        ]));
     }
 }

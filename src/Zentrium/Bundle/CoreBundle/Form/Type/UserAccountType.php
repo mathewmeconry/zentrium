@@ -27,6 +27,11 @@ class UserAccountType extends AbstractType
                 'required' => false,
                 'position' => ['after' => 'username'],
             ])
+            ->add('roles', RoleType::class, [
+                'required' => false,
+                'multiple' => true,
+                'position' => ['after' => 'enabled'],
+            ])
         ;
     }
 
