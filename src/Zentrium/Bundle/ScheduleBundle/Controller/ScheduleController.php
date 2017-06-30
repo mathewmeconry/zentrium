@@ -188,7 +188,7 @@ class ScheduleController extends Controller
             $userId = $availability->getUser()->getBase()->getId();
             $coveredUsers[$userId] = true;
             $result[] = [
-                'id' => 'a'.$availability->getId(),
+                'id' => 'a'.$userId,
                 'resourceId' => $userId,
                 'start' => $this->serializeDate($availability->getFrom()),
                 'end' => $this->serializeDate($availability->getTo()),
