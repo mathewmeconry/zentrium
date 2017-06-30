@@ -129,7 +129,7 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     } else {
       newScroll.left = Math.round((oldScroll.left + slotWidth) / slotWidth) * slotWidth;
     }
-    view.setScroll(newScroll);
+    view.applyScroll(newScroll);
   });
 
   return $view;
