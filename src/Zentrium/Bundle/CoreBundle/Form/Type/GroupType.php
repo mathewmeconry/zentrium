@@ -20,6 +20,10 @@ class GroupType extends AbstractType
             ->add('shortName', TextType::class, [
                 'label' => 'zentrium.group.field.short_name',
             ])
+            ->add('roles', RoleType::class, [
+                'required' => false,
+                'multiple' => true,
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'zentrium.form.save',
             ]);

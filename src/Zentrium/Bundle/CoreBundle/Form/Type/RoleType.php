@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zentrium\Bundle\CoreBundle\Security\RoleHierarchy;
 
@@ -24,7 +25,9 @@ class RoleType extends AbstractType
         $roles = $this->roles->all();
 
         $resolver->setDefaults([
-            'label' => 'zentrium.form.role',
+            'label' => function (Options $options) {
+                return $options['multiple'] ? 'zentrium.form.roles' : 'zentrium.form.role';
+            },
             'choices' => array_keys($roles),
             'choice_label' => function ($value, $key, $index) use ($roles) {
                 return $roles[$value][0].'.label';
@@ -38,7 +41,7 @@ class RoleType extends AbstractType
             $unmanaged = [];
 
             $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($options, &$unmanaged) {
-                $unmanaged = array_diff($event->getData(), $options['choices']);
+                $unmanaged = array_diff($event->getData() ?? [], $options['choices']);
             });
 
             $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use (&$unmanaged) {

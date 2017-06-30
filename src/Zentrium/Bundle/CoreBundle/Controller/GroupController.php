@@ -6,6 +6,7 @@ use FOS\UserBundle\Event\FilterGroupResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseGroupEvent;
 use FOS\UserBundle\FOSUserEvents;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +33,7 @@ class GroupController extends Controller
 
     /**
      * @Route("/new", name="group_new")
+     * @Secure("ROLE_ADMINISTRATOR")
      * @Template
      */
     public function newAction(Request $request)
@@ -44,6 +46,7 @@ class GroupController extends Controller
 
     /**
      * @Route("/{group}/edit", name="group_edit")
+     * @Secure("ROLE_ADMINISTRATOR")
      * @Template
      */
     public function editAction(Request $request, Group $group)
