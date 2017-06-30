@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\LogBundle\Controller;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +17,7 @@ class LabelController extends Controller
 
     /**
      * @Route("/logs/labels/new", name="log_label_new")
+     * @Secure("ROLE_LOG_WRITE")
      * @Template
      */
     public function newAction(Request $request)
@@ -25,6 +27,7 @@ class LabelController extends Controller
 
     /**
      * @Route("/logs/labels/{label}/edit", name="log_label_edit")
+     * @Secure("ROLE_LOG_WRITE")
      * @Template
      */
     public function editAction(Request $request, Label $label)

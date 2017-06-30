@@ -29,7 +29,9 @@
           {% endfor %}
         </ul>
       </div>
+      {% if is_granted('ROLE_LOG_WRITE') %}
       <a href="{{ path('log_new') }}" title="{{ 'zentrium_log.menu.new'|trans }}" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+      {% endif %}
     </div>
   </div>
   <div class="box-body no-padding">

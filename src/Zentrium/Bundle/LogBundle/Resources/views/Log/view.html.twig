@@ -9,6 +9,7 @@
   <div class="box-header with-border">
     <h3 class="box-title">{{ log.title }}</h3>
     {% for label in log.labels %}&#32;<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>{% endfor %}
+    {% if is_granted('ROLE_LOG_WRITE') %}
     <div class="box-tools pull-right">
       <div class="btn-group" data-log-status-endpoint="{{ path('log_status', {'log': log.id}) }}">
         <button type="button" class="btn btn-box-tool" data-toggle="dropdown">{{ logUtils.statusIcon(log.status) }}</button>
@@ -20,6 +21,7 @@
       </div>
       <a href="{{ path('log_edit', {'log': log.id}) }}" data-toggle="tooltip" class="btn btn-box-tool" href="#" data-original-title="{{ 'zentrium_log.view.edit'|trans }}"><i class="fa fa-pencil"></i></a>
     </div>
+    {% endif %}
     {% if log.location %}<p>{{ 'zentrium_log.log.field.location'|trans }}: {{ log.location }}</p>{% endif %}
     {% if log.source %}<p>{{ 'zentrium_log.log.field.source'|trans }}: {{ log.source }}</p>{% endif %}
     <p>{{ 'zentrium_log.log.field.reported'|trans }}: {{ log.reported|default(log.created)|localizedDate('datetime_medium') }} ({{ log.deadline|default(log.created)|ago }})</p>

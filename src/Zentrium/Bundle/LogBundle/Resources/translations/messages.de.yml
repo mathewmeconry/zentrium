@@ -9,6 +9,11 @@ zentrium_log:
         log_widget:
             open_logs: offener Eintrag|offene Einträge
             show: Anzeigen
+    role:
+        read:
+            label: Journal lesen
+        write:
+            label: Journal bearbeiten
     list:
         labels: Labels
         status: Status
