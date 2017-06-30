@@ -27,7 +27,9 @@
           {% if activeLabels|length %}
           <a href="{{ path('logs', {'status': activeStatus}) }}" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="{{ 'zentrium_log.list.label_reset'|trans }}"><i class="fa fa-times"></i></a>
           {% endif %}
+          {% if is_granted('ROLE_LOG_WRITE') %}
           <a href="{{ path('log_label_new') }}" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="{{ 'zentrium_log.list.label_new'|trans }}"><i class="fa fa-plus"></i></a>
+          {% endif %}
         </div>
       </div>
       <div class="box-body no-padding">
@@ -35,9 +37,11 @@
           {% for label in labels %}
             <li{% if label.id in activeLabels %} class="active"{% endif %}>
               <a href="{% if label.id in activeLabels %}{{ path('logs', {'status': activeStatus, 'labels': activeLabels|without(label.id)|join(' ')}) }}{% else %}{{ path('logs', {'status': activeStatus, 'labels': activeLabels|merge([label.id])|join(' ')}) }}{% endif %}"><i class="fa fa-circle-o" style="color: {{ label.color }}"></i> {{ label.name }}</a>
+              {% if is_granted('ROLE_LOG_WRITE') %}
               <div class="pill-tools">
                  <a href="{{ path('log_label_edit', {'label': label.id}) }}"><i class="fa fa-pencil"></i></a>
               </div>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>

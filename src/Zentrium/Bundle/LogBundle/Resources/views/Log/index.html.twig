@@ -1,7 +1,11 @@
 {% extends 'ZentriumLogBundle:Log:layoutSidebar.html.twig' %}
 {% import "ZentriumLogBundle::utils.html.twig" as logUtils %}
 
-{% block content_top %}<a href="{{ path('log_new') }}" class="btn btn-primary btn-block margin-bottom">{{ 'zentrium_log.menu.new'|trans }}</a>{% endblock %}
+{% block content_top %}
+{% if is_granted('ROLE_LOG_WRITE') %}
+<a href="{{ path('log_new') }}" class="btn btn-primary btn-block margin-bottom">{{ 'zentrium_log.menu.new'|trans }}</a>
+{% endif %}
+{% endblock %}
 
 {% set activeLabelNames = [] %}
 {% for label in labels %}

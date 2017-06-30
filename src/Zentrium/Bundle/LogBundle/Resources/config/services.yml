@@ -1,12 +1,13 @@
 services:
     zentrium_log.dashboard_listener:
         class: Zentrium\Bundle\LogBundle\Dashboard\DashboardListener
-        arguments: ["@templating", "@zentrium_log.repository.log"]
+        arguments: ["@templating", "@zentrium_log.repository.log", "@security.authorization_checker"]
         tags:
             - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
 
     zentrium_log.menu_listener:
         class: Zentrium\Bundle\LogBundle\Menu\MenuListener
+        arguments: ["@security.authorization_checker"]
         tags:
             - { name: kernel.event_listener, event: zentrium.menu.main, method: onCreateMainMenu, priority: -20 }
 
