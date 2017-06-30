@@ -14,7 +14,7 @@ class ExportParameters
 {
     /**
      * @Assert\NotNull
-     * @Assert\Choice({"csv", "report"})
+     * @Assert\Choice({"csv", "report"}, strict=true)
      */
     protected $format;
 
