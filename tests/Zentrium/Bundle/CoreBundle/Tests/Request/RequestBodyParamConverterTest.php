@@ -2,12 +2,13 @@
 
 namespace Zentrium\Bundle\CoreBundle\Tests\Request;
 
+use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Zentrium\Bundle\CoreBundle\Request\RequestBodyParamConverter;
 
-class RequestBodyParamConverterTest extends \PHPUnit_Framework_TestCase
+class RequestBodyParamConverterTest extends TestCase
 {
     private $converter;
 

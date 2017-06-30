@@ -4,11 +4,12 @@ namespace Zentrium\Bundle\CoreBundle\Tests\Twig;
 
 use DateTime;
 use League\Period\Period;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\DurationHelper;
 
-class DurationHelperTest extends \PHPUnit_Framework_TestCase
+class DurationHelperTest extends TestCase
 {
     private $translator;
 

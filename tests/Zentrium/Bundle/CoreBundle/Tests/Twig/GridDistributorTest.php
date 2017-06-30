@@ -2,9 +2,10 @@
 
 namespace Zentrium\Bundle\CoreBundle\Tests\Twig;
 
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\CoreBundle\Twig\GridDistributor;
 
-class GridDistributorTest extends \PHPUnit_Framework_TestCase
+class GridDistributorTest extends TestCase
 {
     /**
      * @dataProvider distributeSamples

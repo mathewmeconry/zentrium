@@ -4,12 +4,13 @@ namespace Zentrium\Bundle\ScheduleBundle\Tests\Schedule\Constraint\Validator;
 
 use DateTime;
 use League\Period\Period;
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Constraint;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\SleepValidator;
 
-class SleepValidatorTest extends \PHPUnit_Framework_TestCase
+class SleepValidatorTest extends TestCase
 {
     private $validator;
 
