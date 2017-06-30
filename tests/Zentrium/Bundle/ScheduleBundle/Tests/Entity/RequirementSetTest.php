@@ -3,9 +3,10 @@
 namespace Zentrium\Bundle\ScheduleBundle\Tests\Entity;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
 
-class RequirementSetTest extends \PHPUnit_Framework_TestCase
+class RequirementSetTest extends TestCase
 {
     /**
      * @dataProvider isAlignedValues

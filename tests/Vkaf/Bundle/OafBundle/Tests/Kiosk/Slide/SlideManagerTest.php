@@ -2,10 +2,10 @@
 
 namespace Vkaf\Bundle\OafBundle\Tests\Kiosk\Slide;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Vkaf\Bundle\OafBundle\Kiosk\Slide\SlideManager;
 
-class SlideManagerTest extends PHPUnit_Framework_TestCase
+class SlideManagerTest extends TestCase
 {
     public function testRender()
     {
@@ -13,13 +13,13 @@ class SlideManagerTest extends PHPUnit_Framework_TestCase
         $slideResult = ['c' => 'd'];
         $templatingResult = '<html></html>';
 
-        $templating = $this->getMock('Symfony\Component\Templating\EngineInterface');
+        $templating = $this->createMock('Symfony\Component\Templating\EngineInterface');
         $templating->expects($this->once())
             ->method('render')
             ->with($this->identicalTo('VkafOafBundle:Kiosk:foo.html.twig'), $this->identicalTo($slideResult))
             ->will($this->returnValue($templatingResult));
 
-        $slide = $this->getMock('Vkaf\Bundle\OafBundle\Kiosk\Slide\SlideInterface');
+        $slide = $this->createMock('Vkaf\Bundle\OafBundle\Kiosk\Slide\SlideInterface');
         $slide->expects($this->once())
             ->method('render')
             ->with($this->identicalTo($slideOptions))
@@ -38,7 +38,7 @@ class SlideManagerTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderInvalidType()
     {
-        $templating = $this->getMock('Symfony\Component\Templating\EngineInterface');
+        $templating = $this->createMock('Symfony\Component\Templating\EngineInterface');
         $manager = new SlideManager($templating);
 
         $manager->render('invalidtype', [], []);

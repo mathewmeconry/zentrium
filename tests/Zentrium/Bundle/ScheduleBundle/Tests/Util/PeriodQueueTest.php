@@ -3,9 +3,10 @@
 namespace Zentrium\Bundle\ScheduleBundle\Tests\Util;
 
 use League\Period\Period;
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\ScheduleBundle\Util\PeriodQueue;
 
-class PeriodQueueTest extends \PHPUnit_Framework_TestCase
+class PeriodQueueTest extends TestCase
 {
     /**
      * @dataProvider compareUnequalValues

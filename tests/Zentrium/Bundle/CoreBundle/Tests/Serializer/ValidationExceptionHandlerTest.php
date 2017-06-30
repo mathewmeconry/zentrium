@@ -8,12 +8,13 @@ use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Handler\ConstraintViolationHandler;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializerBuilder;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Zentrium\Bundle\CoreBundle\Serializer\ValidationExceptionHandler;
 use Zentrium\Bundle\CoreBundle\Validator\ValidationException;
 
-class ValidationExceptionHandlerTest extends \PHPUnit_Framework_TestCase
+class ValidationExceptionHandlerTest extends TestCase
 {
     private $serializer;
 

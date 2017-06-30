@@ -2,10 +2,10 @@
 
 namespace Vkaf\Bundle\OafBundle\Tests\Twig;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Vkaf\Bundle\OafBundle\Twig\Extension;
 
-class ExtensionTest extends PHPUnit_Framework_TestCase
+class ExtensionTest extends TestCase
 {
     /**
      * @dataProvider truncateSamples

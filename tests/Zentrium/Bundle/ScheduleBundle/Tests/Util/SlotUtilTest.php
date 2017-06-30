@@ -3,9 +3,10 @@
 namespace Zentrium\Bundle\ScheduleBundle\Tests\Util;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\ScheduleBundle\Util\SlotUtil;
 
-class SlotUtilTest extends \PHPUnit_Framework_TestCase
+class SlotUtilTest extends TestCase
 {
     public function testBeforeAlignedPast()
     {

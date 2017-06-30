@@ -3,12 +3,13 @@
 namespace Zentrium\Bundle\ScheduleBundle\Tests\Schedule\Constraint\Validator;
 
 use DateTimeImmutable;
+use PHPUnit\Framework\TestCase;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Constraint;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator\PauseValidator;
 
-class PauseValidatorTest extends \PHPUnit_Framework_TestCase
+class PauseValidatorTest extends TestCase
 {
     private $validator;
 

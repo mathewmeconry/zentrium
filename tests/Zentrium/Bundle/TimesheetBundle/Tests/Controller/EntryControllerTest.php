@@ -25,6 +25,7 @@ class EntryControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/timesheet/export');
         $form = $crawler->selectButton('export_parameters[export]')->form([
+            'export_parameters[format]' => 'csv',
             'export_parameters[from]' => '01.01.2000',
             'export_parameters[to]' => '01.01.2020',
         ]);
