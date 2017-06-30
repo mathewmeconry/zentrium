@@ -7,7 +7,6 @@ $(function () {
   }
 
   var config = $wrapper.data('config');
-  console.log(config);
 
   function setupSchedule(config, users, $view) {
     var options = {
