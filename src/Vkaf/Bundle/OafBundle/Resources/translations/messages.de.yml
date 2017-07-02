@@ -24,6 +24,7 @@ vkaf_oaf:
             show: Anzeigen
     resource:
         field:
+            id: ID
             label: Name
             owner: Eigentümer
         form:
