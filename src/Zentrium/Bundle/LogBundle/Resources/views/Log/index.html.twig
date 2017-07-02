@@ -39,7 +39,6 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th>{{ 'zentrium_log.log.field.id'|trans }}</th>
             <th class="col-status"></th>
             <th>{{ 'zentrium_log.log.field.labels'|trans }}</th>
             <th>{{ 'zentrium_log.log.field.reported'|trans }}/{{ 'zentrium_log.log.field.deadline'|trans }}</th>
@@ -53,7 +52,6 @@
         <tbody>
           {% for log in logs %}
           <tr>
-            <td>#{{ log.id }}</td>
             <td class="col-status" title="{{ ('zentrium_log.status.'~log.status)|trans }}">{{ logUtils.statusIcon(log.status) }}</td>
             <td>{% for label in log.labels %}<span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>&#x20;{% endfor %}</td>
             <td>
