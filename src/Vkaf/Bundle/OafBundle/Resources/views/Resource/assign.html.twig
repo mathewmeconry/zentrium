@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="row">
+  {% if is_granted('ROLE_OAF_RESOURCE_MANAGE') %}
   <div class="col-md-3">
     <div class="box box-solid">
       <div class="box-header with-border">
@@ -17,6 +18,9 @@
     </div>
   </div>
   <div class="col-md-9">
+  {% else %}
+  <div class="col-md-12">
+  {% endif %}
     <div class="box box-solid">
       <div class="box-header with-border">
         <h3 class="box-title">{{ 'vkaf_oaf.resource.assign.title_return'|trans }}</h3>

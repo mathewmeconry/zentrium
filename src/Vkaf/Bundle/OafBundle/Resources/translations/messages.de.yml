@@ -4,6 +4,9 @@ vkaf_oaf:
     menu:
         resource: Geräte
         resource_assign: Geräte-Ausleihe
+    role:
+        resource_manage:
+            label: Geräte ausleihen
     kiosk:
         title: Kiosk
         unauthorized_title: Ungültiger Zugangscode

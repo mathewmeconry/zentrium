@@ -11,9 +11,11 @@
           <th></th>
           <th>{{ 'vkaf_oaf.resource.field.owner'|trans }}</th>
           <th>{{ 'vkaf_oaf.resource.field.label'|trans }}</th>
+          {% if is_granted('ROLE_OAF_RESOURCE_MANAGE') %}
           <th class="col-right">
             <a href="{{ path('oaf_resource_new') }}" data-title="{{ 'vkaf_oaf.resource.view.new'|trans }}" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
           </th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
@@ -22,9 +24,11 @@
           <td>{{ resource.id }}</td>
           <td>{{ resource.owner.name }}</td>
           <td>{{ resource.label }}</td>
+          {% if is_granted('ROLE_OAF_RESOURCE_MANAGE') %}
           <td class="col-right">
             <a href="{{ path('oaf_resource_edit', {'resource': resource.id}) }}"><i class="fa fa-pencil"></i></a>
           </td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
