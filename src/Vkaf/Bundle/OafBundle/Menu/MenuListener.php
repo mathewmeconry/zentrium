@@ -9,16 +9,16 @@ class MenuListener
     public function onCreateMainMenu(ConfigureMenuEvent $event)
     {
         $menu = $event->getMenu()->addChild('vkaf_oaf.menu.resource', [
-            'route' => 'oaf_resources',
+            'route' => 'oaf_resource_assign',
             'labelAttributes' => ['icon' => 'fa fa-square'],
-        ]);
-
-        $menu->addChild('vkaf_oaf.menu.resource', [
-            'route' => 'oaf_resources',
         ]);
 
         $menu->addChild('vkaf_oaf.menu.resource_assign', [
             'route' => 'oaf_resource_assign',
+        ]);
+
+        $menu->addChild('vkaf_oaf.menu.resource', [
+            'route' => 'oaf_resources',
         ]);
     }
 }
