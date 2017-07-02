@@ -24,7 +24,7 @@
     {% endif %}
     {% if log.location %}<p>{{ 'zentrium_log.log.field.location'|trans }}: {{ log.location }}</p>{% endif %}
     {% if log.source %}<p>{{ 'zentrium_log.log.field.source'|trans }}: {{ log.source }}</p>{% endif %}
-    <p>{{ 'zentrium_log.log.field.reported'|trans }}: {{ log.reported|default(log.created)|localizedDate('datetime_medium') }} ({{ log.deadline|default(log.created)|ago }})</p>
+    <p>{{ 'zentrium_log.log.field.reported'|trans }}: {{ log.reported|default(log.created)|localizedDate('datetime_medium') }} ({{ log.reported|default(log.created)|ago }})</p>
     {% if log.deadline %}<p>{{ 'zentrium_log.log.field.deadline'|trans }}: <span class="{% if log.deadline < now and log.status == 'open' %}text-danger{% endif %}">{{ log.deadline|localizedDate('datetime_medium') }} ({{ log.deadline|ago }})</span></p>{% endif %}
   </div>
   <div class="box-body">
