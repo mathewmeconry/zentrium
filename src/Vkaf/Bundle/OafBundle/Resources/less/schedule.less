@@ -52,3 +52,36 @@
     margin: 0 0 10px 0;
     padding: 3px 6px;
 }
+
+.schedule-slot {
+    section {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+
+        > h4 {
+            flex-grow: 2;
+            width: 100%;
+        }
+
+        > ul {
+            flex-grow: 1;
+            list-style-type: none;
+            padding: 0;
+        }
+    }
+
+    .schedule-slot-extra {
+        display: block;
+        font-size: 80%;
+        margin-left: 1.5em;
+
+        .fa {
+            margin: 0 0.3em 0 1em;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}

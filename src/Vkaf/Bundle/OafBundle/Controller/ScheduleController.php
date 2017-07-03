@@ -90,23 +90,36 @@ class ScheduleController extends Controller
         $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
 
         $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
-        $groupedShifts = [];
+        $tasks = [];
+        $users = [];
         foreach ($shifts as $shift) {
             if ($shift->getTask()->isInformative()) {
                 continue;
             }
-            $taskid = $shift->getTask()->getId();
-            if (!isset($groupedShifts[$taskid])) {
-                $groupedShifts[$taskid] = [];
-                $groupedShifts[$taskid]['start'] = [];
-                $groupedShifts[$taskid]['end'] = [];
-                $groupedShifts[$taskid]['task'] = $shift->getTask();
+
+            $taskId = $shift->getTask()->getId();
+            if (!isset($tasks[$taskId])) {
+                $tasks[$taskId] = [
+                    'task' => $shift->getTask(),
+                    'start' => [],
+                    'end' => [],
+                ];
+            }
+
+            $userId = $shift->getUser()->getId();
+            if (!isset($users[$userId])) {
+                $users[$userId] = [
+                    'start' => [],
+                    'end' => [],
+                ];
             }
 
             if ($shift->getTo() == $slotDate) {
-                $groupedShifts[$taskid]['end'][] = $shift->getUser();
+                $tasks[$taskId]['end'][] = $shift->getUser();
+                $users[$userId]['end'][] = $shift->getTask();
             } else {
-                $groupedShifts[$taskid]['start'][] = $shift->getUser();
+                $tasks[$taskId]['start'][] = $shift->getUser();
+                $users[$userId]['start'][] = $shift->getTask();
             }
         }
 
@@ -114,7 +127,8 @@ class ScheduleController extends Controller
             'schedule' => $schedule,
             'slot' => $slot,
             'slotDate' => $slotDate,
-            'groupedShifts' => $groupedShifts,
+            'tasks' => $tasks,
+            'users' => $users,
         ];
     }
 

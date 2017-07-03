@@ -1,32 +1,46 @@
-<html>
-<head>
-    <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
-</head>
-<body>
-<div>
-    <h4>{{ slotDate|localizedDate('date_full') }}</h4>
-    <h3>{{ slotDate|date('H:i') }}</h3>
-    {% for row in groupedShifts %}
-        <div style="font-weight: bold;">{{ row.task.name }} ({{ row.task.code }})</div>
-        {% for user in row.start %}
-            <div>
-                <i class="fa fa-long-arrow-right"></i> {{ user.name }}
-                {% for group in user.groups %}
-                    {{ group.shortName }}
-                {% endfor %}
-                {% if user.bednumber %}({{ 'zentrium.user.field.bednumber'|trans }} {{ user.bednumber }}){% endif %}
-            </div>
-        {% endfor %}
-        {% for user in row.end %}
-            <div>
-                <i class="fa fa-long-arrow-left"></i> {{ user.name }}
-                {% for group in user.groups %}
-                    {{ group.shortName }}
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <br>
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title %}{{ schedule.name }}{% endblock %}
+
+{% block body_class %}schedule-slot{% endblock %}
+
+{% block body %}
+<h4>{{ slotDate|localizedDate('date_full') }}</h4>
+<h3>{{ slotDate|date('H:i') }}</h3>
+{% for row in tasks %}
+<section>
+  <h4>{{ row.task.name }} ({{ row.task.code }})</h4>
+  <ul>
+    {% for user in row.end %}
+    <li>
+      <span class="fa {% if users[user.id].start|length > 0 %}fa-minus-square-o{% else %}fa-minus-square{% endif %}"></span>
+      {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
+      {% if users[user.id].start|length %}
+      <span class="schedule-slot-extra">
+        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.code }} {% endfor %}
+      </span>
+      {% endif %}
+    </li>
     {% endfor %}
-</div>
-</body>
-</html>
+  </ul>
+  <ul>
+    {% for user in row.start %}
+    <li>
+      <span class="fa {% if users[user.id].end|length > 0 %}fa-plus-square-o{% else %}fa-plus-square{% endif %}"></span>
+      {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
+      {% if users[user.id].end|length or user.bednumber %}
+      <span class="schedule-slot-extra">
+        {% if users[user.id].end|length %}
+        <span class="fa fa-long-arrow-right"></span>{% for task in users[user.id].end %}{{ task.code }} {% endfor %}
+        {% endif %}
+        {% if user.bednumber %}
+        <span class="fa fa-bed"></span>{{ user.bednumber }}
+        {% endif %}
+      </span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}
