@@ -3,6 +3,7 @@
 namespace Zentrium\Bundle\CoreBundle\Twig;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\Collection;
 use League\Period\Period;
 use Symfony\Component\Translation\TranslatorInterface;
 use Zentrium\Bundle\CoreBundle\Templating\Helper\DateTimeHelper;
@@ -103,6 +104,10 @@ class Extension extends \Twig_Extension
      */
     public function formatListFilter($list, array $options = [])
     {
+        if ($list instanceof Collection) {
+            $list = $list->toArray();
+        }
+
         if (!count($list)) {
             return '';
         }
