@@ -19,9 +19,9 @@ vkaf_oaf:
         schedule_list:
             no_shifts: Keine Einsätze in den nächsten %hours% Stunden.
     dashboard:
-        user_schedule:
-            title: Individueller Einsatzplan
-            show: Anzeigen
+        user_desk:
+            title: Front-Desk
+            open: Öffnen
     resource:
         field:
             id: ID
@@ -50,3 +50,10 @@ vkaf_oaf:
             ending: Schicht-Ende
             changing: Schicht-Wechsel
             beginning: Schicht-Beginn
+    user:
+        desk:
+            edit: Bearbeiten
+            labels: Labels drucken
+            upcoming_shifts: Nächste Einsätze
+            show_schedule: Einsatzplan anzeigen
+            timesheet_hours: Erfasste Stunden

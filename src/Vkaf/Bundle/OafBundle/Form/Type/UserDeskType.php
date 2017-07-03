@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\CoreBundle\Entity\UserRepository;
 
-class UserScheduleType extends AbstractType
+class UserDeskType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,8 +25,8 @@ class UserScheduleType extends AbstractType
                     return $repository->createSortedQueryBuilder('u');
                 },
             ])
-            ->add('show', SubmitType::class, [
-                'label' => 'vkaf_oaf.dashboard.user_schedule.show',
+            ->add('open', SubmitType::class, [
+                'label' => 'vkaf_oaf.dashboard.user_desk.open',
             ]);
     }
 }

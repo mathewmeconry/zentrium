@@ -65,6 +65,9 @@ doctrine:
                 auto_mapping: true
                 hydrators:
                     column: Zentrium\Bundle\CoreBundle\Doctrine\ColumnHydrator
+                dql:
+                    numeric_functions:
+                        timestamp_diff: Vkaf\Bundle\OafBundle\Doctrine\TimestampDiff
 
 # Doctrine Migrations Configuration
 doctrine_migrations:

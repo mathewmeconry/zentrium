@@ -5,7 +5,7 @@ namespace Vkaf\Bundle\OafBundle\Dashboard;
 use DateInterval;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Templating\EngineInterface;
-use Vkaf\Bundle\OafBundle\Form\Type\UserScheduleType;
+use Vkaf\Bundle\OafBundle\Form\Type\UserDeskType;
 use Vkaf\Bundle\OafBundle\Lineup\LineupManager;
 use Zentrium\Bundle\CoreBundle\Dashboard\BuildDashboardEvent;
 use Zentrium\Bundle\CoreBundle\Dashboard\Position;
@@ -33,12 +33,12 @@ class DashboardListener
             $event->addWidget(Position::TOP, $lineupWidget);
         }
 
-        $userScheduleForm = $this->formFactory->create(UserScheduleType::class);
-        $userScheduleWidget = $this->templating->render(
-            'VkafOafBundle:Dashboard:userSchedule.html.twig',
-            ['form' => $userScheduleForm->createView()]
+        $userDeskForm = $this->formFactory->create(UserDeskType::class);
+        $userDeskWidget = $this->templating->render(
+            'VkafOafBundle:Dashboard:userDesk.html.twig',
+            ['form' => $userDeskForm->createView()]
         );
-        $event->addWidget(Position::SIDEBAR, $userScheduleWidget);
+        $event->addWidget(Position::SIDEBAR, $userDeskWidget);
     }
 
     private function groupByDay(array $lineup)

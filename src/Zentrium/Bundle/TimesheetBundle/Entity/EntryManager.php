@@ -5,6 +5,7 @@ namespace Zentrium\Bundle\TimesheetBundle\Entity;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 class EntryManager
 {
@@ -53,6 +54,23 @@ class EntryManager
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function sumByUser(User $user, $approved = null)
+    {
+        $qb = $this->repository->createQueryBuilder('e')
+            ->select('SUM(TIMESTAMP_DIFF(e.start, e.end))')
+            ->where('e.user = :user')
+            ->setParameter('user', $user)
+        ;
+
+        if ($approved === true) {
+            $qb->andWhere('e.approvedAt IS NOT NULL');
+        } elseif ($approved === false) {
+            $qb->andWhere('e.approvedAt IS NULL');
+        }
+
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     public function isOverlapping(Entry $entry)

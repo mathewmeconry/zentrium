@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Vkaf\Bundle\OafBundle\Form\Type\UserScheduleType;
 use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
@@ -130,23 +129,6 @@ class ScheduleController extends Controller
             'tasks' => $tasks,
             'users' => $users,
         ];
-    }
-
-    /**
-     * @Route("/user/dashboard", name="oaf_schedule_user_dashboard")
-     * @Template
-     */
-    public function userDashboardAction(Request $request)
-    {
-        $form = $this->createForm(UserScheduleType::class);
-
-        $form->handleRequest($request);
-
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->redirectToRoute('oaf_schedule_user', ['user' => $form->getData()['user']->getId()]);
     }
 
     /**

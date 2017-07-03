@@ -1,0 +1,43 @@
+{% extends 'VkafOafBundle::layout.html.twig' %}
+
+{% block title_full %}{{ user.name }} - {{ 'zentrium.user.list.title'|trans }}{% endblock %}
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{ timesheetHours }} h</h3>
+        <p>{{ 'vkaf_oaf.user.desk.timesheet_hours'|trans }}</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-clock-o"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="box box-solid">
+      <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i> {{ 'vkaf_oaf.user.desk.edit'|trans }}</a></li>
+          <li><a href="{{ path('user_labels', {'user': user.id}) }}"><i class="fa fa-tag"></i> {{ 'vkaf_oaf.user.desk.labels'|trans }}</a></li>
+          <li><a href="{{ path('schedule_user_availability', {'user': user.id}) }}"><i class="fa fa-check-circle"></i> {{ 'zentrium_schedule.user.list.availability'|trans }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'vkaf_oaf.user.desk.upcoming_shifts'|trans }}</h3>
+      </div>
+      <div class="box-footer">
+        <a href="{{ path('oaf_schedule_user', {'user': user.id}) }}" class="btn btn-default btn-block">{{ 'vkaf_oaf.user.desk.show_schedule'|trans }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
