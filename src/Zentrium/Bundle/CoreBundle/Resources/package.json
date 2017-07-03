@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "admin-lte": "^2.3.3",
-    "font-awesome": "^4.6.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^2.2.3",
     "jquery-minicolors": "^2.1.10",
     "js-cookie": "^2.1.1",
