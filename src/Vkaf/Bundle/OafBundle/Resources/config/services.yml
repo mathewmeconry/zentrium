@@ -54,5 +54,6 @@ services:
 
     vkaf_oaf.twig.extension:
         class: Vkaf\Bundle\OafBundle\Twig\Extension
+        arguments: ["@translator"]
         tags:
             - { name: twig.extension }

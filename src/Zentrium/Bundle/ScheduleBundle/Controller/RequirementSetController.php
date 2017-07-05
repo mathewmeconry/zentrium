@@ -223,6 +223,36 @@ class RequirementSetController extends Controller
         });
     }
 
+    /**
+     * @Route("/{set}/statistics", name="schedule_requirement_set_statistics")
+     * @Template
+     */
+    public function statisticsAction(RequirementSet $set)
+    {
+        $aggregated = $this->get('zentrium_schedule.manager.requirement_set')->aggregateByTask($set);
+
+        $rates = [];
+        $durationTotal = 0;
+        $ratesTotal = 0;
+        foreach($aggregated as list($task, $duration)) {
+            $rowTotal = $task->getRate() !== null ? $duration * $task->getRate() / 3600 : null;
+            $rates[] = [
+                'task' => $task,
+                'duration' => intval($duration),
+                'total' => $rowTotal,
+            ];
+            $durationTotal += $duration;
+            $ratesTotal += $rowTotal;
+        }
+
+        return [
+            'set' => $set,
+            'rates' => $rates,
+            'durationTotal' => $durationTotal,
+            'ratesTotal' => $ratesTotal,
+        ];
+    }
+
     private function handleDiffView(RequirementSet $set, AbstractPlan $subject, $dataUrl)
     {
         if (!$set->getPeriod()->contains($subject->getPeriod())) {

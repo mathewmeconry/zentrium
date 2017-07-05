@@ -7,6 +7,7 @@ vkaf_oaf:
     role:
         resource_manage:
             label: Geräte ausleihen
+    money: '%0.2f Fr.'
     kiosk:
         title: Kiosk
         unauthorized_title: Ungültiger Zugangscode

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Zentrium\Bundle\CoreBundle\Form\Type\ColorType;
 use Zentrium\Bundle\ScheduleBundle\Entity\Skill;
@@ -34,6 +35,12 @@ class TaskType extends AbstractType
             ->add('notes', TextareaType::class, [
                 'required' => false,
                 'label' => 'zentrium_schedule.task.field.notes',
+            ])
+            ->add('rate', MoneyType::class, [
+                'required' => false,
+                'label' => 'zentrium_schedule.task.field.rate',
+                'currency' => 'CHF',
+                'divisor' => 100,
             ])
             ->add('informative', CheckboxType::class, [
                 'required' => false,

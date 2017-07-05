@@ -4,13 +4,22 @@ namespace Vkaf\Bundle\OafBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFilter;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class Extension extends Twig_Extension
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function getFilters()
     {
         return [
             new Twig_SimpleFilter('truncate', [$this, 'truncate']),
+            new Twig_SimpleFilter('money', [$this, 'money']),
         ];
     }
 
@@ -34,6 +43,18 @@ class Extension extends Twig_Extension
         }
 
         return substr($text, 0, $breakpoint).' …';
+    }
+
+    /**
+     * Formats a monetary value.
+     *
+     * @param int $cents
+     *
+     * @return string
+     */
+    public function money($cents)
+    {
+        return sprintf($this->translator->trans('vkaf_oaf.money'), $cents / 100);
     }
 
     public function getName()

@@ -8,6 +8,7 @@
   <div class="box-header">
     <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.view.title'|trans }}</h3>
     <div class="box-tools">
+      <a class="btn btn-box-tool" href="{{ path('schedule_requirement_set_statistics', {'set': set.id}) }}" data-title="{{ 'zentrium_schedule.requirement_set.view.statistics'|trans }}" data-toggle="tooltip"><i class="fa fa-bar-chart"></i></a>
       {% if comparables|length %}
       <div class="btn-group">
         <button type="button" class="btn btn-box-tool" data-toggle="dropdown" data-original-title="{{ 'zentrium_schedule.requirement_set.view.compare'|trans }}"><i class="fa fa-adjust"></i></button>

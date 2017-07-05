@@ -4,6 +4,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\OperationInterface;
 
 class RequirementSetManager
@@ -50,6 +51,19 @@ class RequirementSetManager
                 ->setParameter('id', $plan->getId())
             ;
         }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function aggregateByTask(RequirementSet $set)
+    {
+        $qb = $this->em->getRepository(Task::class)->createQueryBuilder('t')
+            ->addSelect('SUM(TIMESTAMP_DIFF(r.from, r.to) * r.count)')
+            ->leftJoin(Requirement::class, 'r', Join::WITH, 't.id = r.task')
+            ->where('r.set = :set')
+            ->groupBy('t.id')
+            ->setParameter('set', $set)
+        ;
 
         return $qb->getQuery()->getResult();
     }

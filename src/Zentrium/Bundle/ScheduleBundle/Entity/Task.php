@@ -68,6 +68,15 @@ class Task
     protected $color;
 
     /**
+     * @var int|null
+     *
+     * @Assert\Range(min=0)
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $rate;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
@@ -141,6 +150,18 @@ class Task
     public function setColor($color)
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
 
         return $this;
     }

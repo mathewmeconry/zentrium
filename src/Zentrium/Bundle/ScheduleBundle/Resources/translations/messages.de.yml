@@ -70,10 +70,12 @@ zentrium_schedule:
             new: Neuer Plan
             copy: Kopieren
             edit: Bearbeiten
+            statistics: Statistiken
         view:
             title: Bedarf
             compare: Plan vergleichen
             edit: Plan bearbeiten
+            statistics: Statistiken
         new:
             title: Neuer Plan
         edit:
@@ -88,6 +90,13 @@ zentrium_schedule:
             warn_alignment: Das Zeitraster von «%b%» ist nicht mit jenem von «%a%» kompatibel. Es können Rundungsfehler auftreten.
         compare_schedule:
             title: Stand von «%schedule%» bezüglich «%set%»
+        statistics:
+            rates:
+                title: Kosten
+                task: Aufgabe
+                duration: Dauer
+                rate: Ansatz
+                total: Summe
     schedule:
         field:
             name: Name
@@ -156,6 +165,7 @@ zentrium_schedule:
             notes: Bemerkungen
             skill: Anforderung
             informative: informell
+            rate: Ansatz
         form:
             no_skill: Keine Qualifikation nötig
             saved: Die Aufgabe wurde erfolgreich gespeichert.

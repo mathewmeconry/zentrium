@@ -1,0 +1,40 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title_full %}{{ set.name }} - {{ 'zentrium_schedule.layout.requirements'|trans }}{% endblock %}
+{% block title %}{{ set.name }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary requirement-set-statistics">
+  <div class="box-header">
+    <h3 class="box-title">{{ 'zentrium_schedule.requirement_set.statistics.rates.title'|trans }}</h3>
+  </div>
+  <div class="box-body no-padding">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium_schedule.requirement_set.statistics.rates.task'|trans }}</th>
+          <th class="col-right">{{ 'zentrium_schedule.requirement_set.statistics.rates.duration'|trans }}</th>
+          <th class="col-right">{{ 'zentrium_schedule.requirement_set.statistics.rates.rate'|trans }}</th>
+          <th class="col-right">{{ 'zentrium_schedule.requirement_set.statistics.rates.total'|trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rates %}
+        <tr>
+          <td>{{ row.task.name }}</td>
+          <td class="col-right">{{ row.duration|duration }}</td>
+          <td class="col-right">{% if row.total is not null %}{{ row.task.rate|money }}{% else %}-{% endif %}</td>
+          <td class="col-right">{% if row.total is not null %}{{ row.total|money }}{% else %}-{% endif %}</td>
+        </tr>
+        {% endfor %}
+        <tr class="total">
+          <td></td>
+          <td class="col-right">{{ durationTotal|duration }}</td>
+          <td></td>
+          <td class="col-right">{{ ratesTotal|money }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
