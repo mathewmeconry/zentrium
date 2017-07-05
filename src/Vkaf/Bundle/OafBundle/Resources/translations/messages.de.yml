@@ -17,7 +17,8 @@ vkaf_oaf:
             Herzlich Willkommen
             am Openair Frauenfeld!
         schedule_list:
-            no_shifts: Keine Einsätze in den nächsten %hours% Stunden.
+            empty: Derzeit sind keine Einsätze mit den gewählten Kriterien geplant.
+            no_shifts: In den nächsten %hours% Stunden keine Einsätze
     dashboard:
         user_desk:
             title: Front-Desk

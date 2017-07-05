@@ -15,6 +15,15 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findPresent()
+    {
+        $qb = $this->createSortedQueryBuilder()
+            ->where('u.present = 1')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findAllWithGroups()
     {
         $qb = $this->createQueryBuilder('u')

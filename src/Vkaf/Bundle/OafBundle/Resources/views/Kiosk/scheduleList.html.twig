@@ -5,6 +5,7 @@
 {% block content %}
 <div class="box box-primary kiosk-schedule-list">
   <div class="box-body no-padding">
+    {% if columns|length %}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -37,6 +38,9 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p class="empty">{{ 'vkaf_oaf.kiosk.schedule_list.empty'|trans }}
+    {% endif %}
   </div>
 </div>
 {% endblock %}
