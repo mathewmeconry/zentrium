@@ -122,6 +122,10 @@ class ScheduleController extends Controller
             }
         }
 
+        uasort($tasks, function ($a, $b) {
+            return strcasecmp($a['task']->getName(), $b['task']->getName());
+        });
+
         return [
             'schedule' => $schedule,
             'slot' => $slot,

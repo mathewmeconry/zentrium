@@ -55,19 +55,20 @@
 
 .schedule-slot {
     section {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: stretch;
+        page-break-inside: avoid;
+        clear: both;
+        padding: 0.5cm 0 1cm 0;
 
         > h4 {
-            flex-grow: 2;
             width: 100%;
         }
 
         > ul {
-            flex-grow: 1;
-            list-style-type: none;
+            display: block;
+            width: 50%;
+            float: left;
             padding: 0;
+            list-style-type: none;
         }
     }
 

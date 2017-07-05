@@ -13,7 +13,7 @@
   <ul>
     {% for user in row.end %}
     <li>
-      <span class="fa {% if users[user.id].start|length > 0 %}fa-minus-square-o{% else %}fa-minus-square{% endif %}"></span>
+      <span class="fa {% if users[user.id].start|length > 0 %}fa-minus-square{% else %}fa-minus-square-o{% endif %}"></span>
       {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
       {% if users[user.id].start|length %}
       <span class="schedule-slot-extra">
@@ -26,7 +26,7 @@
   <ul>
     {% for user in row.start %}
     <li>
-      <span class="fa {% if users[user.id].end|length > 0 %}fa-plus-square-o{% else %}fa-plus-square{% endif %}"></span>
+      <span class="fa {% if users[user.id].end|length > 0 %}fa-plus-square{% else %}fa-plus-square-o{% endif %}"></span>
       {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
       {% if users[user.id].end|length or user.bednumber %}
       <span class="schedule-slot-extra">
