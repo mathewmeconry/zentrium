@@ -2,9 +2,9 @@
 
 namespace Vkaf\Bundle\OafBundle\Twig;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class Extension extends Twig_Extension
 {

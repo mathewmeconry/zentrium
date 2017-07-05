@@ -234,7 +234,7 @@ class RequirementSetController extends Controller
         $rates = [];
         $durationTotal = 0;
         $ratesTotal = 0;
-        foreach($aggregated as list($task, $duration)) {
+        foreach ($aggregated as list($task, $duration)) {
             $rowTotal = $task->getRate() !== null ? $duration * $task->getRate() / 3600 : null;
             $rates[] = [
                 'task' => $task,
