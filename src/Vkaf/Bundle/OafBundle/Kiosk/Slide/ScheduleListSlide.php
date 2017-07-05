@@ -28,6 +28,12 @@ class ScheduleListSlide implements SlideInterface
         $period = Period::createFromDuration('- 2 hours', sprintf('%d hours', $horizon));
 
         $users = $this->userRepository->findAll();
+        if (isset($options['offset'])) {
+            $users = array_slice($users, intval($options['offset']));
+        }
+        if (isset($options['count'])) {
+            $users = array_slice($users, 0, intval($options['count']));
+        }
         $rows = [];
         foreach ($users as $user) {
             $rows[$user->getId()] = ['user' => $user, 'shifts' => []];
@@ -35,7 +41,10 @@ class ScheduleListSlide implements SlideInterface
 
         $shifts = $this->shiftManager->findPublishedInPeriod($period);
         foreach ($shifts as $shift) {
-            $rows[$shift->getUser()->getId()]['shifts'][] = $shift;
+            $userId = $shift->getUser()->getId();
+            if (isset($rows[$userId])) {
+                $rows[$userId]['shifts'][] = $shift;
+            }
         }
 
         return [
