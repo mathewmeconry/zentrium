@@ -50,6 +50,7 @@ class ScheduleListSlide implements SlideInterface
         return [
             'horizon' => $horizon,
             'columns' => count($rows) ? array_chunk($rows, ceil(count($rows) / $columns)) : [],
+            'colors' => boolval($options['colors'] ?? true),
             'next' => $next,
         ];
     }

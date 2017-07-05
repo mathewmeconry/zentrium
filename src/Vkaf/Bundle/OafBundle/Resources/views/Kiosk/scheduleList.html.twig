@@ -24,7 +24,7 @@
             <td>
               {% if column[i].shifts|length %}
                 {% for shift in column[i].shifts %}
-                <span class="label" style="background-color: {{ shift.task.color }}">{{ shift.from|date('H:i') }} - {{ shift.to|date('H:i') }}</span>
+                <span class="label{% if colors %}" style="background-color: {{ shift.task.color }}{% else %} label-primary{% endif %}">{{ shift.from|date('H:i') }} - {{ shift.to|date('H:i') }}</span>
                 {% endfor %}
               {% else %}
                 <span class="text-muted">{{ 'vkaf_oaf.kiosk.schedule_list.no_shifts'|trans({'%hours%': horizon}) }}</span>
