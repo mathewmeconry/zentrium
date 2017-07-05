@@ -27,7 +27,7 @@ class ScheduleSlide implements SlideInterface
         $period = Period::createFromDuration('- 2 hours', '12 hours');
         // align to interval
 
-        $shifts = $this->shiftManager->findPublishedInPeriod($period);
+        $shifts = $this->shiftManager->findPublishedInPeriod($period, true);
         $serializedShifts = [];
         foreach ($shifts as $shift) {
             $serializedShifts[] = $this->serializeShift($shift);

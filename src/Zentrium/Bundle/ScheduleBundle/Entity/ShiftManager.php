@@ -59,7 +59,7 @@ class ShiftManager
         return $qb->getQuery()->getResult();
     }
 
-    public function findPublishedInPeriod(Period $period)
+    public function findPublishedInPeriod(Period $period, $includeStarted)
     {
         $qb = $this->repository->createQueryBuilder('s')
             ->addSelect('t')
@@ -68,7 +68,7 @@ class ShiftManager
             ->leftJoin('s.task', 't')
             ->leftJoin('s.user', 'u')
             ->where('s.from <= :end')
-            ->andWhere('s.to >= :start')
+            ->andWhere($includeStarted ? 's.to >= :start' : 's.from >= :start')
             ->andWhere('p.published = 1')
             ->orderBy('s.from')
             ->setParameter('start', $period->getStartDate())

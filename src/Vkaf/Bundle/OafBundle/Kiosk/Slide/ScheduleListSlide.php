@@ -39,7 +39,7 @@ class ScheduleListSlide implements SlideInterface
             $rows[$user->getId()] = ['user' => $user, 'shifts' => []];
         }
 
-        $shifts = $this->shiftManager->findPublishedInPeriod($period);
+        $shifts = $this->shiftManager->findPublishedInPeriod($period, false);
         foreach ($shifts as $shift) {
             $userId = $shift->getUser()->getId();
             if (isset($rows[$userId]) && !$shift->getTask()->isInformative()) {
