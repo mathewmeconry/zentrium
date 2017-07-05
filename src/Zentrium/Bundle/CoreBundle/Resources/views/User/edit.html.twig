@@ -17,8 +17,8 @@
 
 {% block scripts %}
     <script type="text/javascript">
-        document.getElementById('user_labels').onclick = function () {
-            window.open("{{ path('user_labels', {'user': user.id}) }}");
-        }
+        $('#user_labels, #user_account_labels').click(function () {
+            window.open({{ path('user_labels', {'user': user.id})|json_encode|raw }});
+        });
     </script>
 {% endblock %}
