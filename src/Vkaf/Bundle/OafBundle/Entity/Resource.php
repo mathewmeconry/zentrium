@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Zentrium\Bundle\CoreBundle\Entity\Group;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Vkaf\Bundle\OafBundle\Entity\ResourceRepository")
  * @ORM\Table(name="oaf_resource")
  */
 class Resource

@@ -25,14 +25,11 @@ class ResourceManager
 
     public function findAll()
     {
-        $qb = $this->repository->createQueryBuilder('r')
-            ->addSelect('g')
-            ->leftJoin('r.owner', 'g')
-            ->orderBy('g.name')
-            ->addOrderBy('r.label')
+        return $this->repository
+            ->createSortedQueryBuilder()
+            ->getQuery()
+            ->getResult()
         ;
-
-        return $qb->getQuery()->getResult();
     }
 
     public function save(Resource $resource)

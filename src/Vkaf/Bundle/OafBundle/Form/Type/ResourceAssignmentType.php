@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vkaf\Bundle\OafBundle\Entity\Resource;
+use Vkaf\Bundle\OafBundle\Entity\ResourceRepository;
 use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\CoreBundle\Entity\UserRepository;
 
@@ -19,6 +20,9 @@ class ResourceAssignmentType extends AbstractType
                 'label' => 'vkaf_oaf.resource_assignment.field.resource',
                 'class' => Resource::class,
                 'choice_label' => 'label',
+                'query_builder' => function (ResourceRepository $repository) {
+                    return $repository->createSortedQueryBuilder();
+                },
             ])
             ->add('user', EntityType::class, [
                 'label' => 'vkaf_oaf.resource_assignment.field.user',
