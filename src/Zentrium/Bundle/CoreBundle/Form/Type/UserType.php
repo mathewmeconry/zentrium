@@ -44,7 +44,7 @@ class UserType extends AbstractType
                 'label' => 'zentrium.user.field.present',
                 'required' => false,
             ])
-            ->add('bednumber', NumberType::class, [
+            ->add('bednumber', TextType::class, [
                 'label' => 'zentrium.user.field.bednumber',
                 'required' => false,
             ])

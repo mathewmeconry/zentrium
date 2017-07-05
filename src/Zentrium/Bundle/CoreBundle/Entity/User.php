@@ -90,9 +90,9 @@ class User extends BaseUser
     protected $present;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(type="integer", length=3, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     protected $bednumber;
 
