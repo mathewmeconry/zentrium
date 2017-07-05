@@ -59,3 +59,5 @@ vkaf_oaf:
             upcoming_shifts: Nächste Einsätze
             show_schedule: Einsatzplan anzeigen
             timesheet_hours: Erfasste Stunden
+            assigned_resources: Zugeteilte Geräte
+            no_resources: %user% hat zurzeit keine Geräte ausgeliehen.

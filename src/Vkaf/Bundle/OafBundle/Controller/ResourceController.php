@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Vkaf\Bundle\OafBundle\Entity\Resource;
 use Vkaf\Bundle\OafBundle\Entity\ResourceAssignment;
 use Vkaf\Bundle\OafBundle\Form\Type\ResourceAssignmentType;
@@ -96,6 +97,10 @@ class ResourceController extends Controller
      */
     public function returnAction(Request $request, ResourceAssignment $assignment)
     {
+        if ($assignment->getReturnedAt() !== null) {
+            throw new BadRequestHttpException();
+        }
+
         $assignment->setReturnedBy($this->getUser());
         $assignment->setReturnedAt(new DateTime());
 

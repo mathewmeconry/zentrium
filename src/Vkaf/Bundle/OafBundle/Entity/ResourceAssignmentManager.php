@@ -4,6 +4,7 @@ namespace Vkaf\Bundle\OafBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 class ResourceAssignmentManager
 {
@@ -31,6 +32,20 @@ class ResourceAssignmentManager
             ->leftJoin('a.user', 'u')
             ->leftJoin('a.resource', 'r')
             ->orderBy('a.assignedAt', 'DESC')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findNonReturnedByUser(User $user)
+    {
+        $qb = $this->repository->createQueryBuilder('a')
+            ->addSelect('r')
+            ->leftJoin('a.resource', 'r')
+            ->where('a.user = :user')
+            ->andWhere('a.returnedAt IS NULL')
+            ->orderBy('a.assignedAt', 'DESC')
+            ->setParameter('user', $user)
         ;
 
         return $qb->getQuery()->getResult();

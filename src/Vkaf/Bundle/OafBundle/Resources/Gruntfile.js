@@ -17,6 +17,7 @@ module.exports = function(grunt) {
           'public/js/kiosk_schedule.js',
           'public/js/resource.js',
           'public/js/schedule.js',
+          'public/js/user_desk.js',
         ],
         dest: 'public/js/bundle.js'
       }

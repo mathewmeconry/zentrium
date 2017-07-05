@@ -29,13 +29,41 @@
       </div>
     </div>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-4">
     <div class="box box-solid">
       <div class="box-header with-border">
         <h3 class="box-title">{{ 'vkaf_oaf.user.desk.upcoming_shifts'|trans }}</h3>
       </div>
       <div class="box-footer">
         <a href="{{ path('oaf_schedule_user', {'user': user.id}) }}" class="btn btn-default btn-block">{{ 'vkaf_oaf.user.desk.show_schedule'|trans }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'vkaf_oaf.user.desk.assigned_resources'|trans }}</h3>
+      </div>
+      <div class="box-body no-padding">
+        {% if resourceAssignments|length > 0 %}
+        <table class="table">
+          <tbody>
+            {% for assignment in resourceAssignments %}
+            <tr>
+              <td>{{ assignment.resource.label }}</td>
+              <td>{{ assignment.assignedAt|localizedDate('datetime_medium') }}</td>
+              {% if is_granted('ROLE_OAF_RESOURCE_MANAGE') %}
+              <td class="col-tools">
+                <a href="#" class="oaf-desk-resource" data-target="{{ path('oaf_resource_return', {'assignment': assignment.id}) }}"><i class="fa fa-arrow-circle-o-left"></i></a>
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="empty">{{ 'vkaf_oaf.user.desk.no_resources'|trans({'%user%': user.name}) }}</p>
+        {% endif %}
       </div>
     </div>
   </div>

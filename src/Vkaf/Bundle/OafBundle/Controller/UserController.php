@@ -39,9 +39,12 @@ class UserController extends Controller
     {
         $timesheetHours = floor($this->get('zentrium_timesheet.manager.entry')->sumByUser($user) / 3600);
 
+        $resourceAssignments = $this->get('vkaf_oaf.manager.resource_assignment')->findNonReturnedByUser($user);
+
         return [
             'user' => $user,
             'timesheetHours' => $timesheetHours,
+            'resourceAssignments' => $resourceAssignments,
         ];
     }
 }
