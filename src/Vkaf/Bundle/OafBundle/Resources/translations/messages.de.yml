@@ -61,3 +61,4 @@ vkaf_oaf:
             timesheet_hours: Erfasste Stunden
             assigned_resources: Zugeteilte Geräte
             no_resources: %user% hat zurzeit keine Geräte ausgeliehen.
+            age: %age% Jahre

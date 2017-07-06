@@ -28,6 +28,22 @@
         </ul>
       </div>
     </div>
+    <div class="box box-solid">
+      <div class="box-body">
+        <dl>
+          <dt>{{ 'zentrium.user.field.present'|trans }}</dt>
+          <dd>{% if user.present %}<span class="text-success">{{ 'zentrium.user.list.present'|trans }}</span>{% else %}<span class="text-danger">{{ 'zentrium.user.list.absent'|trans }}</span>{% endif %}</dd>
+          <dt>{{ 'zentrium.user.field.bednumber'|trans }}</dt>
+          <dd>{{ user.bednumber|default('-') }}</dd>
+          <dt>{{ 'zentrium.user.field.mobile_phone'|trans }}</dt>
+          <dd>{% if user.mobilePhone %}<a href="{{ user.mobilePhone|phoneNumber('url') }}">{{ user.mobilePhone|phoneNumber }}</a>{% else %}-{% endif %}</dd>
+          <dt>{{ 'zentrium.user.field.birthday'|trans }}</dt>
+          <dd>{% if user.birthday %}{{ user.birthday|localizedDate('date_short') }} ({{ 'vkaf_oaf.user.desk.age'|trans({'%age%': age}) }}){% else %}-{% endif %}</dd>
+          <dt>{{ 'zentrium.user.field.groups'|trans }}</dt>
+          <dd>{% for group in user.groups %}<span class="label label-primary" title="{{ group.name }}">{{ group.shortName }}</span>&#32;{% endfor %}
+        </dl>
+      </div>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="box box-solid">

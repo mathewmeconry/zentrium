@@ -2,6 +2,7 @@
 
 namespace Vkaf\Bundle\OafBundle\Controller;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,12 +38,15 @@ class UserController extends Controller
      */
     public function deskAction(User $user)
     {
+        $age = $user->getBirthday() ? $user->getBirthday()->diff((new DateTime())->setTime(0, 0, 0))->y : null;
+
         $timesheetHours = floor($this->get('zentrium_timesheet.manager.entry')->sumByUser($user) / 3600);
 
         $resourceAssignments = $this->get('vkaf_oaf.manager.resource_assignment')->findNonReturnedByUser($user);
 
         return [
             'user' => $user,
+            'age' => $age,
             'timesheetHours' => $timesheetHours,
             'resourceAssignments' => $resourceAssignments,
         ];

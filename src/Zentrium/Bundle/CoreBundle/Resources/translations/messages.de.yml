@@ -56,6 +56,7 @@ zentrium:
             minutes: "%minutes% min"
             seconds: "%seconds% s"
         datetime:
+            date_short: dd.MM.yyyy
             date_medium: EEE, dd.MM.yyyy
             date_long: EEE, d. MMMM yyyy
             date_full: EEEE, d. MMMM yyyy
