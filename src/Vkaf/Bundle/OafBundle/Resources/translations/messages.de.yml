@@ -39,6 +39,8 @@ vkaf_oaf:
             edit: Gerät bearbeiten
         new:
             title: Neues Gerät
+        edit:
+            title: Gerät bearbeiten
         assign:
             title: Geräte-Ausleihe
             title_assign: Ausgabe
