@@ -49,6 +49,8 @@ vkaf_oaf:
         field:
             resource: Gerät
             user: Benutzer
+            assigned_at: Ausgabe
+            returned_at: Rücknahme
     schedule:
         slot:
             ending: Schicht-Ende

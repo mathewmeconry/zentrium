@@ -27,6 +27,14 @@
       </div>
       <div class="box-body no-padding">
         <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{ 'vkaf_oaf.resource_assignment.field.resource'|trans }}</th>
+              <th>{{ 'vkaf_oaf.resource_assignment.field.user'|trans }}</th>
+              <th>{{ 'vkaf_oaf.resource_assignment.field.assigned_at'|trans }}</th>
+              <th>{{ 'vkaf_oaf.resource_assignment.field.returned_at'|trans }}</th>
+            </tr>
+          </thead>
           <tbody>
             {% for assignment in assignments %}
             <tr>

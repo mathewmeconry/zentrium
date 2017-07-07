@@ -1,6 +1,5 @@
-<td>{{ assignment.id }}</td>
-<td>{{ assignment.user.name(true) }}</td>
 <td>{{ assignment.resource.label }}</td>
+<td>{{ assignment.user.name(true) }}</td>
 <td>{{ assignment.assignedAt|localizedDate('datetime_medium') }}</td>
 <td>{% if assignment.returnedAt %}{{ assignment.returnedAt|localizedDate('datetime_medium') }}{% endif %}</td>
 {% if is_granted('ROLE_OAF_RESOURCE_MANAGE') %}

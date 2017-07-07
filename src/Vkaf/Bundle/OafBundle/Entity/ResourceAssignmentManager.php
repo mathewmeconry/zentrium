@@ -29,9 +29,12 @@ class ResourceAssignmentManager
         $qb = $this->repository->createQueryBuilder('a')
             ->addSelect('r')
             ->addSelect('u')
+            ->addSelect('(CASE WHEN a.returnedAt IS NULL THEN 1 ELSE 0 END) AS HIDDEN returned')
             ->leftJoin('a.user', 'u')
             ->leftJoin('a.resource', 'r')
-            ->orderBy('a.assignedAt', 'DESC')
+            ->orderBy('returned', 'DESC')
+            ->addOrderBy('r.label', 'ASC')
+            ->addOrderBy('a.assignedAt', 'DESC')
         ;
 
         return $qb->getQuery()->getResult();
