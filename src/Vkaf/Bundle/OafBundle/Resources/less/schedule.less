@@ -54,10 +54,13 @@
 }
 
 .schedule-slot {
-    section {
+    > h3, > dl, > section {
+        margin: 0 0 0.5cm 0;
+    }
+
+    > section {
         page-break-inside: avoid;
-        clear: both;
-        padding: 0.5cm 0 1cm 0;
+        overflow: hidden;
 
         > h4 {
             width: 100%;
@@ -70,6 +73,10 @@
             padding: 0;
             list-style-type: none;
         }
+    }
+
+    .dl-horizontal dt {
+        text-align: left;
     }
 
     .schedule-slot-extra {

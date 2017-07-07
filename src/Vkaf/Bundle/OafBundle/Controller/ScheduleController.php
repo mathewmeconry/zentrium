@@ -126,12 +126,26 @@ class ScheduleController extends Controller
             return strcasecmp($a['task']->getName(), $b['task']->getName());
         });
 
+        $ending = $changing = $starting = 0;
+        foreach ($users as $user) {
+            if (count($user['end']) && count($user['start'])) {
+                $changing++;
+            } elseif (count($user['end'])) {
+                $ending++;
+            } else {
+                $starting++;
+            }
+        }
+
         return [
             'schedule' => $schedule,
             'slot' => $slot,
             'slotDate' => $slotDate,
             'tasks' => $tasks,
             'users' => $users,
+            'ending' => $ending,
+            'changing' => $changing,
+            'starting' => $starting,
         ];
     }
 

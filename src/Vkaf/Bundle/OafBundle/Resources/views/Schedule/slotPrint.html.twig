@@ -1,12 +1,20 @@
 {% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
 
-{% block title %}{{ schedule.name }}{% endblock %}
+{% block title %}{{ slotDate|localizedDate('datetime_medium') }} - {{ schedule.name }}{% endblock %}
 
 {% block body_class %}schedule-slot{% endblock %}
 
 {% block body %}
 <h4>{{ slotDate|localizedDate('date_full') }}</h4>
 <h3>{{ slotDate|date('H:i') }}</h3>
+<dl class="dl-horizontal">
+  <dt>{{ 'vkaf_oaf.schedule.slot.ending'|trans }}</dt>
+  <dd>{{ ending }}</dd>
+  <dt>{{ 'vkaf_oaf.schedule.slot.changing'|trans }}</dt>
+  <dd>{{ changing }}</dd>
+  <dt>{{ 'vkaf_oaf.schedule.slot.beginning'|trans }}</dt>
+  <dd>{{ starting }}</dd>
+</dl>
 {% for row in tasks %}
 <section>
   <h4>{{ row.task.name }} ({{ row.task.code }})</h4>
