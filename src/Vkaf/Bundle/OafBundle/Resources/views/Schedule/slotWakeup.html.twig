@@ -12,7 +12,7 @@
   <ul>
     {% for row in users %}
     <li>
-      <span class="fa {% if row.end|length > 0 %}fa-minus-square{% else %}fa-minus-square-o{% endif %}"></span>
+      <span class="fa {% if row.end|length > 0 %}fa-plus-square{% else %}fa-plus-square-o{% endif %}"></span>
       {{ row.user.name }} ({{ row.user.groups|formatList({'property': 'shortName'}) }})
       {% if row.end|length or row.user.bednumber %}
       <span class="schedule-slot-extra">
