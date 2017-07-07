@@ -52,6 +52,8 @@ vkaf_oaf:
             ending: Schicht-Ende
             changing: Schicht-Wechsel
             beginning: Schicht-Beginn
+        slot_wakeup:
+            title: Weckliste
     user:
         desk:
             edit: Bearbeiten

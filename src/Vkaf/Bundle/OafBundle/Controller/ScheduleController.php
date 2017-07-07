@@ -150,6 +150,58 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/slots/{slot}/wakup", name="oaf_schedule_slot_wakeup")
+     * @Template
+     */
+    public function slotWakeupAction(Schedule $schedule, $slot)
+    {
+        $slot = intval($slot);
+        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
+            throw $this->createNotFoundException();
+        }
+
+        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+
+        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
+        $users = [];
+        foreach ($shifts as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
+
+            $userId = $shift->getUser()->getId();
+            if (!isset($users[$userId])) {
+                $users[$userId] = [
+                    'user' => $shift->getUser(),
+                    'start' => [],
+                    'end' => [],
+                ];
+            }
+
+            if ($shift->getTo() == $slotDate) {
+                $users[$userId]['end'][] = $shift->getTask();
+            } else {
+                $users[$userId]['start'][] = $shift->getTask();
+            }
+        }
+
+        $users = array_filter($users, function ($row) {
+            return count($row['start']) > 0;
+        });
+
+        uasort($users, function ($a, $b) {
+            return strnatcasecmp($a['user']->getBednumber() ?? '', $b['user']->getBednumber() ?? '');
+        });
+
+        return [
+            'schedule' => $schedule,
+            'slot' => $slot,
+            'slotDate' => $slotDate,
+            'users' => $users,
+        ];
+    }
+
+    /**
      * @Route("/user/{user}", name="oaf_schedule_user")
      * @Template
      */
