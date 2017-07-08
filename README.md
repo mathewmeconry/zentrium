@@ -20,11 +20,11 @@ bin/console doctrine:migrations:migrate
 # Dump JS translations
 bin/console bazinga:js-translation:dump
 
-# Install assets
-bin/console assets:install --relative
-
 # Compile bundle assets
 grunt
+
+# Install assets
+bin/console assets:install --relative
 ```
 
 ## System Requirements
