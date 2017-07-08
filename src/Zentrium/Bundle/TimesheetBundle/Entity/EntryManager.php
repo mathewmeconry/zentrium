@@ -56,6 +56,19 @@ class EntryManager
         return $qb->getQuery()->getResult();
     }
 
+    public function findByUser(User $user)
+    {
+        $qb = $this->repository->createQueryBuilder('entry')
+            ->addSelect('activity')
+            ->leftJoin('entry.activity', 'activity')
+            ->where('entry.user = :user')
+            ->orderBy('entry.start', 'DESC')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function sumByUser(User $user, $approved = null)
     {
         $qb = $this->repository->createQueryBuilder('e')

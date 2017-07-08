@@ -40,13 +40,16 @@ class UserController extends Controller
     {
         $age = $user->getBirthday() ? $user->getBirthday()->diff((new DateTime())->setTime(0, 0, 0))->y : null;
 
-        $timesheetHours = floor($this->get('zentrium_timesheet.manager.entry')->sumByUser($user) / 3600);
+        $timesheetManager = $this->get('zentrium_timesheet.manager.entry');
+        $timesheetEntries = $timesheetManager->findByUser($user);
+        $timesheetHours = floor($timesheetManager->sumByUser($user) / 3600);
 
         $resourceAssignments = $this->get('vkaf_oaf.manager.resource_assignment')->findNonReturnedByUser($user);
 
         return [
             'user' => $user,
             'age' => $age,
+            'timesheetEntries' => $timesheetEntries,
             'timesheetHours' => $timesheetHours,
             'resourceAssignments' => $resourceAssignments,
         ];

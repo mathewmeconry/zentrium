@@ -64,6 +64,8 @@ vkaf_oaf:
             labels: Labels drucken
             upcoming_shifts: Nächste Einsätze
             show_schedule: Einsatzplan anzeigen
+            timesheet_entries: Zeiterfassung
+            no_timesheet_entries: Es wurden noch keine Einsätze von %user% erfasst.
             timesheet_hours: Erfasste Stunden
             assigned_resources: Zugeteilte Geräte
             no_resources: %user% hat zurzeit keine Geräte ausgeliehen.
