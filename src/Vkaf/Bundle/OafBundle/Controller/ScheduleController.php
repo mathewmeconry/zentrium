@@ -150,7 +150,7 @@ class ScheduleController extends Controller
     }
 
     /**
-     * @Route("/{schedule}/slots/{slot}/wakup", name="oaf_schedule_slot_wakeup")
+     * @Route("/{schedule}/slots/{slot}/wakeup", name="oaf_schedule_slot_wakeup")
      * @Template
      */
     public function slotWakeupAction(Schedule $schedule, $slot)
