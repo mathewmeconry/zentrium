@@ -60,6 +60,10 @@ class ReportExporter extends Exporter
             $duration += $entry->getDuration();
         }
 
+        uasort($rows, function ($a, $b) {
+            return strcasecmp($a['user']->getName(true), $b['user']->getName(true));
+        });
+
         return new Response($this->twig->render('ZentriumTimesheetBundle:Export:report.html.twig', [
             'parameters' => $parameters,
             'rows' => $rows,
