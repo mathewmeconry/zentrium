@@ -67,7 +67,6 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
   var resourceUpdates = {};
 
   $view.fullCalendar($.extend({}, {
-    now: parameters.begin || null,
     editable: false,
     selectable: false,
     selectHelper: true,
@@ -102,6 +101,9 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     scrollTime: '00:00',
     header: false,
     defaultView: 'timelineCustom',
+    defaultDate: parameters.begin || null,
+    now: $.fullCalendar.moment(),
+    nowIndicator: true,
     views: {
       timelineCustom: {
         type: 'timeline',
