@@ -67,6 +67,8 @@ class Task
      */
     protected $color;
 
+    protected $timesheetActivity;
+
     /**
      * @var int|null
      *
@@ -150,6 +152,18 @@ class Task
     public function setColor($color)
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getTimesheetActivity()
+    {
+        return $this->timesheetActivity;
+    }
+
+    public function setTimesheetActivity($timesheetActivity)
+    {
+        $this->timesheetActivity = $timesheetActivity;
 
         return $this;
     }

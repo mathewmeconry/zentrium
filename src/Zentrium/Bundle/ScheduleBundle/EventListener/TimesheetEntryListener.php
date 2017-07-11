@@ -31,6 +31,7 @@ class TimesheetEntryListener
         $entry->setUser($shift->getUser());
         $entry->setStart($shift->getFrom());
         $entry->setEnd($shift->getTo());
+        $entry->setActivity($shift->getTask()->getTimesheetActivity());
         $entry->setNotes($this->buildNotes($shift));
     }
 

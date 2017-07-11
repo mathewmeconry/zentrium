@@ -1,6 +1,16 @@
 services:
+    zentrium_schedule.timesheet.activity_listener:
+        class: Zentrium\Bundle\ScheduleBundle\EventListener\TimesheetActivityListener
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+
     zentrium_schedule.timesheet.entry_listener:
         class: Zentrium\Bundle\ScheduleBundle\EventListener\TimesheetEntryListener
         arguments: ["@zentrium_schedule.manager.shift"]
         tags:
             - { name: kernel.event_listener, event: zentrium_timesheet.entry.edit.initialize, method: onEditInitialize }
+
+    zentrium_schedule.timesheet.form.task_activity_extension:
+        class: Zentrium\Bundle\ScheduleBundle\Form\Extension\TaskActivityExtension
+        tags:
+            - { name: form.type_extension, extended_type: Zentrium\Bundle\ScheduleBundle\Form\Type\TaskType }

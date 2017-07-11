@@ -164,6 +164,7 @@ zentrium_schedule:
             name: Name
             notes: Bemerkungen
             skill: Anforderung
+            timesheet_activity: Aktivität
             informative: informell
             rate: Ansatz
         form:
