@@ -243,7 +243,10 @@ class ScheduleController extends Controller
                 'start' => $this->serializeDate($shift->getFrom()),
                 'end' => $this->serializeDate($shift->getTo()),
                 'color' => $shift->getTask()->getColor(),
-                'timesheet' => $this->generateUrl('timesheet_entry_new', ['shift' => $shift->getId()]),
+                'timesheet' => $this->generateUrl('timesheet_entry_new', [
+                    'shift' => $shift->getId(),
+                    'return_oaf_schedule' => $schedule->getId(),
+                ]),
             ];
         }
 

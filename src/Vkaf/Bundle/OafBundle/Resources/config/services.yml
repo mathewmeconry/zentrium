@@ -52,6 +52,12 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@templating"]
         lazy: true
 
+    vkaf_oaf.timesheet.entry_listener:
+        class: Vkaf\Bundle\OafBundle\EventListener\TimesheetEntryListener
+        arguments: ["@router", "@translator"]
+        tags:
+            - { name: kernel.event_listener, event: zentrium_timesheet.entry.edit.completed, method: onEditCompleted }
+
     vkaf_oaf.twig.extension:
         class: Vkaf\Bundle\OafBundle\Twig\Extension
         arguments: ["@translator"]
