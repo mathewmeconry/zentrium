@@ -9,6 +9,7 @@ use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\PasswordResetListene
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RequestBodyParamConverterPass;
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RoleHierarchyPass;
 use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\RoleRegistrationPass;
+use Zentrium\Bundle\CoreBundle\DependencyInjection\Compiler\TemplateGuesserPass;
 
 class ZentriumCoreBundle extends Bundle
 {
@@ -27,5 +28,6 @@ class ZentriumCoreBundle extends Bundle
             'ROLE_MANAGER' => ['zentrium.role.manager', []],
             'ROLE_ADMINISTRATOR' => ['zentrium.role.administrator', ['ROLE_MANAGER']],
         ]));
+        $container->addCompilerPass(new TemplateGuesserPass());
     }
 }
