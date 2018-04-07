@@ -4,6 +4,11 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
+# Container Configuration
+parameters:
+    container.autowiring.strict_mode: true
+    container.dumper.inline_class_loader: true
+
 # Zentrium Configuration
 zentrium_core:
     default_country: "%country%"
