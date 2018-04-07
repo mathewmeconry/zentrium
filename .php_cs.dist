@@ -9,10 +9,11 @@ $finder = PhpCsFixer\Finder::create()
 return PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
-        'pre_increment' => false,
+        'array_syntax' => ['syntax' => 'short'],
+        'increment_style' => null,
         'no_unneeded_control_parentheses' => false,
         'ordered_imports' => true,
-        'array_syntax' => ['syntax' => 'short'],
+        'yoda_style' => null,
     ])
     ->setFinder($finder)
 ;
