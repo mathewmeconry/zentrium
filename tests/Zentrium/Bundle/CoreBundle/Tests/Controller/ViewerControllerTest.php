@@ -14,6 +14,6 @@ class ViewerControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/viewer/profile');
         $this->assertStatusCode(200, $client);
-        $this->assertSame(1, $crawler->filterXpath('//dd[text()="033 444 55 66"]')->count());
+        $this->assertSame(1, $crawler->filterXPath('//dd[text()="033 444 55 66"]')->count());
     }
 }

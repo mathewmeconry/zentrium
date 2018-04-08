@@ -1,6 +1,6 @@
 <?php
 
-namespace Zentrium\Bundle\CoreBundle\Tests\Twig;
+namespace Zentrium\Bundle\CoreBundle\Tests\Templating\Helper;
 
 use DateTime;
 use League\Period\Period;
