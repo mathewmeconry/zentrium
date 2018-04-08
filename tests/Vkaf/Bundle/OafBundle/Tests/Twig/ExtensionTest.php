@@ -3,6 +3,7 @@
 namespace Vkaf\Bundle\OafBundle\Tests\Twig;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Translation\TranslatorInterface;
 use Vkaf\Bundle\OafBundle\Twig\Extension;
 
 class ExtensionTest extends TestCase
@@ -12,7 +13,8 @@ class ExtensionTest extends TestCase
      */
     public function testDistribute($text, $length, $expected)
     {
-        $extension = new Extension();
+        $translator = $this->createMock(TranslatorInterface::class);
+        $extension = new Extension($translator);
 
         $actual = $extension->truncate($text, $length);
 
