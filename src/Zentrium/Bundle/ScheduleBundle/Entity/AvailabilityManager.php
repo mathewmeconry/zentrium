@@ -4,6 +4,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use League\Period\Period;
 use Zentrium\Bundle\CoreBundle\Entity\User as BaseUser;
 

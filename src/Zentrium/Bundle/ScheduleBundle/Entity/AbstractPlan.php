@@ -53,7 +53,7 @@ abstract class AbstractPlan
     protected $end;
 
     /**
-     * @var Period
+     * @var Period|null
      */
     protected $period;
 
