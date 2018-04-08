@@ -33,7 +33,6 @@
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "knplabs/knp-time-bundle": "^1.6",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "jms/security-extra-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.1",
         "jms/serializer-bundle": "^2.0",
         "php-http/httplug-bundle": "^1.1",

@@ -5,7 +5,7 @@ namespace Zentrium\Bundle\ScheduleBundle\Controller;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -47,7 +47,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/new", name="schedule_requirement_set_new")
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -128,7 +128,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/modify", name="schedule_requirement_set_modify", options={"protect": true})
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Method("POST")
      */
     public function modifyAction(Request $request, RequirementSet $set)
@@ -140,7 +140,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/set", name="schedule_requirement_set_set", options={"protect": true})
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Method("POST")
      */
     public function setAction(Request $request, RequirementSet $set)
@@ -152,7 +152,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/copy", name="schedule_requirement_set_copy")
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Template
      */
     public function copyAction(Request $request, RequirementSet $set)
@@ -165,7 +165,7 @@ class RequirementSetController extends Controller
 
     /**
      * @Route("/{set}/edit", name="schedule_requirement_set_edit")
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, RequirementSet $set)

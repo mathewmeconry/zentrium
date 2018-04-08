@@ -2,7 +2,7 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Controller;
 
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -34,7 +34,7 @@ class SkillController extends Controller
 
     /**
      * @Route("/new", name="schedule_skill_new")
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Template
      */
     public function newAction(Request $request)
@@ -44,7 +44,7 @@ class SkillController extends Controller
 
     /**
      * @Route("/{skill}/edit", name="schedule_skill_edit")
-     * @Secure("ROLE_SCHEDULER")
+     * @IsGranted("ROLE_SCHEDULER")
      * @Template
      */
     public function editAction(Request $request, Skill $skill)
