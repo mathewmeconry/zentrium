@@ -23,6 +23,7 @@ use Zentrium\Bundle\ScheduleBundle\Form\Type\ModifyOperationType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\RequirementSetType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\SetOperationType;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\ModifyOperation;
+use Zentrium\Bundle\ScheduleBundle\RequirementSet\OperationException;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\SetOperation;
 
 /**
