@@ -39,7 +39,7 @@ class SecurityController extends Controller
             ];
         }
 
-        if ($user->getEmail() === null) {
+        if ($user->getUsername() === null || $user->getEmail() === null) {
             return [
                 'error' => 'zentrium.security.password_reset.incomplete_profile',
             ];

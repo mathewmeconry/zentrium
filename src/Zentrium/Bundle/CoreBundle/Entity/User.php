@@ -14,6 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Zentrium\Bundle\CoreBundle\Entity\UserRepository")
  * @ORM\Table(name="users")
  * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="username",
+ *          column=@ORM\Column(type="string", length=180, nullable=true)
+ *      ),
+ *      @ORM\AttributeOverride(name="usernameCanonical",
+ *          column=@ORM\Column(type="string", length=180, nullable=true, unique=true)
+ *      ),
  *      @ORM\AttributeOverride(name="email",
  *          column=@ORM\Column(type="string", length=180, nullable=true)
  *      ),

@@ -21,6 +21,7 @@ class UserAccountType extends AbstractType
             ])
             ->add('username', TextType::class, [
                 'label' => 'zentrium.user.field.username',
+                'required' => false,
                 'position' => ['after' => 'firstName'],
             ])
             ->add('enabled', CheckboxType::class, [

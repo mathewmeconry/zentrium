@@ -1,7 +1,6 @@
 FOS\UserBundle\Model\User:
     properties:
         username:
-            - NotBlank: ~
             - Regex: '/^[a-z0-9]+(\.[a-z0-9]+)*$/'
         email:
             - Length: { min: 2, max: 180, minMessage: fos_user.email.short, maxMessage: fos_user.email.long }
