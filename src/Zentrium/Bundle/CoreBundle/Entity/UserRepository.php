@@ -26,6 +26,18 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findOneByCanonicalEmail($email)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.emailCanonical = :email')
+            ->setParameter('email', $email)
+            ->setMaxResults(2);
+
+        $results = $qb->getQuery()->getResult();
+
+        return count($results) === 1 ? $results[0] : null;
+    }
+
     public function count()
     {
         $qb = $this->createQueryBuilder('u')

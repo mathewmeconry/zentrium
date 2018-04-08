@@ -88,6 +88,7 @@ stof_doctrine_extensions:
 fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
+        user_manager: zentrium.user_manager
     db_driver: orm
     firewall_name: main
     user_class: Zentrium\Bundle\CoreBundle\Entity\User
