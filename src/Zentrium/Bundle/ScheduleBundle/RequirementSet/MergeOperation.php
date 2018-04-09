@@ -3,6 +3,7 @@
 namespace Zentrium\Bundle\ScheduleBundle\RequirementSet;
 
 use ArrayIterator;
+use CallbackFilterIterator;
 use League\Period\Period;
 use Symfony\Component\Validator\Constraints as Assert;
 use Traversable;
