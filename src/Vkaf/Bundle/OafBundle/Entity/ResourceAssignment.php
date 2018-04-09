@@ -2,8 +2,10 @@
 
 namespace Vkaf\Bundle\OafBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 /**
  * @ORM\Entity
@@ -19,7 +21,7 @@ class ResourceAssignment
     protected $id;
 
     /**
-     * @var Vkaf\Bundle\OafBundle\Entity\Resource
+     * @var \Vkaf\Bundle\OafBundle\Entity\Resource
      *
      * @Assert\NotNull
      *
