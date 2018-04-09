@@ -3,7 +3,7 @@
 namespace Zentrium\Bundle\CoreBundle\Controller;
 
 use FOS\UserBundle\Event\FormEvent;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,7 +30,7 @@ class UserController extends Controller
 
     /**
      * @Route("/users/new", name="user_new")
-     * @Secure("ROLE_ADMINISTRATOR")
+     * @IsGranted("ROLE_ADMINISTRATOR")
      * @Template
      */
     public function newAction(Request $request)
@@ -52,7 +52,7 @@ class UserController extends Controller
 
     /**
      * @Route("/users/{user}/labels", name="user_labels")
-     * @Secure("ROLE_MANAGER")
+     * @IsGranted("ROLE_MANAGER")
      * @Template
      */
     public function labelsAction(Request $request, User $user)

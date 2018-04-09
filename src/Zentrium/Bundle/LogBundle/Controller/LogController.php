@@ -3,7 +3,7 @@
 namespace Zentrium\Bundle\LogBundle\Controller;
 
 use DateTime;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,7 +22,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs", name="logs")
-     * @Secure("ROLE_LOG_READ")
+     * @IsGranted("ROLE_LOG_READ")
      * @Template
      */
     public function indexAction(Request $request)
@@ -55,7 +55,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs/new", name="log_new")
-     * @Secure("ROLE_LOG_WRITE")
+     * @IsGranted("ROLE_LOG_WRITE")
      * @Template
      */
     public function newAction(Request $request)
@@ -68,7 +68,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs/{log}", name="log_view")
-     * @Secure("ROLE_LOG_READ")
+     * @IsGranted("ROLE_LOG_READ")
      * @Template
      */
     public function viewAction(Request $request, Log $log)
@@ -84,7 +84,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs/{log}/edit", name="log_edit")
-     * @Secure("ROLE_LOG_WRITE")
+     * @IsGranted("ROLE_LOG_WRITE")
      * @Template
      */
     public function editAction(Request $request, Log $log)
@@ -94,7 +94,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs/{log}/status", name="log_status", options={"protect": true})
-     * @Secure("ROLE_LOG_WRITE")
+     * @IsGranted("ROLE_LOG_WRITE")
      * @Method("PATCH")
      */
     public function statusAction(Request $request, Log $log)
@@ -114,7 +114,7 @@ class LogController extends Controller
 
     /**
      * @Route("/logs/{log}/comments/new", name="log_comment_new")
-     * @Secure("ROLE_LOG_READ")
+     * @IsGranted("ROLE_LOG_READ")
      * @Template
      */
     public function newCommentAction(Request $request, Log $log)

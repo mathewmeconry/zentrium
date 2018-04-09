@@ -71,11 +71,11 @@ $(function () {
     $this.data('ol', map);
 
     $('#map-fullscreen').click(function () {
-      if (goog.dom.fullscreen.isFullScreen()) {
-        goog.dom.fullscreen.exitFullScreen();
+      if (ol.control.FullScreen.isFullScreen()) {
+        ol.control.FullScreen.exitFullScreen();
       } else {
         var element = map.getTargetElement();
-        goog.dom.fullscreen.requestFullScreen(element);
+        ol.control.FullScreen.requestFullScreen(element);
       }
     });
   });

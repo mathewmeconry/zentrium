@@ -39,6 +39,12 @@ class SecurityController extends Controller
             ];
         }
 
+        if ($user->getUsername() === null || $user->getEmail() === null) {
+            return [
+                'error' => 'zentrium.security.password_reset.incomplete_profile',
+            ];
+        }
+
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
             return [
                 'error' => 'zentrium.security.password_reset.already_requested',

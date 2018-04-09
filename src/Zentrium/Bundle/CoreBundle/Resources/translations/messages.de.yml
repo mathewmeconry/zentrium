@@ -45,6 +45,7 @@ zentrium:
                 Um dein Passwort zurücksetzen, klicke bitte hier: %url%
                 Danach kannst du dich mit dem Benutzernamen «%username%» wieder einloggen.
             already_requested: Für diesen Benutzer wurde vor kurzem bereits ein neues Passwort beantragt.
+            incomplete_profile: Das Passwort dieses Benutzers kann nicht zurückgesetzt werden.
             invalid_username: Der gesuchte Benutzer existiert nicht.
             request: Passwort zurücksetzen
             sent: Du erhältst in den nächsten Minuten ein E-Mail mit Instruktionen zum Setzen deines neuen Passworts.

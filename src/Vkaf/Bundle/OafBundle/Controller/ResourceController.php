@@ -3,7 +3,7 @@
 namespace Vkaf\Bundle\OafBundle\Controller;
 
 use DateTime;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -39,7 +39,7 @@ class ResourceController extends Controller
 
     /**
      * @Route("/new", name="oaf_resource_new")
-     * @Secure("ROLE_OAF_RESOURCE_MANAGE")
+     * @IsGranted("ROLE_OAF_RESOURCE_MANAGE")
      * @Template
      */
     public function newAction(Request $request)
@@ -82,7 +82,7 @@ class ResourceController extends Controller
 
     /**
      * @Route("/{resource}/edit", name="oaf_resource_edit")
-     * @Secure("ROLE_OAF_RESOURCE_MANAGE")
+     * @IsGranted("ROLE_OAF_RESOURCE_MANAGE")
      * @Template
      */
     public function editAction(Request $request, Resource $resource)
@@ -92,7 +92,7 @@ class ResourceController extends Controller
 
     /**
      * @Route("/assignments/{assignment}/return", name="oaf_resource_return", options={"protect": true})
-     * @Secure("ROLE_OAF_RESOURCE_MANAGE")
+     * @IsGranted("ROLE_OAF_RESOURCE_MANAGE")
      * @Method("POST")
      */
     public function returnAction(Request $request, ResourceAssignment $assignment)
