@@ -22,6 +22,11 @@ class CapabilitiesParser
      */
     private $httpClient;
 
+    /**
+     * @var Service
+     */
+    private $service;
+
     public function __construct(HttpMethodsClient $httpClient)
     {
         $this->httpClient = $httpClient;

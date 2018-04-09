@@ -75,7 +75,7 @@ class ConstraintManager
         } elseif (is_array($constraint->getParameters())) {
             $parametersType = 'array';
         } else {
-            throw LogicException('Unknown type.');
+            throw new LogicException('Unknown type.');
         }
 
         $entity->setType($constraint->getType());

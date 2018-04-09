@@ -5,7 +5,6 @@ namespace Zentrium\Bundle\CoreBundle\Templating\Helper;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class PhoneNumberHelper
 {
@@ -22,8 +21,8 @@ class PhoneNumberHelper
     /**
      * Constructor.
      *
-     * @param TranslatorInterface $translator
-     * @param string              $defaultRegion
+     * @param PhoneNumberUtil $phoneNumberUtil
+     * @param string          $defaultRegion
      */
     public function __construct(PhoneNumberUtil $phoneNumberUtil, $defaultRegion)
     {

@@ -2,6 +2,7 @@
 
 namespace Zentrium\Bundle\MapBundle\Command;
 
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,7 +38,7 @@ class DeleteWmtsLayerCommand extends ContainerAwareCommand
         if ($layerId !== null) {
             $layer = $manager->findOneByCapabilitiesUrlAndLayerId($url, $layerId);
             if ($layer === null) {
-                throw InvalidArgumentException('Could not find layer.');
+                throw new InvalidArgumentException('Could not find layer.');
             }
             $layers = [$layer];
         } else {

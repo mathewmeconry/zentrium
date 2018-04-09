@@ -3,9 +3,10 @@
 namespace Zentrium\Bundle\ScheduleBundle\RequirementSet;
 
 use ArrayIterator;
+use CallbackFilterIterator;
 use League\Period\Period;
 use Symfony\Component\Validator\Constraints as Assert;
-use Traverable;
+use Traversable;
 use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
 use Zentrium\Bundle\ScheduleBundle\Util\PeriodQueue;
@@ -38,8 +39,8 @@ class MergeOperation implements OperationInterface
     }
 
     /**
-     * @param RequirementSet   $set
-     * @param array|Traverable $requirements
+     * @param RequirementSet    $set
+     * @param array|Traversable $requirements
      */
     public function merge(RequirementSet $set, $requirements)
     {

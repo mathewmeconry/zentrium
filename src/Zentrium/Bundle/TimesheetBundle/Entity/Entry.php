@@ -2,9 +2,11 @@
 
 namespace Zentrium\Bundle\TimesheetBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Zentrium\Bundle\CoreBundle\Entity\TimestampableTrait;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\TimesheetBundle\Validator\Constraints as AssertTimesheet;
 
 /**

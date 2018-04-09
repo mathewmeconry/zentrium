@@ -14,8 +14,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Controller\ControllerTrait;
-use Zentrium\Bundle\ScheduleBundle\Entity\AbstractItem;
 use Zentrium\Bundle\ScheduleBundle\Entity\AbstractPlan;
+use Zentrium\Bundle\ScheduleBundle\Entity\AbstractPlanItem;
 use Zentrium\Bundle\ScheduleBundle\Entity\Requirement;
 use Zentrium\Bundle\ScheduleBundle\Entity\RequirementSet;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
@@ -23,6 +23,7 @@ use Zentrium\Bundle\ScheduleBundle\Form\Type\ModifyOperationType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\RequirementSetType;
 use Zentrium\Bundle\ScheduleBundle\Form\Type\SetOperationType;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\ModifyOperation;
+use Zentrium\Bundle\ScheduleBundle\RequirementSet\OperationException;
 use Zentrium\Bundle\ScheduleBundle\RequirementSet\SetOperation;
 
 /**
@@ -283,10 +284,11 @@ class RequirementSetController extends Controller
     }
 
     /**
-     * @param RequirementSet $set
-     * @param AbstractItem[] $subjectCollection
-     * @param int|null       $subjectCount
-     * @param callable       $formatter
+     * @param Request            $request
+     * @param RequirementSet     $set
+     * @param AbstractPlanItem[] $subjectCollection
+     * @param int|null           $subjectCount
+     * @param callable           $formatter
      */
     private function handleDiffData(Request $request, RequirementSet $set, $subjectCollection, $subjectCount, $formatter)
     {

@@ -42,7 +42,7 @@ abstract class AbstractPlanItem
     protected $to;
 
     /**
-     * @var Period
+     * @var Period|null
      */
     protected $period;
 

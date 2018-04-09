@@ -25,6 +25,6 @@ class DashboardControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
         $this->assertStatusCode(200, $client);
-        $this->assertGreaterThanOrEqual(4, intval($crawler->filterXpath('//div[contains(@class, "small-box") and .//a[@href="/users"]]//h3')->text()));
+        $this->assertGreaterThanOrEqual(4, intval($crawler->filterXPath('//div[contains(@class, "small-box") and .//a[@href="/users"]]//h3')->text()));
     }
 }

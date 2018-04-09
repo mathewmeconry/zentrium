@@ -50,7 +50,7 @@ class Availability
     protected $to;
 
     /**
-     * @var Period
+     * @var Period|null
      */
     protected $period;
 
