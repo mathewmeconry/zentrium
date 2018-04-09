@@ -22,7 +22,7 @@ class UserDeskType extends AbstractType
                     return $user->getName(true);
                 },
                 'query_builder' => function (UserRepository $repository) {
-                    return $repository->createSortedQueryBuilder('u');
+                    return $repository->createSortedQueryBuilder();
                 },
             ])
             ->add('open', SubmitType::class, [
