@@ -31,7 +31,7 @@ class ImportAvailabilityCommand extends ContainerAwareCommand
     {
         $path = $input->getArgument('file');
         if (!is_readable($path)) {
-            throw new RuntimeException(sprintf('"%" is not readable.', $path));
+            throw new RuntimeException(sprintf('"%s" is not readable.', $path));
         }
 
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');

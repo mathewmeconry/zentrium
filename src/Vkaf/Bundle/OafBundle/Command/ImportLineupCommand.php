@@ -27,7 +27,7 @@ class ImportLineupCommand extends ContainerAwareCommand
     {
         $path = $input->getArgument('file');
         if (!is_readable($path)) {
-            throw new RuntimeException(sprintf('"%" is not readable.', $path));
+            throw new RuntimeException(sprintf('"%s" is not readable.', $path));
         }
 
         $data = json_decode(file_get_contents($input->getArgument('file')), true);
