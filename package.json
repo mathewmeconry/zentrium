@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
+    "zentrium-map-bundle": "file:src/Zentrium/Bundle/MapBundle/Resources",
     "zentrium-timesheet-bundle": "file:src/Zentrium/Bundle/TimesheetBundle/Resources"
   },
   "devDependencies": {

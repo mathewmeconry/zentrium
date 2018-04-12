@@ -2,10 +2,10 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" href="{{ asset('bundles/zentriummap/css/bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('build/zentrium_map.css') }}">
 {% endblock %}
 
 {% block scripts %}
 {{ parent() }}
-<script src="{{ asset('bundles/zentriummap/js/bundle.min.js') }}"></script>
+<script src="{{ asset('build/zentrium_map.js') }}"></script>
 {% endblock %}
