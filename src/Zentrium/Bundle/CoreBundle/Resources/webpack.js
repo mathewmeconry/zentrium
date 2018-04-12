@@ -10,7 +10,6 @@ module.exports = function (config) {
 
   config.plugins.push(new webpack.ProvidePlugin({
     'jQuery': 'jquery',
-    'Sortable': 'sortablejs',
     'Translator': ['zentrium', 'Translator'],
   }));
 
@@ -24,9 +23,7 @@ module.exports = function (config) {
     'select2/dist/js/i18n/de.js',
     'jquery-slimscroll',
     'jquery-minicolors',
-    'sortablejs/jquery.binding.js',
     'admin-lte',
-    path.join(__dirname, 'js/global.js'),
     path.join(__dirname, 'js/layout.js'),
     path.join(__dirname, 'js/form.js'),
     path.join(__dirname, 'less/bundle.less'),
