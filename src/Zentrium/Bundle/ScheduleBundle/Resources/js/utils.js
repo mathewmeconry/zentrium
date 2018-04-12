@@ -59,7 +59,7 @@ export function setup($view, parameters, config, selectCallback) {
         resourceId: resource.id,
         start: start,
         end: end,
-        className: 'schedule-operation-pending',
+        className: ['schedule-operation-pending'],
         editable: false,
       };
 

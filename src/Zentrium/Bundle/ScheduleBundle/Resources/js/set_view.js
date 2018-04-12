@@ -74,7 +74,7 @@ $(function() {
       $view.fullCalendar('removeEvents', eventData.id);
       view.displayEvents.start();
     }).fail(function (data) {
-      eventData.className = 'schedule-operation-failed';
+      eventData.className = ['schedule-operation-failed'];
       $view.fullCalendar('updateEvent', eventData);
     });
   });

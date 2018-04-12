@@ -46,10 +46,10 @@ $(function() {
         crosstab.broadcast('schedule:change', { id: config.scheduleId });
       }
     }).fail(function () {
-      event.className = 'schedule-operation-failed';
+      event.className = ['schedule-operation-failed'];
       $view.fullCalendar('updateEvent', event);
     });
-    event.className = 'schedule-operation-pending';
+    event.className = ['schedule-operation-pending'];
     event.editable = false;
     if ('_id' in event) {
       $view.fullCalendar('updateEvent', event);
@@ -100,10 +100,10 @@ $(function() {
             crosstab.broadcast('schedule:change', { id: config.scheduleId });
           }
         }).fail(function () {
-          event.className = 'schedule-operation-failed';
+          event.className = ['schedule-operation-failed'];
           $view.fullCalendar('updateEvent', event);
         });
-        event.className = 'schedule-operation-pending';
+        event.className = ['schedule-operation-pending'];
         event.editable = false;
         $view.fullCalendar('updateEvent', event);
         $modal.modal('hide');
