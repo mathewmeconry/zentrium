@@ -3,6 +3,11 @@ const glob = require('glob');
 const webpack = require('webpack');
 
 module.exports = function (config) {
+  config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    name: ['zentrium', 'manifest'],
+    minChunks: Infinity,
+  }));
+
   config.plugins.push(new webpack.ProvidePlugin({
     'jQuery': 'jquery',
     'Sortable': 'sortablejs',
