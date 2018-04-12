@@ -6,6 +6,9 @@ const Encore = require('@symfony/webpack-encore');
 Encore
   .setOutputPath('web/build/')
   .setPublicPath('/build')
+  .addAliases({
+    '@willdurand/js-translation-bundle$': path.join(__dirname, 'vendor/willdurand/js-translation-bundle/Resources/js/translator.js'),
+  })
   .addEntry('dummy', './dummy.js')
   .enableLessLoader()
   .enableSourceMaps(!Encore.isProduction())

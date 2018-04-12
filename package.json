@@ -2,6 +2,7 @@
   "name": "zentrium",
   "private": true,
   "dependencies": {
+    "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
     "zentrium-timesheet-bundle": "file:src/Zentrium/Bundle/TimesheetBundle/Resources"
   },
   "devDependencies": {

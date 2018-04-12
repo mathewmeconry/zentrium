@@ -1,24 +1,28 @@
-var Zentrium = Zentrium || {};
+import $ from 'jquery';
+import Cookies from 'js-cookie';
+import Translator from '@willdurand/js-translation-bundle';
 
-Zentrium.TOKEN = Cookies.get('XSRF-TOKEN');
+export const TOKEN = Cookies.get('XSRF-TOKEN');
 
-Zentrium.request = function (method, url, data) {
+export { Translator };
+
+export function request(method, url, data) {
   return $.ajax({
     url: url,
     data: data,
     dataType: 'json',
     method: method,
     headers: {
-      'X-XSRF-TOKEN': Zentrium.TOKEN
+      'X-XSRF-TOKEN': TOKEN,
     }
   });
 };
 
-Zentrium.post = function (url, data) {
-  return Zentrium.request('POST', url, data);
+export function post(url, data) {
+  return request('POST', url, data);
 };
 
-Zentrium.addFlash = function (type, message, autoClose) {
+export function addFlash(type, message, autoClose) {
   var flashIcons = {'success': 'check', 'warning': 'warning', 'info': 'info'};
   var $flash = $('<div class="alert alert-dismissible"><button type="button" class="close" data-dismiss="alert">×</button></div>').addClass('alert-' + type);
   if(type in flashIcons) {
