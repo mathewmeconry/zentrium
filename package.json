@@ -5,6 +5,7 @@
     "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
     "zentrium-log-bundle": "file:src/Zentrium/Bundle/LogBundle/Resources",
     "zentrium-map-bundle": "file:src/Zentrium/Bundle/MapBundle/Resources",
+    "zentrium-schedule-bundle": "file:src/Zentrium/Bundle/ScheduleBundle/Resources",
     "zentrium-timesheet-bundle": "file:src/Zentrium/Bundle/TimesheetBundle/Resources"
   },
   "devDependencies": {

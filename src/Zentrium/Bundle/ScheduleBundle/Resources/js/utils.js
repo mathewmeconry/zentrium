@@ -1,10 +1,9 @@
-var Zentrium = Zentrium || {};
-Zentrium.Schedule = Zentrium.Schedule || {};
+import $ from 'jquery';
 
-Zentrium.Schedule.pause = function (func, paused) {
-  var lastArgs;
-  var lastThis;
-  var queue = false;
+export function pause(func, paused) {
+  let lastArgs;
+  let lastThis;
+  let queue = false;
 
   function run() {
     if(!paused) {
@@ -33,19 +32,19 @@ Zentrium.Schedule.pause = function (func, paused) {
   return run;
 };
 
-Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
+export function setup($view, parameters, config, selectCallback) {
   if(!$view.length) {
     return;
   }
 
-  var generateId = (function () {
-    var id = 0;
+  const generateId = (function () {
+    let id = 0;
     return function () {
       return 'tmp' + (++id);
     };
   })();
 
-  var resourceUpdates = {};
+  const resourceUpdates = {};
 
   $view.fullCalendar($.extend({}, {
     now: parameters.begin || null,
@@ -55,7 +54,7 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     select: function(start, end, jsEvent, view, resource) {
       $view.fullCalendar('unselect');
 
-      var eventPrototype = {
+      const eventPrototype = {
         id: generateId(),
         resourceId: resource.id,
         start: start,
@@ -64,14 +63,14 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
         editable: false,
       };
 
-      var updateHelper = function (events, time) {
+      const updateHelper = function (events, time) {
         if(!time || (resourceUpdates[resource.id] || 0) < time) {
           resourceUpdates[resource.id] = time;
           $view.fullCalendar('removeEvents', function (eventData) {
             return eventData.resourceId == resource.id;
           });
-          for(var i in events) {
-            $view.fullCalendar('renderEvent', events[i]);
+          for(let event of events) {
+            $view.fullCalendar('renderEvent', event);
           }
         }
       };
@@ -94,17 +93,17 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
   }, config));
 
-  var view = $view.fullCalendar('getView');
-  view.displayEvents = Zentrium.Schedule.pause(view.displayEvents);
+  const view = $view.fullCalendar('getView');
+  view.displayEvents = pause(view.displayEvents);
 
   $(window).keydown(function(e) {
     if(e.keyCode != 37 && e.keyCode != 39) { // left/right arrow keys
       return;
     }
-    var view = $view.fullCalendar('getView');
-    var slotWidth = view.timeGrid.slotWidth;
-    var oldScroll = view.queryScroll();
-    var newScroll = { top: oldScroll.top };
+    const view = $view.fullCalendar('getView');
+    const slotWidth = view.slotWidth;
+    const oldScroll = view.queryScroll();
+    const newScroll = { top: oldScroll.top };
     if(e.keyCode == 37) {
       newScroll.left = Math.round((oldScroll.left - slotWidth) / slotWidth) * slotWidth;
     } else {
