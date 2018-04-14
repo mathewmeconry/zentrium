@@ -44,6 +44,8 @@ class KioskController extends Controller
         try {
             return $this->get('vkaf_oaf.kiosk.slide_manager')->render($slide->getType(), $slide->getOptions(), $next);
         } catch (RenderException $e) {
+            $this->get('logger')->error('Could not render slide.', ['exception' => $e]);
+
             return $this->renderMessage('vkaf_oaf.kiosk.exception', $nextUrl);
         }
     }
