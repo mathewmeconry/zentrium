@@ -1,4 +1,4 @@
-@theme-path: '../node_modules/admin-lte/build/less/';
+@theme-path: '~admin-lte/build/less/';
 
 // Bootstrap
 @import (reference) '@{theme-path}../bootstrap-less/mixins.less';
@@ -33,6 +33,7 @@
 @import '@{theme-path}carousel.less';
 @import '@{theme-path}modal.less';
 @import '@{theme-path}social-widgets.less';
+@import '@{theme-path}treeview.less';
 
 // Pages
 @import '@{theme-path}mailbox.less';
@@ -40,12 +41,7 @@
 @import '@{theme-path}login_and_register.less';
 @import '@{theme-path}404_500_errors.less';
 @import '@{theme-path}invoice.less';
-@import '@{theme-path}profile';
-
-// Plugins
-@import '@{theme-path}bootstrap-social.less';
-@import '@{theme-path}fullcalendar.less';
-@import '@{theme-path}select2.less';
+@import '@{theme-path}profile.less';
 
 // Miscellaneous
 @import '@{theme-path}miscellaneous.less';
@@ -53,6 +49,9 @@
 
 // Skin
 @import '@{theme-path}skins/skin-blue.less';
+
+// Paths
+@boxed-layout-bg-image-path: '~admin-lte/dist/img/boxed-bg.jpg';
 
 .bg-gray-dark {
     color: #fff !important;
@@ -132,6 +131,10 @@ body.error-page {
     .container > .navbar-custom-menu {
         margin-right: 15px;
     }
+}
+
+.box-header > .box-tools .dropdown-menu > li.active > a {
+    color: @dropdown-link-active-color !important;
 }
 
 .box-body .fc {

@@ -1,9 +1,15 @@
 {
   "name": "zentrium",
   "private": true,
+  "dependencies": {
+    "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
+    "zentrium-log-bundle": "file:src/Zentrium/Bundle/LogBundle/Resources",
+    "zentrium-schedule-bundle": "file:src/Zentrium/Bundle/ScheduleBundle/Resources",
+    "zentrium-timesheet-bundle": "file:src/Zentrium/Bundle/TimesheetBundle/Resources"
+  },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-hub": "^0.7.0",
-    "grunt-install-workspace-deps": "^0.4.0"
+    "@symfony/webpack-encore": "^0.19.0",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0"
   }
 }

@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{% block title_full %}{{ title|raw }}{% endblock %} - Zentrium</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{ asset('bundles/zentriumcore/css/bundle.css') }}">
+  <link rel="stylesheet" href="{{ asset('build/zentrium.css') }}">
   {% block stylesheets %}{% endblock %}
 </head>
 <body class="{% block body_class %}hold-transition skin-blue sidebar-collapse sidebar-mini{% endblock %}">
@@ -20,11 +20,7 @@
         <span class="logo-lg">Zentrium</span>
       </a>
       <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
         <div class="navbar-custom-menu">
           <p class="navbar-text">{{ app.user.name }}</p>
           <ul class="nav navbar-nav">
@@ -73,7 +69,8 @@
     </footer>
   </div>
   {% endblock %}
-  <script src="{{ asset('bundles/zentriumcore/js/bundle.min.js') }}"></script>
+  <script src="{{ asset('build/manifest.js') }}"></script>
+  <script src="{{ asset('build/zentrium.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

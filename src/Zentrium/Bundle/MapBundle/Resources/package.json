@@ -2,14 +2,8 @@
   "name": "zentrium-map-bundle",
   "private": true,
   "dependencies": {
-    "openlayers": "^4.2.0",
-    "proj4": "^2.4.3"
-  },
-  "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-less": "^1.4.1",
-    "grunt-contrib-uglify": "^3.0.1",
-    "grunt-contrib-watch": "^1.0.0"
+    "ol": "^4.6.5",
+    "proj4": "^2.4.3",
+    "sortablejs": "^1.7.0"
   }
 }

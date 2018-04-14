@@ -1,12 +1,15 @@
+import $ from 'jquery';
+import Sortable from 'sortablejs';
+
 $(function () {
   $('#layers-available').each(function () {
-    var $available = $(this);
-    var layers = $available.data('layers');
-    var $active = $('#layers-active');
-    var $activeInput = $active.siblings().filter('input');
-    var activeLayers = JSON.parse($activeInput.val());
+    const $available = $(this);
+    const layers = $available.data('layers');
+    const $active = $('#layers-active');
+    const $activeInput = $active.siblings().filter('input');
+    let activeLayers = JSON.parse($activeInput.val());
 
-    var renderedActiveLayers = {};
+    const renderedActiveLayers = {};
     for(var i in layers) {
       var position = activeLayers.indexOf(layers[i].id);
       var $layer = $('<li></li>').text(layers[i].name).data('id', layers[i].id);
@@ -23,7 +26,7 @@ $(function () {
       }
     }
 
-    $active.sortable({
+    new Sortable($active.get(0), {
       group: 'layers',
       onSort: function () {
         activeLayers = [];
@@ -34,7 +37,7 @@ $(function () {
       }
     });
 
-    $available.sortable({
+    new Sortable($available.get(0), {
       group: 'layers',
       sort: false
     });

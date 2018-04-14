@@ -1,9 +1,12 @@
-@import (inline) "../node_modules/jquery-minicolors/jquery.minicolors.css";
+@import "~jquery-minicolors/jquery.minicolors.css";
 .minicolors-theme-bootstrap .minicolors-swatch {
     border-radius: 0;
 }
 
-@import (inline) "../node_modules/admin-lte/plugins/select2/select2.css";
+@import "@{theme-path}fullcalendar.less";
+
+@import "~select2/dist/css/select2.css";
+@import "@{theme-path}select2.less";
 .select2-results__option {
     min-height: 32px;
 
@@ -13,7 +16,8 @@
     }
 }
 
-@import (inline) "../node_modules/admin-lte/plugins/datepicker/datepicker3.css";
+@import "~bootstrap-datepicker/less/datepicker3.less";
+@import "@{theme-path}datepicker.less";
 .datepicker.dropdown-menu {
     border-radius: 0;
     box-shadow: none;

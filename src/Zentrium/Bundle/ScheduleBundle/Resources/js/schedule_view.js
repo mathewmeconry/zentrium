@@ -1,25 +1,32 @@
+import $ from 'jquery';
+import _ from 'underscore';
+import crosstab from 'crosstab';
+import moment from 'moment';
+import { request, Translator } from 'zentrium';
+import { setup } from './utils';
+
 $(function() {
-  var $view = $('#schedule');
+  const $view = $('#schedule');
   if (!$view.length) {
     return;
   }
-  var config = $view.data('config');
+  const config = $view.data('config');
 
-  var $modal = $('#shift-edit').modal({
+  const $modal = $('#shift-edit').modal({
     show: false,
   });
   $modal.data('bs.modal').enforceFocus = $.noop; // https://github.com/select2/select2/issues/600
-  var $modalSave = $('#shift-save');
-  var $modalDelete = $('#shift-delete');
-  var $modalTimesheet = $('#shift-timesheet');
+  const $modalSave = $('#shift-save');
+  const $modalDelete = $('#shift-delete');
+  const $modalTimesheet = $('#shift-timesheet');
   $modalTimesheet.mouseup(function (e) {
     if(e.which != 3) {
       $modal.modal('hide');
     }
   });
 
-  var modalSelectData = [];
-  Zentrium.request('GET', config.layout == 'task' ? config.users : config.tasks).done(function (data) {
+  let modalSelectData = [];
+  request('GET', config.layout == 'task' ? config.users : config.tasks).done(function (data) {
     modalSelectData = $.map(data, function (row) {
       row.text = row.name;
       if (row.groups && row.groups.length) {
@@ -30,7 +37,7 @@ $(function() {
   });
 
   function patchEvent(event, view, data) {
-    Zentrium.request((event.endpoint ? 'PATCH' : 'POST'), (event.endpoint || config.endpoint), { shift: data }).done(function (data) {
+    request((event.endpoint ? 'PATCH' : 'POST'), (event.endpoint || config.endpoint), { shift: data }).done(function (data) {
       view.displayEvents.stop();
       $view.fullCalendar('removeEvents', event.id);
       $view.fullCalendar('renderEvent', data.shift, true);
@@ -39,10 +46,10 @@ $(function() {
         crosstab.broadcast('schedule:change', { id: config.scheduleId });
       }
     }).fail(function () {
-      event.className = 'schedule-operation-failed';
+      event.className = ['schedule-operation-failed'];
       $view.fullCalendar('updateEvent', event);
     });
-    event.className = 'schedule-operation-pending';
+    event.className = ['schedule-operation-pending'];
     event.editable = false;
     if ('_id' in event) {
       $view.fullCalendar('updateEvent', event);
@@ -54,15 +61,15 @@ $(function() {
   function editEvent(event, view, data, persistent) {
     $modal.find('h4').text(Translator.trans(config.layout == 'task' ? 'zentrium_schedule.shift.edit.choose_user' : 'zentrium_schedule.shift.edit.choose_task'));
 
-    var resource = $view.fullCalendar('getResourceById', event.resourceId);
-    var $warningIcon = $('<i class="fa fa-warning"></i>').attr('title', Translator.trans('zentrium_schedule.shift.edit.insufficient_skills'));
-    var $select = $('<select tabindex="100"></select>');
+    const resource = $view.fullCalendar('getResourceById', event.resourceId);
+    const $warningIcon = $('<i class="fa fa-warning"></i>').attr('title', Translator.trans('zentrium_schedule.shift.edit.insufficient_skills'));
+    const $select = $('<select tabindex="100"></select>');
     $modal.find('.modal-body').empty().append($select);
     $select.select2({
       width: '100%',
       data: modalSelectData,
       templateResult: function (state) {
-        var $result = $('<span></span>').text(state.text);
+        const $result = $('<span></span>').text(state.text);
         if (
           (resource.skill && !_.findWhere(state.skills, { id: resource.skill})) ||
           (state.skill && !_.findWhere(resource.skills, { id: state.skill }))
@@ -87,16 +94,16 @@ $(function() {
       $modalDelete.show();
       $modalDelete.off();
       $modalDelete.click(function () {
-        Zentrium.request('DELETE', event.endpoint).done(function () {
+        request('DELETE', event.endpoint).done(function () {
           $view.fullCalendar('removeEvents', event.id);
           if(crosstab.supported) {
             crosstab.broadcast('schedule:change', { id: config.scheduleId });
           }
         }).fail(function () {
-          event.className = 'schedule-operation-failed';
+          event.className = ['schedule-operation-failed'];
           $view.fullCalendar('updateEvent', event);
         });
-        event.className = 'schedule-operation-pending';
+        event.className = ['schedule-operation-pending'];
         event.editable = false;
         $view.fullCalendar('updateEvent', event);
         $modal.modal('hide');
@@ -116,7 +123,7 @@ $(function() {
     $modal.modal('show');
   }
 
-  var eventSources = [{
+  const eventSources = [{
     url: config.shifts
   }];
   if(config.layout == 'user') {
@@ -125,8 +132,8 @@ $(function() {
     });
   }
 
-  var editable = _.isString(config.endpoint);
-  var options = {
+  const editable = _.isString(config.endpoint);
+  const options = {
     selectable: editable,
     editable: editable,
     eventSources: eventSources,
@@ -137,7 +144,7 @@ $(function() {
       editEvent(event, view, {}, true);
     } : null),
     eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-      var data = {
+      const data = {
         from: event.start.format("YYYY-MM-DD[T]HH:mm:ss"),
         to: event.end.format("YYYY-MM-DD[T]HH:mm:ss"),
       };
@@ -164,7 +171,7 @@ $(function() {
         },
       ],
       resourceRender: function (resource, $columns, $cells) {
-        var $row = $columns.first().parent();
+        const $row = $columns.first().parent();
         $row.tooltip({
           title: resource.notes,
           placement: 'right',
@@ -188,16 +195,16 @@ $(function() {
         }
       ],
       resourceRender: function (resource, $columns, $cells) {
-        var $cellContent = $columns.first().find('.fc-cell-content');
+        const $cellContent = $columns.first().find('.fc-cell-content');
 
-        var $actions = $('<span class="schedule-column-actions"></span>');
+        const $actions = $('<span class="schedule-column-actions"></span>');
         $actions.append($('<a><i class="fa fa-check-circle"></i></a>').attr('href', resource.availability).attr('title', Translator.trans('zentrium_schedule.schedule.view.user_availability')));
-        for(var i in resource.skills) {
-          $actions.prepend($('<span class="label label-primary"></span>').text(resource.skills[i].name));
+        for(let skill of resource.skills) {
+          $actions.prepend($('<span class="label label-primary"></span>').text(skill.name));
         }
         $cellContent.prepend($actions);
 
-        var $row = $columns.first().parent();
+        const $row = $columns.first().parent();
         $row.tooltip({
           title: resource.notes,
           placement: 'right',
@@ -208,12 +215,12 @@ $(function() {
     });
   }
 
-  Zentrium.Schedule.setup($view, config, options, function (start, end, jsEvent, view, resource, eventPrototype, updateHelper) {
-    var pendingEvent = $.extend({}, eventPrototype, {
+  setup($view, config, options, function (start, end, jsEvent, view, resource, eventPrototype, updateHelper) {
+    const pendingEvent = $.extend({}, eventPrototype, {
       title: '',
     });
 
-    var data = {
+    const data = {
       schedule: config.scheduleId,
       from: start.format("YYYY-MM-DD[T]HH:mm:ss"),
       to: end.format("YYYY-MM-DD[T]HH:mm:ss"),
@@ -229,13 +236,13 @@ $(function() {
         name: config.name,
         begin: moment(config.begin).valueOf(),
         slotDuration: config.slotDuration,
-        slotWidth: $view.fullCalendar('getView').timeGrid.slotWidth,
+        slotWidth: $view.fullCalendar('getView').slotWidth,
       });
     }, 2000);
 
-    var $scrollers = $view.find('.fc-time-area .fc-scroller');
+    const $scrollers = $view.find('.fc-time-area .fc-scroller');
     $scrollers.on('scroll', _.throttle(function () {
-      var scroll = $view.fullCalendar('getView').queryScroll();
+      const scroll = $view.fullCalendar('getView').queryScroll();
       crosstab.broadcast('schedule:scroll', {
         id: config.scheduleId,
         top: scroll.top,

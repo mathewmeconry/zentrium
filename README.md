@@ -8,23 +8,20 @@ A versatile management tool for large operations.
 # Install PHP dependencies
 composer install
 
-# Install Node.js root dependencies
+# Install Node.js dependencies
 npm install
-
-# Install Node.js dependencies of bundles
-grunt install
 
 # Setup schema
 bin/console doctrine:migrations:migrate
 
-# Dump JS translations
+# Dump client-side translations
 bin/console bazinga:js-translation:dump
-
-# Compile bundle assets
-grunt
 
 # Install assets
 bin/console assets:install --relative
+
+# Pack assets
+node_modules/.bin/encore production
 ```
 
 ## System Requirements
@@ -32,7 +29,6 @@ bin/console assets:install --relative
  * PHP ≥ 7.0
  * php-intl
  * NPM
- * Grunt
  * MySQL
 
 ## License

@@ -3,15 +3,11 @@
   "private": true,
   "dependencies": {
     "crosstab": "^0.2.12",
-    "fullcalendar": "^3.4.0",
-    "fullcalendar-scheduler": "^1.6.2",
-    "moment": "^2.18.1"
-  },
-  "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-less": "^1.3.0",
-    "grunt-contrib-uglify": "^3.0.1",
-    "grunt-contrib-watch": "^1.0.0"
+    "fullcalendar": "^3.9.0",
+    "fullcalendar-scheduler": "^1.9.4",
+    "moment": "^2.22.0",
+    "screenfull": "^3.0.0",
+    "underscore": "^1.8.3",
+    "urijs": "^1.18.1"
   }
 }

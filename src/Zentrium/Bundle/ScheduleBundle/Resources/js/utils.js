@@ -1,29 +1,26 @@
-var Zentrium = Zentrium || {};
-Zentrium.Schedule = Zentrium.Schedule || {};
+import $ from 'jquery';
+import { getViewConfig, ResourceTimelineView as BaseResourceTimelineView } from 'fullcalendar';
 
-// Emphasize quarter of a day
-$.fullCalendar.views.timeline.resourceClass.prototype.instantiateGrid = _.wrap($.fullCalendar.views.timeline.resourceClass.prototype.instantiateGrid, function (func) {
-  var grid = func.apply(this, arguments);
-  grid.slatCellHtml = _.wrap(grid.slatCellHtml, function (func) {
-    var args = [].slice.call(arguments, 1);
-    classes = [];
-    if(args[0].hour() === 0 && args[0].minute() === 0) {
+class ResourceTimelineView extends BaseResourceTimelineView {
+  slatCellHtml(date, isEm) {
+    const html = super.slatCellHtml(date, isEm);
+    const classes = [];
+    if(date.hour() === 0 && date.minute() === 0) {
       classes.push('schedule-slat-day');
     }
-    if(args[0].hour() % 6 === 0 && args[0].minute() === 0) {
+    if(date.hour() % 6 === 0 && date.minute() === 0) {
       classes.push('schedule-slat-quarter');
     }
-    html = func.apply(this, args);
-    html = html.replace('class="', 'class="' + classes.join(' ') + ' ');
-    return html;
-  });
-  return grid;
-});
+    return html.replace('class="', 'class="' + classes.join(' ') + ' ');
+  }
+}
 
-Zentrium.Schedule.pause = function (func, paused) {
-  var lastArgs;
-  var lastThis;
-  var queue = false;
+getViewConfig('timeline').resourceClass = ResourceTimelineView;
+
+export function pause(func, paused) {
+  let lastArgs;
+  let lastThis;
+  let queue = false;
 
   function run() {
     if(!paused) {
@@ -52,19 +49,19 @@ Zentrium.Schedule.pause = function (func, paused) {
   return run;
 };
 
-Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
+export function setup($view, parameters, config, selectCallback) {
   if(!$view.length) {
     return;
   }
 
-  var generateId = (function () {
-    var id = 0;
+  const generateId = (function () {
+    let id = 0;
     return function () {
       return 'tmp' + (++id);
     };
   })();
 
-  var resourceUpdates = {};
+  const resourceUpdates = {};
 
   $view.fullCalendar($.extend({}, {
     editable: false,
@@ -73,23 +70,23 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     select: function(start, end, jsEvent, view, resource) {
       $view.fullCalendar('unselect');
 
-      var eventPrototype = {
+      const eventPrototype = {
         id: generateId(),
         resourceId: resource.id,
         start: start,
         end: end,
-        className: 'schedule-operation-pending',
+        className: ['schedule-operation-pending'],
         editable: false,
       };
 
-      var updateHelper = function (events, time) {
+      const updateHelper = function (events, time) {
         if(!time || (resourceUpdates[resource.id] || 0) < time) {
           resourceUpdates[resource.id] = time;
           $view.fullCalendar('removeEvents', function (eventData) {
             return eventData.resourceId == resource.id;
           });
-          for(var i in events) {
-            $view.fullCalendar('renderEvent', events[i]);
+          for(let event of events) {
+            $view.fullCalendar('renderEvent', event);
           }
         }
       };
@@ -115,17 +112,17 @@ Zentrium.Schedule.setup = function ($view, parameters, config, selectCallback) {
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
   }, config));
 
-  var view = $view.fullCalendar('getView');
-  view.displayEvents = Zentrium.Schedule.pause(view.displayEvents);
+  const view = $view.fullCalendar('getView');
+  view.displayEvents = pause(view.displayEvents);
 
   $(window).keydown(function(e) {
     if(e.keyCode != 37 && e.keyCode != 39) { // left/right arrow keys
       return;
     }
-    var view = $view.fullCalendar('getView');
-    var slotWidth = view.timeGrid.slotWidth;
-    var oldScroll = view.queryScroll();
-    var newScroll = { top: oldScroll.top };
+    const view = $view.fullCalendar('getView');
+    const slotWidth = view.slotWidth;
+    const oldScroll = view.queryScroll();
+    const newScroll = { top: oldScroll.top };
     if(e.keyCode == 37) {
       newScroll.left = Math.round((oldScroll.left - slotWidth) / slotWidth) * slotWidth;
     } else {
