@@ -2,10 +2,12 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" href="{{ asset('bundles/vkafoaf/css/bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('build/zentrium_schedule.css') }}">
+<link rel="stylesheet" href="{{ asset('build/vkaf_oaf.css') }}">
 {% endblock %}
 
 {% block scripts %}
 {{ parent() }}
-<script src="{{ asset('bundles/vkafoaf/js/bundle.min.js') }}"></script>
+<script src="{{ asset('build/zentrium_schedule.js') }}"></script>
+<script src="{{ asset('build/vkaf_oaf.js') }}"></script>
 {% endblock %}

@@ -1,6 +1,9 @@
+import $ from 'jquery';
+import _ from 'underscore';
+
 $(function () {
-  var $indicator = $('.kiosk-refresh');
-  var config = $indicator.data('config');
+  const $indicator = $('.kiosk-refresh');
+  const config = $indicator.data('config');
   if(!_.isObject(config)) {
     return;
   }

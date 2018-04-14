@@ -2,6 +2,7 @@
   "name": "zentrium",
   "private": true,
   "dependencies": {
+    "vkaf-oaf-bundle": "file:src/Vkaf/Bundle/OafBundle/Resources",
     "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
     "zentrium-log-bundle": "file:src/Zentrium/Bundle/LogBundle/Resources",
     "zentrium-schedule-bundle": "file:src/Zentrium/Bundle/ScheduleBundle/Resources",

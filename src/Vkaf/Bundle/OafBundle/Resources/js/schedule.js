@@ -1,11 +1,15 @@
+import $ from 'jquery';
+import _ from 'underscore';
+import { setup } from 'zentrium-schedule-bundle/js/utils';
+
 $(function () {
-  var $schedule = $('#oaf-user-schedule');
-  var config = $schedule.data('config');
+  const $schedule = $('#oaf-user-schedule');
+  const config = $schedule.data('config');
   if(!_.isObject(config)) {
     return;
   }
 
-  var scheduleOptions = {
+  const scheduleOptions = {
     defaultView: 'agendaMultiDay',
     defaultDate: config.begin,
     views: {
@@ -21,7 +25,7 @@ $(function () {
       config.availabilities,
     ],
     eventAfterRender: function(event, element, view) {
-      var buttons = '<a href="' + event.timesheet + '" class="btn btn-default"><i class="fa fa-clock-o"></i></a>';
+      const buttons = '<a href="' + event.timesheet + '" class="btn btn-default"><i class="fa fa-clock-o"></i></a>';
       $(element).popover({
         placement: 'top',
         trigger: 'manual',
@@ -39,5 +43,5 @@ $(function () {
     },
   };
 
-  Zentrium.Schedule.setup($schedule, {}, scheduleOptions);
+  setup($schedule, {}, scheduleOptions);
 });
