@@ -72,6 +72,11 @@ services:
     zentrium.roles:
         class: Zentrium\Bundle\CoreBundle\Security\RoleHierarchy
 
+    zentrium.security.email_change_listener:
+        class: Zentrium\Bundle\CoreBundle\Security\EmailChangeListener
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: Zentrium\Bundle\CoreBundle\Entity\User, event: preUpdate }
+
     zentrium.serializer.relation_handler:
         class: Zentrium\Bundle\CoreBundle\Serializer\RelationHandler
         arguments: ["@doctrine.orm.entity_manager"]
