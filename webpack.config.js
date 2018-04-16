@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const npm = require('npm');
 const Encore = require('@symfony/webpack-encore');
+const package = require('./package.json');
 
 Encore
   .setOutputPath('web/build/')
@@ -20,20 +20,11 @@ let webpackConfig = Encore.getWebpackConfig();
 delete webpackConfig.entry['dummy'];
 
 // let direct dependencies extend the configuration
-module.exports = new Promise((resolve, reject) => {
-  npm.load({}, (err, manager) => {
-    if (err) return reject(err);
-    manager.commands.ls([], true, (err, package) => {
-      if (err) return reject(err);
-      resolve(package);
-    });
-  });
-}).then(package => {
-  for(let d in package.dependencies) {
-    const webpackPath = path.join(package.dependencies[d].path, 'webpack.js');
-    if (fs.existsSync(webpackPath)) {
-      webpackConfig = require(webpackPath)(webpackConfig);
-    }
+for(let dependency in package.dependencies) {
+  const configPath = path.join(__dirname, 'node_modules', dependency, 'webpack.js');
+  if (fs.existsSync(configPath)) {
+    webpackConfig = require(configPath)(webpackConfig);
   }
-  return webpackConfig;
-});
+}
+
+module.exports = webpackConfig;
