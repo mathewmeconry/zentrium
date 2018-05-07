@@ -5,6 +5,8 @@ services:
                   subject: "%vkaf_oaf.push.subject%"
                   publicKey: "%vkaf_oaf.push.public_key%"
                   privateKey: "%vkaf_oaf.push.private_key%"
+        calls:
+            - [setAutomaticPadding, [0]] # web-push-libs/web-push-php#108
 
     Vkaf\Bundle\OafBundle\Command\:
         resource: "../../Command/*"
