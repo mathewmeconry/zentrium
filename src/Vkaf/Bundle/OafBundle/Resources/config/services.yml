@@ -1,4 +1,20 @@
 services:
+    Minishlink\WebPush\WebPush:
+        arguments:
+            - VAPID:
+                  subject: "%vkaf_oaf.push.subject%"
+                  publicKey: "%vkaf_oaf.push.public_key%"
+                  privateKey: "%vkaf_oaf.push.private_key%"
+
+    Vkaf\Bundle\OafBundle\Command\:
+        resource: "../../Command/*"
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Vkaf\Bundle\OafBundle\Push\PushManager:
+        autowire: true
+
     vkaf_oaf.dashboard_listener:
         class: Vkaf\Bundle\OafBundle\Dashboard\DashboardListener
         arguments: ["@templating", "@vkaf_oaf.lineup", "@form.factory"]

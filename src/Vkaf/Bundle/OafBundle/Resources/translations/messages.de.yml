@@ -24,6 +24,8 @@ vkaf_oaf:
         user_desk:
             title: Front-Desk
             open: Öffnen
+    push:
+        title: Benachrichtigungen
     resource:
         field:
             id: ID
@@ -58,6 +60,8 @@ vkaf_oaf:
             beginning: Schicht-Beginn
         slot_wakeup:
             title: Weckliste
+        reminder:
+            title: Einsatz um %from%
     user:
         desk:
             edit: Bearbeiten

@@ -17,3 +17,7 @@ parameters:
 
     locale:            de
     country:           CH
+
+    push_subject:      ~
+    push_public_key:   ~
+    push_private_key:  ~

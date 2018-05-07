@@ -185,3 +185,7 @@ jms_serializer:
 vkaf_oaf:
     lineup:
         path: "%kernel.root_dir%/../data/lineup.json"
+    push:
+        subject: "%push_subject%"
+        public_key: "%push_public_key%"
+        private_key: "%push_private_key%"

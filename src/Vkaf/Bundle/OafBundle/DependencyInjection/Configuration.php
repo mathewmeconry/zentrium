@@ -23,6 +23,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('path')->isRequired()->cannotBeEmpty()->end()
                     ->end()
                 ->end()
+                ->arrayNode('push')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('subject')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('public_key')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('private_key')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

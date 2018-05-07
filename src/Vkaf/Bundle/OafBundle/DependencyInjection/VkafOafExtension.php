@@ -21,5 +21,9 @@ class VkafOafExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('vkaf_oaf.lineup_path', $config['lineup']['path']);
+
+        foreach ($config['push'] as $key => $value) {
+            $container->setParameter('vkaf_oaf.push.'.$key, $value);
+        }
     }
 }

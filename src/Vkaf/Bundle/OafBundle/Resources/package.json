@@ -1,4 +1,7 @@
 {
   "name": "vkaf-oaf-bundle",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "serviceworker-webpack-plugin": "^0.2.3"
+  }
 }

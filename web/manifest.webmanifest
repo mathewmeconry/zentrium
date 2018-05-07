@@ -1,0 +1,19 @@
+{
+    "name": "Zentrium",
+    "short_name": "Zentrium",
+    "start_url": "/viewer/",
+    "display": "minimal-ui",
+    "background_color": "#ecf0f5",
+    "icons": [
+        {
+            "src": "apple-touch-icon.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
