@@ -30,6 +30,11 @@ services:
         tags:
             - { name: form.type_extension, extended_type: FOS\UserBundle\Form\Type\ChangePasswordFormType }
 
+    zentrium.form.extension.reset_password:
+        class: Zentrium\Bundle\CoreBundle\Form\Extension\ResetPasswordTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: FOS\UserBundle\Form\Type\ResettingFormType }
+
     zentrium.form.type.phone_number:
         class:  Zentrium\Bundle\CoreBundle\Form\Type\PhoneNumberType
         arguments: ["@libphonenumber.phone_number_util", "@zentrium.templating.helper.phone_number"]
@@ -76,6 +81,10 @@ services:
         class: Zentrium\Bundle\CoreBundle\Security\EmailChangeListener
         tags:
             - { name: doctrine.orm.entity_listener, entity: Zentrium\Bundle\CoreBundle\Entity\User, event: preUpdate }
+
+    zentrium.security.invitation:
+        class: Zentrium\Bundle\CoreBundle\Security\InvitationManager
+        arguments: ["@fos_user.user_manager", "@fos_user.util.token_generator", "@router"]
 
     zentrium.serializer.relation_handler:
         class: Zentrium\Bundle\CoreBundle\Serializer\RelationHandler

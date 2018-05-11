@@ -73,6 +73,15 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/invitation/{token}", name="invitation")
+     * @Template
+     */
+    public function invitationAction(Request $request, $token)
+    {
+        return $this->resetPasswordAction($request, $token);
+    }
+
+    /**
      * @Route("/password/reset/{token}", name="fos_user_resetting_reset")
      * @Template
      */

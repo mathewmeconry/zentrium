@@ -39,6 +39,9 @@ zentrium:
         logout: Logout
         password: Passwort
         username: Benutzername
+        invitation:
+            title: Willkommen
+            submit: Weiter
         password_reset:
             subject: Passwort zurücksetzen
             instructions: |
