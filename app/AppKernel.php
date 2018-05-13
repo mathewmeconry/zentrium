@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Ivory\OrderedFormBundle\IvoryOrderedFormBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
+            new Aws\Symfony\AwsBundle(),
             new Zentrium\Bundle\CoreBundle\ZentriumCoreBundle(),
             new Zentrium\Bundle\LogBundle\ZentriumLogBundle(),
             new Zentrium\Bundle\ScheduleBundle\ZentriumScheduleBundle(),

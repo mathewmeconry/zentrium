@@ -23,6 +23,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('path')->isRequired()->cannotBeEmpty()->end()
                     ->end()
                 ->end()
+                ->arrayNode('sms')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('sender_id')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('send_topic')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('status_topic')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

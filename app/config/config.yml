@@ -181,7 +181,21 @@ jms_serializer:
                 namespace_prefix: FOS\UserBundle
                 path: "@ZentriumCoreBundle/Resources/config/serializer/fos_user"
 
+# AWS Configuration
+aws:
+    version: latest
+    region: eu-central-1
+    credentials:
+        key: "%aws_key%"
+        secret: "%aws_secret%"
+    Sns:
+        region: eu-west-1
+
 # OAF Configuration
 vkaf_oaf:
     lineup:
         path: "%kernel.root_dir%/../data/lineup.json"
+    sms:
+        sender_id: OAF18
+        send_topic: "%aws_sns_topic_send%"
+        status_topic: "%aws_sns_topic_status%"

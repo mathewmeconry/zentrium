@@ -1,19 +1,24 @@
 parameters:
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_host:           127.0.0.1
+    database_port:           ~
+    database_name:           symfony
+    database_user:           root
+    database_password:       ~
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_port:       25
-    mailer_encryption: ~
-    mailer_user:       ~
-    mailer_password:   ~
-    mailer_from:       ~
+    mailer_transport:        smtp
+    mailer_host:             127.0.0.1
+    mailer_port:             25
+    mailer_encryption:       ~
+    mailer_user:             ~
+    mailer_password:         ~
+    mailer_from:             ~
 
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:                  ThisTokenIsNotSoSecretChangeIt
 
-    locale:            de
-    country:           CH
+    locale:                  de
+    country:                 CH
+
+    aws_key:                 ~
+    aws_secret:              ~
+    aws_sns_topic_send:      ~
+    aws_sns_topic_status:    ~

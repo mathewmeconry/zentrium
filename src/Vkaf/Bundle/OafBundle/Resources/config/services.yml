@@ -1,4 +1,23 @@
 services:
+    Aws\Sns\MessageValidator: ~
+
+    Vkaf\Bundle\OafBundle\:
+        resource: "../../{Announcement,Command}/*"
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Vkaf\Bundle\OafBundle\Announcement\AwsMessenger:
+        arguments:
+            $senderId: "%vkaf_oaf.sms.sender_id%"
+            $sendTopic: "%vkaf_oaf.sms.send_topic%"
+            $statusTopic: "%vkaf_oaf.sms.status_topic%"
+        autowire: true
+
+    Vkaf\Bundle\OafBundle\Announcement\MessengerInterface: '@Vkaf\Bundle\OafBundle\Announcement\AwsMessenger'
+
+    Zentrium\Bundle\CoreBundle\Entity\UserRepository: '@zentrium.repository.user'
+
     vkaf_oaf.dashboard_listener:
         class: Vkaf\Bundle\OafBundle\Dashboard\DashboardListener
         arguments: ["@templating", "@vkaf_oaf.lineup", "@form.factory"]
