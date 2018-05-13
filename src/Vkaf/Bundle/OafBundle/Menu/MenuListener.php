@@ -10,7 +10,7 @@ class MenuListener
     {
         $resourceMenu = $event->getMenu()->addChild('vkaf_oaf.menu.resource', [
             'route' => 'oaf_resource_assign',
-            'labelAttributes' => ['icon' => 'fa fa-square'],
+            'labelAttributes' => ['icon' => 'fa fa-cubes'],
         ]);
 
         $resourceMenu->addChild('vkaf_oaf.menu.resource_assign', [
