@@ -27,7 +27,7 @@ class MessageDelivery
      *
      * @Assert\NotNull
      *
-     * @ORM\ManyToOne(targetEntity="Message")
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="deliveries")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $message;

@@ -1,0 +1,39 @@
+{% extends 'VkafOafBundle::layout.html.twig' %}
+
+{% block title %}{{ 'vkaf_oaf.layout.messages'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-message-receivers">{{ 'vkaf_oaf.message.receivers'|trans }}</th>
+          <th class="col-message-text">{{ 'vkaf_oaf.message.field.text'|trans }}</th>
+          <th>{{ 'vkaf_oaf.message.field.created'|trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for message in messages %}
+        <tr>
+          <td class="col-message-receivers"><a href="{{ path('oaf_message', {'message': message.id}) }}" class="oaf-message-info">{% for d in message.deliveries.slice(0, 4) %}{% if not loop.first %}, {% endif %}{% if loop.last and loop.index == 4 %}...{% else %}{{ d.user.name }}{% endif %}{% endfor %}</a></td>
+          <td class="col-message-text">{{ message.text|nl2br }}</td>
+          <td>{{ message.created|localizedDate('datetime_medium') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" id="oaf-message-modal">
+  <div class="modal-dialog overlay-wrapper">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">{{ 'vkaf_oaf.message.receivers'|trans }}</h4>
+      </div>
+      <div class="modal-body no-padding"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

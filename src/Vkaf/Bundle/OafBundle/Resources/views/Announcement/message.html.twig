@@ -1,0 +1,10 @@
+<table class="table message-deliveries">
+  <tbody>
+    {% for delivery in message.deliveries %}
+    <tr>
+      <td class="col-delivery-status"><i class="fa {% if delivery.status is null %}fa-circle-thin{% elseif delivery.status %}fa-check-circle{% else %}fa-times-circle{% endif %}"></i></td>
+      <td><a href="{{ path('oaf_user_desk', {'user': delivery.user.id}) }}">{{ delivery.user.name }}</a>{% if delivery.status is not null %}<br>{{ delivery.updated|localizedDate('datetime_medium') }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

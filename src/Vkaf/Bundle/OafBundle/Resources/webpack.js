@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = function (config) {
   config.entry['vkaf_oaf'] = [
+    path.join(__dirname, 'js/announcement.js'),
     path.join(__dirname, 'js/kiosk.js'),
     path.join(__dirname, 'js/kiosk_schedule.js'),
     path.join(__dirname, 'js/resource.js'),

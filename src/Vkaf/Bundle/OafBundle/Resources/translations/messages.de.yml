@@ -1,7 +1,10 @@
 vkaf_oaf:
     layout:
         resources: Geräte
+        messages: SMS
     menu:
+        notifications: Benachrichtigungen
+        messages: SMS
         resource: Geräte
         resource_assign: Geräte-Ausleihe
     role:
@@ -24,6 +27,11 @@ vkaf_oaf:
         user_desk:
             title: Front-Desk
             open: Öffnen
+    message:
+        field:
+            text: Nachricht
+            created: Datum
+        receivers: Empfänger
     resource:
         field:
             id: ID

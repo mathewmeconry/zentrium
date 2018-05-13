@@ -2,12 +2,13 @@
 
 namespace Vkaf\Bundle\OafBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Vkaf\Bundle\OafBundle\Entity\MessageRepository")
  * @ORM\Table("oaf_message")
  */
 class Message
@@ -34,9 +35,19 @@ class Message
      */
     protected $deliveries;
 
+    /**
+     * @var DateTime
+     *
+     * @Assert\NotNull
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
     public function __construct()
     {
         $this->deliveries = new ArrayCollection();
+        $this->created = new DateTime();
     }
 
     public function getId()
@@ -66,5 +77,10 @@ class Message
         $this->deliveries = $deliveries;
 
         return $this;
+    }
+
+    public function getCreated()
+    {
+        return $this->created;
     }
 }
