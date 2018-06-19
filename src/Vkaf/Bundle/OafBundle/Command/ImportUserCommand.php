@@ -38,6 +38,8 @@ class ImportUserCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $userManager = $this->getContainer()->get('fos_user.user_manager');
         $scheduleUserManager = $this->getContainer()->get('zentrium_schedule.manager.user');
+        $phoneNumberUtil = $this->getContainer()->get('libphonenumber.phone_number_util');
+        $phoneNumberCountry = $this->getContainer()->getParameter('zentrium.default_country');
 
         $groups = $em->getRepository(Group::class)->findAll();
         $groupMap = [];
@@ -112,6 +114,9 @@ class ImportUserCommand extends ContainerAwareCommand
                 } else {
                     throw new RuntimeException();
                 }
+            }
+            if ($mapped['phone']) {
+                $user->setMobilePhone($phoneNumberUtil->parse($mapped['phone'], $phoneNumberCountry));
             }
 
             $userManager->updateUser($user);
