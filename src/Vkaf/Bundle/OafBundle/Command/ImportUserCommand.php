@@ -69,6 +69,7 @@ class ImportUserCommand extends ContainerAwareCommand
             }
             $mapped = [];
             foreach ($row as $i => $value) {
+                $value = trim($value);
                 if ($value === '') {
                     $value = null;
                 }
@@ -79,9 +80,9 @@ class ImportUserCommand extends ContainerAwareCommand
             $username = str_replace(' ', '.', $username);
             $username = iconv('UTF8', 'ASCII//TRANSLIT', $username);
 
-            $groups = preg_split('/[ ,;\/]+/', $mapped['groups']);
-            $skills = preg_split('/[ ,;\/]+/', $mapped['skills']);
-            $skills = array_diff($skills, ['und', 'oder']);
+            $groups = $this->parseList($mapped['groups']);
+
+            $skills = $this->parseList($mapped['skills']);
             if (in_array('Verkehrskadett', $skills)) {
                 $skills = array_diff($skills, ['Verkehrskadett']);
                 if (!in_array('VK-PL', $groups)) {
@@ -133,5 +134,14 @@ class ImportUserCommand extends ContainerAwareCommand
             $scheduleUserManager->save($scheduleUser);
         }
         fclose($fh);
+    }
+
+    private function parseList($list)
+    {
+        $list = preg_split('/[,;\/&]+/', $list);
+        $list = array_map('trim', $list);
+        $list = array_filter($list, 'strlen');
+
+        return $list;
     }
 }
