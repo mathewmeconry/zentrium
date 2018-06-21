@@ -8,9 +8,12 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="col-message-receivers">{{ 'vkaf_oaf.message.receivers'|trans }}</th>
+          <th class="col-message-receivers">{{ 'vkaf_oaf.message.field.receivers'|trans }}</th>
           <th class="col-message-text">{{ 'vkaf_oaf.message.field.text'|trans }}</th>
           <th>{{ 'vkaf_oaf.message.field.created'|trans }}</th>
+          <th class="col-right">
+            <a href="{{ path('oaf_message_send') }}" title="{{ 'vkaf_oaf.message.list.send'|trans }}"><i class="fa fa-paper-plane"></i></a>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +22,7 @@
           <td class="col-message-receivers"><a href="{{ path('oaf_message', {'message': message.id}) }}" class="oaf-message-info">{% for d in message.deliveries.slice(0, 4) %}{% if not loop.first %}, {% endif %}{% if loop.last and loop.index == 4 %}...{% else %}{{ d.user.name }}{% endif %}{% endfor %}</a></td>
           <td class="col-message-text">{{ message.text|nl2br }}</td>
           <td>{{ message.created|localizedDate('datetime_medium') }}</td>
+          <td class="col-right"></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -30,7 +34,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-        <h4 class="modal-title">{{ 'vkaf_oaf.message.receivers'|trans }}</h4>
+        <h4 class="modal-title">{{ 'vkaf_oaf.message.field.receivers'|trans }}</h4>
       </div>
       <div class="modal-body no-padding"></div>
     </div>

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Vkaf\Bundle\OafBundle\Entity\Message;
 use Vkaf\Bundle\OafBundle\Entity\MessageDelivery;
+use Zentrium\Bundle\CoreBundle\Entity\User;
 
 class AwsMessenger implements MessengerInterface
 {
@@ -39,7 +40,7 @@ class AwsMessenger implements MessengerInterface
         $this->logger = $logger;
     }
 
-    public function send(array $receivers, string $text)
+    public function send(array $receivers, string $text, User $sender = null)
     {
         $numbers = [];
         foreach ($receivers as $receiver) {
@@ -77,6 +78,7 @@ class AwsMessenger implements MessengerInterface
         foreach ($numbers as $number => $users) {
             foreach ($users as $user) {
                 $delivery = new MessageDelivery($message, $user, $user->getMobilePhone());
+                $delivery->setSender($sender);
                 $delivery->setExtra($result['MessageId']);
                 $message->getDeliveries()->add($delivery);
             }

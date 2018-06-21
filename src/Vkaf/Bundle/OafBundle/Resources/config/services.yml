@@ -1,8 +1,10 @@
 services:
     Aws\Sns\MessageValidator: ~
 
+    Instasent\SMSCounter\SMSCounter: ~
+
     Vkaf\Bundle\OafBundle\:
-        resource: "../../{Announcement,Command}/*"
+        resource: "../../{Announcement,Command,Validator}/*"
         autowire: true
         autoconfigure: true
         public: false
@@ -12,6 +14,11 @@ services:
             $senderId: "%vkaf_oaf.sms.sender_id%"
             $sendTopic: "%vkaf_oaf.sms.send_topic%"
             $statusTopic: "%vkaf_oaf.sms.status_topic%"
+        autowire: true
+
+    Vkaf\Bundle\OafBundle\Announcement\CostEstimator:
+        arguments:
+            $path: "%kernel.project_dir%/src/Vkaf/Bundle/OafBundle/Resources/config/sms_pricing.json"
         autowire: true
 
     Vkaf\Bundle\OafBundle\Announcement\MessengerInterface: '@Vkaf\Bundle\OafBundle\Announcement\AwsMessenger'

@@ -1,0 +1,16 @@
+{% extends 'VkafOafBundle::layout.html.twig' %}
+{% form_theme form 'ZentriumCoreBundle::form.html.twig' %}
+
+{% block title %}{{ 'vkaf_oaf.layout.messages'|trans }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'vkaf_oaf.message.new.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+    {#{{ form(form, {'attr': {'data-send-confirm': path('oaf_message_send_confirm')}}) }}#}
+  </div>
+</div>
+{% endblock %}

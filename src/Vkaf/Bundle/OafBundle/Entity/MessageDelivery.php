@@ -67,6 +67,14 @@ class MessageDelivery
     protected $extra;
 
     /**
+     * @var User|null
+     *
+     * @ORM\ManyToOne(targetEntity="Zentrium\Bundle\CoreBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $sender;
+
+    /**
      * @var DateTime
      *
      * @Assert\NotNull
@@ -132,6 +140,18 @@ class MessageDelivery
     public function setExtra($extra)
     {
         $this->extra = $extra;
+
+        return $this;
+    }
+
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    public function setSender($sender)
+    {
+        $this->sender = $sender;
 
         return $this;
     }

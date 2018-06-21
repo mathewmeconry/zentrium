@@ -31,7 +31,15 @@ vkaf_oaf:
         field:
             text: Nachricht
             created: Datum
-        receivers: Empfänger
+            receivers: Empfänger
+        form:
+            send: Senden
+        list:
+            send: Neue Nachricht
+        new:
+            title: Neue Nachricht verfassen
+        cost: Kosten
+        cost_approximation: ca. %cost%
     resource:
         field:
             id: ID
