@@ -2,6 +2,7 @@
   "name": "zentrium",
   "private": true,
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "zentrium-core-bundle": "file:src/Zentrium/Bundle/CoreBundle/Resources",
     "zentrium-log-bundle": "file:src/Zentrium/Bundle/LogBundle/Resources",
     "zentrium-map-bundle": "file:src/Zentrium/Bundle/MapBundle/Resources",

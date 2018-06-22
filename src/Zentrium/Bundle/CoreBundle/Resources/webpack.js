@@ -16,6 +16,7 @@ module.exports = function (config) {
   config.resolve.alias['zentrium$'] = path.join(__dirname, 'js/lib.js');
 
   config.entry['zentrium'] = glob.sync('./web/js/translations/*/*.js').concat([
+    'babel-polyfill',
     'bootstrap',
     'bootstrap-datepicker',
     'bootstrap-datepicker/dist/locales/bootstrap-datepicker.de.min.js',
