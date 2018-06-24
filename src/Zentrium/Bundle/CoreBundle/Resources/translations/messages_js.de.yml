@@ -2,3 +2,4 @@ zentrium:
     fullscreen:
         enter: Vollbild-Modus
         leave: Vollbild-Modus verlassen
+    search: Suchen…
