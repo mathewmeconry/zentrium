@@ -76,6 +76,13 @@ vkaf_oaf:
             beginning: Schicht-Beginn
         slot_wakeup:
             title: Weckliste
+        statistics:
+            hours: Stunden
+            hours_daytime: Tagesstunden
+            hours_nighttime: Nachtstunden
+            workload: Auslastung
+        view:
+            statistics: Statistiken
     user:
         desk:
             edit: Bearbeiten

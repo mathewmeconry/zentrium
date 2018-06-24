@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Zentrium\Bundle\CoreBundle\Entity\User;
+use Zentrium\Bundle\ScheduleBundle\Entity\Availability;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 
@@ -291,6 +292,47 @@ class ScheduleController extends Controller
         }
 
         return new JsonResponse($result);
+    }
+
+    /**
+     * @Route("/{schedule}/statistics/workload", name="oaf_schedule_statistics_workload")
+     * @Template
+     */
+    public function statisticsWorkloadAction(Schedule $schedule)
+    {
+        $users = [];
+        foreach ($schedule->getShifts() as $shift) {
+            $userId = $shift->getUser()->getId();
+            if (!isset($users[$userId])) {
+                $users[$userId] = [$shift->getUser(), 0, 0, 0];
+            }
+            $begin = $shift->getPeriod()->getStartDate();
+            $daytime = new Period($begin->setTime(6, 0, 0), $begin->setTime(22, 0, 0));
+            while (!$daytime->isAfter($shift->getTo())) {
+                if ($daytime->overlaps($shift->getPeriod())) {
+                    $users[$userId][1] += $daytime->intersect($shift->getPeriod())->getTimestampInterval();
+                }
+                $daytime = $daytime->move('1 day');
+            }
+            $users[$userId][2] += $shift->getPeriod()->getTimestampInterval();
+        }
+
+        $availablities = $this->get('vkaf_oaf.repository.availability')->findAll();
+        foreach ($availablities as $availability) {
+            $userId = $availability->getUser()->getBase()->getId();
+            if (isset($users[$userId])) {
+                $users[$userId][3] += $availability->getPeriod()->getTimestampInterval();
+            }
+        }
+
+        uasort($users, function ($a, $b) {
+            return strcasecmp($a[0]->getName(true), $b[0]->getName(true));
+        });
+
+        return [
+            'schedule' => $schedule,
+            'users' => $users,
+        ];
     }
 
     private function getSchedule(Request $request, $schedules)

@@ -69,6 +69,10 @@ services:
         tags:
             - { name: vkaf_oaf.kiosk.slide, type: welcome }
 
+    vkaf_oaf.repository.availability:
+        class: Vkaf\Bundle\OafBundle\Entity\AvailabilityRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
     vkaf_oaf.repository.shift:
         class: Vkaf\Bundle\OafBundle\Entity\ShiftRepository
         arguments: ["@doctrine.orm.entity_manager"]
