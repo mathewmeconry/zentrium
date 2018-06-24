@@ -8,6 +8,8 @@ vkaf_oaf:
         resource: Geräte
         resource_assign: Geräte-Ausleihe
     role:
+        message_send:
+            label: SMS verschicken
         resource_manage:
             label: Geräte ausleihen
     money: '%0.2f Fr.'

@@ -2,6 +2,7 @@
 
 namespace Vkaf\Bundle\OafBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -60,6 +61,7 @@ class AnnouncementController extends Controller
 
     /**
      * @Route("/messages/send", name="oaf_message_send")
+     * @IsGranted("ROLE_OAF_MESSAGE_SEND")
      * @Template
      */
     public function messageSendAction(Request $request)
@@ -82,6 +84,7 @@ class AnnouncementController extends Controller
 
     /**
      * @Route("/messages/send/{token}", name="oaf_message_confirm")
+     * @IsGranted("ROLE_OAF_MESSAGE_SEND")
      * @Template
      */
     public function messageConfirmAction(Request $request, $token)

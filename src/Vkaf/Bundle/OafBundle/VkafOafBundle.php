@@ -19,6 +19,7 @@ class VkafOafBundle extends Bundle
         $container->addCompilerPass(new KioskSlidePass());
 
         $container->addCompilerPass(new RoleRegistrationPass([
+            'ROLE_OAF_MESSAGE_SEND' => ['vkaf_oaf.role.message_send', ['ROLE_MANAGER']],
             'ROLE_OAF_RESOURCE_MANAGE' => ['vkaf_oaf.role.resource_manage', ['ROLE_MANAGER']],
         ]));
     }

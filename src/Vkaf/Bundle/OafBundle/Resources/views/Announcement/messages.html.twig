@@ -12,7 +12,7 @@
           <th class="col-message-text">{{ 'vkaf_oaf.message.field.text'|trans }}</th>
           <th>{{ 'vkaf_oaf.message.field.created'|trans }}</th>
           <th class="col-right">
-            <a href="{{ path('oaf_message_send') }}" title="{{ 'vkaf_oaf.message.list.send'|trans }}"><i class="fa fa-paper-plane"></i></a>
+            {% if is_granted('ROLE_OAF_MESSAGE_SEND') %}<a href="{{ path('oaf_message_send') }}" title="{{ 'vkaf_oaf.message.list.send'|trans }}"><i class="fa fa-paper-plane"></i></a>{% endif %}
           </th>
         </tr>
       </thead>
