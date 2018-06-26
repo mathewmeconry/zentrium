@@ -1,0 +1,38 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title_full %}{{ schedule.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ schedule.name }}{% endblock %}
+
+{% block content %}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'zentrium.user.field.last_name'|trans }}</th>
+          <th>{{ 'zentrium.user.field.first_name'|trans }}</th>
+          <th class="col-right">{{ 'vkaf_oaf.schedule.statistics.hours_daytime'|trans }}</th>
+          <th class="col-right">{{ 'vkaf_oaf.schedule.statistics.hours_nighttime'|trans }}</th>
+          <th class="col-right">{{ 'vkaf_oaf.schedule.statistics.hours'|trans }}</th>
+          <th class="col-right">{{ 'vkaf_oaf.schedule.statistics.workload'|trans }}</th>
+          <th class="col-tools"></th>
+      </thead>
+      <tbody>
+        {% for row in users %}
+        <tr>
+          <td>{{ row[0].lastName }}</td>
+          <td>{{ row[0].firstName }}</td>
+          {% for hours in [row[1], row[2] - row[1], row[2]] %}
+          <td class="col-right">{% if hours > 0 %}{{ (hours / 3600)|number_format(1) }} h{% endif %}</td>
+          {% endfor %}
+          <td class="col-right">{% if row[3] > 0 %}{{ (row[2] / row[3] * 100)|number_format(1) }} %{% endif %}</td>
+          <td class="col-tools">
+            <a href="{{ path('schedule_user_availability', {'user': row[0].id}) }}" title="{{ 'zentrium_schedule.user.list.availability'|trans }}"><i class="fa fa-check-circle"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

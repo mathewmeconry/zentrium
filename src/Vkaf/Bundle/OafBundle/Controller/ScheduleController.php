@@ -293,6 +293,41 @@ class ScheduleController extends Controller
         return new JsonResponse($result);
     }
 
+    /**
+     * @Route("/{schedule}/statistics/workload", name="oaf_schedule_statistics_workload")
+     * @Template
+     */
+    public function statisticsWorkloadAction(Schedule $schedule)
+    {
+        $userManager = $this->get('zentrium_schedule.manager.user');
+        $users = [];
+        foreach ($userManager->findWithAvailabilities() as $user) {
+            $available = 0;
+            foreach ($user->getAvailabilities() as $availability) {
+                $available += $availability->getPeriod()->getTimestampInterval();
+            }
+            $users[$user->getBase()->getId()] = [$user->getBase(), 0, 0, $available];
+        }
+
+        foreach ($schedule->getShifts() as $shift) {
+            $userId = $shift->getUser()->getId();
+            $begin = $shift->getPeriod()->getStartDate();
+            $daytime = new Period($begin->setTime(6, 0, 0), $begin->setTime(22, 0, 0));
+            while (!$daytime->isAfter($shift->getTo())) {
+                if ($daytime->overlaps($shift->getPeriod())) {
+                    $users[$userId][1] += $daytime->intersect($shift->getPeriod())->getTimestampInterval();
+                }
+                $daytime = $daytime->move('1 day');
+            }
+            $users[$userId][2] += $shift->getPeriod()->getTimestampInterval();
+        }
+
+        return [
+            'schedule' => $schedule,
+            'users' => $users,
+        ];
+    }
+
     private function getSchedule(Request $request, $schedules)
     {
         $scheduleId = intval($request->query->get('schedule'));

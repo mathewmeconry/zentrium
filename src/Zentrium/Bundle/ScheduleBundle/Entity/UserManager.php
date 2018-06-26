@@ -39,6 +39,17 @@ class UserManager
         return $this->handleParentResult($rows);
     }
 
+    public function findWithAvailabilities()
+    {
+        $qb = $this->createParentQueryBuilder()
+            ->addSelect('a')
+            ->leftJoin('e.availabilities', 'a')
+        ;
+        $rows = $qb->getQuery()->getResult();
+
+        return $this->handleParentResult($rows);
+    }
+
     public function findBySkill(Skill $skill)
     {
         $qb = $this->createParentQueryBuilder()
