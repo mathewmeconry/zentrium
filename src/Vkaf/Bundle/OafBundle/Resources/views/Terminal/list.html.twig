@@ -10,6 +10,7 @@
         <tr>
           <th>{{ 'vkaf_oaf.terminal.field.label'|trans }}</th>
           <th>{{ 'vkaf_oaf.terminal.field.online'|trans }}</th>
+          <th class="col-tools"></th>
         </tr>
       </thead>
       <tbody>
@@ -17,10 +18,26 @@
         <tr>
           <td>{{ terminal.label }}</td>
           <td data-oaf-terminal-status="{{ terminal.id }}"></td>
+          <td class="col-tools">
+            <a href="{{ path('oaf_terminal_app', {'token': terminal.token}) }}" data-oaf-terminal-qr="{{ path('oaf_terminal_qr', {'terminal': terminal.id}) }}" title="{{ 'vkaf_oaf.terminal.list.link'|trans }}"><i class="fa fa-qrcode"></i></a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" id="oaf-terminal-qr">
+  <div class="modal-dialog overlay-wrapper">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">{{ 'vkaf_oaf.terminal.list.link'|trans }}</h4>
+      </div>
+      <div class="modal-body no-padding">
+        <a><img></a>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

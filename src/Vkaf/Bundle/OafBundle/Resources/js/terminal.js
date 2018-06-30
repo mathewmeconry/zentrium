@@ -157,3 +157,13 @@ $(function () {
     });
   });
 });
+
+$(function () {
+  $('[data-oaf-terminal-qr]').click(function (e) {
+    e.preventDefault();
+    const $this = $(this);
+    const $modal = $('#oaf-terminal-qr').modal();
+    $modal.find('.modal-body a').attr('href', $this.attr('href'));
+    $modal.find('.modal-body img').attr('src', $this.data('oaf-terminal-qr'));
+  });
+});
