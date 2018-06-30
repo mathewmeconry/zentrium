@@ -2,3 +2,8 @@ vkaf_oaf:
     terminal:
         online: online
         offline: offline
+        signature: Bestätigung
+        cancel: Abbrechen
+        confirm: Bestätigen
+        reset: Reset
+        sign: Unterschreiben

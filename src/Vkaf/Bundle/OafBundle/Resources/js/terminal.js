@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import SignaturePad from 'signature_pad';
 import { Translator } from 'zentrium';
 
 function render($container, title, buttons) {
@@ -28,7 +29,80 @@ function render($container, title, buttons) {
   return $body;
 }
 
+class SignatureFlow {
+  constructor($container, params) {
+    this.$container = $container;
+    this.description = params;
+  }
+
+  run() {
+    const $description = $('<dl>');
+    for (let row of this.description) {
+      $description.append($('<dt>').text(row[0]));
+      $description.append($('<dd>').text(row[1]));
+    }
+    render(this.$container, Translator.trans('vkaf_oaf.terminal.signature'), [
+      [Translator.trans('vkaf_oaf.terminal.cancel'), () => { this.cancel() }],
+      [Translator.trans('vkaf_oaf.terminal.sign'), () => { this.sign() }],
+    ]).append($description);
+    return new Promise((resolve, reject) => {
+      this.resolve = resolve;
+    });
+  }
+
+  sign() {
+    const $body = render(this.$container, Translator.trans('vkaf_oaf.terminal.signature'), [
+      [Translator.trans('vkaf_oaf.terminal.cancel'), () => { this.cancel() }],
+      [Translator.trans('vkaf_oaf.terminal.reset'), () => { this.reset() }],
+      [Translator.trans('vkaf_oaf.terminal.confirm'), () => { this.confirm() }],
+    ]);
+    const canvas = document.createElement('canvas');
+    $body.addClass('terminal-signature');
+    $body.append(canvas);
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    this.pad = new SignaturePad(canvas, {
+      dotSize: 2.0,
+      minWidth: 1.0,
+      maxWidth: 2.0,
+    });
+  }
+
+  reset() {
+    this.pad.clear();
+  }
+
+  confirm() {
+    if (this.pad.isEmpty()) {
+      return;
+    }
+    const strokes = [];
+    for (let data of this.pad.toData()) {
+      let stroke = [];
+      let startTime = data[0].time;
+      let lastTime = data[0].time;
+      for (let point of data) {
+        if (point.time < lastTime) {
+          continue;
+        }
+        stroke.push([point.time - startTime, point.x, point.y]);
+        lastTime = point.time;
+      }
+      strokes.push(stroke);
+    }
+    this.resolve(strokes);
+  }
+
+  cancel() {
+    if (this.resolve) {
+      this.resolve(null);
+      this.resolve = null;
+    }
+  }
+}
+
 const flows = {
+  'signature': SignatureFlow,
 };
 
 $(function () {
