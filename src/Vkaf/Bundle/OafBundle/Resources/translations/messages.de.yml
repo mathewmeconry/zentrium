@@ -83,6 +83,10 @@ vkaf_oaf:
             workload: Auslastung
         view:
             statistics: Statistiken
+    terminal:
+        app:
+            title: Terminal
+            unauthorized: Der Zugangscode ist nicht gültig.
     user:
         desk:
             edit: Bearbeiten

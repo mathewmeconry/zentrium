@@ -1,0 +1,45 @@
+.terminal-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.terminal-header {
+    background-color: #3c8dbc;
+    border-bottom: 1px solid #367fa9;
+    color: white;
+    padding: 10px;
+
+    h1 {
+        text-align: center;
+        font-size: 20px;
+        margin: 0;
+    }
+}
+
+.terminal-body {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.terminal-footer {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+
+    .btn {
+        margin-right: 10px;
+
+        &.pull-right {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+}
+
+.terminal-splash img {
+    max-height: 70vh;
+    max-width: 70vw;
+}

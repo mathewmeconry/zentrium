@@ -94,9 +94,24 @@ services:
         class: Vkaf\Bundle\OafBundle\Entity\ShiftRepository
         arguments: ["@doctrine.orm.entity_manager"]
 
+    vkaf_oaf.repository.terminal:
+        class: Vkaf\Bundle\OafBundle\Entity\TerminalRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [Vkaf\Bundle\OafBundle\Entity\Terminal]
+
     vkaf_oaf.security.kiosk_authenticator:
         class: Vkaf\Bundle\OafBundle\Security\TokenAuthenticator
         arguments: ["@vkaf_oaf.repository.kiosk", "VkafOafBundle:Kiosk:unauthorized.html.twig", "@templating"]
+        lazy: true
+
+    vkaf_oaf.security.terminal_authenticator:
+        class: Vkaf\Bundle\OafBundle\Security\TokenAuthenticator
+        arguments: ["@vkaf_oaf.repository.terminal", "VkafOafBundle:Terminal:unauthorized.html.twig", "@templating"]
+        lazy: true
+
+    vkaf_oaf.terminals:
+        class: Vkaf\Bundle\OafBundle\Terminal\TerminalManager
+        arguments: ["@vkaf_oaf.pushpin", "@doctrine.orm.entity_manager", "@event_dispatcher", "%secret%"]
         lazy: true
 
     vkaf_oaf.timesheet.entry_listener:

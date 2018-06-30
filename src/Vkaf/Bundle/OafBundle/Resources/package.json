@@ -1,4 +1,7 @@
 {
   "name": "vkaf-oaf-bundle",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "reconnecting-websocket": "^4.0.0-rc5"
+  }
 }

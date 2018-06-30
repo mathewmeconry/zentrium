@@ -25,6 +25,13 @@ security:
             guard:
                 authenticators:
                     - vkaf_oaf.security.kiosk_authenticator
+        terminal:
+            pattern:    ^/oaf/terminals/(app|control)$
+            stateless:  true
+            anonymous:  false
+            guard:
+                authenticators:
+                    - vkaf_oaf.security.terminal_authenticator
         main:
             pattern: ^/
             form_login:
@@ -41,5 +48,6 @@ security:
         - { path: ^/api/, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/viewer/, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/kiosk, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/oaf/terminals/(app|control)$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^, role: ROLE_MANAGER }
