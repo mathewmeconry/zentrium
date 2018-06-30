@@ -7,3 +7,9 @@ vkaf_oaf:
         confirm: Bestätigen
         reset: Reset
         sign: Unterschreiben
+    timesheet:
+        already_approved: Der Eintrag wurde bereits bestätigt.
+        cancelled: Die Bestätigung wurde abgebrochen.
+        continue: Weiter
+        invalid_signature: Die Unterschrift ist ungültig.
+        no_terminals: Zurzeit sind keine Terminals verfügbar.

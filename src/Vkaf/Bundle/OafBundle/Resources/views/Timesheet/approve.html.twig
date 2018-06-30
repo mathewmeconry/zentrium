@@ -1,0 +1,43 @@
+{% extends 'VkafOafBundle::layout.html.twig' %}
+
+{% block title_full %}{{ entry.user.name }} - {{ 'zentrium_timesheet.layout.timesheet'|trans }}{% endblock %}
+{% block title %}{{ entry.user.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'vkaf_oaf.timesheet.approve.approval'|trans }}</h3>
+      </div>
+      <div class="box-body" data-oaf-timesheet-approve="{{ {'endpoint': pushpin_url('oaf_timesheet_approve_control', {'entry': entry.id}), 'return': return}|json_encode|e('html_attr') }}">
+        <p class="timesheet-approve-indicator"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ 'vkaf_oaf.timesheet.approve.details'|trans }}</h3>
+        <div class="box-tools">
+          <a href="{{ path('timesheet_entry_edit', {'entry': entry.id}) }}" class="btn btn-box-tool"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+      <div class="box-body">
+        <dl>
+          <dt>{{ 'zentrium_timesheet.entry.field.start'|trans }}</dt>
+          <dd>{{ entry.start|localizedDate('datetime_medium') }}</dd>
+          <dt>{{ 'zentrium_timesheet.entry.field.end'|trans }}</dt>
+          <dd>{{ entry.end|localizedDate('datetime_medium') }}</dd>
+          <dt>{{ 'zentrium_timesheet.entry.field.duration'|trans }}</dt>
+          <dd>{{ entry.duration|duration }}</dd>
+          <dt>{{ 'zentrium_timesheet.entry.field.activity'|trans }}</dt>
+          <dd>{{ entry.activity.name }}</dd>
+          <dt>{{ 'zentrium_timesheet.entry.field.notes'|trans }}</dt>
+          <dd>{{ entry.notes|nl2br }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

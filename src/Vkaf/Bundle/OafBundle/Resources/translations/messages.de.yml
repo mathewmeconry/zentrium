@@ -93,6 +93,12 @@ vkaf_oaf:
             unauthorized: Der Zugangscode ist nicht gültig.
         list:
             title: Terminals
+    timesheet:
+        approve:
+            approval: Bestätigung
+            details: Details
+            time: Zeit
+            user: Name
     user:
         desk:
             edit: Bearbeiten

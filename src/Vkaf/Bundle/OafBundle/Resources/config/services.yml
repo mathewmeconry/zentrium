@@ -114,6 +114,12 @@ services:
         arguments: ["@vkaf_oaf.pushpin", "@doctrine.orm.entity_manager", "@event_dispatcher", "%secret%"]
         lazy: true
 
+    vkaf_oaf.timesheet.approvals:
+        class: Vkaf\Bundle\OafBundle\Timesheet\ApprovalHandler
+        arguments: ["@vkaf_oaf.pushpin", "@vkaf_oaf.terminals", "@doctrine.orm.entity_manager", "@validator", "@translator"]
+        tags:
+            - { name: kernel.event_listener, event: vkaf_oaf.terminal.flow, method: onFlowEvent }
+
     vkaf_oaf.timesheet.entry_listener:
         class: Vkaf\Bundle\OafBundle\EventListener\TimesheetEntryListener
         arguments: ["@router", "@translator"]
