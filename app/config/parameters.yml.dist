@@ -22,3 +22,6 @@ parameters:
     aws_secret:              ~
     aws_sns_topic_send:      ~
     aws_sns_topic_status:    ~
+
+    pushpin_key:             ThisKeyIsNotValidChangeIt
+    pushpin_api:             http://127.0.0.1:5561

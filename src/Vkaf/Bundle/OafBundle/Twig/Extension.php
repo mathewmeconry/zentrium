@@ -2,16 +2,22 @@
 
 namespace Vkaf\Bundle\OafBundle\Twig;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
+use Twig_SimpleFunction;
 
 class Extension extends Twig_Extension
 {
+    private $pushpinUrl;
+    private $generator;
     private $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    public function __construct($pushpinUrl, UrlGeneratorInterface $generator, TranslatorInterface $translator)
     {
+        $this->pushpinUrl = $pushpinUrl;
+        $this->generator = $generator;
         $this->translator = $translator;
     }
 
@@ -20,6 +26,13 @@ class Extension extends Twig_Extension
         return [
             new Twig_SimpleFilter('truncate', [$this, 'truncate']),
             new Twig_SimpleFilter('money', [$this, 'money']),
+        ];
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('pushpin_url', [$this, 'pushpinUrl']),
         ];
     }
 
@@ -55,6 +68,27 @@ class Extension extends Twig_Extension
     public function money($cents)
     {
         return sprintf($this->translator->trans('vkaf_oaf.money'), $cents / 100);
+    }
+
+    /**
+     * Generates a WebSocket URL for a specific route.
+     *
+     * @param string $route
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public function pushpinUrl($route, array $parameters = [])
+    {
+        if (preg_match('!^wss?://!', $this->pushpinUrl)) {
+            $path = $this->generator->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_PATH);
+
+            return rtrim($this->pushpinUrl, '/').$path;
+        } else {
+            $url = $this->generator->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
+
+            return preg_replace('!^http(s?)://([^/]+)!', 'ws$1://$2'.rtrim($this->pushpinUrl, '/'), $url);
+        }
     }
 
     public function getName()

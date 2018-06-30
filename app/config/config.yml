@@ -195,6 +195,10 @@ aws:
 vkaf_oaf:
     lineup:
         path: "%kernel.root_dir%/../data/lineup.json"
+    pushpin:
+        key: "%pushpin_key%"
+        api: "%pushpin_api%"
+        base_url: "/pushpin"
     sms:
         sender_id: OAF18
         send_topic: "%aws_sns_topic_send%"

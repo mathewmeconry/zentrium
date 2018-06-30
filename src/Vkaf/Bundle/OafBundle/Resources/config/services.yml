@@ -69,6 +69,22 @@ services:
         tags:
             - { name: vkaf_oaf.kiosk.slide, type: welcome }
 
+    vkaf_oaf.pushpin:
+        class: Vkaf\Bundle\OafBundle\Pushpin\GripPublisher
+        arguments: ["@vkaf_oaf.pushpin.pub_control"]
+        lazy: true
+
+    vkaf_oaf.pushpin.param_converter:
+        class: Vkaf\Bundle\OafBundle\Pushpin\GripParamConverter
+        arguments: ["%vkaf_oaf.pushpin.key%"]
+        tags:
+            - { name: request.param_converter, converter: pushpin }
+
+    vkaf_oaf.pushpin.pub_control:
+        class: GripControl\GripPubControl
+        arguments: [{"control_uri": "%vkaf_oaf.pushpin.api%"}]
+        lazy: true
+
     vkaf_oaf.repository.shift:
         class: Vkaf\Bundle\OafBundle\Entity\ShiftRepository
         arguments: ["@doctrine.orm.entity_manager"]
@@ -86,6 +102,6 @@ services:
 
     vkaf_oaf.twig.extension:
         class: Vkaf\Bundle\OafBundle\Twig\Extension
-        arguments: ["@translator"]
+        arguments: ["%vkaf_oaf.pushpin.base_url%", "@router", "@translator"]
         tags:
             - { name: twig.extension }

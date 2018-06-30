@@ -22,6 +22,10 @@ class VkafOafExtension extends Extension
 
         $container->setParameter('vkaf_oaf.lineup_path', $config['lineup']['path']);
 
+        foreach ($config['pushpin'] as $key => $value) {
+            $container->setParameter('vkaf_oaf.pushpin.'.$key, $value);
+        }
+
         foreach ($config['sms'] as $key => $value) {
             $container->setParameter('vkaf_oaf.sms.'.$key, $value);
         }
