@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Vkaf\Bundle\OafBundle\Entity\KioskRepository")
  * @ORM\Table(name="oaf_kiosk")
  * @UniqueEntity({"token"})
  */

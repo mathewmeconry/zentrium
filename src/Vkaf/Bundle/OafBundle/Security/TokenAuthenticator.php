@@ -2,7 +2,6 @@
 
 namespace Vkaf\Bundle\OafBundle\Security;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -11,16 +10,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Templating\EngineInterface;
-use Vkaf\Bundle\OafBundle\Entity\Kiosk;
 
-class KioskAuthenticator extends AbstractGuardAuthenticator
+class TokenAuthenticator extends AbstractGuardAuthenticator
 {
-    private $em;
+    private $repository;
+    private $failureTemplate;
     private $templating;
 
-    public function __construct(EntityManager $em, EngineInterface $templating)
+    public function __construct(TokenRepository $repository, $failureTemplate, EngineInterface $templating)
     {
-        $this->em = $em;
+        $this->repository = $repository;
+        $this->failureTemplate = $failureTemplate;
         $this->templating = $templating;
     }
 
@@ -31,7 +31,7 @@ class KioskAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        return $this->em->getRepository(Kiosk::class)->findOneByToken($credentials);
+        return $this->repository->findOneByToken($credentials);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
@@ -45,7 +45,7 @@ class KioskAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response($this->templating->render('VkafOafBundle:Kiosk:unauthorized.html.twig'), 401);
+        return new Response($this->templating->render($this->failureTemplate), 401);
     }
 
     public function start(Request $request, AuthenticationException $authException = null)

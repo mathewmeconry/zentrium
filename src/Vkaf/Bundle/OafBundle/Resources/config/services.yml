@@ -85,13 +85,18 @@ services:
         arguments: [{"control_uri": "%vkaf_oaf.pushpin.api%"}]
         lazy: true
 
+    vkaf_oaf.repository.kiosk:
+        class: Vkaf\Bundle\OafBundle\Entity\KioskRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [Vkaf\Bundle\OafBundle\Entity\Kiosk]
+
     vkaf_oaf.repository.shift:
         class: Vkaf\Bundle\OafBundle\Entity\ShiftRepository
         arguments: ["@doctrine.orm.entity_manager"]
 
     vkaf_oaf.security.kiosk_authenticator:
-        class: Vkaf\Bundle\OafBundle\Security\KioskAuthenticator
-        arguments: ["@doctrine.orm.entity_manager", "@templating"]
+        class: Vkaf\Bundle\OafBundle\Security\TokenAuthenticator
+        arguments: ["@vkaf_oaf.repository.kiosk", "VkafOafBundle:Kiosk:unauthorized.html.twig", "@templating"]
         lazy: true
 
     vkaf_oaf.timesheet.entry_listener:
