@@ -29,5 +29,10 @@ class MenuListener
         $announcementMenu->addChild('vkaf_oaf.menu.messages', [
             'route' => 'oaf_messages',
         ]);
+
+        $timesheetMenu = $event->getMenu()->getChild('zentrium_timesheet.menu.timesheet');
+        $timesheetMenu->addChild('vkaf_oaf.menu.terminals', [
+            'route' => 'oaf_terminals',
+        ]);
     }
 }

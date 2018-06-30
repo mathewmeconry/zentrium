@@ -1,0 +1,26 @@
+{% extends 'VkafOafBundle::layout.html.twig' %}
+
+{% block title %}{{ 'vkaf_oaf.terminal.list.title'|trans }}{% endblock %}
+
+{% block content%}
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <table class="table table-striped" data-endpoint="{{ pushpin_url('oaf_terminal_status') }}">
+      <thead>
+        <tr>
+          <th>{{ 'vkaf_oaf.terminal.field.label'|trans }}</th>
+          <th>{{ 'vkaf_oaf.terminal.field.online'|trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for terminal in terminals %}
+        <tr>
+          <td>{{ terminal.label }}</td>
+          <td data-oaf-terminal-status="{{ terminal.id }}"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

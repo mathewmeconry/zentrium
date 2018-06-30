@@ -7,6 +7,7 @@ vkaf_oaf:
         messages: SMS
         resource: Geräte
         resource_assign: Geräte-Ausleihe
+        terminals: Terminals
     role:
         message_send:
             label: SMS verschicken
@@ -84,9 +85,14 @@ vkaf_oaf:
         view:
             statistics: Statistiken
     terminal:
+        field:
+            online: Status
+            label: Name
         app:
             title: Terminal
             unauthorized: Der Zugangscode ist nicht gültig.
+        list:
+            title: Terminals
     user:
         desk:
             edit: Bearbeiten

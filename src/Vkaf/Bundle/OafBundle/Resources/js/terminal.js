@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { Translator } from 'zentrium';
 
@@ -65,5 +66,20 @@ $(function () {
         }));
       });
     }
+  });
+});
+
+$(function () {
+  const $cells = $('[data-oaf-terminal-status]');
+  if (!$cells.length) {
+      return;
+  }
+  const socket = new ReconnectingWebSocket($cells.closest('[data-endpoint]').data('endpoint'));
+  socket.addEventListener('message', event => {
+    const terminals = _.indexBy(JSON.parse(event.data).terminals, 'id');
+    $cells.each(function () {
+      const id = $(this).data('oaf-terminal-status');
+      $(this).text(Translator.trans(terminals[id].online ? 'vkaf_oaf.terminal.online' : 'vkaf_oaf.terminal.offline'));
+    });
   });
 });
