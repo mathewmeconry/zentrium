@@ -1,13 +1,13 @@
 <?php
 
-namespace Vkaf\Bundle\OafBundle\EventListener;
+namespace Vkaf\Bundle\OafBundle\Timesheet;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Zentrium\Bundle\TimesheetBundle\Event\GetResponseEntryEvent;
 
-class TimesheetEntryListener
+class EntryListener
 {
     private $urlGenerator;
     private $translator;
@@ -29,15 +29,10 @@ class TimesheetEntryListener
             return;
         }
 
-        $scheduleUrl = $this->urlGenerator->generate('oaf_schedule_user', [
-            'user' => $event->getEntry()->getUser()->getId(),
+        $scheduleUrl = $this->urlGenerator->generate('oaf_timesheet_approve', [
+            'entry' => $event->getEntry()->getId(),
             'schedule' => $scheduleId,
         ]);
         $event->setResponse(new RedirectResponse($scheduleUrl));
-
-        $event->getRequest()->getSession()->getFlashBag()->add(
-            'success',
-            $this->translator->trans('zentrium_timesheet.entry.form.saved')
-        );
     }
 }

@@ -27,7 +27,12 @@ class TimesheetController extends Controller
      */
     public function approveAction(Request $request, Entry $entry)
     {
-        $returnUrl = $this->generateUrl('oaf_user_desk', ['user' => $entry->getUser()->getId()]);
+        $userId = $entry->getUser()->getId();
+        if ($scheduleId = $request->query->get('schedule')) {
+            $returnUrl = $this->generateUrl('oaf_schedule_user', ['user' => $userId, 'schedule' => $scheduleId]);
+        } else {
+            $returnUrl = $this->generateUrl('oaf_user_desk', ['user' => $userId]);
+        }
 
         return [
             'entry' => $entry,

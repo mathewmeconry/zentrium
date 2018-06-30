@@ -121,7 +121,7 @@ services:
             - { name: kernel.event_listener, event: vkaf_oaf.terminal.flow, method: onFlowEvent }
 
     vkaf_oaf.timesheet.entry_listener:
-        class: Vkaf\Bundle\OafBundle\EventListener\TimesheetEntryListener
+        class: Vkaf\Bundle\OafBundle\Timesheet\EntryListener
         arguments: ["@router", "@translator"]
         tags:
             - { name: kernel.event_listener, event: zentrium_timesheet.entry.edit.completed, method: onEditCompleted }

@@ -6,6 +6,7 @@
 {% block content %}
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs">
+    <li><a class="text-muted" href="{{ path('oaf_user_desk', {'user': user.id}) }}"><i class="fa fa-chevron-left"></i></a></li>
     {% for s in schedules %}
     <li{% if s.id == schedule.id %} class="active"{% endif %}><a href="{{ path('oaf_schedule_user', {'user': user.id, 'schedule': s.id}) }}">{{ s.name }}</a></li>
     {% endfor %}
