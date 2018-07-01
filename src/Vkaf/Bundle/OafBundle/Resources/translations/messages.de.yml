@@ -81,6 +81,7 @@ vkaf_oaf:
             hours: Stunden
             hours_daytime: Tagesstunden
             hours_nighttime: Nachtstunden
+            slots: Schichtwechsel
             workload: Auslastung
         view:
             statistics: Statistiken

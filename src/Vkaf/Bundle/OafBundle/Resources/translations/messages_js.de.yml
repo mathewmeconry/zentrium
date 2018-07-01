@@ -1,4 +1,10 @@
 vkaf_oaf:
+    schedule:
+        statistics:
+            beginning: Neu
+            changing: Wechsel
+            staying: Bestehend
+            ending: Ende
     terminal:
         online: online
         offline: offline

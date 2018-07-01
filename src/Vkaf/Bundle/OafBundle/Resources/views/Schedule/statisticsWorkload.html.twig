@@ -4,8 +4,12 @@
 {% block title %}{{ schedule.name }}{% endblock %}
 
 {% block content %}
-<div class="box box-primary">
-  <div class="box-body no-padding">
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+   <li><a href="{{ path('oaf_schedule_statistics_slots', {'schedule': schedule.id}) }}">{{ 'vkaf_oaf.schedule.statistics.slots'|trans }}</a></li>
+   <li class="active"><a href="{{ path('oaf_schedule_statistics_workload', {'schedule': schedule.id}) }}">{{ 'vkaf_oaf.schedule.statistics.workload'|trans }}</a></li>
+  </ul>
+  <div class="tab-content no-padding">
     <table class="table table-striped">
       <thead>
         <tr>

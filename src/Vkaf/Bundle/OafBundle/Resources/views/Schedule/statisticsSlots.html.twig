@@ -1,0 +1,17 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title_full %}{{ schedule.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
+{% block title %}{{ schedule.name }}{% endblock %}
+{% block title_sub %}{{ date|localizedDate('date_full') }}{% endblock %}
+
+{% block content %}
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+   <li class="active"><a href="{{ path('oaf_schedule_statistics_slots', {'schedule': schedule.id}) }}">{{ 'vkaf_oaf.schedule.statistics.slots'|trans }}</a></li>
+   <li><a href="{{ path('oaf_schedule_statistics_workload', {'schedule': schedule.id}) }}">{{ 'vkaf_oaf.schedule.statistics.workload'|trans }}</a></li>
+   {% if day + 1 < days  %}<li class="pull-right"><a href="{{ path('oaf_schedule_statistics_slots', {'schedule': schedule.id, 'day': (day + 1)}) }}"><i class="fa fa-chevron-right"></i></a></li>{% endif %}
+   {% if day > 0 %}<li class="pull-right"><a href="{{ path('oaf_schedule_statistics_slots', {'schedule': schedule.id, 'day': (day - 1)}) }}"><i class="fa fa-chevron-left"></i></a></li>{% endif %}
+  </ul>
+  <div class="tab-content schedule-statistics-slots" data-data="{{ data|json_encode|e('html_attr') }}"></div>
+</div>
+{% endblock %}

@@ -34,7 +34,7 @@
           <td class="col-tools">
             <a href="{{ path('oaf_schedule_slot_next', {'schedule': schedule.id}) }}"><i class="fa fa-exchange"></i></a>
             <a href="{{ path('schedule_validate', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.validate'|trans }}"><i class="fa fa-check-square-o"></i></a>
-            <a href="{{ path('oaf_schedule_statistics_workload', {'schedule': schedule.id}) }}" title="{{ 'vkaf_oaf.schedule.view.statistics'|trans }}"><i class="fa fa-bar-chart"></i></a>
+            <a href="{{ path('oaf_schedule_statistics', {'schedule': schedule.id}) }}" title="{{ 'vkaf_oaf.schedule.view.statistics'|trans }}"><i class="fa fa-bar-chart"></i></a>
             {% if is_granted('ROLE_SCHEDULER') %}
             <a href="{{ path('schedule_copy', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.copy'|trans }}"><i class="fa fa-copy"></i></a>
             <a href="{{ path('schedule_edit', {'schedule': schedule.id}) }}" title="{{ 'zentrium_schedule.schedule.list.edit'|trans }}"><i class="fa fa-pencil"></i></a>

@@ -294,6 +294,86 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/statistics", name="oaf_schedule_statistics")
+     */
+    public function statisticsAction(Schedule $schedule)
+    {
+        return $this->redirectToRoute('oaf_schedule_statistics_slots', ['schedule' => $schedule->getId()]);
+    }
+
+    /**
+     * @Route("/{schedule}/statistics/slots", name="oaf_schedule_statistics_slots")
+     * @Template
+     */
+    public function statisticsSlotsAction(Request $request, Schedule $schedule)
+    {
+        $days = $this->countDays($schedule);
+        $day = intval($request->query->get('day'));
+        $day = max(0, min($days - 1, $day));
+        $dayPeriod = Period::createFromDay($schedule->getBegin())->move(sprintf('%d day', $day));
+
+        $base = $dayPeriod->getStartDate()->getTimestamp() - $schedule->getSlotDuration();
+        $end = $dayPeriod->getEndDate()->getTimestamp() + $schedule->getSlotDuration();
+
+        $labels = [];
+        for ($time = $base; $time < $end; $time += $schedule->getSlotDuration()) {
+            $labels[] = date('H:i', $time);
+        }
+
+        $maxIndex = count($labels);
+        $beginning = array_fill(0, $maxIndex, []);
+        $ending = array_fill(0, $maxIndex, []);
+        foreach ($schedule->getShifts() as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
+            $beginIndex = ($shift->getFrom()->getTimestamp() - $base) / $schedule->getSlotDuration();
+            $endIndex = ($shift->getTo()->getTimestamp() - $base) / $schedule->getSlotDuration();
+            if ($endIndex < 0 || $beginIndex >= $maxIndex) {
+                continue;
+            }
+            $userId = $shift->getUser()->getId();
+            $beginning[max(0, $beginIndex)][] = $userId;
+            $ending[min($maxIndex - 1, $endIndex)][] = $userId;
+        }
+
+        $changing = array_fill(0, $maxIndex, 0);
+        $staying = array_fill(0, $maxIndex, 0);
+        $last = 0;
+        for ($i = 0; $i < $maxIndex; $i++) {
+            foreach ($beginning[$i] as $userId) {
+                $pos = array_search($userId, $ending[$i], true);
+                if ($pos !== false) {
+                    unset($ending[$i][$pos]);
+                    $changing[$i]++;
+                }
+            }
+            $beginning[$i] = count($beginning[$i]) - $changing[$i];
+            $ending[$i] = count($ending[$i]);
+            $staying[$i] = $last - $ending[$i] - $changing[$i];
+            $last = $last + $beginning[$i] - $ending[$i];
+        }
+
+        $data = array_map(function ($set) {
+            return array_slice($set, 1, -1);
+        }, [
+            'labels' => $labels,
+            'beginning' => $beginning,
+            'changing' => $changing,
+            'staying' => $staying,
+            'ending' => $ending,
+        ]);
+
+        return [
+            'schedule' => $schedule,
+            'date' => $dayPeriod->getStartDate(),
+            'day' => $day,
+            'days' => $days,
+            'data' => $data,
+        ];
+    }
+
+    /**
      * @Route("/{schedule}/statistics/workload", name="oaf_schedule_statistics_workload")
      * @Template
      */
