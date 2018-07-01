@@ -144,7 +144,7 @@ zentrium_schedule:
                 subject_group: Gruppe «%group%»
                 subject_skill: Qualifikation «%skill%»
     shift:
-        icon: briefcase
+        icon: calendar
         edit:
             timesheet: Zeit erfassen
     skill:
