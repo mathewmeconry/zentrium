@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.2",
-    "reconnecting-websocket": "^4.0.0-rc5",
+    "reconnecting-websocket": "^3.2.2",
     "signature_pad": "^2.3.2"
   }
 }
