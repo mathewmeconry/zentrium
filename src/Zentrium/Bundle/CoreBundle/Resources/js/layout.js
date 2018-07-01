@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 $(function () {
+  $('[data-toggle="tooltip"]').tooltip();
   $('[data-original-title][data-toggle="dropdown"]').tooltip();
 
   $('.sidebar-menu').on('click', '.treeview a', function (e) {
