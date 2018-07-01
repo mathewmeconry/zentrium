@@ -112,3 +112,5 @@ vkaf_oaf:
             assigned_resources: Zugeteilte Geräte
             no_resources: %user% hat zurzeit keine Geräte ausgeliehen.
             age: %age% Jahre
+            terms_accepted: Akzeptiert
+            terms_unaccepted: Nicht akzeptiert

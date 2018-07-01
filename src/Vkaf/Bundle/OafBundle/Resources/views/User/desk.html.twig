@@ -32,6 +32,8 @@
     <div class="box box-solid">
       <div class="box-body">
         <dl>
+          <dt>{{ 'zentrium.user.field.terms'|trans }}</dt>
+          <dd>{% if user.terms %}<span class="text-success">{{ 'vkaf_oaf.user.desk.terms_accepted'|trans }}</span>{% else %}<span class="text-danger">{{ 'vkaf_oaf.user.desk.terms_unaccepted'|trans }}</span>{% endif %}</dd>
           <dt>{{ 'zentrium.user.field.present'|trans }}</dt>
           <dd>{% if user.present %}<span class="text-success">{{ 'zentrium.user.list.present'|trans }}</span>{% else %}<span class="text-danger">{{ 'zentrium.user.list.absent'|trans }}</span>{% endif %}</dd>
           <dt>{{ 'zentrium.user.field.bednumber'|trans }}</dt>
