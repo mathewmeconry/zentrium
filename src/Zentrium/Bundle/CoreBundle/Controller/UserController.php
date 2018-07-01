@@ -50,20 +50,6 @@ class UserController extends Controller
         return $this->handleEdit($request, $user);
     }
 
-    /**
-     * @Route("/users/{user}/labels", name="user_labels")
-     * @IsGranted("ROLE_MANAGER")
-     * @Template
-     */
-    public function labelsAction(Request $request, User $user)
-    {
-        return [
-            'firstname' => $user->getFirstName(),
-            'lastname' => $user->getLastName(),
-            'groups' => $user->getGroups(),
-        ];
-    }
-
     private function handleEdit(Request $request, User $user)
     {
         $formClass = ($this->isGranted('ROLE_ADMINISTRATOR') ? UserAccountType::class : UserType::class);

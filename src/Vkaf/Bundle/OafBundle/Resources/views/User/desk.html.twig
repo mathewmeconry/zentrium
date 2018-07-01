@@ -23,7 +23,7 @@
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
           <li><a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i> {{ 'vkaf_oaf.user.desk.edit'|trans }}</a></li>
-          <li><a href="{{ path('user_labels', {'user': user.id}) }}"><i class="fa fa-tag"></i> {{ 'vkaf_oaf.user.desk.labels'|trans }}</a></li>
+          <li><a href="{{ path('oaf_user_labels', {'user': user.id}) }}"><i class="fa fa-tag"></i> {{ 'vkaf_oaf.user.desk.labels'|trans }}</a></li>
           <li><a href="{{ path('schedule_user_availability', {'user': user.id}) }}"><i class="fa fa-check-circle"></i> {{ 'zentrium_schedule.user.list.availability'|trans }}</a></li>
           <li><a href="{{ path('oaf_messages_user', {'user': user.id}) }}"><i class="fa fa-envelope"></i> {{ 'vkaf_oaf.menu.messages'|trans }}</a></li>
         </ul>

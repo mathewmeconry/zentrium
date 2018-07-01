@@ -54,4 +54,15 @@ class UserController extends Controller
             'resourceAssignments' => $resourceAssignments,
         ];
     }
+
+    /**
+     * @Route("/users/{user}/labels", name="oaf_user_labels")
+     * @Template
+     */
+    public function labelsAction(User $user)
+    {
+        return [
+            'user' => $user,
+        ];
+    }
 }

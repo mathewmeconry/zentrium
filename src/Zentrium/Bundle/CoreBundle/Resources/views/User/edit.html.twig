@@ -5,20 +5,12 @@
 {% block title %}{{ user.name }}{% endblock %}
 
 {% block content %}
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">{{ 'zentrium.user.edit.title'|trans }}</h3>
-        </div>
-        <div class="box-body">
-            {{ form(form) }}
-        </div>
-    </div>
-{% endblock %}
-
-{% block scripts %}
-    <script type="text/javascript">
-        $('#user_labels, #user_account_labels').click(function () {
-            window.open({{ path('user_labels', {'user': user.id})|json_encode|raw }});
-        });
-    </script>
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">{{ 'zentrium.user.edit.title'|trans }}</h3>
+  </div>
+  <div class="box-body">
+    {{ form(form) }}
+  </div>
+</div>
 {% endblock %}

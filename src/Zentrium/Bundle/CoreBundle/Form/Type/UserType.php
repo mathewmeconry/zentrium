@@ -4,7 +4,6 @@ namespace Zentrium\Bundle\CoreBundle\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -64,11 +63,6 @@ class UserType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'zentrium.form.save',
-                'attr' => ['class' => 'btn-primary'],
-            ])
-            ->add('labels', ButtonType::class, [
-                'label' => 'zentrium.user.form.labels',
-                'attr' => ['class' => 'pull-right'],
             ])
         ;
     }
