@@ -66,6 +66,7 @@ zentrium:
             datetime_full: EEEE, d. MMMM yyyy HH:mm
     twig:
         format_list:
+            ampersand: "&"
             and: und
             or: oder
     email:
