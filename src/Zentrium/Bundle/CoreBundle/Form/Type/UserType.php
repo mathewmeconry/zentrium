@@ -39,6 +39,10 @@ class UserType extends AbstractType
                 'label' => 'zentrium.user.field.title',
                 'required' => false,
             ])
+            ->add('terms', CheckboxType::class, [
+                'label' => 'zentrium.user.field.terms',
+                'required' => false,
+            ])
             ->add('present', CheckboxType::class, [
                 'label' => 'zentrium.user.field.present',
                 'required' => false,

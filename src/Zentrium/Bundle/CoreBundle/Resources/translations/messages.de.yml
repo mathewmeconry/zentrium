@@ -93,6 +93,7 @@ zentrium:
             groups: Gruppen
             email: E-Mail
             mobile_phone: Telefon
+            terms: Teilnahme-Bedingungen
             present: Anwesenheit
             bednumber: Bettnummer
             food_notes: Essenswünsche
@@ -107,6 +108,7 @@ zentrium:
             title: Benutzer
             absent: Abwesend
             present: Anwesend
+            unaccepted_terms: Teilnahme-Bedingungen nicht akzeptiert
         edit:
             title: Benutzer bearbeiten
         new:

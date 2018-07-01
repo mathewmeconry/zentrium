@@ -102,6 +102,13 @@ class User extends BaseUser
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
+    protected $terms;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
     protected $present;
 
     /**
@@ -123,6 +130,7 @@ class User extends BaseUser
         parent::__construct();
 
         $this->groups = new ArrayCollection();
+        $this->terms = false;
         $this->present = false;
     }
 
@@ -183,13 +191,6 @@ class User extends BaseUser
         return $this;
     }
 
-    public function setPresent($present)
-    {
-        $this->present = $present;
-
-        return $this;
-    }
-
     public function getMobilePhone()
     {
         return $this->mobilePhone;
@@ -214,9 +215,28 @@ class User extends BaseUser
         return $this;
     }
 
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
+
+        return $this;
+    }
+
     public function getPresent()
     {
         return $this->present;
+    }
+
+    public function setPresent($present)
+    {
+        $this->present = $present;
+
+        return $this;
     }
 
     public function getBednumber()

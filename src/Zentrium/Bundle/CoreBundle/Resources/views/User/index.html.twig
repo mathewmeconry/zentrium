@@ -29,6 +29,7 @@
           <td>{{ user.title }}</td>
           <td>{% for group in user.groups %}<span class="label label-primary">{{ group.shortName }}</span>&#32;{% endfor %}</td>
           <td class="col-tools">
+            {% if not user.terms %}<i class="fa fa-exclamation-triangle" title="{{ 'zentrium.user.list.unaccepted_terms'|trans }}" data-toggle="tooltip" data-placement="left"></i>{% endif %}
             {% if not user.enabled %}<i class="fa fa-lock"></i>{% endif %}
             <a href="{{ path('user_edit', {'user': user.id}) }}"><i class="fa fa-pencil"></i></a>
             <a href="{{ path('oaf_user_desk', {'user': user.id}) }}"><i class="fa fa-address-card-o"></i></a>
