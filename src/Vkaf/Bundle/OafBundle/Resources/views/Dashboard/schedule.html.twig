@@ -1,0 +1,10 @@
+<div class="small-box bg-aqua">
+  <div class="inner">
+    <h3>{{ count }}</h3>
+    <p>{{ 'vkaf_oaf.dashboard.schedule.title'|trans }}</p>
+  </div>
+  <div class="icon">
+    <i class="fa fa-road"></i>
+  </div>
+  <a class="small-box-footer" href="{{ schedule ? path('schedule_view', {'schedule': schedule.id}) : path('schedules') }}">{{ 'vkaf_oaf.dashboard.schedule.show'|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+</div>

@@ -31,4 +31,20 @@ class ShiftRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function countActive(DateTimeInterface $date)
+    {
+        $qb = $this->repository->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->leftJoin('s.schedule', 'p')
+            ->leftJoin('s.task', 't')
+            ->where('p.published = 1')
+            ->andWhere('t.informative = 0')
+            ->andWhere('s.from <= :date')
+            ->andWhere('s.to > :date')
+            ->setParameter('date', $date)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

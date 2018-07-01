@@ -27,6 +27,9 @@ vkaf_oaf:
             empty: Derzeit sind keine Einsätze mit den gewählten Kriterien geplant.
             no_shifts: In den nächsten %hours% Stunden keine Einsätze
     dashboard:
+        schedule:
+            title: im Einsatz
+            show: Anzeigen
         user_desk:
             title: Front-Desk
             open: Öffnen

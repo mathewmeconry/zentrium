@@ -27,7 +27,7 @@ services:
 
     vkaf_oaf.dashboard_listener:
         class: Vkaf\Bundle\OafBundle\Dashboard\DashboardListener
-        arguments: ["@templating", "@vkaf_oaf.lineup", "@form.factory"]
+        arguments: ["@templating", "@vkaf_oaf.lineup", "@zentrium_schedule.manager.schedule", "@vkaf_oaf.repository.shift", "@form.factory"]
         tags:
             - { name: kernel.event_listener, event: zentrium.dashboard, method: onBuildDashboard }
 
