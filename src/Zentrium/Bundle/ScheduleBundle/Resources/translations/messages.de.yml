@@ -126,7 +126,7 @@ zentrium_schedule:
             edit: Plan bearbeiten
             change_layout: Layout wechseln
     shift:
-        icon: briefcase
+        icon: calendar
         edit:
             timesheet: Zeit erfassen
     skill:
