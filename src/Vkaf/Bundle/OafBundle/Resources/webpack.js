@@ -1,6 +1,9 @@
 const path = require('path');
 
 module.exports = function (config) {
+  // override dependency of AdminLTE
+  config.resolve.alias['chart.js'] = path.join(__dirname, 'node_modules/chart.js');
+
   config.entry['vkaf_oaf'] = [
     path.join(__dirname, 'js/announcement.js'),
     path.join(__dirname, 'js/kiosk.js'),
