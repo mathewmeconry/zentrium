@@ -5,7 +5,7 @@ const webpack = require('webpack');
 module.exports = function (config) {
   config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
     name: ['zentrium', 'manifest'],
-    minChunks: Infinity,
+    minChunks: 2,
   }));
 
   config.plugins.push(new webpack.ProvidePlugin({
