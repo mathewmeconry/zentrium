@@ -78,6 +78,8 @@ vkaf_oaf:
             ending: Schicht-Ende
             changing: Schicht-Wechsel
             beginning: Schicht-Beginn
+        slot_changes:
+            warning: Diese Liste enthält nur die Posten-Wechsel jener, die bereits im Einsatz sind.
         slot_wakeup:
             title: Weckliste
         statistics:

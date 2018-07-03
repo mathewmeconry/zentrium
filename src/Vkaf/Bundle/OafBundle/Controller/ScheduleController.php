@@ -76,51 +76,43 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/slots/{slot}/changes", name="oaf_schedule_slot_changes")
+     * @Template
+     */
+    public function slotChangesAction(Schedule $schedule, $slot)
+    {
+        list($slot, $slotDate, $tasks, $users) = $this->analyzeSlot($schedule, $slot);
+
+        $tasks = array_filter($tasks, function ($row) use ($users) {
+            foreach ($row['end'] as $user) {
+                if (count($users[$user->getId()]['start']) > 0) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        uasort($tasks, function ($a, $b) {
+            return strcasecmp($a['task']->getName(), $b['task']->getName());
+        });
+
+        return [
+            'schedule' => $schedule,
+            'slot' => $slot,
+            'slotDate' => $slotDate,
+            'tasks' => $tasks,
+            'users' => $users,
+        ];
+    }
+
+    /**
      * @Route("/{schedule}/slots/{slot}/print", name="oaf_schedule_slot_print")
      * @Template
      */
     public function slotPrintAction(Schedule $schedule, $slot)
     {
-        $slot = intval($slot);
-        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
-            throw $this->createNotFoundException();
-        }
-
-        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
-
-        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
-        $tasks = [];
-        $users = [];
-        foreach ($shifts as $shift) {
-            if ($shift->getTask()->isInformative()) {
-                continue;
-            }
-
-            $taskId = $shift->getTask()->getId();
-            if (!isset($tasks[$taskId])) {
-                $tasks[$taskId] = [
-                    'task' => $shift->getTask(),
-                    'start' => [],
-                    'end' => [],
-                ];
-            }
-
-            $userId = $shift->getUser()->getId();
-            if (!isset($users[$userId])) {
-                $users[$userId] = [
-                    'start' => [],
-                    'end' => [],
-                ];
-            }
-
-            if ($shift->getTo() == $slotDate) {
-                $tasks[$taskId]['end'][] = $shift->getUser();
-                $users[$userId]['end'][] = $shift->getTask();
-            } else {
-                $tasks[$taskId]['start'][] = $shift->getUser();
-                $users[$userId]['start'][] = $shift->getTask();
-            }
-        }
+        list($slot, $slotDate, $tasks, $users) = $this->analyzeSlot($schedule, $slot);
 
         uasort($tasks, function ($a, $b) {
             return strcasecmp($a['task']->getName(), $b['task']->getName());
@@ -155,35 +147,7 @@ class ScheduleController extends Controller
      */
     public function slotWakeupAction(Schedule $schedule, $slot)
     {
-        $slot = intval($slot);
-        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
-            throw $this->createNotFoundException();
-        }
-
-        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
-
-        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
-        $users = [];
-        foreach ($shifts as $shift) {
-            if ($shift->getTask()->isInformative()) {
-                continue;
-            }
-
-            $userId = $shift->getUser()->getId();
-            if (!isset($users[$userId])) {
-                $users[$userId] = [
-                    'user' => $shift->getUser(),
-                    'start' => [],
-                    'end' => [],
-                ];
-            }
-
-            if ($shift->getTo() == $slotDate) {
-                $users[$userId]['end'][] = $shift->getTask();
-            } else {
-                $users[$userId]['start'][] = $shift->getTask();
-            }
-        }
+        list($slot, $slotDate, $tasks, $users) = $this->analyzeSlot($schedule, $slot);
 
         $users = array_filter($users, function ($row) {
             return count($row['start']) > 0;
@@ -406,6 +370,53 @@ class ScheduleController extends Controller
             'schedule' => $schedule,
             'users' => $users,
         ];
+    }
+
+    private function analyzeSlot(Schedule $schedule, $slot)
+    {
+        $slot = intval($slot);
+        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
+            throw $this->createNotFoundException();
+        }
+
+        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+
+        $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
+        $tasks = [];
+        $users = [];
+        foreach ($shifts as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
+
+            $taskId = $shift->getTask()->getId();
+            if (!isset($tasks[$taskId])) {
+                $tasks[$taskId] = [
+                    'task' => $shift->getTask(),
+                    'start' => [],
+                    'end' => [],
+                ];
+            }
+
+            $userId = $shift->getUser()->getId();
+            if (!isset($users[$userId])) {
+                $users[$userId] = [
+                    'user' => $shift->getUser(),
+                    'start' => [],
+                    'end' => [],
+                ];
+            }
+
+            if ($shift->getTo() == $slotDate) {
+                $tasks[$taskId]['end'][] = $shift->getUser();
+                $users[$userId]['end'][] = $shift->getTask();
+            } else {
+                $tasks[$taskId]['start'][] = $shift->getUser();
+                $users[$userId]['start'][] = $shift->getTask();
+            }
+        }
+
+        return [$slot, $slotDate, $tasks, $users];
     }
 
     private function getSchedule(Request $request, $schedules)

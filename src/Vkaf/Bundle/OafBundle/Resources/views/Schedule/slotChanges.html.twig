@@ -1,0 +1,28 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title %}{{ slotDate|localizedDate('datetime_medium') }} - {{ schedule.name }}{% endblock %}
+
+{% block body_class %}schedule-slot{% endblock %}
+
+{% block body %}
+<h4>{{ slotDate|localizedDate('date_full') }}</h4>
+<h3>{{ slotDate|date('H:i') }}</h3>
+<p><span class="fa fa-exclamation-triangle"></span> {{ 'vkaf_oaf.schedule.slot_changes.warning'|trans }}</p>
+{% for row in tasks %}
+<section>
+  <h4>{{ row.task.name }} ({{ row.task.code }})</h4>
+  <ul>
+    {% for user in row.end %}
+    {% if users[user.id].start|length %}
+    <li>
+      {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
+      <span class="schedule-slot-extra">
+        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.code }} {% endfor %}
+      </span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}
