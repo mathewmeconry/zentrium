@@ -28,6 +28,17 @@ class ScheduleListSlide implements SlideInterface
         $period = Period::createFromDuration('- 2 hours', sprintf('%d hours', $horizon));
 
         $users = $this->userRepository->findPresent();
+        if (isset($options['excluded_groups'])) {
+            $users = array_filter($users, function (User $user) use ($options) {
+                foreach ($user->getGroups() as $group) {
+                    if (in_array($group->getId(), $options['excluded_groups'])) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+        }
         if (isset($options['offset'])) {
             $users = array_slice($users, intval($options['offset']));
         }
