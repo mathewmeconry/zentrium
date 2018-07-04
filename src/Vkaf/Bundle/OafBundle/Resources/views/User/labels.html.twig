@@ -28,7 +28,7 @@
     </style>
   </head>
   <body>
-    {% for i in 0..1 %}
+    {% for i in 0..2 %}
     <div class="label">
       <p>{{ user.name }}</p>
       <p>{{ user.groups|formatList({'property': 'shortName', 'relation': 'ampersand'}) }}</p>
