@@ -61,6 +61,7 @@ class LogController extends Controller
     public function newAction(Request $request)
     {
         $log = new Log();
+        $log->setReported(new DateTime());
         $log->setAuthor($this->getUser());
 
         return $this->handleEdit($request, $log);
