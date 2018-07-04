@@ -25,7 +25,7 @@
       {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
       {% if users[user.id].start|length %}
       <span class="schedule-slot-extra">
-        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.code }} {% endfor %}
+        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.name }} ({{ task.code }}) {% endfor %}
       </span>
       {% endif %}
     </li>
@@ -39,7 +39,7 @@
       {% if users[user.id].end|length or user.bednumber %}
       <span class="schedule-slot-extra">
         {% if users[user.id].end|length %}
-        <span class="fa fa-long-arrow-left"></span>{% for task in users[user.id].end %}{{ task.code }} {% endfor %}
+        <span class="fa fa-long-arrow-left"></span>{% for task in users[user.id].end %}{{ task.name }} ({{ task.code }}) {% endfor %}
         {% endif %}
         {% if user.bednumber %}
         <span class="fa fa-bed"></span>{{ user.bednumber }}

@@ -17,7 +17,7 @@
     <li>
       {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
       <span class="schedule-slot-extra">
-        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.code }} {% endfor %}
+        <span class="fa fa-long-arrow-right"></span> {% for task in users[user.id].start %}{{ task.name }} ({{ task.code }}) {% endfor %}
       </span>
     </li>
     {% endif %}
