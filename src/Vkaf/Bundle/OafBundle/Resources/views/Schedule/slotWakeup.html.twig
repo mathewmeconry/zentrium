@@ -14,13 +14,16 @@
     <li>
       <span class="fa {% if row.end|length > 0 %}fa-plus-square{% else %}fa-plus-square-o{% endif %}"></span>
       {{ row.user.name }} ({{ row.user.groups|formatList({'property': 'shortName'}) }})
-      {% if row.end|length or row.user.bednumber %}
+      {% if row.end|length or row.user.bednumber or row.user.mobilePhone %}
       <span class="schedule-slot-extra">
         {% if row.end|length %}
         <span class="fa fa-long-arrow-right"></span> {% for task in row.start %}{{ task.code }} {% endfor %}
         {% endif %}
         {% if row.user.bednumber %}
         <span class="fa fa-bed"></span>{{ row.user.bednumber }}
+        {% endif %}
+        {% if row.user.mobilePhone %}
+        <span class="fa fa-phone"></span>{{ row.user.mobilePhone|phoneNumber }}
         {% endif %}
       </span>
       {% endif %}
