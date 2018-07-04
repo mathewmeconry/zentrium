@@ -39,6 +39,12 @@ class LogController extends Controller
         $statusCounts = $logRepository->aggregateByStatus();
         $commentCounts = $logRepository->countComments();
 
+        if ($activeStatus === null) {
+            uasort($logs, function (Log $a, Log $b) {
+                return $a->compareByStatus($b);
+            });
+        }
+
         $labels = $this->getDoctrine()->getRepository('ZentriumLogBundle:Label')->findAll();
 
         return [

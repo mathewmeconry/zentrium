@@ -286,6 +286,11 @@ class Log
         return $this;
     }
 
+    public function compareByStatus(Log $b)
+    {
+        return array_search($this->getStatus(), self::getStatuses()) - array_search($b->getStatus(), self::getStatuses());
+    }
+
     public static function getStatuses()
     {
         return [
