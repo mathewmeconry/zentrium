@@ -39,7 +39,7 @@
       {% if users[user.id].end|length or user.bednumber %}
       <span class="schedule-slot-extra">
         {% if users[user.id].end|length %}
-        <span class="fa fa-long-arrow-right"></span>{% for task in users[user.id].end %}{{ task.code }} {% endfor %}
+        <span class="fa fa-long-arrow-left"></span>{% for task in users[user.id].end %}{{ task.code }} {% endfor %}
         {% endif %}
         {% if user.bednumber %}
         <span class="fa fa-bed"></span>{{ user.bednumber }}

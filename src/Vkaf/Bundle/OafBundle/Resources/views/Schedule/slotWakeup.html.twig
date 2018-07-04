@@ -17,7 +17,7 @@
       {% if row.end|length or row.user.bednumber or row.user.mobilePhone %}
       <span class="schedule-slot-extra">
         {% if row.end|length %}
-        <span class="fa fa-long-arrow-right"></span> {% for task in row.start %}{{ task.code }} {% endfor %}
+        <span class="fa fa-long-arrow-left"></span>{% for task in row.end %}{{ task.code }} {% endfor %}
         {% endif %}
         {% if row.user.bednumber %}
         <span class="fa fa-bed"></span>{{ row.user.bednumber }}
