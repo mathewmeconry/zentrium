@@ -354,6 +354,9 @@ class ScheduleController extends Controller
         }
 
         foreach ($schedule->getShifts() as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
             $userId = $shift->getUser()->getId();
             $begin = $shift->getPeriod()->getStartDate();
             $daytime = new Period($begin->setTime(6, 0, 0), $begin->setTime(22, 0, 0));
