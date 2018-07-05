@@ -7,9 +7,6 @@ use Vkaf\Bundle\OafBundle\Validator\Constraints as AssertOaf;
 
 class MessageDraft
 {
-    /**
-     * @Assert\Count(min=1)
-     */
     private $receivers;
 
     /**

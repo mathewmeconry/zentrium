@@ -46,6 +46,10 @@ vkaf_oaf:
             title: Neue Nachricht verfassen
         cost: Kosten
         cost_approximation: ca. %cost%
+        receiver:
+            active: Benutzer im Einsatz
+            choice: Ausgewählte Benutzer
+            present: Anwesende Benutzer
     resource:
         field:
             id: ID

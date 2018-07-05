@@ -71,6 +71,16 @@ class AnnouncementController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository = $this->get('vkaf_oaf.repository.user');
+            switch ($form->get('receiverSet')->getData()) {
+                case MessageDraftType::RECEIVERS_ACTIVE:
+                    $draft->setReceivers($userRepository->findActive());
+                    break;
+                case MessageDraftType::RECEIVERS_PRESENT:
+                    $draft->setReceivers($userRepository->findPresent());
+                    break;
+            }
+
             $token = bin2hex(random_bytes(10));
             $request->getSession()->set(self::CONFIRM_NS.$token, $draft);
 

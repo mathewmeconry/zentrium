@@ -11,4 +11,14 @@ $(function () {
       $body.append(info);
     });
   });
+
+  $('#message_draft_receiverSet').each(function () {
+    const $input = $(this);
+    const $choice = $('#message_draft_receivers').closest('.form-group');
+    function update() {
+      $choice.toggle($input.val() === 'choice');
+    }
+    $input.on('change', update);
+    update();
+  });
 });

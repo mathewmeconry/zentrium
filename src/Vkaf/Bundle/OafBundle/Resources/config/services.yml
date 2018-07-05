@@ -99,6 +99,10 @@ services:
         factory: ["@doctrine", getRepository]
         arguments: [Vkaf\Bundle\OafBundle\Entity\Terminal]
 
+    vkaf_oaf.repository.user:
+        class: Vkaf\Bundle\OafBundle\Entity\UserRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
     vkaf_oaf.security.kiosk_authenticator:
         class: Vkaf\Bundle\OafBundle\Security\TokenAuthenticator
         arguments: ["@vkaf_oaf.repository.kiosk", "VkafOafBundle:Kiosk:unauthorized.html.twig", "@templating"]
