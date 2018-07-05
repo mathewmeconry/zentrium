@@ -4,8 +4,8 @@
 {% block title_full %}{{ schedule.name }} - {{ 'zentrium_schedule.layout.schedule'|trans }}{% endblock %}
 {% block title %}{{ schedule.name }}{% endblock %}
 
-{% macro renderShift(shift, type) %}
-<div class="slot-shift-end" style="background-color: {{ shift.task.color }}; border-color: {{ shift.task.color }}">{{ shift.task.name }} ({{ shift.task.code }})</div>
+{% macro renderShift(shift) %}
+<div class="slot-shift" style="background-color: {{ shift.task.color }};">{{ shift.task.name }} ({{ shift.task.code }})</div>
 {% endmacro %}
 
 {% block content %}
@@ -42,7 +42,7 @@
           {% if row.ending|length and not row.beginning|length %}
             <p>{{ row.user.name }}</p>
             {% for shift in row.ending %}
-            {{ self.renderShift(shift, 'end') }}
+            {{ self.renderShift(shift) }}
             {% endfor %}
           {% endif %}
         {% endfor %}
@@ -59,10 +59,10 @@
           {% if row.ending|length and row.beginning|length %}
             <p>{{ row.user.name }}</p>
             {% for shift in row.ending %}
-            {{ self.renderShift(shift, 'end') }}
+            {{ self.renderShift(shift) }}
             {% endfor %}
             {% for shift in row.beginning %}
-            {{ self.renderShift(shift, 'begin') }}
+            {{ self.renderShift(shift) }}
             {% endfor %}
           {% endif %}
         {% endfor %}
@@ -79,7 +79,7 @@
           {% if not row.ending|length and row.beginning|length %}
             <p>{{ row.user.name }}</p>
             {% for shift in row.beginning %}
-            {{ self.renderShift(shift, 'begin') }}
+            {{ self.renderShift(shift) }}
             {% endfor %}
           {% endif %}
         {% endfor %}

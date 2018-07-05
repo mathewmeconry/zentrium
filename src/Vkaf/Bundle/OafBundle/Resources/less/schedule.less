@@ -46,11 +46,22 @@
     }
 }
 
-.slot-shift-begin, .slot-shift-end {
-    color: #000;
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+.slot-shift {
+    position: relative;
+    color: #fff;
     margin: 0 0 10px 0;
     padding: 3px 6px;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 1px;
+        bottom: 1px;
+        right: 1px;
+        left: 1px;
+        background-color: #fff;
+        opacity: 0.25;
+    }
 }
 
 .schedule-slot {
