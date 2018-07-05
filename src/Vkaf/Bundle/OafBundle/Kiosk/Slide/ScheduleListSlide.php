@@ -25,7 +25,7 @@ class ScheduleListSlide implements SlideInterface
     {
         $columns = intval($options['columns'] ?? self::DEFAULT_COLUMNS);
         $horizon = intval($options['horizon'] ?? self::DEFAULT_HORIZON);
-        $period = Period::createFromDuration('- 2 hours', sprintf('%d hours', $horizon));
+        $period = Period::createFromDuration('- 2 hours', sprintf('%d hours', 2 + $horizon));
 
         $users = $this->userRepository->findPresent();
         if (isset($options['excluded_groups'])) {
