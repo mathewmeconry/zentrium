@@ -2,7 +2,7 @@
 
 {% block title %}{{ slotDate|localizedDate('datetime_medium') }} - {{ schedule.name }}{% endblock %}
 
-{% block body_class %}schedule-slot schedule-slot-wakeup{% endblock %}
+{% block body_class %}schedule-slot{% endblock %}
 
 {% block body %}
 <h4>{{ slotDate|localizedDate('date_full') }}</h4>
