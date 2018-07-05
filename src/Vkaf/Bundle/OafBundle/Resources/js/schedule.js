@@ -90,6 +90,15 @@ $(function () {
           },
         },
       },
+      onClick: function (event, elements) {
+        if (!elements.length) {
+          return;
+        }
+        const url = data.urls[elements[0]._index];
+        if (url) {
+          window.location = url;
+        }
+      }
     },
     data: {
       labels: data.labels,

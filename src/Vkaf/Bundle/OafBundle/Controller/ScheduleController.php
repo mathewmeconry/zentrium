@@ -316,6 +316,7 @@ class ScheduleController extends Controller
 
         $base = $dayPeriod->getStartDate()->getTimestamp() - $schedule->getSlotDuration();
         $end = $dayPeriod->getEndDate()->getTimestamp() + $schedule->getSlotDuration();
+        $baseSlot = ($base - $schedule->getBegin()->getTimestamp()) / $schedule->getSlotDuration();
 
         $labels = [];
         for ($time = $base; $time < $end; $time += $schedule->getSlotDuration()) {
@@ -339,10 +340,14 @@ class ScheduleController extends Controller
             $ending[min($maxIndex - 1, $endIndex)][] = $userId;
         }
 
+        $urls = array_fill(0, $maxIndex, null);
         $changing = array_fill(0, $maxIndex, 0);
         $staying = array_fill(0, $maxIndex, 0);
         $last = 0;
         for ($i = 0; $i < $maxIndex; $i++) {
+            if (count($beginning[$i]) || count($ending[$i])) {
+                $urls[$i] = $this->generateUrl('oaf_schedule_slot', ['schedule' => $schedule->getId(), 'slot' => $baseSlot + $i]);
+            }
             foreach ($beginning[$i] as $userId) {
                 $pos = array_search($userId, $ending[$i], true);
                 if ($pos !== false) {
@@ -360,6 +365,7 @@ class ScheduleController extends Controller
             return array_slice($set, 1, -1);
         }, [
             'labels' => $labels,
+            'urls' => $urls,
             'beginning' => $beginning,
             'changing' => $changing,
             'staying' => $staying,
