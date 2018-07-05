@@ -166,6 +166,44 @@ class ScheduleController extends Controller
     }
 
     /**
+     * @Route("/{schedule}/slots/{slot}/list", name="oaf_schedule_slot_list")
+     * @Template
+     */
+    public function slotListAction(Schedule $schedule, $slot)
+    {
+        list($slot, $slotDate) = $this->parseSlot($schedule, $slot);
+
+        $shifts = $this->get('vkaf_oaf.repository.shift')->findActive($schedule, $slotDate);
+        $tasks = [];
+        foreach ($shifts as $shift) {
+            if ($shift->getTask()->isInformative()) {
+                continue;
+            }
+
+            $taskId = $shift->getTask()->getId();
+            if (!isset($tasks[$taskId])) {
+                $tasks[$taskId] = [
+                    'task' => $shift->getTask(),
+                    'users' => [],
+                ];
+            }
+
+            $tasks[$taskId]['users'][] = $shift->getUser();
+        }
+
+        uasort($tasks, function ($a, $b) {
+            return strcasecmp($a['task']->getName(), $b['task']->getName());
+        });
+
+        return [
+            'schedule' => $schedule,
+            'slot' => $slot,
+            'slotDate' => $slotDate,
+            'tasks' => $tasks,
+        ];
+    }
+
+    /**
      * @Route("/user/{user}", name="oaf_schedule_user")
      * @Template
      */
@@ -377,12 +415,7 @@ class ScheduleController extends Controller
 
     private function analyzeSlot(Schedule $schedule, $slot)
     {
-        $slot = intval($slot);
-        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
-            throw $this->createNotFoundException();
-        }
-
-        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+        list($slot, $slotDate) = $this->parseSlot($schedule, $slot);
 
         $shifts = $this->get('vkaf_oaf.repository.shift')->findAdjacent($schedule, $slotDate);
         $tasks = [];
@@ -420,6 +453,18 @@ class ScheduleController extends Controller
         }
 
         return [$slot, $slotDate, $tasks, $users];
+    }
+
+    private function parseSlot(Schedule $schedule, $slot)
+    {
+        $slot = intval($slot);
+        if ($slot < 0 || $slot > $schedule->getSlotCount()) {
+            throw $this->createNotFoundException();
+        }
+
+        $slotDate = DateTimeImmutable::createFromFormat('U', $schedule->getBegin()->getTimestamp() + $slot * $schedule->getSlotDuration());
+
+        return [$slot, $slotDate];
     }
 
     private function getSchedule(Request $request, $schedules)

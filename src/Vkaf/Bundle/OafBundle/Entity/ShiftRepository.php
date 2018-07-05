@@ -16,6 +16,23 @@ class ShiftRepository
         $this->repository = $em->getRepository(Shift::class);
     }
 
+    public function findActive(Schedule $schedule, DateTimeInterface $date)
+    {
+        $qb = $this->repository->createQueryBuilder('s')
+            ->addSelect('t')
+            ->addSelect('u')
+            ->leftJoin('s.task', 't')
+            ->leftJoin('s.user', 'u')
+            ->where('s.schedule = :schedule')
+            ->andWhere('s.from <= :date')
+            ->andWhere('s.to > :date')
+            ->setParameter('schedule', $schedule)
+            ->setParameter('date', $date)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findAdjacent(Schedule $schedule, DateTimeInterface $date)
     {
         $qb = $this->repository->createQueryBuilder('s')

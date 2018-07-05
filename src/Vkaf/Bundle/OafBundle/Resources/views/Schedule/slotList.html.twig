@@ -1,0 +1,27 @@
+{% extends 'VkafOafBundle:Schedule:layout.html.twig' %}
+
+{% block title %}{{ slotDate|localizedDate('datetime_medium') }} - {{ schedule.name }}{% endblock %}
+
+{% block body_class %}schedule-slot schedule-slot-wakeup{% endblock %}
+
+{% block body %}
+<h4>{{ slotDate|localizedDate('date_full') }}</h4>
+<h3>{{ 'vkaf_oaf.schedule.slot_list.title'|trans({'%date%': slotDate|date('H:i')}) }}</h3>
+{% for row in tasks %}
+<section>
+  <h4>{{ row.task.name }} ({{ row.task.code }})</h4>
+  <ul>
+    {% for user in row.users %}
+    <li>
+      {{ user.name }} ({{ user.groups|formatList({'property': 'shortName'}) }})
+      {% if user.mobilePhone %}
+      <span class="schedule-slot-extra">
+        <span class="fa fa-phone"></span> {{ user.mobilePhone|phoneNumber }}
+      </span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endblock %}
