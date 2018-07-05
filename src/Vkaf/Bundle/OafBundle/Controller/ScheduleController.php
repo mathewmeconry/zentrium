@@ -309,9 +309,16 @@ class ScheduleController extends Controller
      */
     public function statisticsSlotsAction(Request $request, Schedule $schedule)
     {
+        $now = new DateTimeImmutable();
         $days = $this->countDays($schedule);
-        $day = intval($request->query->get('day'));
-        $day = max(0, min($days - 1, $day));
+        if (($day = $request->query->get('day')) === null && $schedule->getPeriod()->contains($now)) {
+            $beginDay = $schedule->getPeriod()->getStartDate()->setTime(0, 0, 0);
+            $nowDay = $now->setTime(0, 0, 0);
+            $day = ($nowDay->getTimestamp() - $beginDay->getTimestamp()) / (24 * 60 * 60);
+        } else {
+            $day = intval($day);
+            $day = max(0, min($days - 1, $day));
+        }
         $dayPeriod = Period::createFromDay($schedule->getBegin())->move(sprintf('%d day', $day));
 
         $base = $dayPeriod->getStartDate()->getTimestamp() - $schedule->getSlotDuration();
