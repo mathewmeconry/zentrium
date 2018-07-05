@@ -16,4 +16,13 @@ class ResourceRepository extends EntityRepository
             ->addOrderBy('r.label')
         ;
     }
+
+    public function findAll()
+    {
+        return $this
+            ->createSortedQueryBuilder()
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

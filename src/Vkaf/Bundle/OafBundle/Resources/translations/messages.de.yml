@@ -63,6 +63,7 @@ vkaf_oaf:
         list:
             new: Neues Gerät
             edit: Gerät bearbeiten
+            assignments: Benutzer
         new:
             title: Neues Gerät
         edit:

@@ -30,7 +30,16 @@ class ResourceController extends Controller
      */
     public function indexAction()
     {
-        $resources = $this->get('vkaf_oaf.manager.resource')->findAll();
+        $resources = [];
+        foreach ($this->getDoctrine()->getRepository(Resource::class)->findAll() as $resource) {
+            $resources[$resource->getId()] = [
+                'resource' => $resource,
+                'assignments' => [],
+            ];
+        }
+        foreach ($this->get('vkaf_oaf.manager.resource_assignment')->findNonReturned() as $assignment) {
+            $resources[$assignment->getResource()->getId()]['assignments'][] = $assignment;
+        }
 
         return [
             'resources' => $resources,

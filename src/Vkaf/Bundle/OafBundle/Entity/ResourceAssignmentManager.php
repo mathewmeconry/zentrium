@@ -40,6 +40,19 @@ class ResourceAssignmentManager
         return $qb->getQuery()->getResult();
     }
 
+    public function findNonReturned()
+    {
+        $qb = $this->repository->createQueryBuilder('a')
+            ->addSelect('r')
+            ->addSelect('u')
+            ->leftJoin('a.resource', 'r')
+            ->leftJoin('a.user', 'u')
+            ->andWhere('a.returnedAt IS NULL')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findNonReturnedByUser(User $user)
     {
         $qb = $this->repository->createQueryBuilder('a')
