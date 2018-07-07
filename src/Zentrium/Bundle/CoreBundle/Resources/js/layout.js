@@ -14,9 +14,11 @@ $(function () {
 
   $('.table-searchable').each(function () {
     const $table = $(this);
+    const $tableHeader = $table.children('thead');
     const $inputRow = $('<tr><td><input class="form-control"></td></tr>');
     const $input = $inputRow.find('input');
-    $table.children('thead').prepend($inputRow);
+    $inputRow.find('td').attr('colspan', $tableHeader.find('th').length);
+    $tableHeader.prepend($inputRow);
     $input.attr('placeholder', Translator.trans('zentrium.search'))
     $input.on('input', function () {
       const query = $(this).val().toLowerCase().trim().split(/\s+/);
