@@ -2,7 +2,6 @@
 
 namespace Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Validator;
 
-use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\ConstraintInterface;
 use Zentrium\Bundle\ScheduleBundle\Schedule\Constraint\Message;

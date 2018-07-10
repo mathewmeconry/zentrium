@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use ReflectionClass;
 use Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser as BaseTemplateGuesser;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class TemplateGuesser extends BaseTemplateGuesser
