@@ -10,7 +10,7 @@
     "zentrium-timesheet-bundle": "file:src/Zentrium/Bundle/TimesheetBundle/Resources"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.19.0",
+    "@symfony/webpack-encore": "^0.20.1",
     "less": "^3.0.1",
     "less-loader": "^4.1.0"
   }
