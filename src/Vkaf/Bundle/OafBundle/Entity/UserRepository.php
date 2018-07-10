@@ -6,7 +6,6 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Zentrium\Bundle\CoreBundle\Entity\User;
-use Zentrium\Bundle\ScheduleBundle\Entity\Schedule;
 use Zentrium\Bundle\ScheduleBundle\Entity\Shift;
 use Zentrium\Bundle\ScheduleBundle\Entity\User as ScheduleUser;
 

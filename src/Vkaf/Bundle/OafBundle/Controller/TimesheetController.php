@@ -7,13 +7,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Vkaf\Bundle\OafBundle\Entity\Terminal;
 use Vkaf\Bundle\OafBundle\Pushpin\GripRequest;
 use Vkaf\Bundle\OafBundle\Pushpin\GripResponse;
 use Vkaf\Bundle\OafBundle\Pushpin\MessageEvent;
 use Vkaf\Bundle\OafBundle\Pushpin\OpenEvent;
 use Vkaf\Bundle\OafBundle\Pushpin\SubscribeEvent;
-use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\TimesheetBundle\Entity\Entry;
 
 /**

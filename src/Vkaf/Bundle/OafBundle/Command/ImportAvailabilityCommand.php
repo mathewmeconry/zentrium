@@ -9,7 +9,6 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\ScheduleBundle\Entity\Availability;
 
 class ImportAvailabilityCommand extends ContainerAwareCommand
