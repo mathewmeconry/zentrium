@@ -5,7 +5,6 @@ namespace Zentrium\Bundle\CoreBundle\Tests;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseWebTestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Zentrium\Bundle\CoreBundle\Entity\Application;
 
 class WebTestCase extends BaseWebTestCase
 {

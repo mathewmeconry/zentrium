@@ -5,7 +5,6 @@ namespace Zentrium\Bundle\TimesheetBundle\Export;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Environment;
-use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\TimesheetBundle\Entity\EntryManager;
 
 class ReportExporter extends Exporter

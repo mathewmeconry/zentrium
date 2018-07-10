@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Translation\TranslatorInterface;
-use Zentrium\Bundle\CoreBundle\Entity\User;
 use Zentrium\Bundle\TimesheetBundle\Entity\EntryManager;
 
 class Exporter

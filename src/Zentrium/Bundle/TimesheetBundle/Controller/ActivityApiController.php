@@ -6,7 +6,6 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use Zentrium\Bundle\TimesheetBundle\Entity\Activity;
 
 /**
  * @NamePrefix("api_timesheet_activities")
