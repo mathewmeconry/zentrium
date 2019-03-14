@@ -17,7 +17,7 @@
         }
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.3",
         "symfony/symfony": "3.4.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -73,7 +73,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.0.14"
+            "php": "7.3.3"
         }
     },
     "extra": {
