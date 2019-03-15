@@ -34,4 +34,3 @@ services:
     zentrium_map.wmts.http_client:
         class: Http\Client\Common\HttpMethodsClient
         arguments: ["@httplug.client", "@httplug.message_factory"]
-        lazy: true

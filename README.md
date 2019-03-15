@@ -26,7 +26,7 @@ node_modules/.bin/encore production
 
 ## System Requirements
 
- * PHP ≥ 7.0
+ * PHP ≥ 7.3
  * php-intl
  * NPM
  * MySQL

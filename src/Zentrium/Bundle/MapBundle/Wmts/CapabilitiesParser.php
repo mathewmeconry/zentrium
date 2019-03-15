@@ -2,7 +2,7 @@
 
 namespace Zentrium\Bundle\MapBundle\Wmts;
 
-use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\HttpMethodsClientInterface;
 use RuntimeException;
 use Sabre\Xml\Deserializer;
 use Sabre\Xml\Reader;
@@ -18,7 +18,7 @@ class CapabilitiesParser
     private static $localNamespaces = ['http://www.opengis.net/ows/1.1', 'http://www.opengis.net/wmts/1.0'];
 
     /**
-     * @var HttpMethodsClient
+     * @var HttpMethodsClientInterface
      */
     private $httpClient;
 
@@ -27,7 +27,7 @@ class CapabilitiesParser
      */
     private $service;
 
-    public function __construct(HttpMethodsClient $httpClient)
+    public function __construct(HttpMethodsClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
         $this->service = new Service();
