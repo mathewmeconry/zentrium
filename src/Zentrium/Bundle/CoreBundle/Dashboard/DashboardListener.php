@@ -2,7 +2,7 @@
 
 namespace Zentrium\Bundle\CoreBundle\Dashboard;
 
-use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\ConverterInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Zentrium\Bundle\CoreBundle\Entity\TextWidgetManager;
 use Zentrium\Bundle\CoreBundle\Entity\UserRepository;
@@ -14,7 +14,7 @@ class DashboardListener
     private $textWidgetManager;
     private $commonMarkConverter;
 
-    public function __construct(EngineInterface $engine, UserRepository $userRepository, TextWidgetManager $textWidgetManager, CommonMarkConverter $commonMarkConverter)
+    public function __construct(EngineInterface $engine, UserRepository $userRepository, TextWidgetManager $textWidgetManager, ConverterInterface $commonMarkConverter)
     {
         $this->engine = $engine;
         $this->userRepository = $userRepository;
@@ -31,7 +31,7 @@ class DashboardListener
 
     private function addUserCountWidget(BuildDashboardEvent $event)
     {
-        $userCount = $this->userRepository->count();
+        $userCount = $this->userRepository->count([]);
         $content = $this->engine->render(
             'ZentriumCoreBundle:Dashboard:userCountWidget.html.twig',
             ['count' => $userCount]

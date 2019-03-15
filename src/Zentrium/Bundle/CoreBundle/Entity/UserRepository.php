@@ -38,14 +38,6 @@ class UserRepository extends EntityRepository
         return count($results) === 1 ? $results[0] : null;
     }
 
-    public function count()
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('COUNT(u.id)');
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
     public function createSortedQueryBuilder()
     {
         return $this->createQueryBuilder('u')

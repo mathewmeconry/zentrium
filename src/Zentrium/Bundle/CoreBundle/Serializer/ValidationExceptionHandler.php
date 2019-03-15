@@ -9,18 +9,10 @@ class ValidationExceptionHandler
 {
     public function serialize(JsonSerializationVisitor $visitor, $exception, array $type, Context $context)
     {
-        $shouldSetRoot = (null === $visitor->getRoot());
-
-        $data = [
+        return [
             'message' => 'Validation failed',
             'code' => $exception->getStatusCode(),
-            'errors' => $visitor->getNavigator()->accept($exception->getErrors(), null, $context),
+            'errors' => $context->getNavigator()->accept($exception->getErrors(), null, $context),
         ];
-
-        if ($shouldSetRoot) {
-            $visitor->setRoot($data);
-        }
-
-        return $data;
     }
 }
