@@ -3,6 +3,7 @@
 namespace Vkaf\Bundle\OafBundle\Tests\Twig;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Vkaf\Bundle\OafBundle\Twig\Extension;
 
@@ -11,10 +12,11 @@ class ExtensionTest extends TestCase
     /**
      * @dataProvider truncateSamples
      */
-    public function testDistribute($text, $length, $expected)
+    public function testTruncate($text, $length, $expected)
     {
+        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $translator = $this->createMock(TranslatorInterface::class);
-        $extension = new Extension($translator);
+        $extension = new Extension('', $urlGenerator, $translator);
 
         $actual = $extension->truncate($text, $length);
 
