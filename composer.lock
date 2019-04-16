@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02d34db6463e658416dbb901d518c993",
-    "content-hash": "4625775397c956903613448093da398c",
+    "hash": "296bbb3a35c14b15dd24313a628588a1",
+    "content-hash": "7522f69daaa7754bb554c672594fca7f",
     "packages": [
         {
             "name": "aws/aws-php-sns-message-validator",
@@ -3973,17 +3973,17 @@
         },
         {
             "name": "knplabs/knp-time-bundle",
-            "version": "1.9.0",
+            "version": "1.8.0",
             "target-dir": "Knp/Bundle/TimeBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpTimeBundle.git",
-                "reference": "8111778efe2b5c5065ffc5e81b56c5580e49f690"
+                "reference": "dd7ed9e72e8c28edb596c13e3d3c18c29d1248b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/8111778efe2b5c5065ffc5e81b56c5580e49f690",
-                "reference": "8111778efe2b5c5065ffc5e81b56c5580e49f690",
+                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/dd7ed9e72e8c28edb596c13e3d3c18c29d1248b4",
+                "reference": "dd7ed9e72e8c28edb596c13e3d3c18c29d1248b4",
                 "shasum": ""
             },
             "require": {
@@ -4034,7 +4034,7 @@
                 "knplabs",
                 "time"
             ],
-            "time": "2018-12-06 14:53:51"
+            "time": "2017-12-26 03:59:33"
         },
         {
             "name": "league/commonmark",
