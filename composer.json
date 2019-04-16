@@ -31,7 +31,7 @@
         "knplabs/knp-menu-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "^2.0.0-beta1",
         "doctrine/doctrine-migrations-bundle": "^2.0",
-        "knplabs/knp-time-bundle": "^1.6",
+        "knplabs/knp-time-bundle": "^1.6 <1.9",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.1",
         "jms/serializer-bundle": "^3.0",
